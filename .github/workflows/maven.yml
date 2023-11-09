@@ -29,9 +29,10 @@ jobs:
         cache: maven
     - name: Run Java Tests
       run: mvn --batch-mode --update-snapshots verify
-    - name: Run linter
-      run: cd src/app
-        npm run lint
+    - name: Move into app folder
+      run: cd src/app  
+    - name: run linter
+      run: npm run lint
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
