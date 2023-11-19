@@ -37,9 +37,6 @@ jobs:
   linting:
     name: Linting # job name (unique id)
     runs-on: ubuntu-latest # on which machine to run
-    defaults:
-      run:
-        working-directory: ./src/app
     steps: # list of steps
       - name: Install NodeJS
         with:
@@ -47,6 +44,9 @@ jobs:
 
       - name: Code Checkout
         uses: actions/checkout@v2
+
+      - name: Cd into app
+        run: cd ./src/app
 
       - name: Install Dependencies
         run: npm ci
