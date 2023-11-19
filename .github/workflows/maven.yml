@@ -37,19 +37,12 @@ jobs:
   linting:
     name: Linting # job name (unique id)
     runs-on: ubuntu-latest # on which machine to run
-    steps: # list of steps
-      - name: Install NodeJS
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Code Checkout
-        uses: actions/checkout@v2
-
-      - name: Cd into app
-        run: cd ./src/app
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Code Linting
-        run: npm run lint
+          node-version: '20.x'
+      - run: cd ./src/app
+      - run: npm ci
+      - run: npm run lint
