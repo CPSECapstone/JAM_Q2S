@@ -41,7 +41,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '21.2.0'
-      - run: cd ./src/app
-        working-directory: src/app
       - run: npm ci
+        working-directory: ./src/app
       - run: npm run lint
