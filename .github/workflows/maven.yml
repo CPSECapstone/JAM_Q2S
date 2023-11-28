@@ -42,5 +42,5 @@ jobs:
         with:
           node-version: '21.2.0'
       - run: npm ci
-        working-directory: ./src/app
       - run: npm run lint
+        working-directory: ./src/app
