@@ -40,7 +40,9 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-      - run: cd ./src/app
+          node-version: '21.2.0'
       - run: npm ci
+        working-directory: ./src/app
       - run: npm run lint
+        working-directory: ./src/app
+        
