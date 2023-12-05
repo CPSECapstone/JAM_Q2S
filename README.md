@@ -22,7 +22,7 @@ Permission Levels:
 8. Builder Admin: To start off as the project team itself.
     Would have the ability to assign the Full Control access. All Permissions. 
 
-Develper Set Up:
+Developer Set Up:
 
 Development requires IntelliJ Ultimate. 
 You can apply for a free educational license at the following link: 
@@ -32,3 +32,5 @@ You can apply for a free educational license at the following link:
 The project also requires Java v.20, available here:
 
       https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html
+
+//There is currently no runnable code and no deployment. Respective info to come. 
