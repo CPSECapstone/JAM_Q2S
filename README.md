@@ -32,5 +32,7 @@ You can apply for a free educational license at the following link:
 The project also requires Java v.20, available here:
 
       https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html
+The project is using ESLint setup with Github Actions to lint the code on every pull request to ensure clean and consistent code.
+Github Actions is also setup to build and test the code on every pull request to ensure continous testing and integration.
 
 //There is currently no runnable code and no deployment. Respective info to come. 
