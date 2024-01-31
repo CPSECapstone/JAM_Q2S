@@ -1,38 +1,36 @@
 package data;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 
 public class SemesterCoursesCSVModel {
         @CsvBindByName(column = "Course Code")
+        @CsvBindByPosition(position = 0)
         private String courseCode;
 
         @CsvBindByName(column = "Course Name")
+        @CsvBindByPosition(position = 1)
         private String courseName;
 
         @CsvBindByName(column = "Cross-listed As")
+        @CsvBindByPosition(position = 2)
         private String crossListed;
 
         @CsvBindByName(column = "Units")
+        @CsvBindByPosition(position = 3)
         private String units;
 
         @CsvBindByName(column = "Description")
+        @CsvBindByPosition(position = 4)
         private String description;
 
         @CsvBindByName(column = "Term Typically Offered")
+        @CsvBindByPosition(position = 5)
         private String typicallyOffered;
 
         @CsvBindByName(column = "Unformatted Pre-Requisite/Co-Requisite List")
+        @CsvBindByPosition(position = 6)
         private String unformattedPrereqs;
-
-        public SemesterCoursesCSVModel(String datum, String datum1, String datum2, String datum3, String datum4, String datum5, String datum6) {
-                setCourseCode(datum);
-                setCourseName(datum1);
-                setCrossListed(datum2);
-                setUnits(datum3);
-                setDescription(datum4);
-                setTypicallyOffered(datum5);
-                setUnformattedPrereqs(datum6);
-        }
 
         public String getCourseCode() {
                 return courseCode;
