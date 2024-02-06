@@ -10,9 +10,9 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
         alert("you clicked on " + props.name  + " with id: " + props.id)
     };
     return (
-        <div className="sideBarItem" onClick={() => clickEvent()}>
+        <div className="sideBarItem">
             <Stack direction="row" spacing={1}>
-                <div className="barItemTitle">
+                <div className="barItemTitle" onClick={() => clickEvent()}>
                     <p>{props.name}</p>
                 </div>
                 <div className="buttons">

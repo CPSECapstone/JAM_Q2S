@@ -7,7 +7,6 @@ import SideBar from "./Componenets/SideBar";
 function App() {
   return (
     <div className="App">
-        <SideBar></SideBar>
       <Grid></Grid>
     </div>
   );
