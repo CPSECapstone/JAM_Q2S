@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Grid from './Componenets/Grid';
-import Class from "./Componenets/Class";
+import SideBar from "./Componenets/SideBar";
 
 function App() {
     const exampleTermData = [
@@ -67,6 +67,7 @@ function App() {
 
     return (
         <div className="App">
+            <SideBar></SideBar>
             <Grid termData={exampleTermData}></Grid>
         </div>
     );

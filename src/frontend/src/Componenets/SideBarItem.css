@@ -1,0 +1,22 @@
+.sideBarItem{
+    width: inherit;
+    padding-left: 5%;
+    border-bottom: rgba(74,72,76,0.62) solid 2px;
+    background: rgba(255,240,215,0.63);
+    max-height: 15%;
+}
+
+.barItemTitle{
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.buttons{
+    margin-left: auto;
+    margin-right: 0;
+}
