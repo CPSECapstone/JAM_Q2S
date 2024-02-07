@@ -11,9 +11,8 @@
     justify-content: center;
 }
 .body{
-    border-left: solid #BD8B13;
-    border-bottom: solid #BD8B13;
-    border-top: solid #BD8B13;
+    border: solid #BD8B13;
     height:75%;
+
 
 }

@@ -1,20 +1,36 @@
-import React from "react";
-import "./Quarter.css";
+import React from 'react';
+import './Quarter.css';
+import TempClass from './TempClass';
+import { Droppable } from '@hello-pangea/dnd';
 
-function Quarter ({ year } : { year : string}) : JSX.Element {
-  let clickEvent = () => {
-    alert("you clicked on " + year)
-  };
+type Props = {
+  year: string;
+  classList: string[];
+  id : string;
+};
+
+function Quarter({ year, classList, id }: Props): JSX.Element {
+
   return (
-    <div className="quarter" onClick={() => clickEvent()}>
-      <div className="title">
+    <div className='quarter'>
+      <div className='title'>
         <p>{year}</p>
       </div>
-      <div className="body">
-
-      </div>
+      <Droppable droppableId={id}>
+        {(provided) => (
+          <div className='body'
+               ref={provided.innerRef}
+               {...provided.droppableProps}>
+            {classList.map((tempClass: string, index: number) => {
+              let id = JSON.parse(tempClass).id;
+              return <TempClass index={index} key={id} content={tempClass} />;
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }
 
-export default Quarter
+export default Quarter;
