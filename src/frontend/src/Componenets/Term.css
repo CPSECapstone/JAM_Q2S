@@ -1,9 +1,8 @@
-.quarter{
+.header{
     background-color: #ffffff;
     height: 75vh;
     position: relative;
     width:150px;
-
 }
 .title{
     background-color: #DFD6C4;
@@ -16,4 +15,6 @@
     border-top: solid #BD8B13;
     height:75%;
 
+    max-width: 100%;
+    overflow-x: hidden;
 }

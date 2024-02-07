@@ -4,7 +4,7 @@
     height:100%;
     overflow-y: scroll;
 }
-.year{
+.term{
     display:flex;
     border-top-left-radius: 2%;
     width:100%;
