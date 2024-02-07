@@ -1,8 +1,9 @@
 .quarter{
-    background-color: #ffffff;
-    height: 75vh;
+    height: 70vh;
     position: relative;
     width:150px;
+    display: flex;
+    flex-flow: column;
 
 }
 .title{
@@ -12,7 +13,6 @@
 }
 .body{
     border: solid #BD8B13;
-    height:75%;
-
-
+    height: 100%;
+    overflow-x: scroll;
 }

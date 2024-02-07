@@ -4,6 +4,7 @@ import './TestData';
 import { testData } from './TestData';
 import Quarter from './Quarter';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
+import { getEventClientOffset } from 'react-dnd-html5-backend/dist/OffsetUtils';
 
 function Grid() {
   const [quarters, setQuarters] = useState(JSON.parse(testData));
@@ -16,25 +17,56 @@ function Grid() {
       destination.index === source.index) {
       return;
     }
-    let quarter = quarters.quarters[source.droppableId];
-    let newClasses = Array.from(quarter.classes);
-    newClasses.splice(source.index, 1);
-    newClasses.splice(destination.index, 0, draggableId);
+    let start = quarters.quarters[source.droppableId];
+    let finish = quarters.quarters[destination.droppableId];
+    if (start === finish) {
+      let newClasses = Array.from(start.classes);
+      newClasses.splice(source.index, 1);
+      newClasses.splice(destination.index, 0, draggableId);
 
-    let newQuarter = {
-      ...quarter,
-      'classes' : newClasses
+      let newQuarter = {
+        ...start,
+        'classes': newClasses
+      };
+      let newState = {
+        ...quarters,
+        quarters: {
+          ...quarters.quarters,
+          [newQuarter.id]: newQuarter
+        }
+      };
+
+      setQuarters(newState);
+      return;
+    } else {
+      let startClasses = Array.from(start.classes);
+      startClasses.splice(source.index, 1);
+      let newStart = {
+        ...start,
+        classes : startClasses,
+      };
+
+      let finishClasses = Array.from(finish.classes);
+      finishClasses.splice(destination.index, 0, draggableId);
+      let newFinish = {
+        ...finish,
+        classes : finishClasses,
+      };
+
+      let newState = {
+        ...quarters,
+        quarters: {
+          ...quarters.quarters,
+          [newStart.id]: newStart,
+          [newFinish.id]: newFinish
+        }
+      };
+      setQuarters(newState);
+
     }
 
-    let newState = {
-      ...quarters,
-      quarters: {
-        ...quarters.quarter,
-        [newQuarter.id] : newQuarter
-      }
-    }
-    setQuarters(newState);
   };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className='grid'>
