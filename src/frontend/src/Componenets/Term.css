@@ -1,8 +1,9 @@
-.header{
-    background-color: #ffffff;
-    height: 75vh;
-    position: relative;
+.term{
+    height: 100%;
     width:150px;
+    display: flex;
+    flex-flow: column;
+
 }
 .title{
     background-color: #DFD6C4;
@@ -10,11 +11,6 @@
     justify-content: center;
 }
 .body{
-    border-left: solid #BD8B13;
-    border-bottom: solid #BD8B13;
-    border-top: solid #BD8B13;
-    height:75%;
-
-    max-width: 100%;
-    overflow-x: hidden;
+    border: solid #BD8B13;
+    height: 100%;
 }
