@@ -12,6 +12,5 @@ public class Q2SSeniorProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Q2SSeniorProjectApplication.class, args);
-
 	}
 }
