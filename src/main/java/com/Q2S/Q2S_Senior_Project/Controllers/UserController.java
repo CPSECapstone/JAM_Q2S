@@ -14,13 +14,15 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    UserController (UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     @GetMapping
     public List<User> findAllUsers() {
-        // Implement
-        return null;
+        return (List<User>) userRepository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -34,7 +36,6 @@ public class UserController {
 
     @PostMapping
     public User saveUser(@Validated @RequestBody User user) {
-        // Implement
-        return null;
+        return userRepository.save(user);
     }
 }
