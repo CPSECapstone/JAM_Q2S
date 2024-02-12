@@ -6,6 +6,9 @@
 .sideBar {
   flex-grow: 1;
 }
+.topBar{
+  flex-grow: 1;
+}
 .grid {
   flex-grow: 1;
 }

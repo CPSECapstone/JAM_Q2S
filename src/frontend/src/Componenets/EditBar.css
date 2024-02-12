@@ -1,0 +1,13 @@
+.editBar{
+    height: 50%;
+    width: inherit;
+    background: #CED8D4;
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.icon {
+    margin-right: 20px;
+}
+
