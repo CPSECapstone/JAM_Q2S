@@ -2,16 +2,12 @@ import React from 'react';
 import './Term.css';
 import { Droppable } from '@hello-pangea/dnd';
 import Class from './Class';
+import {QuarterClassData} from './Grid'
 
-interface ClassData {
-  courseCode: string;
-  units: string;
-  courseName: string;
-}
 
 type Props = {
   year: string;
-  classList: ClassData[];
+  classList: QuarterClassData[];
   id : string;
 };
 
@@ -29,12 +25,10 @@ function Term({ year, classList, id }: Props): JSX.Element {
           <div className='body'
                ref={provided.innerRef}
                {...provided.droppableProps}>
-            {classList.map((currentClass: ClassData, i: number) => {
+            {classList.map((currentClass: QuarterClassData, i: number) => {
               return <Class key={i}
                             index={i}
-                            courseCode={currentClass.courseCode}
-                            units={currentClass.units}
-                            courseName={currentClass.courseName} />;
+                            data={currentClass} />;
             })}
             {provided.placeholder}
           </div>
