@@ -1,6 +1,6 @@
 .term{
-    height: 100%;
-    width:125px;
+    height: 100vh;
+    width:150px;
     display: flex;
     flex-flow: column;
 
