@@ -1,5 +1,5 @@
 .term{
-    height: 100%;
+    height: 100vh;
     width:150px;
     display: flex;
     flex-flow: column;
@@ -13,4 +13,5 @@
 .body{
     border: solid #BD8B13;
     height: 100%;
+    overflow-y:scroll;
 }

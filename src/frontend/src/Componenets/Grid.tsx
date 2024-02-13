@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Grid.css';
-import { exampleTermData } from '../JSON/TermData';
-import { dummyClassDatabase } from '../JSON/DummyClassDatabase';
 import Term from './Term';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
+import axios, { AxiosResponse } from 'axios';
+import { exampleTermData } from '../JSON/TermData';
 
 
-interface ClassData {
-  courseCode: string;
+export interface QuarterClassData {
+  id: string;
+  displayName: string;
   units: string;
-  courseName: string;
+  desc: string;
+  addl: string;
+  gwrCourse: boolean;
+  uscpCourse: boolean;
 }
 
 interface TermData {
@@ -22,8 +26,9 @@ interface Props {
 }
 
 function Grid({ termData }: Props) {
-  const [terms, setTerms] = useState(exampleTermData);
-  let classDB = JSON.parse(dummyClassDatabase);
+  const [terms, setTerms] = useState<TermData[]>(exampleTermData)
+  const [classDB, setClassDB] = useState<{ [classId: string]: QuarterClassData }>({});
+  const [loading, setLoading] = useState<boolean>(true); // State to track loading
   let onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -33,15 +38,12 @@ function Grid({ termData }: Props) {
       destination.index === source.index) {
       return;
     }
-
-    // Create a shallow copy of the termData array
     let updatedTerms = [...termData];
 
     // Find the source and destination terms
     let start = updatedTerms.find((term) => term.termName === source.droppableId);
     let finish = updatedTerms.find((term) => term.termName === destination.droppableId);
     if (!start || !finish) return;
-
     if (start === finish) {
       // If the source and destination terms are the same
       let newClasses = Array.from(start.classes);
@@ -60,73 +62,57 @@ function Grid({ termData }: Props) {
       finish.classes = finishClasses;
     }
 
-    // Set the state with the updated terms array
-    console.log(updatedTerms)
     setTerms(updatedTerms);
-
-
-  // if (start === finish) {
-    //   let newClasses = Array.from(start.classes);
-    //   newClasses.splice(source.index, 1);
-    //   newClasses.splice(destination.index, 0, draggableId);
-    //
-    //   let newQuarter = {
-    //     ...start,
-    //     'classes': newClasses
-    //   };
-    //   let newState = {
-    //     ...quarters,
-    //     quarters: {
-    //       ...quarters.quarters,
-    //       [newQuarter.id]: newQuarter
-    //     }
-    //   };
-    //
-    //   setQuarters(newState);
-    //   return;
-    // } else {
-    //   let startClasses = Array.from(start.classes);
-    //   startClasses.splice(source.index, 1);
-    //   let newStart = {
-    //     ...start,
-    //     classes: startClasses,
-    //   };
-    //
-    //   let finishClasses = Array.from(finish.classes);
-    //   finishClasses.splice(destination.index, 0, draggableId);
-    //   let newFinish = {
-    //     ...finish,
-    //     classes: finishClasses,
-    //   };
-    //
-    //   let newState = {
-    //     ...quarters,
-    //     quarters: {
-    //       ...quarters.quarters,
-    //       [newStart.id]: newStart,
-    //       [newFinish.id]: newFinish
-    //     }
-    //   };
-    //   setQuarters(newState);
-    //
-    // }
-
   };
 
-  return (
-    <div className='grid'>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {terms.map((term: TermData) => {
-          let classes: ClassData[] = term.classes.map((classId: string) => classDB[classId]);
-          return <div className='term' key={term.termName}>
-            <Term year={term.termName} classList={classes} id={term.termName}></Term>
-          </div>;
+    // Fetch quarter class data for each term
+    useEffect(() => {
 
-        })}
-      </DragDropContext>
-    </div>
-  );
+      const fetchQuarterClassData = async () => {
+        try {
+          const termClassData: { [ClassId: string]: QuarterClassData } = {};
 
+          const promises = termData.map(async (term) => {
+            await Promise.all(
+              term.classes.map(async (classId: string) => {
+                const response: AxiosResponse<QuarterClassData> = await axios.get('http://localhost:8080/get/QuarterClass/' + classId);
+                termClassData[response.data.id] = response.data;
+              })
+            );
+          });
+
+          await Promise.all(promises);
+          setClassDB(termClassData);
+          setLoading(false);
+        } catch (error) {
+          console.error('Error fetching QuarterClass:', error);
+        }
+      };
+      if (termData.length > 0) {
+        fetchQuarterClassData();
+      }
+    }, []); // Ensure useEffect runs whenever termData changes
+
+
+    return (
+      <div className='grid'>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            terms.map((term: TermData) => {
+              const classes = term.classes.map((classId: string) => classDB[classId]);
+              return (
+                <div className='term' key={term.termName}>
+                  <Term year={term.termName} classList={classes} id={term.termName}></Term>
+                </div>
+              );
+            })
+          )}
+        </DragDropContext>
+      </div>
+
+    );
 }
 
 export default Grid;
