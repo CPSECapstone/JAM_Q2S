@@ -1,8 +1,7 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.User;
-import com.Q2S.Q2S_Senior_Project.Models.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
