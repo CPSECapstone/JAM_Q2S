@@ -6,10 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -34,6 +31,7 @@ public class QuarterClassesController {
         quarterClassRepo.saveAll(quarterClassList);
         return quarterClassList;
     }
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/QuarterClass/{id}")
     QuarterClass getQuarterClassById(@PathVariable String id) {
         return quarterClassRepo.findById(id).orElse(null);
