@@ -1,23 +1,23 @@
 export const exampleTermData = [
   {
     termName: 'Fall 2027',
-    classes: ['CSC 101', 'CSC 203', 'CSC 225', 'CSC 305']
+    classes: ['CSC123', 'MATH141', 'COMS101']
   },
   {
     termName: 'Winter 2027',
-    classes: ['MATH 123', 'PHYS 141', 'CSC 357']
+    classes: ['CSC101', 'MATH142', 'ENGL134']
   },
   {
     termName: 'Spring 2027',
-    classes: []
+    classes: ['CSC202', 'MATH143', 'COMS126']
   },
   {
     termName: 'Fall 2028',
-    classes: []
+    classes: ['CSC203', 'CSC225', 'MATH241', 'CHEM124']
   },
   {
     termName: 'Winter 2028',
-    classes: []
+    classes: ['CSC357', 'CSC248', 'MATH244', 'CHEM125']
   },
   {
     termName: 'Spring 2028',

@@ -1,14 +1,21 @@
 .App {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  grid-template-areas: 'sideBar topBar '
+                        'sidebar grid';
   height: 100vh;
 }
 .sideBar {
+  grid-area: sideBar;
   flex-grow: 1;
 }
 .topBar{
+  grid-area: topBar;
   flex-grow: 1;
 }
 .grid {
+  grid-area: grid;
   flex-grow: 1;
+  width:100%;
+  overflow: scroll;
 }

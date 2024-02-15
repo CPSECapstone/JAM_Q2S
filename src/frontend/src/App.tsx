@@ -13,7 +13,7 @@ function App() {
       <div className='sideBar'>
         <SideBar></SideBar>
       </div>
-      <div>
+      <div className="rightPanel">
           <div className='topBar'>
               <TopBar></TopBar>
           </div>
@@ -21,7 +21,6 @@ function App() {
               <Grid termData={exampleTermData}></Grid>
           </div>
       </div>
-
     </div>
   );
 }

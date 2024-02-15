@@ -1,9 +1,8 @@
 .term{
     height: 100%;
-    width:125px;
+    width:150px;
     display: flex;
     flex-flow: column;
-
 }
 .title{
     background-color: #DFD6C4;
@@ -13,4 +12,5 @@
 .body{
     border: solid #BD8B13;
     height: 100%;
+    overflow-y:scroll;
 }
