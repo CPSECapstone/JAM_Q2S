@@ -13,15 +13,13 @@ function App() {
       <div className='sideBar'>
         <SideBar></SideBar>
       </div>
-      <div className="rightPanel">
-          <div className='topBar'>
-              <TopBar></TopBar>
-          </div>
-          <div className='grid'>
-              <Grid termData={exampleTermData}></Grid>
-          </div>
+      <div className='topBar'>
+        <TopBar></TopBar>
       </div>
-    </div>
+      <div className='grid'>
+        <Grid termData={exampleTermData}></Grid>
+      </div>
+      </div>
   );
 }
 
