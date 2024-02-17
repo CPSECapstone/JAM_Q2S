@@ -8,13 +8,14 @@ import {
     Grid,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, Link as RouterLink} from "react-router-dom";
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = () => {};
+    const handleLogin = () => {    };
 
     return (
         <>
@@ -28,7 +29,6 @@ const Login = () => {
                         alignItems: "center",
                     }}
                 >
-
                     <Typography variant="h5">Welcome Back!</Typography>
                     <Box sx={{ mt: 1 }}>
                         <TextField
@@ -60,11 +60,18 @@ const Login = () => {
                         <Button
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 3, mb: 2}} //add bgcolor: '' here to change button color
                             onClick={handleLogin}
+                            component={RouterLink}
+                            to='/'
                         >
                             Login
                         </Button>
+                        <Grid container justifyContent={"center"}>
+                            <Grid item>
+                                <Link to="/register">Don't have an account? Register</Link>
+                            </Grid>
+                        </Grid>
                     </Box>
                 </Box>
             </Container>
