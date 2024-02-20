@@ -1,16 +1,16 @@
 .App {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
   height: 100vh;
 }
 .sideBar {
-  grid-area: 1 / 1 / 6 / 2;
+  grid-area: 2 / 1 / 10 / 3;
 }
 .topBar{
-  grid-area: 1 / 2 / 2 / 6;
+  grid-area: 1 / 1 / 2 / 10;
 }
 .grid {
-  grid-area: 2 / 2 / 6 / 6;
+  grid-area: 2 / 3 / 10 / 10;
   overflow: scroll;
 }

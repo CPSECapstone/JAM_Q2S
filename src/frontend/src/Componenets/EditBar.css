@@ -1,18 +1,17 @@
 .editBar{
-    height: 50%;
-    width: inherit;
+    height: 100%;
+    width: 100%;
     background: #CED8D4;
     display: flex;
-    align-items: center;
-    /*border-bottom-left-radius: 20px;*/
-    /*border-bottom-right-radius: 20px;*/
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 .icon {
     margin-right: 20px;
     margin-left: 20px;
 }
 .buttons{
-    margin-left: auto;
+    margin-left: 0;
     margin-right: 0;
 }
 
