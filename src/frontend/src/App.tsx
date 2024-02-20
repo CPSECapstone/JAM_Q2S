@@ -1,15 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Grid from './Componenets/Grid';
-import SideBar from "./Componenets/SideBar";
+import SideBar from './Componenets/SideBar';
+import { exampleTermData } from './JSON/TermData';
+import TopBar from "./Componenets/TopBar";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <SideBar></SideBar>
-      <Grid></Grid>
-    </div>
+    <div className='App'>
+      <div className='sideBar'>
+        <SideBar></SideBar>
+      </div>
+      <div className='topBar'>
+        <TopBar></TopBar>
+      </div>
+      <div className='grid'>
+        <Grid termData={exampleTermData}></Grid>
+      </div>
+      </div>
   );
 }
 

@@ -1,0 +1,9 @@
+.tempClass{
+    background-color: #ffffff;
+    border: solid 1px;
+    margin: 8px;
+}
+.name{
+    display: flex;
+    justify-content: center;
+}
