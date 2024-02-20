@@ -4,17 +4,7 @@ import Term from './Term';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import axios, { AxiosResponse } from 'axios';
 import { exampleTermData } from '../JSON/TermData';
-
-
-export interface QuarterClassData {
-  id: string;
-  displayName: string;
-  units: string;
-  desc: string;
-  addl: string;
-  gwrCourse: boolean;
-  uscpCourse: boolean;
-}
+import { QuarterClassData } from './Class';
 
 interface TermData {
   termName: string;
