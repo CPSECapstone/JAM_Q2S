@@ -1,5 +1,5 @@
 .term{
-    height: 100vh;
+    height: 100%;
     width:150px;
     display: flex;
     flex-flow: column;
