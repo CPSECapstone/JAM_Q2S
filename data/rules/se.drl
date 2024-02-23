@@ -1,0 +1,33 @@
+import java.util.List;
+import java.util.Arrays;
+
+import /data/rules/Major.java;
+import /data/rules/Course.java;
+
+// Define a function to check if a course ID is required for the major
+function boolean isMajorCourse(String courseId) {
+    List<String> majorCourses = Arrays.asList("CSC101", "CSC202", "CSC203", "CSC225", "CSC248", "CSC300", "PHIL323");
+    return majorCourses.contains(courseId);
+}
+
+function boolean isSupportCourse(String courseId) {
+    // Define the list of required course IDs for the major here
+    return courseId in ("CSC101", "CSC202", "CSC203", ...);
+}
+
+function boolean isConcentrationCourse(String courseId) {
+    // Define the list of required course IDs for the major here
+    return courseId in ("CSC101", "CSC202", "CSC203", ...);
+}
+
+// Define rules for the Software Engineering major
+rule "Software Engineering Major Rules"
+when
+    $major: Major(name == "Software Engineering")
+    $course: Course(major == $major, $courseId : id)
+    eval(isCourseRequired($courseId))
+then
+    // Define actions for courses matching the required IDs
+    // Example: marking courses as applicable for the major
+    $course.setApplicable(true);
+end
