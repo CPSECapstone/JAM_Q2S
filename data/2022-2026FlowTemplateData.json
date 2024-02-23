@@ -1,5 +1,4 @@
-{
-  "flows": [
+[
     {
       "id": "499c1013-fc87-45d1-bb48-ee46331c745e",
       "catalog": "2022-2026",
@@ -1664,5 +1663,4 @@
       "code": "22-26.10WVITBSU.WNBWVITU",
       "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10WVITBSU.WNBWVITU.pdf"
     }
-  ]
-}
+]
