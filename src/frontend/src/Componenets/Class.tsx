@@ -1,10 +1,10 @@
 import React from "react";
 import "./Class.css";
 import { Draggable } from '@hello-pangea/dnd';
-import { QuarterClassData } from './Grid';
 import {Tooltip} from 'react-tooltip'
 import { Simulate } from 'react-dom/test-utils';
 import click = Simulate.click;
+import { QuarterClassData } from '../Interfaces/Interfaces';
 
 interface classProps {
     data: QuarterClassData

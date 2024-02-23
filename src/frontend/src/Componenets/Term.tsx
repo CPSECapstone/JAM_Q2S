@@ -2,8 +2,7 @@ import React from 'react';
 import './Term.css';
 import { Droppable } from '@hello-pangea/dnd';
 import Class from './Class';
-import {QuarterClassData} from './Grid'
-
+import { QuarterClassData } from '../Interfaces/Interfaces';
 
 type Props = {
   year: string;
@@ -11,10 +10,7 @@ type Props = {
   id : string;
 };
 
-
-
 function Term({ year, classList, id }: Props): JSX.Element {
-
   return (
     <div className='term'>
       <div className='title'>
