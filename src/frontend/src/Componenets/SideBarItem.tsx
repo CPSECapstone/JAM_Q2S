@@ -1,5 +1,6 @@
 import React from "react";
 import {IconButton, Stack } from '@mui/material/';
+import Typography from '@mui/material/Typography';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
@@ -10,21 +11,23 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
         alert("you clicked on " + props.name  + " with id: " + props.id)
     };
     return (
-        <div className="sideBarItem" onClick={() => clickEvent()}>
-            <Stack direction="row" spacing={1}>
-                <div className="barItemTitle">
-                    <p>{props.name}</p>
-                </div>
-                <div className="buttons">
-                    <IconButton aria-label="favorite flowchart" size="large"
-                                onClick={() => {alert('clicked heart');}}>
-                        <FavoriteBorderIcon fontSize="inherit"/>
-                    </IconButton>
-                    <IconButton aria-label="star flowchart" size="large"
-                                onClick={() => {alert('clicked star');}}>
-                        <StarBorderIcon fontSize="inherit"/>
-                    </IconButton>
-                </div>
+        <div className="sideBarItem">
+            {/*<Stack direction ="row" alignItems="center">*/}
+            {/*    <Typography noWrap onClick={() => clickEvent()} sx={{ minWidth: 0, maxWidth: 120}} >{props.name}</Typography>*/}
+            <span className="barItemTitle" onClick={() => clickEvent()}>
+                <p>{props.name}</p>
+            </span>
+
+            <Stack direction="row" justifyContent="flex-end"
+               alignItems="center" spacing={0}>
+                <IconButton aria-label="favorite flowchart" size = "small"
+                            onClick={() => {alert('clicked heart');}}>
+                    <FavoriteBorderIcon/>
+                </IconButton>
+                <IconButton aria-label="star flowchart" size = "small"
+                            onClick={() => {alert('clicked star');}}>
+                    <StarBorderIcon/>
+                </IconButton>
             </Stack>
 
 

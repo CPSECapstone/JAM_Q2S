@@ -17,23 +17,25 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private String userId;
     private String firstName;
     private String lastName;
-    private String userName;
     private String email;
+    private String password;
     private String termAdmitted;
     @Enumerated(EnumType.STRING)
     private AdmitType admitType;
     private String catalogYear;
     private String major;
     private String concentration;
+    private String minor;
 
     public User(){}
-    public User (String firstName, String lastName, String userName, String email){
+    public User (String userId, String firstName, String lastName, String email, String password){
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
         this.email = email;
+        this.password = password;
     }
 }
