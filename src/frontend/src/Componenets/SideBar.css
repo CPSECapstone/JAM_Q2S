@@ -1,6 +1,7 @@
 .sideBar{
     display: flex;
     height:100%;
-    width: 100%;
+    width: 15%;
+    max-width: 200px;
     overflow-x: scroll;
 }
