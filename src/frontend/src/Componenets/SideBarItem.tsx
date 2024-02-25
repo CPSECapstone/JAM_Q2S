@@ -15,7 +15,7 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
             {/*<Stack direction ="row" alignItems="center">*/}
             {/*    <Typography noWrap onClick={() => clickEvent()} sx={{ minWidth: 0, maxWidth: 120}} >{props.name}</Typography>*/}
             <span className="barItemTitle" onClick={() => clickEvent()}>
-                <p>{props.name}</p>
+                <p className="text">{props.name}</p>
             </span>
 
             <Stack direction="row" justifyContent="flex-end"
@@ -29,7 +29,6 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
                     <StarBorderIcon/>
                 </IconButton>
             </Stack>
-
 
         </div>
     );

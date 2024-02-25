@@ -1,7 +1,16 @@
 .sideBar{
     display: flex;
     height:100%;
-    width: 15%;
-    max-width: 200px;
+    width: 100%;
     overflow-x: scroll;
+}
+.sideBarGroup{
+    margin-top: 20px;
+}
+.sideBarTitle {
+    padding: 8px;
+    width: 100%;
+    color: rgb(125, 125, 125);
+    text-align: left;
+    font-size: 14px;
 }
