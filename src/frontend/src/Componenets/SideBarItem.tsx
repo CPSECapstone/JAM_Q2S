@@ -1,5 +1,5 @@
 import React from "react";
-import {IconButton, Stack } from '@mui/material/';
+import { IconButton, Stack } from '@mui/material/';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
