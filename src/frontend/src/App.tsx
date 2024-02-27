@@ -1,24 +1,18 @@
 import React from 'react';
 import './App.css';
-import Grid from './Componenets/Grid';
-import SideBar from './Componenets/SideBar';
-import TopBar from './Componenets/TopBar';
-import { FlowchartProvider } from './Context/FlowchartProvider';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
     <div className='App'>
-        <div className='sideBar'>
-          <SideBar></SideBar>
-        </div>
-        <div className='topBar'>
-          <TopBar></TopBar>
-        </div>
-      <FlowchartProvider>
-        <div className='grid'>
-          <Grid></Grid>
-        </div>
-      </FlowchartProvider>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
     </div>
   );
 }
