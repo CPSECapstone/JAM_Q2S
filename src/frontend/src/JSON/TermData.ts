@@ -1,23 +1,96 @@
 export const exampleTermData = [
   {
     termName: 'Fall 2027',
-    classes: ['CSC123', 'MATH141', 'COMS101']
+    classes: [
+      {
+        id: 'CSC123',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'MATH141',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'COMS101',
+        color: '#FFEA9E'
+      }
+    ]
   },
   {
     termName: 'Winter 2027',
-    classes: ['CSC101', 'MATH142', 'ENGL134']
+    classes: [
+      {
+        id: 'CSC101',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'MATH142',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'ENGL134',
+        color: '#FFEA9E'
+      }
+    ]
   },
   {
     termName: 'Spring 2027',
-    classes: ['CSC202', 'MATH143', 'COMS126']
+    classes: [
+      {
+        id: 'CSC202',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'MATH143',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'COMS126',
+        color: '#FFEA9E'
+      }
+    ]
   },
   {
     termName: 'Fall 2028',
-    classes: ['CSC203', 'CSC225', 'MATH241', 'CHEM124']
+    classes: [
+      {
+        id: 'CSC203',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'CSC225',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'MATH241',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'CHEM124',
+        color: '#FFEA9E'
+      }
+    ]
   },
   {
     termName: 'Winter 2028',
-    classes: ['CSC357', 'CSC248', 'MATH244', 'CHEM125']
+    classes: [
+      {
+        id: 'CSC357',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'CSC248',
+        color: '#FFFFFF'
+      },
+      {
+        id: 'MATH244',
+        color: '#FFEA9E'
+      },
+      {
+        id: 'CHEM125',
+        color: '#FFEA9E'
+      }
+    ]
   },
   {
     termName: 'Spring 2028',
