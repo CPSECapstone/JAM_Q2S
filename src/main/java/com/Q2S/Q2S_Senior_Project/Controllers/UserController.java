@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable(value = "id") String id) {
+    public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
         Optional<User> user = userRepository.findById(id);
 
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
