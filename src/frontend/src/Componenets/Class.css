@@ -1,6 +1,5 @@
 .class{
     margin: 8px;
-    background: #FFEA9E;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
@@ -15,7 +14,6 @@
 }
 
 .class .classInfo  {
-    background: #a69355;
     max-width: 25%;
     opacity: 100;
 }

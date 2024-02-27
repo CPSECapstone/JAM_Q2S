@@ -8,7 +8,17 @@ export interface QuarterClassData {
   uscpCourse: boolean;
 }
 
+export interface FlowchartClass {
+  id: string;
+  color: string;
+}
+
+export interface ClassDBClass {
+  classData: QuarterClassData,
+  color: string
+}
+
 export interface TermData {
   termName: string;
-  classes: string[];
+  classes: FlowchartClass[];
 }
