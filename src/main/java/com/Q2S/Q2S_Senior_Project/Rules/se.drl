@@ -1,8 +1,7 @@
 import java.util.List;
 import java.util.Arrays;
 
-import /data/rules/Major.java;
-import /data/rules/Course.java;
+import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
 
 // Define a function to check if a course ID is required for the major
 function boolean isMajorCourse(String courseId) {
@@ -21,13 +20,20 @@ function boolean isConcentrationCourse(String courseId) {
 }
 
 // Define rules for the Software Engineering major
-rule "Software Engineering Major Rules"
-when
-    $major: Major(name == "Software Engineering")
-    $course: Course(major == $major, $courseId : id)
-    eval(isCourseRequired($courseId))
-then
-    // Define actions for courses matching the required IDs
-    // Example: marking courses as applicable for the major
-    $course.setApplicable(true);
-end
+//rule "Software Engineering Major Courses"
+//when
+//    $major: Major(name == "Software Engineering")
+//    $course: Course(major == $major, $courseId : id)
+//    eval(isCourseRequired($courseId))
+//then
+//    // Define actions for courses matching the required IDs
+//    // Example: marking courses as applicable for the major
+//    $course.setApplicable(true);
+//end
+
+rule "SE Major Courses"
+	when
+		quarterClassObject: QuarterClass(id)
+	then
+		productObject.setDiscount(15);
+	end
