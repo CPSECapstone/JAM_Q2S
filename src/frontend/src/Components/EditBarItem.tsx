@@ -3,9 +3,7 @@ import {IconButton, Stack } from '@mui/material/';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import "./SideBarItem.css";
-
-function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
+function EditBarItem (props: {id : bigint,  name : string}) : JSX.Element {
     let clickEvent = () => {
         alert("you clicked on " + props.name  + " with id: " + props.id)
     };
@@ -32,5 +30,5 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
     );
 }
 
-export default SideBarItem
+export default EditBarItem
 
