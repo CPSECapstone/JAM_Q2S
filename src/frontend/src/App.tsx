@@ -1,25 +1,19 @@
 import React from 'react';
 import './App.css';
-import Grid from './Componenets/Grid';
-import SideBar from './Componenets/SideBar';
-import { exampleTermData } from './JSON/TermData';
-import TopBar from "./Componenets/TopBar";
-
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
-
   return (
     <div className='App'>
-      <div className='sideBar'>
-        <SideBar></SideBar>
-      </div>
-      <div className='topBar'>
-        <TopBar></TopBar>
-      </div>
-      <div className='grid'>
-        <Grid termData={exampleTermData}></Grid>
-      </div>
-      </div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </div>
   );
 }
 
