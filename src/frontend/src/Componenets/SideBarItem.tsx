@@ -1,12 +1,17 @@
 import React from "react";
 import {IconButton, Stack } from '@mui/material/';
-import Typography from '@mui/material/Typography';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
 import "./SideBarItem.css";
 
-function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
+interface SideBarItemProps {
+    id: bigint;
+    name: string;
+    onFavoriteClick: (id: bigint) => void;
+    onStarClick: (id: bigint) => void;
+}
+
+function SideBarItem (props: SideBarItemProps) : JSX.Element {
     let clickEvent = () => {
         alert("you clicked on " + props.name  + " with id: " + props.id)
     };
@@ -21,11 +26,11 @@ function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
             <Stack direction="row" justifyContent="flex-end"
                alignItems="center" spacing={0}>
                 <IconButton aria-label="favorite flowchart" size = "small"
-                            onClick={() => {alert('clicked heart');}}>
+                            onClick={() => props.onFavoriteClick(props.id)}>
                     <FavoriteBorderIcon/>
                 </IconButton>
                 <IconButton aria-label="star flowchart" size = "small"
-                            onClick={() => {alert('clicked star');}}>
+                            onClick={() => props.onStarClick(props.id)}>
                     <StarBorderIcon/>
                 </IconButton>
             </Stack>

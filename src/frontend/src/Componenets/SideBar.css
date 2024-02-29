@@ -6,6 +6,10 @@
 }
 .sideBarGroup{
     margin-top: 20px;
+    display: inline;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 .sideBarTitle {
     padding: 8px;
