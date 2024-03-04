@@ -1,5 +1,20 @@
 .sideBar{
     display: flex;
-    flex-direction: column;
+    height:100%;
+    width: 100%;
     overflow-x: scroll;
+}
+.sideBarGroup{
+    margin-top: 20px;
+    display: inline;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.sideBarTitle {
+    padding: 8px;
+    width: 100%;
+    color: rgb(125, 125, 125);
+    text-align: left;
+    font-size: 14px;
 }

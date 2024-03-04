@@ -1,16 +1,4 @@
 .App {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  width: 100vw;
   height: 100vh;
-}
-.sideBar {
-  grid-area: 2 / 1 / 10 / 3;
-}
-.topBar{
-  grid-area: 1 / 1 / 2 / 10;
-}
-.grid {
-  grid-area: 2 / 3 / 10 / 10;
-  overflow: scroll;
 }

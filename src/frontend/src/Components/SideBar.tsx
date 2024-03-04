@@ -7,6 +7,7 @@ import {IconButton, Stack, Tooltip} from "@mui/material";
 
 interface flowchartProps{
     flowcharts: { id: bigint; name: string }[];
+    group: string;
     onFavoriteClick: (id: bigint) => void;
     onStarClick: (id: bigint) => void;
 }
@@ -69,7 +70,6 @@ function SideBarTab () : JSX.Element {
                 main_flowchart: updatedMainFlowchart,
             };
         });
-        alert('Update Main Flowchart');
     };
 
 
@@ -102,7 +102,6 @@ function SideBarTab () : JSX.Element {
 
             return prevFlowcharts;
         });
-        alert('Move item to Favorites');
     };
 
     return (
@@ -110,12 +109,12 @@ function SideBarTab () : JSX.Element {
             <div className="sideBarItems">
                 <div className="sideBarGroup">
                     <span className="sideBarTitle"> MAIN FLOWCHART </span>
-                    <AllFlowcharts flowcharts={flowcharts.main_flowchart} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.main_flowchart} group={"main"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
 
                 </div>
                 <div className="sideBarGroup">
                     <span className="sideBarTitle"> FAVORITES </span>
-                    <AllFlowcharts flowcharts={flowcharts.favorite_flowcharts} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.favorite_flowcharts} group={"favorite"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
                 </div>
                 <div className="sideBarGroup">
                     <Stack direction="row" justifyContent="flex-end"
@@ -128,7 +127,7 @@ function SideBarTab () : JSX.Element {
                             </IconButton>
                         </Tooltip>
                     </Stack>
-                    <AllFlowcharts flowcharts={flowcharts.all_flowcharts} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.all_flowcharts} group={"all"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
                 </div>
             </div>
         </div>
@@ -138,7 +137,7 @@ function SideBarTab () : JSX.Element {
 function AllFlowcharts(props: flowchartProps): JSX.Element  {
     const sideBarItems = props.flowcharts.map(({id, name}) => {
         return(
-            <SideBarItem id={id} name={name} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
+            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
         );
     });
     return <>{sideBarItems}</>;
