@@ -73,7 +73,6 @@ function SideBarTab () : JSX.Element {
     };
 
 
-
     const handleFavoriteClick = (id: bigint) => {
         setFlowcharts(prevFlowcharts => {
             const flowchartToMove = prevFlowcharts.all_flowcharts.find(flowchart => flowchart.id === id);
@@ -104,6 +103,10 @@ function SideBarTab () : JSX.Element {
         });
     };
 
+    const handleAddClick = () => {
+        alert('add flowchart');
+    }
+
     return (
         <div className="sideBar">
             <div className="sideBarItems">
@@ -122,7 +125,7 @@ function SideBarTab () : JSX.Element {
                         <span className="sideBarTitle"> ALL FLOWCHARTS </span>
                         <Tooltip title="Create a new Flow" placement="right" arrow>
                             <IconButton aria-label="favorite flowchart" size = "small"
-                                        onClick={() => {alert('add flowchart');}}>
+                                        onClick={handleAddClick}>
                                 <AddBoxOutlinedIcon/>
                             </IconButton>
                         </Tooltip>
