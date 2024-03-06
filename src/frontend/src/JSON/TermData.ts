@@ -1,3 +1,5 @@
+// noinspection LanguageDetectionInspection
+
 export const exampleTermData = [
   {
     termName: 'Fall 2027',
@@ -122,6 +124,10 @@ export const exampleTermData = [
   }
 ];
 
+/*
+  Below is the API Post request for adding the example term data above to the database
+  The flowchart JSON is taken in a String and must therefore be on one line
+ */
 // POST http://localhost:8080/FlowchartTemplates
 // {
 //     "catalog": "2022-2026",
@@ -129,4 +135,6 @@ export const exampleTermData = [
 //     "concentration": "Example",
 //     "flowchart": "[\n{\n \"termName\": \"Fall 2027\",\n \"classes\": [\n {\n \"id\": \"CSC123\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"MATH141\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"COMS101\",\n\"color\": \"#FFEA9E\"\n}\n]\n},\n{\n\"termName\": \"Winter 2027\",\n\"classes\": [\n{\n\"id\": \"CSC101\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"MATH142\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"ENGL134\",\n\"color\": \"#FFEA9E\"\n}\n]\n},\n{\n\"termName\": \"Spring 2027\",\n\"classes\": [\n{\n\"id\": \"CSC202\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"MATH143\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"COMS126\",\n\"color\": \"#FFEA9E\"\n}\n]\n},\n{\n\"termName\": \"Fall 2028\",\n\"classes\": [\n{\n\"id\": \"CSC203\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"CSC225\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"MATH241\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"CHEM124\",\n\"color\": \"#FFEA9E\"\n}\n]\n},\n{\n\"termName\": \"Winter 2028\",\n\"classes\": [\n{\n\"id\": \"CSC357\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"CSC248\",\n\"color\": \"#FFFFFF\"\n},\n{\n\"id\": \"MATH244\",\n\"color\": \"#FFEA9E\"\n},\n{\n\"id\": \"CHEM125\",\n\"color\": \"#FFEA9E\"\n}\n]\n},\n{\n\"termName\": \"Spring 2028\",\n\"classes\": []\n},\n{\n\"termName\": \"Fall 2029\",\n\"classes\": []\n},\n{\n\"termName\": \"Winter 2029\",\n\"classes\": []\n},\n{\n\"termName\": \"Spring 2029\",\n\"classes\": []\n},\n{\n\"termName\": \"Fall 2030\",\n\"classes\": []\n},\n{\n\"termName\": \"Winter 2030\",\n\"classes\": []\n},\n{\n\"termName\": \"Spring 2030\",\n\"classes\": []\n}\n]"
 // }
+/* Below is the Flowchart ID of this example data in the flowchart for later proof of concept that
+*  We can use flowchart data from the database */
 // "id": 252

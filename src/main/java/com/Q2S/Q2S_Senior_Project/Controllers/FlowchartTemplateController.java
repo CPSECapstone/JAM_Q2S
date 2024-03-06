@@ -23,11 +23,20 @@ public class FlowchartTemplateController {
     FlowchartTemplateController(FlowchartTemplateRepo flowchartTemplateRepo){
         this.flowchartTemplateRepo = flowchartTemplateRepo;
     }
+
+    /**
+     * API to compile data of Poly Flow Builder's quarter flowchart templates and
+     * input as rows into our database
+     *
+     * @return          the list of flowchart templates added to the database
+     * @throws IOException  thrown on invalid file paths or by object mapper
+     */
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/FlowchartTemplates/fromScratch")
+    @PostMapping("/api/FlowchartTemplates/fromScratch")
     List<FlowchartTemplate> updateFlowchartTemplates() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File dataFile = new File("data/2022-2026FlowTemplateData.json");
+        String templateDataFilePath = "data/2022-2026FlowTemplateData.json";
+        File dataFile = new File(templateDataFilePath);
         List<FlowchartTemplateData> flowDataList = mapper.readValue(dataFile, new TypeReference<>(){});
 
         List<FlowchartTemplate> flowchartTemplateList = new ArrayList<>();
@@ -35,15 +44,7 @@ public class FlowchartTemplateController {
         File[] directoryListing = dir.listFiles();
         assert directoryListing != null;
         for (File child : directoryListing) {
-            String content = new String(Files.readAllBytes(child.toPath()));
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(content);
-            String flowchartCode = jsonNode.get("name").asText();
-
-            //Should only ever be one match
-            List<FlowchartTemplateData> filteredFlowData = flowDataList.stream().filter((data) -> data.getCode().equals(flowchartCode)).toList();
-            FlowchartTemplate template = getFlowchartTemplate(child, filteredFlowData, content);
-
+            FlowchartTemplate template = getFlowchartTemplate(child, flowDataList);
             flowchartTemplateList.add(template);
         }
 
@@ -55,20 +56,27 @@ public class FlowchartTemplateController {
      * Extracts the required data from the correct FlowChartTemplateData object
      * and prepares an Entity to be stored in the database
      *
-     * @param child         the file of the flowchart template
-     * @param filteredFlowData      list of data store objects whose codes match that in the child file
-     *                              -- should only be one
-     * @param content       the contents of the flowchart template file
-     * @return              A FlowchartTemplate object ready to be put in the database
-     * @throws IOException  Thrown in the event that there is no data for the child file
+     * @param child             the file of the flowchart template
+     * @param flowDataList      list of all objects with flowchart data (Major Name,Concentration Name)
+     * @return                  A FlowchartTemplate object ready to be put in the database
+     * @throws IOException      Thrown in the event that there is no data for the child file
      */
-    private static FlowchartTemplate getFlowchartTemplate(File child, List<FlowchartTemplateData> filteredFlowData, String content) throws IOException {
+    static FlowchartTemplate getFlowchartTemplate(File child, List<FlowchartTemplateData> flowDataList) throws IOException {
+        String content = new String(Files.readAllBytes(child.toPath()));
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(content);
+        String flowchartCode = jsonNode.get("name").asText();
+
+        //Should only ever be one match
+        List<FlowchartTemplateData> filteredFlowData = flowDataList.stream().filter((data) -> data.getCode().equals(flowchartCode)).toList();
+
         if (filteredFlowData.isEmpty()){
             throw new IOException("No Matching Major Data for File " + child.getPath());
+        } else if (filteredFlowData.size() > 1){
+            throw new IOException("Conflicting Major Data for File " + child.getPath());
         }
         FlowchartTemplateData data = filteredFlowData.get(0);
         FlowchartTemplate template = new FlowchartTemplate();
-//        template.setId(data.getId());
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
@@ -76,23 +84,23 @@ public class FlowchartTemplateController {
         return template;
     }
 
-    @PostMapping("/FlowchartTemplates")
+    @PostMapping("/api/FlowchartTemplates")
     public FlowchartTemplate saveFlowchartTemplate(@Validated @RequestBody FlowchartTemplate flowchartTemplate) {
         return flowchartTemplateRepo.save(flowchartTemplate);
     }
 
-    @GetMapping("/FlowchartTemplates/{id}")
+    @GetMapping("/api/FlowchartTemplates/{id}")
     FlowchartTemplate getFlowchartTemplateById(@PathVariable long id) {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
 
 
-    @GetMapping("/FlowchartTemplates")
+    @GetMapping("/api/FlowchartTemplates")
     List<FlowchartTemplate> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();
     }
 
-    @DeleteMapping("/FlowchartTemplates")
+    @DeleteMapping("/api/FlowchartTemplates")
     void deleteAllFlowchartTemplates(){
         flowchartTemplateRepo.deleteAll();
     }
