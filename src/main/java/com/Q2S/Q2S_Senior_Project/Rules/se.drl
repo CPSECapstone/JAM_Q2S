@@ -2,38 +2,70 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
+import java.util.List;
+global Boolean requirementMet;
 
-// Define a function to check if a course ID is required for the major
-function boolean isMajorCourse(String courseId) {
-    List<String> majorCourses = Arrays.asList("CSC101", "CSC202", "CSC203", "CSC225", "CSC248", "CSC300", "PHIL323");
-    return majorCourses.contains(courseId);
-}
 
-function boolean isSupportCourse(String courseId) {
-    // Define the list of required course IDs for the major here
-    return courseId in ("CSC101", "CSC202", "CSC203", ...);
-}
+rule "Life Science Elective"
+when
+    $classes: List() // list contains class codes
+    eval(
+        ($classes.contains("BIO111") ||
+        $classes.contains("BIO161") ||
+        $classes.contains("BOT121") ||
+        $classes.contains("MCRO221") ||
+        $classes.contains("MCRO224")) ||
+        ($classes.contains("BIO213") && $classes.contains("BMED213"))
+    )
+then
+    insert(Boolean.TRUE); //might need a class later to show WHICH requirement not met
+end
 
-function boolean isConcentrationCourse(String courseId) {
-    // Define the list of required course IDs for the major here
-    return courseId in ("CSC101", "CSC202", "CSC203", ...);
-}
+rule "Math Elective"
+when
+    $classes: List()
+    eval(
+            $classes.contains("MATH248") ||
+            $classes.contains("MATH304") ||
+            $classes.contains("MATH335") ||
+            $classes.contains("MATH336") ||
+            $classes.contains("MATH451")
+        )
+then
+    insert(Boolean.TRUE);
+end
 
-// Define rules for the Software Engineering major
-//rule "Software Engineering Major Courses"
-//when
-//    $major: Major(name == "Software Engineering")
-//    $course: Course(major == $major, $courseId : id)
-//    eval(isCourseRequired($courseId))
-//then
-//    // Define actions for courses matching the required IDs
-//    // Example: marking courses as applicable for the major
-//    $course.setApplicable(true);
-//end
 
-rule "SE Major Courses"
-	when
-		quarterClassObject: QuarterClass(id)
-	then
-		productObject.setDiscount(15);
-	end
+
+rule "Check all requirements"
+salience -1
+when
+    // Count the number of met requirements
+    $count: Number(intValue >= 1) from accumulate(
+        Boolean(),
+        count()
+    )
+    // Count the total number of requirements
+    $total: Number(intValue > 0) from accumulate(
+        $r: Boolean(),
+        count($r)
+    )
+    // Ensure all requirements are met
+    eval($count == $total)
+then
+    System.out.println("All requirements are met!");
+end
+
+
+
+//for degree requirements, have "validate" button to check if all met
+// at the time of validate -- map all to graduating catalog so don't ahve to requirement map
+//do course mappings dynamically
+//go through courses and compare against each requirement
+
+//figure out ands/ors
+// need to populate database to test
+//flowchart (list of classes) will be input to SE rules
+// each rule is a requirement
+
+

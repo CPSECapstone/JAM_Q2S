@@ -16,3 +16,4 @@ then
     retract($quarterClass);
 end
 
+//only need strings
