@@ -5,14 +5,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "./SideBarItem.css";
-
-interface SideBarItemProps {
-    id: bigint;
-    name: string;
-    group: string;
-    onFavoriteClick: (id: bigint) => void;
-    onStarClick: (id: bigint) => void;
-}
+import { SideBarItemProps } from '../Interfaces/Interfaces';
 
 function SideBarItem(props: SideBarItemProps): JSX.Element {
     const clickEvent = () => {
@@ -36,7 +29,7 @@ function SideBarItem(props: SideBarItemProps): JSX.Element {
                 <p className="text">{props.name}</p>
             </span>
 
-            <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={0}>
+            <Stack direction="row" justifyContent="flex-end" alignItems="left" spacing={0}>
                 <IconButton aria-label="favorite flowchart" size="small" onClick={() => props.onFavoriteClick(props.id)}>
                     {renderIcon("favorite")}
                 </IconButton>

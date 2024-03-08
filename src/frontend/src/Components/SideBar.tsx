@@ -4,13 +4,7 @@ import './SideBar.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import {IconButton, Stack, Tooltip} from "@mui/material";
-
-interface flowchartProps{
-    flowcharts: { id: bigint; name: string }[];
-    group: string;
-    onFavoriteClick: (id: bigint) => void;
-    onStarClick: (id: bigint) => void;
-}
+import { flowchartProps } from '../Interfaces/Interfaces';
 
 
 function SideBarTab () : JSX.Element {
