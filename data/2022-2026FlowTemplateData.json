@@ -1,0 +1,1666 @@
+[
+    {
+      "id": "499c1013-fc87-45d1-bb48-ee46331c745e",
+      "catalog": "2022-2026",
+      "majorName": "Aerospace Engineering",
+      "concName": "Aeronautics",
+      "code": "22-26.52AEROBSU.ARNAEROU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52AEROBSU.ARNAEROU.pdf"
+    },
+    {
+      "id": "8e195e0c-73ce-44f7-a9ae-0212cd7c4b04",
+      "catalog": "2022-2026",
+      "majorName": "Aerospace Engineering",
+      "concName": "Astronautics",
+      "code": "22-26.52AEROBSU.ASTAEROU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52AEROBSU.ASTAEROU.pdf"
+    },
+    {
+      "id": "554c4977-b843-4640-b314-3c01cbad7cdb",
+      "catalog": "2022-2026",
+      "majorName": "Aerospace Engineering",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.52AEROBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52AEROBSU.EMPH-.pdf"
+    },
+    {
+      "id": "31a2167a-0377-4d4e-9849-524bb296b31e",
+      "catalog": "2022-2026",
+      "majorName": "Agricultural Business",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10AGBBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10AGBBSU.pdf"
+    },
+    {
+      "id": "1c4f6f30-b725-4882-b501-54faa7bedd84",
+      "catalog": "2022-2026",
+      "majorName": "Agricultural Communication",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10ACBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ACBSU.pdf"
+    },
+    {
+      "id": "bad3ff4d-13ae-40fd-b3f6-7c003e4797e5",
+      "catalog": "2022-2026",
+      "majorName": "Agricultural Science",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10AGSCBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10AGSCBSU.pdf"
+    },
+    {
+      "id": "a1ec6bd4-1bcc-4123-9d12-6508b8ce361a",
+      "catalog": "2022-2026",
+      "majorName": "Agricultural Systems Management",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10ASMBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ASMBSU.pdf"
+    },
+    {
+      "id": "704110fc-d6b2-44e6-b1c5-ea0a6c1d897d",
+      "catalog": "2022-2026",
+      "majorName": "Animal Science",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10ASCIBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ASCIBSU.pdf"
+    },
+    {
+      "id": "18e460c0-bf72-4284-9f01-06eebc3de784",
+      "catalog": "2022-2026",
+      "majorName": "Animal Science",
+      "concName": "Pre-Veterinary Medicine Track*",
+      "code": "22-26.10ASCIBSU.EMPH-PREVET",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ASCIBSU.EMPH-PREVET.pdf"
+    },
+    {
+      "id": "77488b1e-7690-42f8-93ad-2b0dbf29fc54",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48ANGBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.EMPH-.pdf"
+    },
+    {
+      "id": "d53cb10c-9cd0-4be5-8806-1434fe3ce363",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Environmental Studies and Sustainability",
+      "code": "22-26.48ANGBSU.ESSANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.ESSANGU.pdf"
+    },
+    {
+      "id": "a94bdc7b-24e2-4f19-9946-afff3dc6c78b",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Global Politics",
+      "code": "22-26.48ANGBSU.GPPANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.GPPANGU.pdf"
+    },
+    {
+      "id": "ea1fd146-6032-455b-91a2-aa075a763418",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Global Studies and International Development",
+      "code": "22-26.48ANGBSU.GSIDANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.GSIDANGU.pdf"
+    },
+    {
+      "id": "cc560aff-4fef-4f61-9406-ce1354d65f9d",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Human Ecology",
+      "code": "22-26.48ANGBSU.HMEANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.HMEANGU.pdf"
+    },
+    {
+      "id": "48d9a745-03e0-4efc-a00d-1ed71f9fba86",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.48ANGBSU.ICSANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.ICSANGU.pdf"
+    },
+    {
+      "id": "a3a0d682-2235-470e-bb10-642809a37287",
+      "catalog": "2022-2026",
+      "majorName": "Anthropology and Geography",
+      "concName": "Pre-Law",
+      "code": "22-26.48ANGBSU.PRLANGU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ANGBSU.PRLANGU.pdf"
+    },
+    {
+      "id": "9ba48e70-2260-4931-b08d-3eea3d8ab17e",
+      "catalog": "2022-2026",
+      "majorName": "Architectural Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.20ARCEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.20ARCEBSU.pdf"
+    },
+    {
+      "id": "6cc8634e-f337-4a4b-b354-263a8750f2d7",
+      "catalog": "2022-2026",
+      "majorName": "Architecture",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.20ARCHBARU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.20ARCHBARU.pdf"
+    },
+    {
+      "id": "fa52bf70-b287-4d09-984b-bd829cd8d75c",
+      "catalog": "2022-2026",
+      "majorName": "Art and Design",
+      "concName": "Graphic Design",
+      "code": "22-26.48ARTBFAU.GRDARTU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ARTBFAU.GRDARTU.pdf"
+    },
+    {
+      "id": "c03018cf-ed18-4dfe-aed5-fa78dafc6588",
+      "catalog": "2022-2026",
+      "majorName": "Art and Design",
+      "concName": "Photography and Video",
+      "code": "22-26.48ARTBFAU.PHOVARTU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ARTBFAU.PHOVARTU.pdf"
+    },
+    {
+      "id": "997a0554-1fd3-4127-8963-568ccd5f7ebc",
+      "catalog": "2022-2026",
+      "majorName": "Art and Design",
+      "concName": "Studio Art",
+      "code": "22-26.48ARTBFAU.SAARTU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ARTBFAU.SAARTU.pdf"
+    },
+    {
+      "id": "58323ea8-e770-419d-83a5-63fe40445c6e",
+      "catalog": "2022-2026",
+      "majorName": "Biochemistry",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.76BCHMBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BCHMBSU.pdf"
+    },
+    {
+      "id": "b86e20fd-bea0-4b68-9d40-793b447ef700",
+      "catalog": "2022-2026",
+      "majorName": "Biochemistry",
+      "concName": "Polymers & Coatings",
+      "code": "22-26.76BCHMBSU.PYCBCHMU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BCHMBSU.PYCBCHMU.pdf"
+    },
+    {
+      "id": "2749ba76-630b-4933-b93d-41dcf824a0cf",
+      "catalog": "2022-2026",
+      "majorName": "Biological Sciences",
+      "concName": "Anatomy & Physiology",
+      "code": "22-26.76BIOBSU.APBIOU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BIOBSU.APBIOU.pdf"
+    },
+    {
+      "id": "c3e1f933-f213-4598-a108-8ac4f5201af9",
+      "catalog": "2022-2026",
+      "majorName": "Biological Sciences",
+      "concName": "Ecology, Evolution, Biodiversity and Conservation Concentration",
+      "code": "22-26.76BIOBSU.EEBCBIOU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BIOBSU.EEBCBIOU.pdf"
+    },
+    {
+      "id": "4c0505a3-329f-455a-aed6-0ebb4e4862ab",
+      "catalog": "2022-2026",
+      "majorName": "Biological Sciences",
+      "concName": "Molecular and Cellular Biology",
+      "code": "22-26.76BIOBSU.MCBBIOU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BIOBSU.MCBBIOU.pdf"
+    },
+    {
+      "id": "9df9dc97-406f-4274-9a1c-46c93c2d6b29",
+      "catalog": "2022-2026",
+      "majorName": "Biological Sciences",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.76BIOBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76BIOBSU.pdf"
+    },
+    {
+      "id": "26c622e7-541a-4525-bb93-4c5b158c4247",
+      "catalog": "2022-2026",
+      "majorName": "Biomedical Engineering",
+      "concName": "Bioinstrumentation",
+      "code": "22-26.52BMEDBSU.BINSBMEDU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52BMEDBSU.BINSBMEDU.pdf"
+    },
+    {
+      "id": "11c78bd0-249e-4fbf-b532-c940671eada3",
+      "catalog": "2022-2026",
+      "majorName": "Biomedical Engineering",
+      "concName": "Mechanical Design",
+      "code": "22-26.52BMEDBSU.MDESBMEDU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52BMEDBSU.MDESBMEDU.pdf"
+    },
+    {
+      "id": "ddd69ed9-88fd-40d1-bb25-b9da1c4aeeda",
+      "catalog": "2022-2026",
+      "majorName": "Biomedical Engineering",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.52BMEDBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52BMEDBSU.pdf"
+    },
+    {
+      "id": "c575a716-4acb-4031-81b6-87028fc5cdf7",
+      "catalog": "2022-2026",
+      "majorName": "BioResource and Agricultural Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10BRAEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10BRAEBSU.pdf"
+    },
+    {
+      "id": "ab68f61e-2241-424f-b4c8-d6870bf3d238",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Accounting",
+      "code": "22-26.40BUSBSU.ACTBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.ACTBUSU.pdf"
+    },
+    {
+      "id": "0b249c7b-96fc-4f70-b885-15144157f8b2",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.40BUSBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.EMPH-.pdf"
+    },
+    {
+      "id": "8bbc01a4-ae24-45d6-ad92-667960f94e1b",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Consumer Packaging",
+      "code": "22-26.40BUSBSU.CPBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.CPBUSU.pdf"
+    },
+    {
+      "id": "df72cb2f-3eab-442c-bc46-3c61176facdb",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Entrepreneurship",
+      "code": "22-26.40BUSBSU.ENTRBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.ENTRBUSU.pdf"
+    },
+    {
+      "id": "de9c4128-8701-4e05-873e-4e181b9899d4",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Financial Management",
+      "code": "22-26.40BUSBSU.FIMBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.FIMBUSU.pdf"
+    },
+    {
+      "id": "909964d1-25a2-4eee-a3bb-f6f45139d103",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Information Systems",
+      "code": "22-26.40BUSBSU.ISBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.ISBUSU.pdf"
+    },
+    {
+      "id": "f297b92a-666f-487f-b988-2c46352fbd4d",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Management and Human Resources",
+      "code": "22-26.40BUSBSU.MHRBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.MHRBUSU.pdf"
+    },
+    {
+      "id": "d9550fb5-fe1c-457b-b68f-7b3ad4e344cb",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Marketing Management",
+      "code": "22-26.40BUSBSU.MMBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.MMBUSU.pdf"
+    },
+    {
+      "id": "c1714260-7389-422f-a68b-639eea48562c",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Quantitative Analysis",
+      "code": "22-26.40BUSBSU.QABUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.QABUSU.pdf"
+    },
+    {
+      "id": "27c5e2c0-e501-42b2-8953-a746bbd743a5",
+      "catalog": "2022-2026",
+      "majorName": "Business Administration",
+      "concName": "Real Estate Finance",
+      "code": "22-26.40BUSBSU.REFBUSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40BUSBSU.REFBUSU.pdf"
+    },
+    {
+      "id": "9969fcb7-79ae-4376-aa10-bccfdfba5df2",
+      "catalog": "2022-2026",
+      "majorName": "Chemistry",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.76CHEMBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76CHEMBSU.pdf"
+    },
+    {
+      "id": "5a4192ac-9d36-4aeb-9294-04ff04f0ee96",
+      "catalog": "2022-2026",
+      "majorName": "Chemistry",
+      "concName": "Polymers & Coatings",
+      "code": "22-26.76CHEMBSU.PYCCHEMU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76CHEMBSU.PYCCHEMU.pdf"
+    },
+    {
+      "id": "87d12e21-79d9-418a-bfbe-2832314f49c9",
+      "catalog": "2022-2026",
+      "majorName": "Child Development",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48CDBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48CDBSU.pdf"
+    },
+    {
+      "id": "2fc19791-017b-4e3d-b757-af16473fdd30",
+      "catalog": "2022-2026",
+      "majorName": "City and Regional Planning",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.20CRPBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.20CRPBSU.pdf"
+    },
+    {
+      "id": "48053ee5-bca0-4f91-b975-35b92efc0aef",
+      "catalog": "2022-2026",
+      "majorName": "Civil Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52CEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CEBSU.pdf"
+    },
+    {
+      "id": "9086621f-2bec-48d0-abc8-14a5b5459078",
+      "catalog": "2022-2026",
+      "majorName": "Communication Studies",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48COMSBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48COMSBAU.pdf"
+    },
+    {
+      "id": "9190a301-c1c3-4405-8bc5-9f5b8476e310",
+      "catalog": "2022-2026",
+      "majorName": "Comparative Ethnic Studies",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48ESBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ESBAU.pdf"
+    },
+    {
+      "id": "06d40ab3-c3f5-4ea3-b9c8-e39c1d507451",
+      "catalog": "2022-2026",
+      "majorName": "Computer Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52CPEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CPEBSU.pdf"
+    },
+    {
+      "id": "00e997cf-8111-4f56-9d2b-48ec3967ecf3",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Artifical Intelligence and Machine Learning Concentration",
+      "code": "22-26.52CSCBSU.AIMLCSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.AIMLCSCU.pdf"
+    },
+    {
+      "id": "dd559d3b-a1d8-4b83-901e-60eeb58e952c",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Data Engineering Concentration",
+      "code": "22-26.52CSCBSU.DECSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.DECSCU.pdf"
+    },
+    {
+      "id": "843d4510-1328-4386-ac8c-b0622cbcbd87",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Game Development Concentration",
+      "code": "22-26.52CSCBSU.GDCSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.GDCSCU.pdf"
+    },
+    {
+      "id": "28df7a3e-3362-4e03-a614-e5ebec2be175",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Graphics Concentration",
+      "code": "22-26.52CSCBSU.GRCSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.GRCSCU.pdf"
+    },
+    {
+      "id": "700ba9ff-016c-4472-801b-542da55a80f7",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.52CSCBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.pdf"
+    },
+    {
+      "id": "1966915b-1f8d-4425-82a8-6bc7dafb4c5e",
+      "catalog": "2022-2026",
+      "majorName": "Computer Science",
+      "concName": "Privacy and Security Concentration",
+      "code": "22-26.52CSCBSU.PSCSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52CSCBSU.PSCSCU.pdf"
+    },
+    {
+      "id": "7e07e245-87f5-49f1-bb86-4fe8ec83ef09",
+      "catalog": "2022-2026",
+      "majorName": "Construction Management",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.20CMBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.20CMBSU.pdf"
+    },
+    {
+      "id": "7b4c93a5-d095-4791-8bfc-2449447a1f93",
+      "catalog": "2022-2026",
+      "majorName": "Dairy Science",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.10DSCIBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10DSCIBSU.pdf"
+    },
+    {
+      "id": "16845d47-c212-41e4-8eb5-3b334332fcaa",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Accounting",
+      "code": "22-26.40ECONBSU.ACTECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.ACTECONU.pdf"
+    },
+    {
+      "id": "2d430661-4b59-4890-bbbc-0455c5e3a956",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Consumer Packaging",
+      "code": "22-26.40ECONBSU.CPECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.CPECONU.pdf"
+    },
+    {
+      "id": "412952b2-e49c-46a8-bec5-91e9b26d09ec",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Entrepreneurship",
+      "code": "22-26.40ECONBSU.ENTRECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.ENTRECONU.pdf"
+    },
+    {
+      "id": "c200421e-146d-4b9d-84b8-a4a4e9a5888d",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Financial Management",
+      "code": "22-26.40ECONBSU.FIMECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.FIMECONU.pdf"
+    },
+    {
+      "id": "1c7c80ed-9506-43b5-84d3-8cdfc36b9c3f",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Information Systems",
+      "code": "22-26.40ECONBSU.ISECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.ISECONU.pdf"
+    },
+    {
+      "id": "e27dd2d3-3935-4a84-92da-60fe64e830ae",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Management and Human Resources",
+      "code": "22-26.40ECONBSU.MHRECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.MHRECONU.pdf"
+    },
+    {
+      "id": "49caa663-06e2-4b83-9167-ae13794cb395",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Marketing Management",
+      "code": "22-26.40ECONBSU.MMECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.MMECONU.pdf"
+    },
+    {
+      "id": "d0146678-9c3b-4110-b0a5-902f1f0e1176",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.40ECONBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.pdf"
+    },
+    {
+      "id": "b5024a27-196f-467d-88e7-20678d6e464e",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Quantitative Analysis",
+      "code": "22-26.40ECONBSU.QAECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.QAECONU.pdf"
+    },
+    {
+      "id": "0a51ad8d-fab2-48c7-b191-fd205e906e6f",
+      "catalog": "2022-2026",
+      "majorName": "Economics",
+      "concName": "Real Estate Finance",
+      "code": "22-26.40ECONBSU.REFECONU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ECONBSU.REFECONU.pdf"
+    },
+    {
+      "id": "00e6953b-824a-47f3-93a5-3583224b8faf",
+      "catalog": "2022-2026",
+      "majorName": "Electrical Engineering",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.52EEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52EEBSU.pdf"
+    },
+    {
+      "id": "b614ba44-ecc6-4d97-8ea6-0b1a4a95a8ad",
+      "catalog": "2022-2026",
+      "majorName": "Electrical Engineering",
+      "concName": "Power Concentration",
+      "code": "22-26.52EEBSU.PWREEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52EEBSU.PWREEU.pdf"
+    },
+    {
+      "id": "222d594d-b3c5-4163-9812-e03d73d589fb",
+      "catalog": "2022-2026",
+      "majorName": "Electrical Engineering",
+      "concName": "Radio Frequency - Microwave - Photonics Concentration",
+      "code": "22-26.52EEBSU.RFMPEEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52EEBSU.RFMPEEU.pdf"
+    },
+    {
+      "id": "3d954c07-1b8b-4469-b294-f45c093fa33d",
+      "catalog": "2022-2026",
+      "majorName": "Electrical Engineering",
+      "concName": "Systems Concentration",
+      "code": "22-26.52EEBSU.SYSTEEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52EEBSU.SYSTEEU.pdf"
+    },
+    {
+      "id": "3fdcc153-6735-4878-b426-0218aed22dcc",
+      "catalog": "2022-2026",
+      "majorName": "English",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48ENGLBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ENGLBAU.pdf"
+    },
+    {
+      "id": "ea177f32-7a1d-4786-8993-6ede94bea77d",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Earth and Soil Sciences",
+      "concName": "Geology",
+      "code": "22-26.10EESSBSU.GEOEESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10EESSBSU.GEOEESSU.pdf"
+    },
+    {
+      "id": "7a005e5d-659f-45ae-abee-e041794de305",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Earth and Soil Sciences",
+      "concName": "Hydrology",
+      "code": "22-26.10EESSBSU.HDREESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10EESSBSU.HDREESSU.pdf"
+    },
+    {
+      "id": "e1f4f1e3-0f50-4f63-9f59-21b5593c40bd",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Earth and Soil Sciences",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.10EESSBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10EESSBSU.pdf"
+    },
+    {
+      "id": "b7925d9f-b990-4d51-a0ea-b611383350da",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52ENVEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52ENVEBSU.pdf"
+    },
+    {
+      "id": "0d0af4ad-70a3-403c-b251-e5829c7b21b1",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Management and Protection",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.10ENVMBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ENVMBSU.pdf"
+    },
+    {
+      "id": "f1d70757-6c4b-4dbf-8330-597dddd21bd1",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Management and Protection",
+      "concName": "Watershed Management and Hydrology",
+      "code": "22-26.10ENVMBSU.WMHENVMU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ENVMBSU.WMHENVMU.pdf"
+    },
+    {
+      "id": "db9638e1-0b8b-46f0-9403-10bd9a3faf8b",
+      "catalog": "2022-2026",
+      "majorName": "Environmental Management and Protection",
+      "concName": "Wildlife Biology",
+      "code": "22-26.10ENVMBSU.WBENVMU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10ENVMBSU.WBENVMU.pdf"
+    },
+    {
+      "id": "7c8797e1-9f83-4943-ab6b-1e353557dd02",
+      "catalog": "2022-2026",
+      "majorName": "Food Science",
+      "concName": "Advanced Food Science",
+      "code": "22-26.10FDSCBSU.AFSFDSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FDSCBSU.AFSFDSCU.pdf"
+    },
+    {
+      "id": "8a56c1b1-cd4f-4254-8b9d-bc312b8963ff",
+      "catalog": "2022-2026",
+      "majorName": "Food Science",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.10FDSCBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FDSCBSU.EMPH-.pdf"
+    },
+    {
+      "id": "316b55ae-cdbb-404e-9501-be04671dfa73",
+      "catalog": "2022-2026",
+      "majorName": "Food Science",
+      "concName": "Culinology Concentration",
+      "code": "22-26.10FDSCBSU.CUFDSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FDSCBSU.CUFDSCU.pdf"
+    },
+    {
+      "id": "878396e7-4fbf-42be-82d3-e93f43390889",
+      "catalog": "2022-2026",
+      "majorName": "Forest and Fire Sciences",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.10FFSBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FFSBSU.pdf"
+    },
+    {
+      "id": "d08a9de4-2d4c-4c3f-b39f-ba2b492a0eb0",
+      "catalog": "2022-2026",
+      "majorName": "Forest and Fire Sciences",
+      "concName": "Watershed Management and Hydrology Concentration",
+      "code": "22-26.10FFSBSU.WMHFFSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FFSBSU.WMHFFSU.pdf"
+    },
+    {
+      "id": "b9c4a0e1-313a-473e-852f-face204d6da0",
+      "catalog": "2022-2026",
+      "majorName": "Forest and Fire Sciences",
+      "concName": "Wildland Fire and Fuels Management Concentration",
+      "code": "22-26.10FFSBSU.WFMFFSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FFSBSU.WFMFFSU.pdf"
+    },
+    {
+      "id": "cb612653-1141-4419-b86d-dffb23c07080",
+      "catalog": "2022-2026",
+      "majorName": "Forest and Fire Sciences",
+      "concName": "Wildlife Biology Concentration",
+      "code": "22-26.10FFSBSU.WBFFSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10FFSBSU.WBFFSU.pdf"
+    },
+    {
+      "id": "3a11ccc2-2649-4eb9-885a-2befb1097925",
+      "catalog": "2022-2026",
+      "majorName": "General Engineering",
+      "concName": "Individualized Course of Study (ICS)",
+      "code": "22-26.52GENEBSU.ICSGENEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52GENEBSU.ICSGENEU.pdf"
+    },
+    {
+      "id": "30846523-dcbe-4e3b-8c5c-7be4cebe1d70",
+      "catalog": "2022-2026",
+      "majorName": "General Engineering",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.52GENEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52GENEBSU.pdf"
+    },
+    {
+      "id": "f27ec4c7-3f55-492f-801b-49a3becd7bd9",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48GRCBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.EMPH-.pdf"
+    },
+    {
+      "id": "8af2bc91-c2de-40c8-a090-ddca21054153",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "Design Reproduction Technology",
+      "code": "22-26.48GRCBSU.DRTGRCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.DRTGRCU.pdf"
+    },
+    {
+      "id": "62a4cd26-d101-4bd2-9b70-a0d4e41f564d",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "Graphic Communication Management",
+      "code": "22-26.48GRCBSU.GCMGRCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.GCMGRCU.pdf"
+    },
+    {
+      "id": "f8ce695c-cbd1-49e7-87fc-4ebe5cde9978",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "Graphics for Packaging",
+      "code": "22-26.48GRCBSU.GPKGGRCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.GPKGGRCU.pdf"
+    },
+    {
+      "id": "8e155b5d-c9de-4d21-8965-902b5f11090e",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.48GRCBSU.ICSGRCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.ICSGRCU.pdf"
+    },
+    {
+      "id": "e876543e-316f-4b22-ba1c-60c66839718b",
+      "catalog": "2022-2026",
+      "majorName": "Graphic Communication",
+      "concName": "User Experience/User Interface",
+      "code": "22-26.48GRCBSU.UEUIGRCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48GRCBSU.UEUIGRCU.pdf"
+    },
+    {
+      "id": "8128e356-fd5e-4982-af24-c25ff00a50b0",
+      "catalog": "2022-2026",
+      "majorName": "History",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48HISTBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48HISTBAU.pdf"
+    },
+    {
+      "id": "74513aa4-2917-4f79-9fe6-402a47d4cc6b",
+      "catalog": "2022-2026",
+      "majorName": "Industrial Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52IEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52IEBSU.pdf"
+    },
+    {
+      "id": "c45a2a05-4a39-4b73-8111-edabe3911d2c",
+      "catalog": "2022-2026",
+      "majorName": "Industrial Technology and Packaging",
+      "concName": "Industrial Technology Concentration",
+      "code": "22-26.40ITPBSU.ITITPU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ITPBSU.ITITPU.pdf"
+    },
+    {
+      "id": "9d2258bf-1011-4a56-bec9-8021545104b8",
+      "catalog": "2022-2026",
+      "majorName": "Industrial Technology and Packaging",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.40ITPBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ITPBSU.pdf"
+    },
+    {
+      "id": "d8d942d6-9a0a-453b-8e05-c14a1716c11d",
+      "catalog": "2022-2026",
+      "majorName": "Industrial Technology and Packaging",
+      "concName": "Packaging",
+      "code": "22-26.40ITPBSU.PKGITPU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.40ITPBSU.PKGITPU.pdf"
+    },
+    {
+      "id": "cda36e1f-f846-45fd-9e4e-38199de73a6a",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48ISBAU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.EMPH-.pdf"
+    },
+    {
+      "id": "288c5a3b-62d5-470a-8055-55ecdb0fb7d0",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Ethics, Law, and Social Justice Concentration",
+      "code": "22-26.48ISBAU.ELSJISU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.ELSJISU.pdf"
+    },
+    {
+      "id": "22306eb7-6278-44cb-a81e-dc4740345dfe",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Global Citizenship and Social Sustainability Concentration",
+      "code": "22-26.48ISBAU.GCSSISU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.GCSSISU.pdf"
+    },
+    {
+      "id": "970734dd-9803-468a-8f4f-104c7f1862c0",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Health and Society Concentration",
+      "code": "22-26.48ISBAU.HSOISU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.HSOISU.pdf"
+    },
+    {
+      "id": "d17476aa-bbef-4a03-8e1a-7997b312cc53",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Science, Technology and Society Concentration",
+      "code": "22-26.48ISBAU.STSISU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.STSISU.pdf"
+    },
+    {
+      "id": "67869491-9009-411a-bb92-bda16920343f",
+      "catalog": "2022-2026",
+      "majorName": "Interdisciplinary Studies",
+      "concName": "Visual Media and Cultural Studies Concentration",
+      "code": "22-26.48ISBAU.VMCSISU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48ISBAU.VMCSISU.pdf"
+    },
+    {
+      "id": "043187b6-5138-4009-a45d-d52834f8d85e",
+      "catalog": "2022-2026",
+      "majorName": "Journalism",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48JOURBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48JOURBSU.EMPH-.pdf"
+    },
+    {
+      "id": "1f6cbfa3-2834-43c1-aea0-543e865ae628",
+      "catalog": "2022-2026",
+      "majorName": "Journalism",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.48JOURBSU.ICSJOURU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48JOURBSU.ICSJOURU.pdf"
+    },
+    {
+      "id": "430dc4f7-bcc3-490e-ad3b-f8fe741ccad3",
+      "catalog": "2022-2026",
+      "majorName": "Journalism",
+      "concName": "Media Innovation",
+      "code": "22-26.48JOURBSU.MEDIJOURU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48JOURBSU.MEDIJOURU.pdf"
+    },
+    {
+      "id": "5a1f2680-4d4a-4236-b1db-b50c2092b371",
+      "catalog": "2022-2026",
+      "majorName": "Journalism",
+      "concName": "News Concentration",
+      "code": "22-26.48JOURBSU.NEWSJOURU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48JOURBSU.NEWSJOURU.pdf"
+    },
+    {
+      "id": "38e918ac-2820-42e9-b79b-d89302b62511",
+      "catalog": "2022-2026",
+      "majorName": "Journalism",
+      "concName": "Public Relations",
+      "code": "22-26.48JOURBSU.PRJOURU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48JOURBSU.PRJOURU.pdf"
+    },
+    {
+      "id": "178cdc8a-8b32-45bd-96f6-46c300912caf",
+      "catalog": "2022-2026",
+      "majorName": "Kinesiology",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.76KINEBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76KINEBSU.EMPH-.pdf"
+    },
+    {
+      "id": "1c27e101-b36c-437c-a467-20ece101c3f6",
+      "catalog": "2022-2026",
+      "majorName": "Kinesiology",
+      "concName": "Exercise Science Concentration",
+      "code": "22-26.76KINEBSU.ESKINEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76KINEBSU.ESKINEU.pdf"
+    },
+    {
+      "id": "c3e8c003-87df-4359-b0e1-4c8bcfa5ce69",
+      "catalog": "2022-2026",
+      "majorName": "Kinesiology",
+      "concName": "Health Promotion Concentration",
+      "code": "22-26.76KINEBSU.HPKINEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76KINEBSU.HPKINEU.pdf"
+    },
+    {
+      "id": "b4bfd254-924f-4b35-b612-9bfe73afff67",
+      "catalog": "2022-2026",
+      "majorName": "Kinesiology",
+      "concName": "Sport Science Concentration",
+      "code": "22-26.76KINEBSU.SSKINEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76KINEBSU.SSKINEU.pdf"
+    },
+    {
+      "id": "7a77b54a-9cee-449b-b0e0-fa25cc854aae",
+      "catalog": "2022-2026",
+      "majorName": "Landscape Architecture",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.20LARCBLAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.20LARCBLAU.pdf"
+    },
+    {
+      "id": "0582a397-805f-4e78-b3a8-89e8b26c82e0",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Computer Graphics and Individualized Course of Study Concentration",
+      "code": "22-26.52LAESBSU.CGRLAESSU.ICLLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.CGRLAESSU.ICLLAESSU.pdf"
+    },
+    {
+      "id": "d94d20e1-a0a1-4c7e-9b5d-0be7d7b18cea",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Computer Graphics and Interactive Communication - Cinematic Focus Concentration",
+      "code": "22-26.52LAESBSU.CGRLAESSU.ICCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.CGRLAESSU.ICCLAESSU.pdf"
+    },
+    {
+      "id": "e9fe429a-dcc9-4a3f-ab1c-7ce8c99d2683",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Computer Graphics and Interactive Communication - Theatrical Focus Concentration",
+      "code": "22-26.52LAESBSU.CGRLAESSU.ICTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.CGRLAESSU.ICTLAESSU.pdf"
+    },
+    {
+      "id": "6cec7bc9-d2da-47ca-abff-066753e94d83",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Computer Graphics and Publishing Technology Concentration",
+      "code": "22-26.52LAESBSU.CGRLAESSU.PTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.CGRLAESSU.PTLAESSU.pdf"
+    },
+    {
+      "id": "2c292721-65cb-46f4-ad89-c425570c3033",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Computer Graphics and Technical Communication Concentration",
+      "code": "22-26.52LAESBSU.CGRLAESSU.TCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.CGRLAESSU.TCLAESSU.pdf"
+    },
+    {
+      "id": "7bae26cb-b18f-41e2-8eda-1d02d5055866",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.52LAESBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EMPH-.pdf"
+    },
+    {
+      "id": "3b3d84ee-a1bb-4314-9b15-67b394718013",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Electrical Engineering (Power) and Individualized Course of Study in Liberal Arts",
+      "code": "22-26.52LAESBSU.EELAESSU.ICLLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EELAESSU.ICLLAESSU.pdf"
+    },
+    {
+      "id": "9902c9ff-df17-4b40-b516-ee0750bf7620",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Electrical Engineering (Power) and Interactive Communication - Cinematic Focus Concentration",
+      "code": "22-26.52LAESBSU.EELAESSU.ICCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EELAESSU.ICCLAESSU.pdf"
+    },
+    {
+      "id": "b75775d9-b034-420b-bddd-3f9289aea4b7",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Electrical Engineering (Power) and Interactive Communication - Theatrical Focus Concentration",
+      "code": "22-26.52LAESBSU.EELAESSU.ICTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EELAESSU.ICTLAESSU.pdf"
+    },
+    {
+      "id": "24e6ec13-cf7a-4039-a233-83abf0e1718b",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Electrical Engineering (Power) and Publishing Technology Concentration",
+      "code": "22-26.52LAESBSU.EELAESSU.PTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EELAESSU.PTLAESSU.pdf"
+    },
+    {
+      "id": "67425c02-bc8a-47fd-927e-3d007067da11",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Electrical Engineering (Power) and Technical Communication Concentration",
+      "code": "22-26.52LAESBSU.EELAESSU.TCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.EELAESSU.TCLAESSU.pdf"
+    },
+    {
+      "id": "dd5043d7-9352-46b3-a9f2-523c8d23ed0b",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Individualized Course of Study - Interactive Communication - Theatrical Focus Concentration",
+      "code": "22-26.52LAESBSU.ICELAESSU.ICTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.ICELAESSU.ICTLAESSU.pdf"
+    },
+    {
+      "id": "d185563e-b6c4-4b69-b134-76d42b2b7286",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Individualized Course of Study in Engineering and Individualized Course of Study in Liberal Arts",
+      "code": "22-26.52LAESBSU.ICELAESSU.ICLLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.ICELAESSU.ICLLAESSU.pdf"
+    },
+    {
+      "id": "a987565e-584b-4949-a4cb-45322c1c7ea9",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Individualized Course of Study in Engineering and Publishing Technology Concentration",
+      "code": "22-26.52LAESBSU.ICELAESSU.PTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.ICELAESSU.PTLAESSU.pdf"
+    },
+    {
+      "id": "bfa84ad8-034e-45cd-89f6-d0888707d244",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Individualized Course of Study in Engineering and Technical Communication Concentration",
+      "code": "22-26.52LAESBSU.ICELAESSU.TCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.ICELAESSU.TCLAESSU.pdf"
+    },
+    {
+      "id": "5b3eb560-2acb-4e7a-b304-431a3e19c3be",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Individualized Course of Study in Engineering Interactive Communication - Cinema Concentration",
+      "code": "22-26.52LAESBSU.ICELAESSU.ICCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.ICELAESSU.ICCLAESSU.pdf"
+    },
+    {
+      "id": "cb65784d-23d6-44a9-ae7a-03b4b50d5b36",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Industrial/Manufacturing Engr - System Design and Individualized Course of Study in Liberal Arts",
+      "code": "22-26.52LAESBSU.IMSLAESSU.ICLLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.IMSLAESSU.ICLLAESSU.pdf"
+    },
+    {
+      "id": "80c55695-4b7d-4cf6-86c9-151c4e11d5bf",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Industrial/Manufacturing Engr - System Design and Publishing Technology Concentration",
+      "code": "22-26.52LAESBSU.IMSLAESSU.PTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.IMSLAESSU.PTLAESSU.pdf"
+    },
+    {
+      "id": "df403dd1-acb5-4bb0-8d40-58f62d725572",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Industrial/Manufacturing Engr - System Design and Technical Communication Concentration",
+      "code": "22-26.52LAESBSU.IMSLAESSU.TCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.IMSLAESSU.TCLAESSU.pdf"
+    },
+    {
+      "id": "94cb04e1-f17c-4911-b025-8109eac62ad7",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Industrial/Manufacturing Engr - System Design Interactive Comm - Cinematic Focus Concentration",
+      "code": "22-26.52LAESBSU.IMSLAESSU.ICCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.IMSLAESSU.ICCLAESSU.pdf"
+    },
+    {
+      "id": "a0645d96-9134-490c-abc5-45949e651f82",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Industrial/Manufacturing Engr - System Design Interactive Comm- Theatrical Focus Concentration",
+      "code": "22-26.52LAESBSU.IMSLAESSU.ICTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.IMSLAESSU.ICTLAESSU.pdf"
+    },
+    {
+      "id": "38e07521-69bd-4904-9942-5d9f67f59f53",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Usability Studies and Individualized Course of Study in Liberal Arts",
+      "code": "22-26.52LAESBSU.USLAESSU.ICLLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.USLAESSU.ICLLAESSU.pdf"
+    },
+    {
+      "id": "5fa95be4-96ac-419e-bc5f-a0625477461a",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Usability Studies and Interactive Communication - Cinematic Focus Concentration",
+      "code": "22-26.52LAESBSU.USLAESSU.ICCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.USLAESSU.ICCLAESSU.pdf"
+    },
+    {
+      "id": "4464b3e6-9476-456c-a55b-fe3c12fe6b13",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Usability Studies and Interactive Communication - Theatrical Focus Concentration",
+      "code": "22-26.52LAESBSU.USLAESSU.ICTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.USLAESSU.ICTLAESSU.pdf"
+    },
+    {
+      "id": "2884b711-cbe9-4b84-9167-e88bec157849",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Usability Studies and Publishing Technology Concentration",
+      "code": "22-26.52LAESBSU.USLAESSU.PTLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.USLAESSU.PTLAESSU.pdf"
+    },
+    {
+      "id": "45e4095f-dabe-4c16-ac5e-5db7d7491112",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Arts and Engineering Studies",
+      "concName": "Usability Studies and Technical Communication Concentration",
+      "code": "22-26.52LAESBSU.USLAESSU.TCLAESSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52LAESBSU.USLAESSU.TCLAESSU.pdf"
+    },
+    {
+      "id": "50c4d64d-3751-4373-9f80-1bf119367a3f",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.76LSBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.EMPH-.pdf"
+    },
+    {
+      "id": "e505c2e5-87f7-4a73-a727-6fec6e78b68e",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "English",
+      "code": "22-26.76LSBSU.ENGLLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.ENGLLSU.pdf"
+    },
+    {
+      "id": "462f4b49-426f-4542-bea2-f1dd58b5cb2c",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Environmental Education",
+      "code": "22-26.76LSBSU.EVEDLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.EVEDLSU.pdf"
+    },
+    {
+      "id": "c7406fac-8eaa-48e2-a2ae-145b6595c4a5",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "History/Social Sciences",
+      "code": "22-26.76LSBSU.HSSLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.HSSLSU.pdf"
+    },
+    {
+      "id": "bc1b2cd5-3b0c-47fb-8efe-c89544b6a92a",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Human Development",
+      "code": "22-26.76LSBSU.HDLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.HDLSU.pdf"
+    },
+    {
+      "id": "0fde007f-239b-4a0a-a57b-bcfa39d66950",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.76LSBSU.ICSLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.ICSLSU.pdf"
+    },
+    {
+      "id": "adbdd735-13ae-4c7d-b83a-9755bf49dec3",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Mathematics",
+      "code": "22-26.76LSBSU.MATHLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.MATHLSU.pdf"
+    },
+    {
+      "id": "8a65701f-3ba2-4410-b981-385a86c1803d",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Science",
+      "code": "22-26.76LSBSU.SCILSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.SCILSU.pdf"
+    },
+    {
+      "id": "7163d799-21ea-41b1-ac78-6f440ef95b22",
+      "catalog": "2022-2026",
+      "majorName": "Liberal Studies",
+      "concName": "Teaching English to Speakers of Other Languages",
+      "code": "22-26.76LSBSU.TSOLLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76LSBSU.TSOLLSU.pdf"
+    },
+    {
+      "id": "a2298f12-84b4-47ca-af16-3d455c9297d0",
+      "catalog": "2022-2026",
+      "majorName": "Manufacturing Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52MFGEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MFGEBSU.pdf"
+    },
+    {
+      "id": "c5b94691-a24f-48c4-8ef0-748581e6ca3b",
+      "catalog": "2022-2026",
+      "majorName": "Marine Sciences",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.76MSCIBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MSCIBSU.pdf"
+    },
+    {
+      "id": "4a7d3f01-9b22-407f-8c6a-a8fddeb8149f",
+      "catalog": "2022-2026",
+      "majorName": "Materials Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52MATEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MATEBSU.pdf"
+    },
+    {
+      "id": "44a12936-daff-463a-84c4-5b78b8ef00d0",
+      "catalog": "2022-2026",
+      "majorName": "Mathematics",
+      "concName": "Applied Mathematics",
+      "code": "22-26.76MATHBSU.APMMATHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MATHBSU.APMMATHU.pdf"
+    },
+    {
+      "id": "44688dc6-4f55-4098-85af-6e0d2f512e55",
+      "catalog": "2022-2026",
+      "majorName": "Mathematics",
+      "concName": "Mathematics Teaching",
+      "code": "22-26.76MATHBSU.MTCHMATHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MATHBSU.MTCHMATHU.pdf"
+    },
+    {
+      "id": "bbc12f09-318f-48db-9ebd-95295695be04",
+      "catalog": "2022-2026",
+      "majorName": "Mathematics",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.76MATHBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MATHBSU.pdf"
+    },
+    {
+      "id": "204341b6-0be2-4e44-bf2c-bc6d2051eca9",
+      "catalog": "2022-2026",
+      "majorName": "Mathematics",
+      "concName": "Pure Mathematics",
+      "code": "22-26.76MATHBSU.PUMMATHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MATHBSU.PUMMATHU.pdf"
+    },
+    {
+      "id": "6002510c-7c56-4d94-a5a5-bfc994b4bce7",
+      "catalog": "2022-2026",
+      "majorName": "Mechanical Engineering",
+      "concName": "Energy Resources Concentration",
+      "code": "22-26.52MEBSU.ENRMEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MEBSU.ENRMEU.pdf"
+    },
+    {
+      "id": "68cb2daf-aab4-4a5a-8d93-6e65f0ad9c87",
+      "catalog": "2022-2026",
+      "majorName": "Mechanical Engineering",
+      "concName": "Heating, Ventilation, Air Conditioning & Refrigerating",
+      "code": "22-26.52MEBSU.HVARMEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MEBSU.HVARMEU.pdf"
+    },
+    {
+      "id": "b9458ad8-583f-4c1c-8cd2-c3e938573ad5",
+      "catalog": "2022-2026",
+      "majorName": "Mechanical Engineering",
+      "concName": "Manufacturing",
+      "code": "22-26.52MEBSU.MFGEMEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MEBSU.MFGEMEU.pdf"
+    },
+    {
+      "id": "3e8f3d4f-d50b-4894-ba84-db7898af8cd2",
+      "catalog": "2022-2026",
+      "majorName": "Mechanical Engineering",
+      "concName": "Mechatronics",
+      "code": "22-26.52MEBSU.MCMEU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MEBSU.MCMEU.pdf"
+    },
+    {
+      "id": "4deac13f-3ebd-46c8-8f85-fc98a12c4304",
+      "catalog": "2022-2026",
+      "majorName": "Mechanical Engineering",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.52MEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52MEBSU.pdf"
+    },
+    {
+      "id": "802f9d59-2d0e-46bb-9eae-4ed278ab63a9",
+      "catalog": "2022-2026",
+      "majorName": "Microbiology",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.76MCROBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76MCROBSU.pdf"
+    },
+    {
+      "id": "0d2244ba-8dd9-4d52-adc5-5c13a37e7781",
+      "catalog": "2022-2026",
+      "majorName": "Music",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48MUBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48MUBAU.pdf"
+    },
+    {
+      "id": "22547520-960a-4a7b-af2e-35e6e55d009f",
+      "catalog": "2022-2026",
+      "majorName": "Nutrition",
+      "concName": "Applied Nutrition",
+      "code": "22-26.10NUTRBSU.ANNUTRU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10NUTRBSU.ANNUTRU.pdf"
+    },
+    {
+      "id": "49f7484f-5326-421d-a3bc-137304f4fb8b",
+      "catalog": "2022-2026",
+      "majorName": "Nutrition",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.10NUTRBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10NUTRBSU.EMPH-.pdf"
+    },
+    {
+      "id": "16990c69-7408-4861-8860-717d259adbba",
+      "catalog": "2022-2026",
+      "majorName": "Nutrition",
+      "concName": "Nutrition Science",
+      "code": "22-26.10NUTRBSU.NSNUTRU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10NUTRBSU.NSNUTRU.pdf"
+    },
+    {
+      "id": "ee3f7d92-a24c-4ab6-a10c-048208edf9e0",
+      "catalog": "2022-2026",
+      "majorName": "Philosophy",
+      "concName": "Ethics & Society",
+      "code": "22-26.48PHILBAU.EASPHILU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48PHILBAU.EASPHILU.pdf"
+    },
+    {
+      "id": "cabfca64-ea15-4acc-8939-6a8574301eaf",
+      "catalog": "2022-2026",
+      "majorName": "Philosophy",
+      "concName": "Ethics of Science and Technology",
+      "code": "22-26.48PHILBAU.ESATPHILU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48PHILBAU.ESATPHILU.pdf"
+    },
+    {
+      "id": "bf5d1d45-318b-4d94-925a-ec7591e6e34d",
+      "catalog": "2022-2026",
+      "majorName": "Philosophy",
+      "concName": "Non-Concentration Option",
+      "code": "22-26.48PHILBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48PHILBAU.pdf"
+    },
+    {
+      "id": "ee9a7ab9-af05-40eb-a095-60b80c25cd13",
+      "catalog": "2022-2026",
+      "majorName": "Philosophy",
+      "concName": "Philosophy and Religion",
+      "code": "22-26.48PHILBAU.PRELPHILU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48PHILBAU.PRELPHILU.pdf"
+    },
+    {
+      "id": "e8882247-c1ae-4f09-8d81-4ee50e097281",
+      "catalog": "2022-2026",
+      "majorName": "Physics - BA",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.76PHYSBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76PHYSBAU.pdf"
+    },
+    {
+      "id": "349e6605-c1d2-43f6-9bcc-f56be72b3b1e",
+      "catalog": "2022-2026",
+      "majorName": "Physics - BS",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.76PHYSBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76PHYSBSU.pdf"
+    },
+    {
+      "id": "9a703a85-61db-4709-ba54-628f1df5d529",
+      "catalog": "2022-2026",
+      "majorName": "Plant Sciences",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.10PLSCBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10PLSCBSU.EMPH-.pdf"
+    },
+    {
+      "id": "31eaa106-9380-4509-8773-d88092a3af4e",
+      "catalog": "2022-2026",
+      "majorName": "Plant Sciences",
+      "concName": "Environmental Horticultural Science",
+      "code": "22-26.10PLSCBSU.EHSPLSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10PLSCBSU.EHSPLSCU.pdf"
+    },
+    {
+      "id": "ba467199-195e-4f3f-9d8c-e204bc213613",
+      "catalog": "2022-2026",
+      "majorName": "Plant Sciences",
+      "concName": "Fruit and Crop Science",
+      "code": "22-26.10PLSCBSU.FRCSPLSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10PLSCBSU.FRCSPLSCU.pdf"
+    },
+    {
+      "id": "431c25a1-64e2-4997-9adc-ea4408c2345c",
+      "catalog": "2022-2026",
+      "majorName": "Plant Sciences",
+      "concName": "Plant Protection Science",
+      "code": "22-26.10PLSCBSU.PPSCPLSCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10PLSCBSU.PPSCPLSCU.pdf"
+    },
+    {
+      "id": "22822494-fd55-4339-892b-7b451d0a92b4",
+      "catalog": "2022-2026",
+      "majorName": "Political Science",
+      "concName": "American Politics",
+      "code": "22-26.48POLSBAU.AMPPOLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48POLSBAU.AMPPOLSU.pdf"
+    },
+    {
+      "id": "c7ed4656-daa4-4788-b3ff-37249906c3ac",
+      "catalog": "2022-2026",
+      "majorName": "Political Science",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48POLSBAU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48POLSBAU.EMPH-.pdf"
+    },
+    {
+      "id": "ed6ec8c0-c6cb-4124-9b8c-76b2b5ad4da8",
+      "catalog": "2022-2026",
+      "majorName": "Political Science",
+      "concName": "Global Politics",
+      "code": "22-26.48POLSBAU.GPPPOLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48POLSBAU.GPPPOLSU.pdf"
+    },
+    {
+      "id": "4a0ff7b9-a2d6-4b59-ab17-5add3d9f1786",
+      "catalog": "2022-2026",
+      "majorName": "Political Science",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.48POLSBAU.ICSPOLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48POLSBAU.ICSPOLSU.pdf"
+    },
+    {
+      "id": "883acfe1-db6b-4dad-b738-c52240af3c82",
+      "catalog": "2022-2026",
+      "majorName": "Political Science",
+      "concName": "Pre-Law",
+      "code": "22-26.48POLSBAU.PRLPOLSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48POLSBAU.PRLPOLSU.pdf"
+    },
+    {
+      "id": "d93305fd-9b7e-467b-bb5d-cecbc383f3ce",
+      "catalog": "2022-2026",
+      "majorName": "Psychology",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48PSYBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48PSYBSU.pdf"
+    },
+    {
+      "id": "6c2da856-418d-42f9-9e49-ec631d6001ca",
+      "catalog": "2022-2026",
+      "majorName": "Public Health",
+      "concName": "Community & Public Health",
+      "code": "22-26.76HLTHBSU.CPHLHLTHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76HLTHBSU.CPHLHLTHU.pdf"
+    },
+    {
+      "id": "e5cf19f1-b713-4878-8815-b9aefaaf574e",
+      "catalog": "2022-2026",
+      "majorName": "Public Health",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.76HLTHBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76HLTHBSU.EMPH-.pdf"
+    },
+    {
+      "id": "f7bbd13c-5407-4d98-8d3a-0ca7adcf0c8c",
+      "catalog": "2022-2026",
+      "majorName": "Public Health",
+      "concName": "Culture & Society in Health",
+      "code": "22-26.76HLTHBSU.CSHLHLTHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76HLTHBSU.CSHLHLTHU.pdf"
+    },
+    {
+      "id": "64d2c8ae-5b1c-4ab3-b16f-d0c12c7ba1d0",
+      "catalog": "2022-2026",
+      "majorName": "Public Health",
+      "concName": "Physical Activity in Public Health",
+      "code": "22-26.76HLTHBSU.PAPHHLTHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76HLTHBSU.PAPHHLTHU.pdf"
+    },
+    {
+      "id": "78f7be8e-1c97-4851-a905-f4773de68c4f",
+      "catalog": "2022-2026",
+      "majorName": "Public Health",
+      "concName": "Worksite & University Health Promotion",
+      "code": "22-26.76HLTHBSU.WUHPHLTHU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76HLTHBSU.WUHPHLTHU.pdf"
+    },
+    {
+      "id": "c771e34e-aeff-4bb2-9b57-b051a6e68aab",
+      "catalog": "2022-2026",
+      "majorName": "Recreation, Parks, and Tourism Administration",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.10RECBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10RECBSU.EMPH-.pdf"
+    },
+    {
+      "id": "e567c200-b6d3-4596-a987-c42c3843b2a6",
+      "catalog": "2022-2026",
+      "majorName": "Recreation, Parks, and Tourism Administration",
+      "concName": "Event Planning and Experience Management",
+      "code": "22-26.10RECBSU.EPEMRECU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10RECBSU.EPEMRECU.pdf"
+    },
+    {
+      "id": "eb3bb3c3-5d0a-4767-8100-371ce51fbf97",
+      "catalog": "2022-2026",
+      "majorName": "Recreation, Parks, and Tourism Administration",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.10RECBSU.ICSRECU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10RECBSU.ICSRECU.pdf"
+    },
+    {
+      "id": "28ce6ac3-c72f-4b8c-8da8-7ec33f8ca5d5",
+      "catalog": "2022-2026",
+      "majorName": "Recreation, Parks, and Tourism Administration",
+      "concName": "Sport & Recreation Management",
+      "code": "22-26.10RECBSU.SRMRECU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10RECBSU.SRMRECU.pdf"
+    },
+    {
+      "id": "39edfd13-2d66-4c3d-a2e1-3a85251cf12a",
+      "catalog": "2022-2026",
+      "majorName": "Recreation, Parks, and Tourism Administration",
+      "concName": "Tourism, Hospitality, and Destination Management",
+      "code": "22-26.10RECBSU.THDMRECU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10RECBSU.THDMRECU.pdf"
+    },
+    {
+      "id": "22b2702e-9695-4c7c-8241-00b99d1e2008",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.48SOCBAU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.EMPH-.pdf"
+    },
+    {
+      "id": "b5751319-1211-4129-ac20-515e52e5699d",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Criminal Justice",
+      "code": "22-26.48SOCBAU.CJSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.CJSOCU.pdf"
+    },
+    {
+      "id": "b3a47b56-34bb-43e6-89b9-f3ca16d80063",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Global Politics",
+      "code": "22-26.48SOCBAU.GPPSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.GPPSOCU.pdf"
+    },
+    {
+      "id": "c4936875-a2c1-4b21-b7e6-8a72847ba326",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Individualized Course of Study",
+      "code": "22-26.48SOCBAU.ICSSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.ICSSOCU.pdf"
+    },
+    {
+      "id": "d38fef1b-990b-4cce-a82c-79d55879f4be",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Organizations",
+      "code": "22-26.48SOCBAU.ORGSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.ORGSOCU.pdf"
+    },
+    {
+      "id": "daa750e3-2440-4a45-85c6-54b7c9d31893",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Pre-Law",
+      "code": "22-26.48SOCBAU.PRLSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.PRLSOCU.pdf"
+    },
+    {
+      "id": "6cad9406-fc21-4701-8ff3-b1de02781b76",
+      "catalog": "2022-2026",
+      "majorName": "Sociology",
+      "concName": "Social Services",
+      "code": "22-26.48SOCBAU.SCSSOCU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SOCBAU.SCSSOCU.pdf"
+    },
+    {
+      "id": "e652a383-f01e-4c92-b1cf-d6ac597b3b46",
+      "catalog": "2022-2026",
+      "majorName": "Software Engineering",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.52SEBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.52SEBSU.pdf"
+    },
+    {
+      "id": "0a68c6c9-1de0-4a3e-b931-538de1d9a3a6",
+      "catalog": "2022-2026",
+      "majorName": "Spanish",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48SPANBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48SPANBAU.pdf"
+    },
+    {
+      "id": "8419610b-e8c2-45bd-9141-b13aac6a562a",
+      "catalog": "2022-2026",
+      "majorName": "Statistics",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.76STATBSU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.76STATBSU.pdf"
+    },
+    {
+      "id": "454d0bfb-4dba-4bcb-899e-99d201127964",
+      "catalog": "2022-2026",
+      "majorName": "Theatre Arts",
+      "concName": "Not Applicable For This Major",
+      "code": "22-26.48THBAU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.48THBAU.pdf"
+    },
+    {
+      "id": "ae52ea6d-c7b4-4fdc-b306-528c3f8787cc",
+      "catalog": "2022-2026",
+      "majorName": "Wine and Viticulture",
+      "concName": "Concentration Not Yet Declared",
+      "code": "22-26.10WVITBSU.EMPH-",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10WVITBSU.EMPH-.pdf"
+    },
+    {
+      "id": "ad547139-ad91-430a-bac2-732dc220eeeb",
+      "catalog": "2022-2026",
+      "majorName": "Wine and Viticulture",
+      "concName": "Enology",
+      "code": "22-26.10WVITBSU.ENWVITU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10WVITBSU.ENWVITU.pdf"
+    },
+    {
+      "id": "e0999ee2-1254-4c32-ae69-d8b40ab78b55",
+      "catalog": "2022-2026",
+      "majorName": "Wine and Viticulture",
+      "concName": "Viticulture",
+      "code": "22-26.10WVITBSU.VITWVITU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10WVITBSU.VITWVITU.pdf"
+    },
+    {
+      "id": "8317f63d-cf69-4561-a388-ce3273a5c5d4",
+      "catalog": "2022-2026",
+      "majorName": "Wine and Viticulture",
+      "concName": "Wine Business",
+      "code": "22-26.10WVITBSU.WNBWVITU",
+      "dataLink": "http://flowcharts.calpoly.edu/downloads/mymap/22-26.10WVITBSU.WNBWVITU.pdf"
+    }
+]
