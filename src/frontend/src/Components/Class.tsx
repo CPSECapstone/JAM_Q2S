@@ -4,7 +4,8 @@ import { Draggable } from '@hello-pangea/dnd';
 import { Tooltip } from 'react-tooltip'
 import { Simulate } from 'react-dom/test-utils';
 import click = Simulate.click;
-import EmbeddedClass, { EmbeddedSemesterClassData } from "./EmbeddedClass";
+import EmbeddedClass from "./EmbeddedClass";
+import {EmbeddedSemesterClassData} from "../Interfaces/Interfaces";
 
 export interface QuarterClassData {
     id: string;

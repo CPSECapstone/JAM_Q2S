@@ -3,12 +3,8 @@ import "./Class.css";
 import {Tooltip} from 'react-tooltip'
 import { Simulate } from 'react-dom/test-utils';
 import click = Simulate.click;
+import {EmbeddedSemesterClassData} from "../Interfaces/Interfaces";
 
-export interface EmbeddedSemesterClassData {
-    id: string;
-    displayName: string;
-    units: string;
-}
 interface classProps {
     data: EmbeddedSemesterClassData
 }
