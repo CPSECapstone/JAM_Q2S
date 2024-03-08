@@ -16,7 +16,6 @@ function Term({ year, classList, id, totalUnits }: Props): JSX.Element {
     <div className='term'>
       <div className='title'>
         <p>{year}</p>
-          <p>{ totalUnits}</p>
       </div>
       <Droppable droppableId={id}>
         {(provided) => (
@@ -32,6 +31,9 @@ function Term({ year, classList, id, totalUnits }: Props): JSX.Element {
           </div>
         )}
       </Droppable>
+      <div className="termTotalUnits" style={{ textAlign: 'center', margin: 0 }}>
+          <p style={{ margin: 0 }}>{totalUnits}</p>
+      </div>
     </div>
   );
 }
