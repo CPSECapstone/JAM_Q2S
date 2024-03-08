@@ -52,6 +52,16 @@ function Grid() {
 
   };
 
+  const calculateTotalUnits = () => {
+    let total = 0;
+    if (flowchart) {
+      flowchart.forEach((term) => {
+        total += term.totalUnits || 0;
+      });
+    }
+    return total;
+  };
+
   useEffect((): void => {
     const fetchQuarterClassData = async () => {
       if (!flowchart) {
@@ -95,12 +105,17 @@ function Grid() {
           <p>Loading...</p>
         ) : (
           flowchart ? (
-            flowchart.map((term: TermData) => {
+            flowchart.map((term: TermData, index: number) => {
               const classes: ClassDBClass[] =
                 term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
               return (
                 <div className='term' key={term.termName}>
-                  <Term year={term.termName} classList={classes} id={term.termName} totalUnits={term.totalUnits}></Term>
+                  <Term year={term.termName} classList={term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id])} totalUnits={term.totalUnits || 0} id={term.termName} />
+                  {index === flowchart.length - 1 && (
+                      <div className="total-units">
+                        Total Units: {calculateTotalUnits()}
+                      </div>
+                  )}
                 </div>
               );
             })
