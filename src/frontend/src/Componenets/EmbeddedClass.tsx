@@ -4,13 +4,13 @@ import {Tooltip} from 'react-tooltip'
 import { Simulate } from 'react-dom/test-utils';
 import click = Simulate.click;
 
-export interface EmbeddedQuarterClassData {
+export interface EmbeddedSemesterClassData {
     id: string;
     displayName: string;
     units: string;
 }
 interface classProps {
-    data: EmbeddedQuarterClassData
+    data: EmbeddedSemesterClassData
 }
 
 function EmbeddedClass({ data }: classProps) {

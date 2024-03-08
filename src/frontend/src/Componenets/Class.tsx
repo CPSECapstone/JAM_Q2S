@@ -4,7 +4,7 @@ import { Draggable } from '@hello-pangea/dnd';
 import { Tooltip } from 'react-tooltip'
 import { Simulate } from 'react-dom/test-utils';
 import click = Simulate.click;
-import EmbeddedClass, {EmbeddedQuarterClassData} from "./EmbeddedClass";
+import EmbeddedClass, { EmbeddedSemesterClassData } from "./EmbeddedClass";
 
 export interface QuarterClassData {
     id: string;
@@ -21,8 +21,8 @@ interface classProps {
     index: number;
 }
 
-const mockData: EmbeddedQuarterClassData = {
-    id: "CSC 101",
+const mockData: EmbeddedSemesterClassData = {
+    id: "CSC 1001",
     displayName: "Introduction to Computer Science",
     units: "4"
 };
@@ -58,7 +58,7 @@ function Class({ index, data }: classProps) {
                         place="right"
                         className="classInfo"
                         delayShow={100}
-                        style={{ width: "200px" }}
+                        style={{ width: "200px", zIndex: 10001 }}
                     >
                         <b>{data.id + "\n"}</b><br></br>
                         {data.displayName}<br></br>
