@@ -111,11 +111,6 @@ function Grid() {
               return (
                 <div className='term' key={term.termName}>
                   <Term year={term.termName} classList={term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id])} totalUnits={term.totalUnits || 0} id={term.termName} />
-                  {index === flowchart.length - 1 && (
-                      <div className="total-units">
-                        Total Units: {calculateTotalUnits()}
-                      </div>
-                  )}
                 </div>
               );
             })
@@ -124,7 +119,9 @@ function Grid() {
           )
         )}
       </DragDropContext>
-
+      <div className="total-units">
+        Total Units: {calculateTotalUnits()}
+      </div>
     </div>
 
   );
