@@ -56,14 +56,16 @@ function SideBarTab(): JSX.Element {
         setFlowcharts(prevFlowcharts => {
             const allFlowchartToRemoveIndex = prevFlowcharts.all_flowcharts.findIndex(flowchart => flowchart.id === id);
             const favoriteFlowchartToRemoveIndex = prevFlowcharts.favorite_flowcharts.findIndex(flowchart => flowchart.id === id);
-            let updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, ...prevFlowcharts.main_flowchart];
+            let updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts];
             let updatedFavoriteFlowcharts = [...prevFlowcharts.favorite_flowcharts];
             let updatedMainFlowchart = prevFlowcharts.main_flowchart;
 
             if (allFlowchartToRemoveIndex !== -1) {
+                updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, ...prevFlowcharts.main_flowchart];
                 updatedMainFlowchart = [prevFlowcharts.all_flowcharts[allFlowchartToRemoveIndex]];
                 updatedAllFlowcharts.splice(allFlowchartToRemoveIndex, 1);
             } else if (favoriteFlowchartToRemoveIndex !== -1) {
+                updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, ...prevFlowcharts.main_flowchart];
                 updatedMainFlowchart = [prevFlowcharts.favorite_flowcharts[favoriteFlowchartToRemoveIndex]];
                 updatedFavoriteFlowcharts.splice(favoriteFlowchartToRemoveIndex, 1);
             }
