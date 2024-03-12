@@ -6,8 +6,7 @@
 }
 
 .barItemTitle{
-    margin-left: 8px;
-    width: 60%;
+    width: 100%;
     float: left;
     word-wrap: break-word;
     text-overflow: ellipsis;
@@ -17,4 +16,14 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+.text{
+    font-family: "Inter";
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-left: 10px;
 }
