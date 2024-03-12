@@ -5,16 +5,27 @@ import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import axios, { AxiosResponse } from 'axios';
 import { ClassDBClass, FlowchartClass, QuarterClassData, TermData } from '../../Interfaces/Interfaces';
 import { FlowchartContext } from '../../Context/FlowchartProvider';
+import ClassInfoDialog from './ClassInfoDialog';
+import { useContextMenu } from '../../Hooks/useContextMenu';
+import ContextMenu from './ContextMenu';
 
 function Grid() {
   const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
   const [loading, setLoading] = useState<boolean>(true); // State to track loading
   const { flowchart, setFlowchart } = useContext(FlowchartContext);
+  const { clicked, setClicked, coords, setCoords } = useContextMenu();
+
+  const handleRightClick = (classId: string, x: number, y: number) =>
+  {
+    console.log(classId);
+    setClicked(true);
+    setCoords({x, y});
+  }
+
   let onDragEnd = (result: DropResult): void => {
     if (!flowchart) {
       return;
     }
-
 
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -87,7 +98,11 @@ function Grid() {
 
   return (
     <div className='grid'>
-      <DragDropContext onDragEnd={onDragEnd}>
+      {clicked && (
+        <ContextMenu top={coords.y} left={coords.x} ></ContextMenu>
+      )}
+      <DragDropContext onDragEnd={onDragEnd}
+                       onDragStart={() => setClicked(false)}>
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -97,7 +112,7 @@ function Grid() {
                 term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
               return (
                 <div className='term' key={term.termName}>
-                  <Term year={term.termName} classList={classes} id={term.termName}></Term>
+                  <Term year={term.termName} classList={classes} id={term.termName} handleRightClick={handleRightClick}></Term>
                 </div>
               );
             })

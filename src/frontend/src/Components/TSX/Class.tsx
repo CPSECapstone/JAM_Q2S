@@ -13,11 +13,11 @@ import ClassInfoDialog from './ClassInfoDialog';
 interface classProps {
   classData: ClassDBClass;
   index: number;
+  handleRightClick: (classId: string, x: number, y: number) => void;
 }
 
-function Class({ index, classData }: classProps) {
+function Class({ index, classData, handleRightClick }: classProps) {
   const data: QuarterClassData = classData.classData;
-  const { clicked, setClicked, coords, setCoords } = useContextMenu();
   const [open, setOpen] = useState<boolean>(false);
 
   const handleClickOpen = (): void => {
@@ -42,13 +42,9 @@ function Class({ index, classData }: classProps) {
               $color={classData.color}
               onContextMenu={(e) => {
                 e.preventDefault()
-                setClicked(true)
-                setCoords({ x: e.pageX, y: e.pageY })
+                handleRightClick(data.id, e.pageX, e.pageY)
               }}>
 
-              {clicked && (
-                <ContextMenu top={coords.y} left={coords.x} ></ContextMenu>
-              )}
               <div className='courseCode'>
                 <p>{data.id + ' (' + data.units + ')'}</p>
               </div>
@@ -56,11 +52,7 @@ function Class({ index, classData }: classProps) {
                 <p>{data.displayName}</p>
               </div>
             </StyledClass>
-            <ClassInfoDialog
-              classData={data}
-              open={open}
-              onClose={handleClose}
-            />
+
           </div>)}
       </Draggable>
   );

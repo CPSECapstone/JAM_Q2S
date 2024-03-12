@@ -8,9 +8,10 @@ type Props = {
   year: string;
   classList: ClassDBClass[];
   id : string;
+  handleRightClick: (classId: string, x: number, y: number) => void;
 };
 
-function Term({ year, classList, id }: Props): JSX.Element {
+function Term({ year, classList, id, handleRightClick }: Props): JSX.Element {
   return (
     <div className='term'>
       <div className='title'>
@@ -24,7 +25,8 @@ function Term({ year, classList, id }: Props): JSX.Element {
             {classList.map((currentClass: ClassDBClass, i: number) => {
               return <Class key={i}
                             index={i}
-                            classData={currentClass} />;
+                            classData={currentClass}
+                            handleRightClick={handleRightClick}/>;
             })}
             {provided.placeholder}
           </div>

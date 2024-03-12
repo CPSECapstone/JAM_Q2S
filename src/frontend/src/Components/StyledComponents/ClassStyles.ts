@@ -10,7 +10,3 @@ export const StyledClass = styled.div<{$color : string}>`
   }
 `;
 
-export const CourseCode = styled.p`
-  display:flex;
-  justify-content: center;
-`
