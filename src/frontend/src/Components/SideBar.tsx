@@ -1,13 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import SideBarItem from "./SideBarItem";
 import './SideBar.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
-import {IconButton, Stack, Tooltip} from "@mui/material";
+import { IconButton, Stack, Tooltip } from "@mui/material";
 import { flowchartProps } from '../Interfaces/Interfaces';
 
+interface NewFlowFormProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (inputValue: string) => void;
+}
 
-function SideBarTab () : JSX.Element {
+function SideBarTab(): JSX.Element {
     const [flowcharts, setFlowcharts] = useState({
         all_flowcharts: [
             {
@@ -40,6 +45,12 @@ function SideBarTab () : JSX.Element {
             },
         ],
     });
+
+    useEffect(() => {
+        console.log('New state:', flowcharts);
+    }, [flowcharts]);
+
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
     const handleStarClick = (id: bigint) => {
         setFlowcharts(prevFlowcharts => {
@@ -82,7 +93,7 @@ function SideBarTab () : JSX.Element {
                     favorite_flowcharts: updatedFavoriteFlowcharts,
                 };
             }
-            else if(flowchartToMove2){
+            else if (flowchartToMove2) {
                 const updatedFavFlowcharts = prevFlowcharts.favorite_flowcharts.filter(flowchart => flowchart.id !== id);
                 const updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, flowchartToMove2];
 
@@ -98,47 +109,98 @@ function SideBarTab () : JSX.Element {
     };
 
     const handleAddClick = () => {
-        alert('add flowchart');
-    }
+        setIsFormOpen(true);
+    };
+
+    const handleCloseForm = () => {
+        setIsFormOpen(false);
+    };
+
+    const handleSubmitForm = (inputValue: string) => {
+        if (inputValue.trim() !== '') {
+            const newFlowchart = {
+                id: BigInt(Date.now()),
+                name: inputValue.trim(),
+            };
+
+            // Create a new array with the new flowchart added
+            const updatedFlowcharts = [...flowcharts.all_flowcharts, newFlowchart];
+
+            // Update the state with the new array
+            setFlowcharts(prevFlowcharts => ({
+                ...prevFlowcharts,
+                all_flowcharts: updatedFlowcharts,
+            }));
+
+            handleCloseForm();
+        }
+    };
 
     return (
         <div className="sideBar">
             <div className="sideBarItems">
                 <div className="sideBarGroup">
                     <span className="sideBarTitle"> MAIN FLOWCHART </span>
-                    <AllFlowcharts flowcharts={flowcharts.main_flowchart} group={"main"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.main_flowchart} group={"main"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick} />
 
                 </div>
                 <div className="sideBarGroup">
                     <span className="sideBarTitle"> FAVORITES </span>
-                    <AllFlowcharts flowcharts={flowcharts.favorite_flowcharts} group={"favorite"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.favorite_flowcharts} group={"favorite"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick} />
                 </div>
                 <div className="sideBarGroup">
                     <Stack direction="row" justifyContent="flex-end"
                            alignItems="center" spacing={0}>
                         <span className="sideBarTitle"> ALL FLOWCHARTS </span>
                         <Tooltip title="Create a new Flow" placement="right" arrow>
-                            <IconButton aria-label="favorite flowchart" size = "small"
+                            <IconButton aria-label="favorite flowchart" size="small"
                                         onClick={handleAddClick}>
-                                <AddBoxOutlinedIcon/>
+                                <AddBoxOutlinedIcon />
                             </IconButton>
                         </Tooltip>
                     </Stack>
-                    <AllFlowcharts flowcharts={flowcharts.all_flowcharts} group={"all"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+                    <AllFlowcharts flowcharts={flowcharts.all_flowcharts} group={"all"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick} />
                 </div>
+                <NewFlowForm isOpen={isFormOpen} onClose={handleCloseForm} onSubmit={handleSubmitForm} />
             </div>
         </div>
     );
 }
 
-function AllFlowcharts(props: flowchartProps): JSX.Element  {
-    const sideBarItems = props.flowcharts.map(({id, name}) => {
-        return(
-            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
+function AllFlowcharts(props: flowchartProps): JSX.Element {
+    const sideBarItems = props.flowcharts.map(({ id, name }) => {
+        return (
+            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick} />
         );
     });
     return <>{sideBarItems}</>;
 }
 
-export default SideBarTab
+function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormProps) {
+    const [inputValue, setInputValue] = useState('');
 
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleSubmit = () => {
+        onSubmit(inputValue);
+        setInputValue('');
+    };
+
+    return (
+        <div className={`custom-popup ${isOpen ? 'open' : 'closed'}`}>
+            <div className="custom-popup-content">
+                <IconButton aria-label="close-btn" size="small"
+                            onClick={onClose}>
+                    <IndeterminateCheckBoxOutlinedIcon/>
+                </IconButton>
+                <text className="popup-text">ENTER NEW FLOW NAME</text>
+                <input type="text" value={inputValue} onChange={handleChange} />
+                <button onClick={handleSubmit}>Submit</button>
+            </div>
+        </div>
+    );
+}
+
+export default SideBarTab;

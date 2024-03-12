@@ -18,3 +18,31 @@
     text-align: left;
     font-size: 14px;
 }
+
+.custom-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it appears above other elements */
+    /* Additional styling */
+    background: #2D5A48;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.popup-text{
+    font-family: "Inter";
+    display: block;
+    color: whitesmoke;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-left: 10px;
+}
+
+.closed {
+    display: none;
+}
