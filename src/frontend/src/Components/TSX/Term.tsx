@@ -1,8 +1,8 @@
 import React from 'react';
-import './Term.css';
+import '../CSS/Term.css';
 import { Droppable } from '@hello-pangea/dnd';
 import Class from './Class';
-import { ClassDBClass, QuarterClassData } from '../Interfaces/Interfaces';
+import { ClassDBClass, QuarterClassData } from '../../Interfaces/Interfaces';
 
 type Props = {
   year: string;

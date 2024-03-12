@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledContextMenu } from './StyledComponents/RightClickMenuStyle';
+import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
 
 interface ClassProps {
     top: number;

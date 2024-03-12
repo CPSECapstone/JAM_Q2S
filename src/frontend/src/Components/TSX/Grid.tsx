@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './Grid.css';
+import '../CSS/Grid.css';
 import Term from './Term';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import axios, { AxiosResponse } from 'axios';
-import { ClassDBClass, FlowchartClass, QuarterClassData, TermData } from '../Interfaces/Interfaces';
-import { FlowchartContext } from '../Context/FlowchartProvider';
+import { ClassDBClass, FlowchartClass, QuarterClassData, TermData } from '../../Interfaces/Interfaces';
+import { FlowchartContext } from '../../Context/FlowchartProvider';
 
 function Grid() {
   const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});

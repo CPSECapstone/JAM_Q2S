@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import "./SideBarItem.css";
+import "../CSS/SideBarItem.css";
 
 function SideBarItem (props: {id : bigint,  name : string}) : JSX.Element {
     let clickEvent = () => {

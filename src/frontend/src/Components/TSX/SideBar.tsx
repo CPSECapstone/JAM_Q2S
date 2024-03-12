@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBarItem from "./SideBarItem";
-import './SideBar.css';
+import '../CSS/SideBar.css';
 
 function SideBarTab () : JSX.Element {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import './TitleBar.css';
+import '../CSS/TitleBar.css';
 import {Typography} from "@mui/material";
 
 function TitleBar() : JSX.Element{
