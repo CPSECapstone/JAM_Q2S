@@ -35,4 +35,8 @@ The project also requires Java v.20, available here:
 The project is using ESLint setup with Github Actions to lint the code on every pull request to ensure clean and consistent code.
 Github Actions is also setup to build and test the code on every pull request to ensure continous testing and integration.
 
-//There is currently no runnable code and no deployment. Respective info to come. 
+How to Run the Application Locally:
+
+- Back-end: Through IntelliJ run the "Q2SSeniorProjectApplication" file. The APIs can be accessed through "http://localhost:8080/api".
+- 
+- Front-end: Once the back-end is running, run "npm start" in the terminal from the "src/frontend" directory. A tab should open in your browswer. 
