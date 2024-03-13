@@ -27,8 +27,8 @@ public class UserFlowchartController {
     }
 
     /**
-     *
-     *
+     * Personalizes the given quarter flowchart template to match the given term admitted
+     * by setting the term names and term types. It also adds summer terms.
      *
      * @param termAdmitted          Assumes the format "<Term> <Year>"
      * @param flowchartTemplate     JSON String of the appropriate template
@@ -37,10 +37,10 @@ public class UserFlowchartController {
     static String createNewUserQuarterFlowchart(String termAdmitted, String flowchartTemplate) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         int[] intInfo = getValidatedTermAdmittedYearAndOrdinal(termAdmitted);
-        int year = intInfo[0];
         JsonNode rootNode = getValidatedFlowchartTemplateInfo(flowchartTemplate);
         ArrayNode terms = (ArrayNode) rootNode.get("termData");
         int termSeasonIterator = intInfo[1] -1; //iterate from one term before when the students started
+        int year = (TermSeason.values()[intInfo[1]] == TermSeason.Winter) ? intInfo[0] - 1: intInfo[0];
         int offset = 0;
         String termType = QUARTER_TAG;
         int enumModNumber = QUARTER_MOD_NUMBER;
@@ -62,7 +62,7 @@ public class UserFlowchartController {
                 ObjectNode newObject = mapper.createObjectNode();
                 newObject.put("termName", TermSeason.Summer + " " + year);
                 newObject.put("termType", termType);
-                newObject.put("courses", "[]");
+                newObject.set("courses", mapper.createArrayNode());
                 terms.insert(index,newObject);
                 termSeasonIterator++;
                 offset++;
@@ -94,18 +94,24 @@ public class UserFlowchartController {
     public static int[] getValidatedTermAdmittedYearAndOrdinal(String termAdmitted){
         String[] splitTermAdmitted = termAdmitted.split(" ");
         int admitYear;
+        int ordinal;
         try {
             if (splitTermAdmitted.length != 2) {
                 throw new IllegalStateException("Term Admitted has an invalid format. Required: <Term> <Year>. Given: " + termAdmitted);
             }
             admitYear = Integer.parseInt(splitTermAdmitted[1]);
+            ordinal = getStartingOrdinal(splitTermAdmitted[0]);
+            if (TermSeason.values()[ordinal] == TermSeason.Winter && admitYear > SEMESTER_TRANSITION_YEAR){
+                throw new IllegalStateException("Term Admitted is invalid. There is no winter term in " + admitYear);
+            }
         } catch (NumberFormatException e) {
             throw new IllegalStateException("Term Admitted has an invalid year format. Required: <YYYY>. Given: " + splitTermAdmitted[1]);
         }
-        return new int[] {admitYear, getStartingOrdinal(splitTermAdmitted[0])};
+        return new int[] {admitYear, ordinal};
     }
 
     /**
+     * Validates the given flowchart template string and returns the flowchart as a JsonNode
      *
      * @param flowchartTemplate   String of Flowchart template for major, concentration, and catalog chosen
      * @return                    Flowchart personalized to the termAdmitted submitted
@@ -126,6 +132,8 @@ public class UserFlowchartController {
     }
 
     /**
+     * returns the ordinal of the enum corresponding to the season of the given termAdmitted
+     * throws an exception if an invalid value is given
      *
      * @param startQuarterTerm  - Quarter Term Season of Admit Term - Should be Winter, Spring, Summer, or Fall
      * @return  - the ordinal of the corresponding term Enum for iteration purposes

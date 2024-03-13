@@ -88,6 +88,21 @@ class UserFlowchartControllerTest {
     }
 
     /**
+     * Tests that the proper exception is thrown when the termAdmitted is not properly formatted
+     * - Year does not have a winter term
+     */
+    @Test
+    void getValidatedTermAdmittedYearAndOrdinal_InvalidWinterTerm() {
+        Exception exception = assertThrows(IllegalStateException.class, () ->
+                UserFlowchartController.getValidatedTermAdmittedYearAndOrdinal("Winter 2030"));
+
+        String expectedMessage = "Term Admitted is invalid. There is no winter term in";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    /**
      * Tests that the proper exception is thrown when the flowchartTemplate is not properly formatted
      * - Invalid JSON format
      */
@@ -221,6 +236,44 @@ class UserFlowchartControllerTest {
                     case 3:
                         assertEquals("Semester", termType);
                         assertEquals("Summer 2027", termName);
+                        break;
+                }
+            }
+        } else {
+            throw new IOException("The \"termData\" field does not contain an array.");
+        }
+    }
+
+    @Test
+    void createNewUserQuarterFlowchart_Winter2025() throws IOException {
+        File testJSONFile = new File("src/test/testJSONs/testFlowchart.json");
+        String resultingFlowchart = UserFlowchartController.createNewUserQuarterFlowchart(
+                "Winter 2025",
+                new String(Files.readAllBytes(testJSONFile.toPath())));
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(resultingFlowchart);
+        JsonNode terms = jsonNode.get("termData");
+        if (terms.isArray()){
+            for (int i = 0; i < terms.size(); i++){
+                JsonNode term = terms.get(i);
+                String termType = term.get("termType").asText();
+                String termName = term.get("termName").asText();
+                switch (i) {
+                    case 0:
+                        assertEquals("Quarter", termType);
+                        assertEquals("Fall 2024", termName);
+                        break;
+                    case 1:
+                        assertEquals("Quarter", termType);
+                        assertEquals("Winter 2025", termName);
+                        break;
+                    case 2:
+                        assertEquals("Quarter", termType);
+                        assertEquals("Spring 2025", termName);
+                        break;
+                    case 3:
+                        assertEquals("Quarter", termType);
+                        assertEquals("Summer 2025", termName);
                         break;
                 }
             }
