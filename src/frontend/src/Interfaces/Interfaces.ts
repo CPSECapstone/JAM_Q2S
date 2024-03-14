@@ -8,6 +8,12 @@ export interface QuarterClassData {
   uscpCourse: boolean;
 }
 
+export interface EmbeddedSemesterClassData {
+  id: string;
+  displayName: string;
+  units: string;
+}
+
 export interface FlowchartClass {
   id: string;
   color: string;

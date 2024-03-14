@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import '../CSS/Class.css';
 import { Draggable } from '@hello-pangea/dnd';
 import { StyledClass } from '../StyledComponents/ClassStyles';
-import ContextMenu from './ContextMenu';
+import {ClassDBClass, EmbeddedSemesterClassData, QuarterClassData} from '../../Interfaces/Interfaces';
+import EmbeddedClass from "../EmbeddedClass";
 
-import { useContextMenu } from '../../Hooks/useContextMenu';
-
-import { ClassDBClass, QuarterClassData } from '../../Interfaces/Interfaces';
-import ClassInfoDialog from './ClassInfoDialog';
 
 
 interface classProps {
@@ -16,34 +13,38 @@ interface classProps {
   handleRightClick: (classId: string, x: number, y: number) => void;
 }
 
+const mockData: EmbeddedSemesterClassData = {
+  id: "CSC 1001",
+  displayName: "Introduction to Computer Science",
+  units: "4"
+};
+
+
 function Class({ index, classData, handleRightClick }: classProps) {
   const data: QuarterClassData = classData.classData;
-  const [open, setOpen] = useState<boolean>(false);
+  const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
 
-  const handleClickOpen = (): void => {
-    setOpen(true);
+  const toggleEmbeddedClass = () => {
+    setEmbeddedClassOpen(!isEmbeddedClassOpen);
   };
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
   return (
       <Draggable draggableId={data.id}
                  index={index}
                  key={data.id}>
         {(provided) => (
-          <div>
             <StyledClass
-              onClick={() => handleClickOpen()}
               id={data.id}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
               {...provided.draggableProps} style={{ ...provided.draggableProps.style }}
-              $color={classData.color}
+              color={classData.color}
+              $expanded = {isEmbeddedClassOpen}
               onContextMenu={(e) => {
                 e.preventDefault()
                 handleRightClick(data.id, e.pageX, e.pageY)
-              }}>
+              }}
+              onClick={toggleEmbeddedClass}>
 
               <div className='courseCode'>
                 <p>{data.id + ' (' + data.units + ')'}</p>
@@ -51,9 +52,15 @@ function Class({ index, classData, handleRightClick }: classProps) {
               <div className='courseName'>
                 <p>{data.displayName}</p>
               </div>
-            </StyledClass>
-
-          </div>)}
+              <div className="collapsible">
+                <p>{isEmbeddedClassOpen ? '▲' : '▼'}</p>
+              </div>
+              {isEmbeddedClassOpen && (
+                  <div className="embedded-class">
+                    <EmbeddedClass data={mockData}/>
+                  </div>
+              )}
+            </StyledClass>)}
       </Draggable>
   );
 }

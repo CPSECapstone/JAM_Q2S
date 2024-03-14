@@ -13,7 +13,7 @@ function EditBar() : JSX.Element{
         <div className="editBar" onClick={() => clickEvent()}>
             <Toolbar>
                 <div className="buttons">
-                    <Tooltip title="Add Class to Flow"
+                    <Tooltip title="Add DeprecatedClass to Flow"
                              placement="right"
                              arrow>
                         <IconButton aria-label="add class" size="large"
@@ -23,7 +23,7 @@ function EditBar() : JSX.Element{
                     </Tooltip>
                 </div>
                 <div className="buttons">
-                    <Tooltip title="Remove Class from Flow"
+                    <Tooltip title="Remove DeprecatedClass from Flow"
                              placement="right"
                              arrow>
                         <IconButton aria-label="remove class" size="large"
@@ -33,7 +33,7 @@ function EditBar() : JSX.Element{
                     </Tooltip>
                 </div>
                 <div className="buttons">
-                    <Tooltip title="Edit Selected Class"
+                    <Tooltip title="Edit Selected DeprecatedClass"
                              placement="right"
                              arrow>
                         <IconButton aria-label="edit class" size="large"
