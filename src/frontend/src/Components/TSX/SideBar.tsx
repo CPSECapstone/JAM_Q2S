@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import SideBarItem from "./SideBarItem";
-import './SideBar.css';
+import '../CSS/SideBar.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import { IconButton, Stack, Tooltip } from "@mui/material";
@@ -12,7 +12,7 @@ interface NewFlowFormProps {
     onSubmit: (inputValue: string) => void;
 }
 
-function SideBarTab(): JSX.Element {
+function SideBarTab () : JSX.Element {
     const [flowcharts, setFlowcharts] = useState({
         all_flowcharts: [
             {
@@ -168,11 +168,16 @@ function SideBarTab(): JSX.Element {
         </div>
     );
 }
-
-function AllFlowcharts(props: flowchartProps): JSX.Element {
-    const sideBarItems = props.flowcharts.map(({ id, name }) => {
-        return (
-            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick} />
+export interface flowchartProps {
+    flowcharts: { id: bigint; name: string }[];
+    group: string;
+    onFavoriteClick: (id: bigint) => void;
+    onStarClick: (id: bigint) => void;
+}
+function AllFlowcharts(props: flowchartProps): JSX.Element  {
+    const sideBarItems = props.flowcharts.map(({id, name}) => {
+        return(
+            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
         );
     });
     return <>{sideBarItems}</>;

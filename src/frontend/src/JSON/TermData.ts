@@ -16,7 +16,8 @@ export const exampleTermData = [
         id: 'COMS101',
         color: '#FFEA9E'
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Winter 2027',
@@ -33,7 +34,8 @@ export const exampleTermData = [
         id: 'ENGL134',
         color: '#FFEA9E'
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Spring 2027',
@@ -50,7 +52,8 @@ export const exampleTermData = [
         id: 'COMS126',
         color: '#FFEA9E'
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Fall 2028',
@@ -71,7 +74,8 @@ export const exampleTermData = [
         id: 'CHEM124',
         color: '#FFEA9E'
       }
-    ]
+    ],
+    totalUnits : 16
   },
   {
     termName: 'Winter 2028',
@@ -92,35 +96,43 @@ export const exampleTermData = [
         id: 'CHEM125',
         color: '#FFEA9E'
       }
-    ]
+    ],
+    totalUnits : 16
   },
   {
     termName: 'Spring 2028',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Fall 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Winter 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Spring 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Fall 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Winter 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Spring 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   }
 ];
 

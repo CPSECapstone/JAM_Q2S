@@ -1,5 +1,5 @@
 import React from 'react';
-import './TopBar.css';
+import '../CSS/TopBar.css';
 import TitleBar from "./TitleBar";
 import EditBar from "./EditBar";
 

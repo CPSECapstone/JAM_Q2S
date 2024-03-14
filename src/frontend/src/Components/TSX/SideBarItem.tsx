@@ -4,8 +4,17 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import "./SideBarItem.css";
-import { SideBarItemProps } from '../Interfaces/Interfaces';
+import "../CSS/SideBarItem.css";
+
+
+
+export interface SideBarItemProps {
+    id: bigint;
+    name: string;
+    group: string;
+    onFavoriteClick: (id: bigint) => void;
+    onStarClick: (id: bigint) => void;
+}
 
 function SideBarItem(props: SideBarItemProps): JSX.Element {
     const clickEvent = () => {
