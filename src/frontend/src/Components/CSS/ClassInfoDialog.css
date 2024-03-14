@@ -1,0 +1,17 @@
+#dialog {
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#closeButton {
+    margin: 2%
+}
+#displayName {
+    padding-right: 15%;
+    margin-left: 2%
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-import Grid from '../Components/Grid';
-import SideBar from '../Components/SideBar';
+import Grid from '../Components/TSX/Grid';
+import SideBar from '../Components/TSX/SideBar';
 import { FlowchartProvider } from '../Context/FlowchartProvider';
 import './Home.css'
-import TopBar from '../Components/TopBar';
+import TopBar from '../Components/TSX/TopBar';
 
 const Home = () => {
     return(
-        <div className='App'>
+        <div className='Home'>
           <div className='sideBar'>
             <SideBar></SideBar>
           </div>
