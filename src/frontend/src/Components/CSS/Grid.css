@@ -1,6 +1,9 @@
 .grid{
     display: flex;
-    height: 100%;
+}
+.page {
+    display: flex;
+    flex-direction: column;
 }
 
 .term{
@@ -13,4 +16,5 @@
     left: -2%;
     width: 100%;
     text-align: right;
+
 }

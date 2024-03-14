@@ -109,31 +109,33 @@ function Grid() {
 
 
     return (
-        <div className='grid'>
-            {clicked && (
-                <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
-            )}
-            <DragDropContext onDragEnd={onDragEnd}
-                             onDragStart={() => setClicked(false)}>
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    flowchart ? (
-                        flowchart.map((term: TermData, index: number) => {
-                            const classes: ClassDBClass[] =
-                                term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
-                            return (
-                                <div className='term' key={term.termName}>
-                                    <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
-                                          id={term.termName} handleRightClick={handleRightClick}/>
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <p>No Flowchart Selected</p>
-                    )
+        <div className="page">
+            <div className='grid'>
+                {clicked && (
+                    <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
                 )}
-            </DragDropContext>
+                <DragDropContext onDragEnd={onDragEnd}
+                                 onDragStart={() => setClicked(false)}>
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        flowchart ? (
+                            flowchart.map((term: TermData, index: number) => {
+                                const classes: ClassDBClass[] =
+                                    term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
+                                return (
+                                    <div className='term' key={term.termName}>
+                                        <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
+                                              id={term.termName} handleRightClick={handleRightClick}/>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <p>No Flowchart Selected</p>
+                        )
+                    )}
+                </DragDropContext>
+            </div>
             <div className="total-units">
                 Total Units: {calculateTotalUnits()}
             </div>
