@@ -1,3 +1,14 @@
 {
-  "name": "Test Code"
+  "name": "Test Code",
+  "termData": [
+    {
+      "tIndex": -1
+    },
+    {
+      "tIndex": 1
+    },
+    {
+      "tIndex": 2
+    }
+  ]
 }
