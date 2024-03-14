@@ -9,10 +9,10 @@ type Props = {
   year: string;
   classList: ClassDBClass[];
   id : string;
+  totalUnits: number;
 };
 
-function Term({ year, classList, id }: Props): JSX.Element {
-
+function Term({ year, classList, id, totalUnits }: Props): JSX.Element {
   return (
     <div className='term'>
       <div className='title'>
@@ -32,6 +32,9 @@ function Term({ year, classList, id }: Props): JSX.Element {
           </div>
         )}
       </Droppable>
+      <div className="termTotalUnits" style={{ textAlign: 'center', margin: 0 }}>
+          <p style={{ margin: 0 }}>{totalUnits}</p>
+      </div>
     </div>
   );
 }

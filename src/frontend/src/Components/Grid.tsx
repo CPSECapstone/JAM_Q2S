@@ -52,6 +52,16 @@ function Grid() {
 
   };
 
+  const calculateTotalUnits = () => {
+    let total = 0;
+    if (flowchart) {
+      flowchart.forEach((term) => {
+        total += term.totalUnits || 0;
+      });
+    }
+    return total;
+  };
+
   useEffect((): void => {
     const fetchQuarterClassData = async () => {
       if (!flowchart) {
@@ -60,16 +70,19 @@ function Grid() {
       try {
         const termClassData: { [ClassId: string]: ClassDBClass } = {};
         const promises = flowchart.map(async (term) => {
+          let termTotalUnits = 0;
           await Promise.all(
             term.classes.map(async (flowchartClass: FlowchartClass) => {
               const response: AxiosResponse<QuarterClassData> =
                 await axios.get('http://localhost:8080/get/QuarterClass/' + flowchartClass.id);
+              termTotalUnits += Number(response.data.units);
               termClassData[response.data.id] = {
                 classData: response.data,
                 color: flowchartClass.color
               };
             })
           );
+          term.totalUnits = termTotalUnits;
         });
 
         await Promise.all(promises);
@@ -82,7 +95,7 @@ function Grid() {
     if (flowchart && flowchart.length > 0) {
       fetchQuarterClassData();
     }
-  }, []);
+  }, [flowchart]);
 
 
   return (
@@ -92,12 +105,12 @@ function Grid() {
           <p>Loading...</p>
         ) : (
           flowchart ? (
-            flowchart.map((term: TermData) => {
+            flowchart.map((term: TermData, index: number) => {
               const classes: ClassDBClass[] =
                 term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
               return (
                 <div className='term' key={term.termName}>
-                  <Term year={term.termName} classList={classes} id={term.termName}></Term>
+                  <Term year={term.termName} classList={term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id])} totalUnits={term.totalUnits || 0} id={term.termName} />
                 </div>
               );
             })
@@ -106,7 +119,9 @@ function Grid() {
           )
         )}
       </DragDropContext>
-
+      <div className="total-units">
+        Total Units: {calculateTotalUnits()}
+      </div>
     </div>
 
   );
