@@ -1,9 +1,7 @@
 import React from "react";
-import "./CSS/Class.css";
-import {Tooltip} from 'react-tooltip'
-import { Simulate } from 'react-dom/test-utils';
-import click = Simulate.click;
-import {EmbeddedSemesterClassData} from "../Interfaces/Interfaces";
+import "../CSS/Class.css";
+
+import {EmbeddedSemesterClassData} from "../../Interfaces/Interfaces";
 
 interface classProps {
     data: EmbeddedSemesterClassData

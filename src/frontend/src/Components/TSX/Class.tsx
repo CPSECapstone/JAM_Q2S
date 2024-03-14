@@ -3,7 +3,7 @@ import '../CSS/Class.css';
 import { Draggable } from '@hello-pangea/dnd';
 import { StyledClass } from '../StyledComponents/ClassStyles';
 import {ClassDBClass, EmbeddedSemesterClassData, QuarterClassData} from '../../Interfaces/Interfaces';
-import EmbeddedClass from "../EmbeddedClass";
+import EmbeddedClass from "./EmbeddedClass";
 
 
 
