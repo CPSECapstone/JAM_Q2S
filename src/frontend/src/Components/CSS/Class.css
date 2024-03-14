@@ -11,12 +11,7 @@
     padding-right: 10px;
     margin-bottom: 10px;
 }
-.class .classInfo  {
-    background: #a69355;
-    max-width: 200px;
-    opacity: 100;
-    z-index: 9999;
-}
+
 .collapsible {
     position: absolute;
     cursor: pointer;
@@ -40,7 +35,10 @@
 .class.expanded {
     height: 50%;
 }
-
+.infoIcon {
+    display:flex;
+    justify-content: flex-end;
+}
 
 
 
