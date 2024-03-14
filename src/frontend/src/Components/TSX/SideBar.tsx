@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import SideBarItem from "./SideBarItem";
-import './SideBar.css';
+import '../CSS/SideBar.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import {IconButton, Stack, Tooltip} from "@mui/material";
-import { flowchartProps } from '../Interfaces/Interfaces';
 
 
 function SideBarTab () : JSX.Element {
@@ -130,7 +128,12 @@ function SideBarTab () : JSX.Element {
         </div>
     );
 }
-
+export interface flowchartProps {
+    flowcharts: { id: bigint; name: string }[];
+    group: string;
+    onFavoriteClick: (id: bigint) => void;
+    onStarClick: (id: bigint) => void;
+}
 function AllFlowcharts(props: flowchartProps): JSX.Element  {
     const sideBarItems = props.flowcharts.map(({id, name}) => {
         return(

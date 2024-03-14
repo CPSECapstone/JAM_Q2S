@@ -29,18 +29,3 @@ export interface TermData {
   classes: FlowchartClass[];
   totalUnits: number;
 }
-
-export interface flowchartProps {
-  flowcharts: { id: bigint; name: string }[];
-  group: string;
-  onFavoriteClick: (id: bigint) => void;
-  onStarClick: (id: bigint) => void;
-}
-
-export interface SideBarItemProps {
-  id: bigint;
-  name: string;
-  group: string;
-  onFavoriteClick: (id: bigint) => void;
-  onStarClick: (id: bigint) => void;
-}
