@@ -16,8 +16,11 @@
 .courseName{
     display:flex;
     justify-content: center;
+    alignment: center;
     font-size: 12px;
     text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-bottom: 10px;
 }
 .class .classInfo  {

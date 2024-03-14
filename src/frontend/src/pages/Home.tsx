@@ -7,7 +7,7 @@ import TopBar from '../Components/TopBar';
 
 const Home = () => {
     return(
-        <div className='App'>
+        <div className='Home'>
           <div className='sideBar'>
             <SideBar></SideBar>
           </div>
