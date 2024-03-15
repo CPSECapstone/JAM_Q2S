@@ -27,4 +27,5 @@ export interface ClassDBClass {
 export interface TermData {
   termName: string;
   classes: FlowchartClass[];
+  totalUnits: number;
 }

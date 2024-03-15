@@ -1,8 +1,20 @@
 .grid{
     display: flex;
-    height: 100%;
+}
+.page {
+    display: flex;
+    flex-direction: column;
 }
 
 .term{
     display:flex;
+}
+
+.total-units {
+    position: absolute;
+    bottom: 0;
+    left: -2%;
+    width: 100%;
+    text-align: right;
+
 }
