@@ -3,7 +3,6 @@
     height: 100%;
     display: flex;
     flex-flow: column;
-    flex-direction: column;
 }
 .title{
     background-color: #DFD6C4;
