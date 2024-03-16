@@ -1,20 +1,16 @@
 .grid{
     display: flex;
 }
+.grid::-webkit-scrollbar {
+    display: none;
+}
+
 .page {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    height: 100%;
 }
-
 .term{
     display:flex;
-}
-
-.total-units {
-    position: absolute;
-    bottom: 0;
-    left: -2%;
-    width: 100%;
-    text-align: right;
-
 }

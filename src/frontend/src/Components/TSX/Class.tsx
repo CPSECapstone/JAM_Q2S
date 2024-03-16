@@ -58,8 +58,12 @@ function Class({index, classData, handleRightClick}: classProps) {
                     <div className='courseName'>
                         <p>{data.displayName}</p>
                     </div>
-                    <div className="collapsible">
-                        <p>{isEmbeddedClassOpen ? '▲' : '▼'}</p>
+                    <div className="embedded-class">
+                        {isEmbeddedClassOpen && (
+                            <EmbeddedClass data={mockData}/>)}
+                    </div>
+                    <div className="collapsibleIcon">
+                        {isEmbeddedClassOpen ? '▲' : '▼'}
                     </div>
                     <Tooltip
                         anchorSelect={"#" + data.id}
@@ -75,11 +79,6 @@ function Class({index, classData, handleRightClick}: classProps) {
                         <hr></hr>
                         {data.addl}
                     </Tooltip>
-                    {isEmbeddedClassOpen && (
-                        <div className="embedded-class">
-                            <EmbeddedClass data={mockData}/>
-                        </div>
-                    )}
                 </StyledClass>)}
         </Draggable>
     );

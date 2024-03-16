@@ -9,7 +9,10 @@ import ClassInfoDialog from './ClassInfoDialog';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
 
-function Grid() {
+interface GridProps {
+    setTotalUnits: (units : number) => void;
+}
+function Grid({setTotalUnits} : GridProps) {
     const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
     const [loading, setLoading] = useState<boolean>(true); // State to track loading
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
@@ -69,7 +72,7 @@ function Grid() {
                 total += term.totalUnits || 0;
             });
         }
-        return total;
+        setTotalUnits(total);
     };
 
     useEffect((): void => {
@@ -105,6 +108,7 @@ function Grid() {
         if (flowchart && flowchart.length > 0) {
             fetchQuarterClassData();
         }
+        calculateTotalUnits();
     }, [flowchart]);
 
 
@@ -136,9 +140,7 @@ function Grid() {
                     )}
                 </DragDropContext>
             </div>
-            <div className="total-units">
-                Total Units: {calculateTotalUnits()}
-            </div>
+
         </div>
 
     );
