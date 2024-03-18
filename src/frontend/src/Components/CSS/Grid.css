@@ -1,5 +1,6 @@
 .grid{
     display: flex;
+    min-height: 100%;
 }
 .grid::-webkit-scrollbar {
     display: none;

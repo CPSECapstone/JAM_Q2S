@@ -10,9 +10,10 @@ import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
 
 interface GridProps {
-    setTotalUnits: (units : number) => void;
+    setTotalUnits: (units: number) => void;
 }
-function Grid({setTotalUnits} : GridProps) {
+
+function Grid({setTotalUnits}: GridProps) {
     const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
     const [loading, setLoading] = useState<boolean>(true); // State to track loading
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
@@ -113,34 +114,31 @@ function Grid({setTotalUnits} : GridProps) {
 
 
     return (
-        <div className="page">
-            <div className='grid'>
-                {clicked && (
-                    <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
-                )}
-                <DragDropContext onDragEnd={onDragEnd}
-                                 onDragStart={() => setClicked(false)}>
-                    {loading ? (
-                        <p>Loading...</p>
+        <div className='grid'>
+            {clicked && (
+                <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
+            )}
+            <DragDropContext onDragEnd={onDragEnd}
+                             onDragStart={() => setClicked(false)}>
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    flowchart ? (
+                        flowchart.map((term: TermData, index: number) => {
+                            const classes: ClassDBClass[] =
+                                term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
+                            return (
+                                <div className='term' key={term.termName}>
+                                    <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
+                                          id={term.termName} handleRightClick={handleRightClick}/>
+                                </div>
+                            );
+                        })
                     ) : (
-                        flowchart ? (
-                            flowchart.map((term: TermData, index: number) => {
-                                const classes: ClassDBClass[] =
-                                    term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
-                                return (
-                                    <div className='term' key={term.termName}>
-                                        <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
-                                              id={term.termName} handleRightClick={handleRightClick}/>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <p>No Flowchart Selected</p>
-                        )
-                    )}
-                </DragDropContext>
-            </div>
-
+                        <p>No Flowchart Selected</p>
+                    )
+                )}
+            </DragDropContext>
         </div>
 
     );

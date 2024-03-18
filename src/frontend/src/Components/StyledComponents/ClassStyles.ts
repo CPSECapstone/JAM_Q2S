@@ -10,8 +10,6 @@ export const StyledClass = styled.div<{ color: string; $expanded?: boolean }>`
   }};
   display: flex;
   flex-direction: column;
-  //position: relative;
-  transition: height 0.3s ease; /* Added transition for smoother effect */
   &:hover {
     background: lightgray;
   }
