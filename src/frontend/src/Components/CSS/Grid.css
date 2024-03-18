@@ -1,20 +1,11 @@
 .grid{
     display: flex;
+    min-height: 100%;
 }
-.page {
-    display: flex;
-    flex-direction: column;
+.grid::-webkit-scrollbar {
+    display: none;
 }
 
 .term{
     display:flex;
-}
-
-.total-units {
-    position: absolute;
-    bottom: 0;
-    left: -2%;
-    width: 100%;
-    text-align: right;
-
 }

@@ -5,11 +5,14 @@ import {DragDropContext, DropResult} from '@hello-pangea/dnd';
 import axios, {AxiosResponse} from 'axios';
 import {ClassDBClass, FlowchartClass, QuarterClassData, TermData} from '../../Interfaces/Interfaces';
 import {FlowchartContext} from '../../Context/FlowchartProvider';
-import ClassInfoDialog from './ClassInfoDialog';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
 
-function Grid() {
+interface GridProps {
+    setTotalUnits: (units: number) => void;
+}
+
+function Grid({setTotalUnits}: GridProps) {
     const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
     const [loading, setLoading] = useState<boolean>(true); // State to track loading
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
@@ -69,10 +72,10 @@ function Grid() {
                 total += term.totalUnits || 0;
             });
         }
-        return total;
+        setTotalUnits(total);
     };
 
-    useEffect((): void => {
+    useEffect(() => {
         const fetchQuarterClassData = async () => {
             if (!flowchart) {
                 return null;
@@ -98,10 +101,12 @@ function Grid() {
                 await Promise.all(promises);
                 setClassDB(termClassData);
                 setLoading(false);
+                calculateTotalUnits(); // Call calculateTotalUnits after updating flowchart data
             } catch (error) {
                 console.error('Error fetching QuarterClass:', error);
             }
         };
+
         if (flowchart && flowchart.length > 0) {
             fetchQuarterClassData();
         }
@@ -109,36 +114,31 @@ function Grid() {
 
 
     return (
-        <div className="page">
-            <div className='grid'>
-                {clicked && (
-                    <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
-                )}
-                <DragDropContext onDragEnd={onDragEnd}
-                                 onDragStart={() => setClicked(false)}>
-                    {loading ? (
-                        <p>Loading...</p>
+        <div className='grid'>
+            {clicked && (
+                <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
+            )}
+            <DragDropContext onDragEnd={onDragEnd}
+                             onDragStart={() => setClicked(false)}>
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    flowchart ? (
+                        flowchart.map((term: TermData, index: number) => {
+                            const classes: ClassDBClass[] =
+                                term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
+                            return (
+                                <div className='term' key={term.termName}>
+                                    <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
+                                          id={term.termName} handleRightClick={handleRightClick}/>
+                                </div>
+                            );
+                        })
                     ) : (
-                        flowchart ? (
-                            flowchart.map((term: TermData, index: number) => {
-                                const classes: ClassDBClass[] =
-                                    term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
-                                return (
-                                    <div className='term' key={term.termName}>
-                                        <Term year={term.termName} classList={classes} totalUnits={term.totalUnits || 0}
-                                              id={term.termName} handleRightClick={handleRightClick}/>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <p>No Flowchart Selected</p>
-                        )
-                    )}
-                </DragDropContext>
-            </div>
-            <div className="total-units">
-                Total Units: {calculateTotalUnits()}
-            </div>
+                        <p>No Flowchart Selected</p>
+                    )
+                )}
+            </DragDropContext>
         </div>
 
     );

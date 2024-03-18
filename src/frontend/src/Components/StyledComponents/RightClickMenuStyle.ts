@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 export const StyledContextMenu = styled.div<{top: number, left: number}>`
   position: absolute;
-  z-index: 1;
+  z-index: 999;
   width: 200px;
   background-color: #CED8D4;
   border-radius: 5px;
