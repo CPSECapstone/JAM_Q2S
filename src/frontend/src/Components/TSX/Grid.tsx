@@ -5,7 +5,6 @@ import {DragDropContext, DropResult} from '@hello-pangea/dnd';
 import axios, {AxiosResponse} from 'axios';
 import {ClassDBClass, FlowchartClass, QuarterClassData, TermData} from '../../Interfaces/Interfaces';
 import {FlowchartContext} from '../../Context/FlowchartProvider';
-import ClassInfoDialog from './ClassInfoDialog';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
 
@@ -76,7 +75,7 @@ function Grid({setTotalUnits}: GridProps) {
         setTotalUnits(total);
     };
 
-    useEffect((): void => {
+    useEffect(() => {
         const fetchQuarterClassData = async () => {
             if (!flowchart) {
                 return null;
@@ -102,14 +101,15 @@ function Grid({setTotalUnits}: GridProps) {
                 await Promise.all(promises);
                 setClassDB(termClassData);
                 setLoading(false);
+                calculateTotalUnits(); // Call calculateTotalUnits after updating flowchart data
             } catch (error) {
                 console.error('Error fetching QuarterClass:', error);
             }
         };
+
         if (flowchart && flowchart.length > 0) {
             fetchQuarterClassData();
         }
-        calculateTotalUnits();
     }, [flowchart]);
 
 

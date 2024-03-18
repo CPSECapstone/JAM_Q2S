@@ -13,11 +13,16 @@ interface classProps {
     handleRightClick: (classId: string, x: number, y: number) => void;
 }
 
-const mockData: EmbeddedSemesterClassData = {
-    id: "CSC 1001",
-    displayName: "Introduction to Computer Science",
-    units: "4"
-};
+const mockData: EmbeddedSemesterClassData[] = [
+    {
+        id: "CSC 2002",
+        displayName: "Some Other Semester Class",
+        units: "4"
+    }, {
+        id: "CSC 1001",
+        displayName: "Introduction to Computer Science",
+        units: "4"
+    }];
 
 const tooltipStyles = {
     'background': '#2c372d',
@@ -58,9 +63,10 @@ function Class({index, classData, handleRightClick}: classProps) {
                     <div className='courseName'>
                         <p>{data.displayName}</p>
                     </div>
-                    <div className="embedded-class">
-                        {isEmbeddedClassOpen && (
-                            <EmbeddedClass data={mockData}/>)}
+                    <div className="embeddedClasses">
+                        {isEmbeddedClassOpen && mockData.map((data, index) => (
+                            <EmbeddedClass key={index} data={data}/>
+                        ))}
                     </div>
                     <div className="collapsibleIcon">
                         {isEmbeddedClassOpen ? '▲' : '▼'}

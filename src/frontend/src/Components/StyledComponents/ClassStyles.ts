@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled  from 'styled-components'
 
 export const StyledClass = styled.div<{ color: string; $expanded?: boolean }>`
   margin: 8px;
