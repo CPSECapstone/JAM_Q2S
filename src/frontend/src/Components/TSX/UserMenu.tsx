@@ -53,7 +53,6 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                 <ul>
                     <li>Account</li>
                     <li>Settings</li>
-                    <li>Notifications</li>
                     <li>
                         <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
                     </li>
