@@ -5,12 +5,6 @@ import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import { IconButton, Stack, Tooltip } from "@mui/material";
 
-interface NewFlowFormProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (inputValue: string) => void;
-}
-
 function SideBarTab () : JSX.Element {
     const [flowcharts, setFlowcharts] = useState({
         all_flowcharts: [
@@ -180,6 +174,12 @@ function AllFlowcharts(props: flowchartProps): JSX.Element  {
         );
     });
     return <>{sideBarItems}</>;
+}
+
+interface NewFlowFormProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (inputValue: string) => void;
 }
 
 function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormProps) {
