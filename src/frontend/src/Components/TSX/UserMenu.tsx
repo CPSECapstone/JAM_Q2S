@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
@@ -9,7 +9,7 @@ function UserMenu(): JSX.Element {
     const menuRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
-        setIsMenuOpen(true);
+        setIsMenuOpen(prevState => !prevState);
         console.log('Profile clicked');
     };
 
@@ -49,7 +49,7 @@ export interface MenuProps {
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }, ref) => {
         return (
-            <StyledContextMenu ref={ref} top={12} left={13}>
+            <StyledContextMenu ref={ref} top={65} left={20}>
                 <ul>
                     <li>Account</li>
                     <li>Settings</li>
