@@ -4,7 +4,6 @@ import '../CSS/SideBar.css';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
 import { IconButton, Stack, Tooltip } from "@mui/material";
-import { flowchartProps } from '../Interfaces/Interfaces';
 
 interface NewFlowFormProps {
     isOpen: boolean;
