@@ -170,7 +170,7 @@ export interface flowchartProps {
 function AllFlowcharts(props: flowchartProps): JSX.Element  {
     const sideBarItems = props.flowcharts.map(({id, name}) => {
         return(
-            <SideBarItem id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
+            <SideBarItem key={id} id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
         );
     });
     return <>{sideBarItems}</>;
