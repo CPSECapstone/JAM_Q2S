@@ -7,7 +7,6 @@ import TopBar from '../Components/TSX/TopBar';
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
-
     return (
         <div className='Home'>
             <div className='sideBar'>

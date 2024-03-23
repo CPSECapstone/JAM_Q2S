@@ -86,7 +86,7 @@ export const exampleTermData = [
       },
       {
         id: 'CSC248',
-        color: '#FFFFFF'
+        color: '#e54a4a'
       },
       {
         id: 'MATH244',

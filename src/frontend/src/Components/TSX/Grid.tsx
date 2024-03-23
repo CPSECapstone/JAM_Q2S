@@ -3,7 +3,13 @@ import '../CSS/Grid.css';
 import Term from './Term';
 import {DragDropContext, DropResult} from '@hello-pangea/dnd';
 import axios, {AxiosResponse} from 'axios';
-import {ClassDBClass, FlowchartClass, QuarterClassData, TermData} from '../../Interfaces/Interfaces';
+import {
+    ClassDBClass,
+    ContextMenuData,
+    FlowchartClass,
+    QuarterClassData,
+    TermData
+} from '../../Interfaces/Interfaces';
 import {FlowchartContext} from '../../Context/FlowchartProvider';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
@@ -13,13 +19,19 @@ interface GridProps {
 }
 
 function Grid({setTotalUnits}: GridProps) {
-    const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
+    const [classDB, setClassDB] = useState<{
+        [ClassId: string]: ClassDBClass
+    }>({});
     const [loading, setLoading] = useState<boolean>(true); // State to track loading
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
     const {clicked, setClicked, coords, setCoords} = useContextMenu();
+    const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classId: null, termId: ""});
 
-    const handleRightClick = (classId: string, x: number, y: number) => {
-        console.log(classId);
+    const handleRightClick = (term: string, classId: string, x: number, y: number) => {
+        setContextMenuClass({
+            classId: classDB[classId],
+            termId: term
+        });
         setClicked(true);
         setCoords({x, y});
     }
@@ -81,7 +93,9 @@ function Grid({setTotalUnits}: GridProps) {
                 return null;
             }
             try {
-                const termClassData: { [ClassId: string]: ClassDBClass } = {};
+                const termClassData: {
+                    [ClassId: string]: ClassDBClass
+                } = {};
                 const promises = flowchart.map(async (term) => {
                     let termTotalUnits = 0;
                     await Promise.all(
@@ -116,7 +130,7 @@ function Grid({setTotalUnits}: GridProps) {
     return (
         <div className='grid'>
             {clicked && (
-                <ContextMenu top={coords.y} left={coords.x}></ContextMenu>
+                <ContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}></ContextMenu>
             )}
             <DragDropContext onDragEnd={onDragEnd}
                              onDragStart={() => setClicked(false)}>

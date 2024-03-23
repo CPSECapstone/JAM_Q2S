@@ -10,7 +10,8 @@ import {Tooltip} from "react-tooltip";
 interface classProps {
     classData: ClassDBClass;
     index: number;
-    handleRightClick: (classId: string, x: number, y: number) => void;
+    handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
+    term: string;
 }
 
 const mockData: EmbeddedSemesterClassData[] = [
@@ -30,7 +31,7 @@ const tooltipStyles = {
     'zIndex': '999'
 }
 
-function Class({index, classData, handleRightClick}: classProps) {
+function Class({index, classData, handleRightClick, term}: classProps) {
     const data: QuarterClassData = classData.classData;
     const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
 
@@ -51,7 +52,7 @@ function Class({index, classData, handleRightClick}: classProps) {
                     $expanded={isEmbeddedClassOpen}
                     onContextMenu={(e) => {
                         e.preventDefault()
-                        handleRightClick(data.id, e.pageX, e.pageY)
+                        handleRightClick(term, data.id, e.pageX, e.pageY)
                     }}
                     onClick={toggleEmbeddedClass}>
                     <div className="infoIcon">
