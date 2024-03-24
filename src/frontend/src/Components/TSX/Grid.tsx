@@ -25,11 +25,11 @@ function Grid({setTotalUnits}: GridProps) {
     const [loading, setLoading] = useState<boolean>(true); // State to track loading
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
     const {clicked, setClicked, coords, setCoords} = useContextMenu();
-    const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classId: null, termId: ""});
+    const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classId: "", termId: ""});
 
     const handleRightClick = (term: string, classId: string, x: number, y: number) => {
         setContextMenuClass({
-            classId: classDB[classId],
+            classId: classDB[classId].classData.id,
             termId: term
         });
         setClicked(true);
@@ -57,9 +57,10 @@ function Grid({setTotalUnits}: GridProps) {
         if (!start || !finish) return;
         const newFlowchartClass: FlowchartClass = {
             id: draggableId,
-            color: classDB[draggableId].color
+            color: classDB[draggableId].color,
+            taken: classDB[draggableId].taken
         }
-        if (start === finish) {
+        if (source.droppableId === destination.droppableId) {
             let newClasses: FlowchartClass[] = Array.from(start.classes);
             newClasses.splice(source.index, 1);
             newClasses.splice(destination.index, 0, newFlowchartClass);
@@ -100,13 +101,22 @@ function Grid({setTotalUnits}: GridProps) {
                     let termTotalUnits = 0;
                     await Promise.all(
                         term.classes.map(async (flowchartClass: FlowchartClass) => {
-                            const response: AxiosResponse<QuarterClassData> =
-                                await axios.get('http://localhost:8080/get/QuarterClass/' + flowchartClass.id);
-                            termTotalUnits += Number(response.data.units);
-                            termClassData[response.data.id] = {
-                                classData: response.data,
-                                color: flowchartClass.color
-                            };
+                            if (flowchartClass.id in classDB) {
+                                termClassData[flowchartClass.id] = {
+                                    classData: classDB[flowchartClass.id].classData,
+                                    color: flowchartClass.color,
+                                    taken: flowchartClass.taken
+                                };
+                            } else {
+                                const response: AxiosResponse<QuarterClassData> =
+                                    await axios.get('http://localhost:8080/get/QuarterClass/' + flowchartClass.id);
+                                termTotalUnits += Number(response.data.units);
+                                termClassData[response.data.id] = {
+                                    classData: response.data,
+                                    color: flowchartClass.color,
+                                    taken: flowchartClass.taken
+                                };
+                            }
                         })
                     );
                     term.totalUnits = termTotalUnits;
@@ -138,7 +148,7 @@ function Grid({setTotalUnits}: GridProps) {
                     <p>Loading...</p>
                 ) : (
                     flowchart ? (
-                        flowchart.map((term: TermData, index: number) => {
+                        flowchart.map((term: TermData) => {
                             const classes: ClassDBClass[] =
                                 term.classes.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.id]);
                             return (

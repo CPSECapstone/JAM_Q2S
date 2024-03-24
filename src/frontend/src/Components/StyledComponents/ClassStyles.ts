@@ -1,17 +1,27 @@
 import styled  from 'styled-components'
 
-export const StyledClass = styled.div<{ color: string; $expanded?: boolean }>`
+export const StyledClass = styled.div<{ color: string; $expanded?: boolean, $taken: boolean}>`
   margin: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   border-radius: 5px;
   background: ${(props) => {
-    return props.color;
+    if(props.$taken){
+        return 'gray'
+    } else {
+        return props.color
+    }
   }};
   display: flex;
   flex-direction: column;
   &:hover {
-    background: lightgray;
+    background: ${(props) => {
+      if(props.$taken){
+        return 'gray'
+      } else {
+        return 'lightgray'
+      }
+    }};
   }
 `;
 

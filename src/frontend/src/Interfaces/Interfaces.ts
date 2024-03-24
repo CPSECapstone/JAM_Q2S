@@ -17,11 +17,13 @@ export interface EmbeddedSemesterClassData {
 export interface FlowchartClass {
     id: string;
     color: string;
+    taken: boolean;
 }
 
 export interface ClassDBClass {
     classData: QuarterClassData,
     color: string
+    taken: boolean;
 }
 
 export interface TermData {
@@ -31,7 +33,7 @@ export interface TermData {
 }
 
 export interface ContextMenuData {
-    classId: ClassDBClass | null,
+    classId: string,
     termId: string
 
 }

@@ -50,6 +50,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                     {...provided.draggableProps} style={{...provided.draggableProps.style}}
                     color={classData.color}
                     $expanded={isEmbeddedClassOpen}
+                    $taken={classData.taken}
                     onContextMenu={(e) => {
                         e.preventDefault()
                         handleRightClick(term, data.id, e.pageX, e.pageY)
