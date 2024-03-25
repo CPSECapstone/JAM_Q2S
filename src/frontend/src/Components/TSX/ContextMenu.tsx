@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyledContextMenu} from '../StyledComponents/RightClickMenuStyle';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
@@ -9,8 +9,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
-import {ContextMenuData, FlowchartClass, TermData} from "../../Interfaces/Interfaces";
-import {FlowchartContext} from "../../Context/FlowchartProvider";
+import {ContextMenuData, FlowchartClass, TermData} from '../../Interfaces/Interfaces';
+import {FlowchartContext} from '../../Context/FlowchartProvider';
 
 interface ClassProps {
     top: number;
@@ -20,55 +20,64 @@ interface ClassProps {
 
 const ContextMenu = ({top, left, classData}: ClassProps) => {
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
+    const [classTaken, setClassTaken] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!flowchart || !classData.classUUID) {
+            return;
+        }
+        const term: TermData | undefined = flowchart.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
+        if (!term) {
+            return;
+        }
+        const classIndex: number = term.courses.findIndex((termClass: FlowchartClass): boolean => termClass.uuid === classData.classUUID);
+        if (classIndex === -1) {
+            return;
+        }
+        const selectedClass: FlowchartClass = term.courses[classIndex];
+        setClassTaken(selectedClass.taken);
+    }, [classData, flowchart]);
+
+    const updateFlowchart = (callback: (term: TermData, classIndex: number, selectedClass: FlowchartClass) => void) => {
+        if (!flowchart || !classData.classUUID) {
+            return;
+        }
+        const updatedFlowchart: TermData[] = [...flowchart];
+        const termIndex: number = updatedFlowchart.findIndex((term: TermData) => term.tIndex.toString() === classData.termId);
+        if (termIndex === -1) {
+            return;
+        }
+        const term: TermData = updatedFlowchart[termIndex];
+        const classIndex: number = term.courses.findIndex((termClass: FlowchartClass) => termClass.uuid === classData.classUUID);
+        if (classIndex === -1) {
+            return;
+        }
+        const selectedClass: FlowchartClass = term.courses[classIndex];
+        callback(term, classIndex, selectedClass);
+        setFlowchart(updatedFlowchart);
+    };
 
     const handleDelete = () => {
-        if (!flowchart || !classData.classId) {
-            return;
-        }
-        let updatedFlowchart: TermData[] | null = [...flowchart];
-        let term: TermData | undefined = updatedFlowchart.find((term: TermData): boolean => term.termName === classData.termId);
-        if (!term) {
-            return;
-        }
-        let newClasses: FlowchartClass[] = Array.from(term.classes);
-        let classIndex: number = term.classes.findIndex((termClass: FlowchartClass): boolean => termClass.id === classData.classId);
-        newClasses.splice(classIndex, 1);
-        term.classes = newClasses;
-        setFlowchart(updatedFlowchart);
-    }
+        updateFlowchart((term, classIndex) => {
+            term.courses.splice(classIndex, 1);
+        });
+    };
 
     const handleMarkTaken = () => {
-        if (!flowchart || !classData.classId) {
-            return;
-        }
-        let updatedFlowchart: TermData[] | null = [...flowchart];
-        let term: TermData | undefined = updatedFlowchart.find((term: TermData): boolean => term.termName === classData.termId);
-        if (!term) {
-            return;
-        }
-        let newClasses: FlowchartClass[] = Array.from(term.classes);
-        let classIndex: number = term.classes.findIndex((termClass: FlowchartClass): boolean => termClass.id === classData.classId);
-        let oldClass: FlowchartClass = newClasses[classIndex];
-        newClasses.splice(classIndex, 1);
-        let updatedClass: FlowchartClass = {
-            id: oldClass.id,
-            color: oldClass.color,
-            taken: !oldClass.taken
-        }
-        newClasses.splice(classIndex, 0, updatedClass);
-        term.classes = newClasses;
-        setFlowchart(updatedFlowchart);
-    }
+        updateFlowchart((term, classIndex, selectedClass) => {
+            selectedClass.taken = !selectedClass.taken;
+        });
+    };
 
     return (
         <StyledContextMenu $top={top} $left={left}>
             <Paper sx={{width: 320, maxWidth: '100%'}}>
                 <MenuList>
-                    <MenuItem onClick = {() => handleMarkTaken()}>
+                    <MenuItem onClick={() => handleMarkTaken()}>
                         <ListItemIcon>
                             <CheckIcon fontSize="small"/>
                         </ListItemIcon>
-                        <ListItemText>Mark Taken</ListItemText>
+                        <ListItemText>Mark {classTaken ? "Not Taken" : "Taken"}</ListItemText>
                     </MenuItem>
                     <MenuItem>
                         <ListItemIcon>

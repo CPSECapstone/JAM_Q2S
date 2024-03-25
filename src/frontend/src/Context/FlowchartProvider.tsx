@@ -1,5 +1,5 @@
 import React, {ReactNode, useState } from 'react';
-import { TermData } from '../Interfaces/Interfaces';
+import {TermData} from '../Interfaces/Interfaces';
 import { exampleTermData } from '../JSON/TermData';
 
 
@@ -15,7 +15,7 @@ export const FlowchartContext = React.createContext<ContextProps>({
   setFlowchart: () => null
 })
 export const FlowchartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [flowchart, setFlowchart] = useState<TermData[] | null>(exampleTermData)
+  const [flowchart, setFlowchart] = useState<TermData[] | null>(null)
 
   const value = {
     flowchart,

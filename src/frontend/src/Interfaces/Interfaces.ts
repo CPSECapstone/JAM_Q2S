@@ -15,25 +15,65 @@ export interface EmbeddedSemesterClassData {
 }
 
 export interface FlowchartClass {
-    id: string;
     color: string;
+    customDesc?: string;
+    customDisplayName?: string;
+    customId?: string;
+    customUnits?: string;
+    id: string | null;
     taken: boolean;
+    uuid: string;
 }
 
 export interface ClassDBClass {
-    classData: QuarterClassData,
-    color: string
+    classData: QuarterClassData;
+    color: string;
     taken: boolean;
+    uuid: string;
 }
 
 export interface TermData {
-    termName: string;
-    classes: FlowchartClass[];
-    totalUnits: number;
+    tIndex: number;
+    courses: FlowchartClass[];
+    tUnits: string;
 }
 
-export interface ContextMenuData {
-    classId: string,
-    termId: string
+// export interface TermData {
+//     color: string;
+//     customDesc?: string;
+//     customDisplayName?: string;
+//     customId?: string;
+//     customUnits?: string;
+//     id: string | null;
+//     taken: boolean;
+// }
 
+
+export interface ContextMenuData {
+    classUUID: string,
+    termId: string
+}
+
+export interface FlowchartResponse {
+    id: number;
+    major: string;
+    catalog: string;
+    flowchart: string;
+    concentration: string;
+}
+
+export interface FlowchartData {
+    hash: string;
+    id: string;
+    importedId: string | null;
+    lastUpdatedUTC: string;
+    name: string;
+    notes: string;
+    ownerId: string;
+    programId: string[];
+    publishedId: string | null;
+    startYear: string;
+    termData: TermData[];
+    unitTotal: string;
+    version: string;
 }

@@ -40,9 +40,9 @@ function Class({index, classData, handleRightClick, term}: classProps) {
     };
 
     return (
-        <Draggable draggableId={data.id}
+        <Draggable draggableId={classData.uuid}
                    index={index}
-                   key={data.id}>
+                   key={classData.uuid}>
             {(provided) => (
                 <StyledClass
                     {...provided.dragHandleProps}
@@ -53,11 +53,11 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                     $taken={classData.taken}
                     onContextMenu={(e) => {
                         e.preventDefault()
-                        handleRightClick(term, data.id, e.pageX, e.pageY)
+                        handleRightClick(term, classData.uuid, e.pageX, e.pageY)
                     }}
                     onClick={toggleEmbeddedClass}>
                     <div className="infoIcon">
-                        <InfoOutlinedIcon fontSize="small" id={data.id}/>
+                        <InfoOutlinedIcon fontSize="small" id={"id" + classData.uuid}/>
                     </div>
                     <div className='courseCode'>
                         <p>{data.id + ' (' + data.units + ')'}</p>
@@ -74,7 +74,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                         {isEmbeddedClassOpen ? '▲' : '▼'}
                     </div>
                     <Tooltip
-                        anchorSelect={"#" + data.id}
+                        anchorSelect={"#id" + classData.uuid}
                         place="right"
                         className="classInfo"
                         delayShow={100}
