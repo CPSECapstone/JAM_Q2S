@@ -5,20 +5,19 @@ import {FlowchartContext, FlowchartProvider} from '../Context/FlowchartProvider'
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
 import axios, {AxiosResponse} from "axios";
-import {FlowchartData, FlowchartResponse } from "../Interfaces/Interfaces";
+import {FlowchartData, FlowchartResponse} from "../Interfaces/Interfaces";
 import {TestSideBar} from "../Components/TSX/TestSideBar";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
-    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartData[]>([]);
+    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
     const [loading, setLoading] = useState<boolean>(true);
 
     let getFlowcharts = async () => {
         let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        let allFlowcharts: FlowchartData[] = res.data.map((response : FlowchartResponse) => JSON.parse(response.flowchart))
-       setAllFlowcharts(allFlowcharts)
-        //setFlowchart(termData);
+        setAllFlowcharts(res.data)
+
     }
     useEffect(() => {
         getFlowcharts();
@@ -27,7 +26,8 @@ const Home = () => {
         <div className='Home'>
             <div className='sideBar'>
                 {/*<SideBar></SideBar>*/}
-                <TestSideBar AllFlowcharts={allFlowchartData} setLoading={setLoading}></TestSideBar>
+                <TestSideBar allFlowcharts={allFlowchartData} setLoading={setLoading}
+                             setAllFlowcharts={setAllFlowcharts}></TestSideBar>
             </div>
             <div className='topBar'>
                 <TopBar></TopBar>

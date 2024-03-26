@@ -6,14 +6,14 @@ export const StyledSideBarItem = styled.div<{$selected: boolean}>`
   border-bottom: rgba(74, 72, 76, 0.62) solid 2px;
   background: ${(props) => {
     if(props.$selected){
-      return 'gray'
+      return 'lightgray'
     } else {
       return '#fff0d7a1'
     }
   }};
           //
   &:hover {
-    background: gray
+    background: lightgray
   ;
   }
 `;

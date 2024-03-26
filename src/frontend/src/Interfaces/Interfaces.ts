@@ -38,17 +38,6 @@ export interface TermData {
     tUnits: string;
 }
 
-// export interface TermData {
-//     color: string;
-//     customDesc?: string;
-//     customDisplayName?: string;
-//     customId?: string;
-//     customUnits?: string;
-//     id: string | null;
-//     taken: boolean;
-// }
-
-
 export interface ContextMenuData {
     classUUID: string,
     termId: string
@@ -60,6 +49,8 @@ export interface FlowchartResponse {
     catalog: string;
     flowchart: string;
     concentration: string;
+    favorite: boolean;
+    main: boolean;
 }
 
 export interface FlowchartData {
