@@ -26,7 +26,7 @@ const ContextMenu = ({top, left, classData}: ClassProps) => {
         if (!flowchart || !classData.classUUID) {
             return;
         }
-        const term: TermData | undefined = flowchart.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
+        const term: TermData | undefined = flowchart.termData.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
         if (!term) {
             return;
         }
@@ -42,7 +42,7 @@ const ContextMenu = ({top, left, classData}: ClassProps) => {
         if (!flowchart || !classData.classUUID) {
             return;
         }
-        const updatedFlowchart: TermData[] = [...flowchart];
+        const updatedFlowchart: TermData[] = [...flowchart.termData];
         const termIndex: number = updatedFlowchart.findIndex((term: TermData) => term.tIndex.toString() === classData.termId);
         if (termIndex === -1) {
             return;
@@ -54,7 +54,7 @@ const ContextMenu = ({top, left, classData}: ClassProps) => {
         }
         const selectedClass: FlowchartClass = term.courses[classIndex];
         callback(term, classIndex, selectedClass);
-        setFlowchart(updatedFlowchart);
+        setFlowchart({...flowchart, termData: updatedFlowchart});
     };
 
     const handleDelete = () => {

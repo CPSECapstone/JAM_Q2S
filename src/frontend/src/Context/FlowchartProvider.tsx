@@ -1,13 +1,13 @@
 import React, {ReactNode, useState } from 'react';
-import {TermData} from '../Interfaces/Interfaces';
+import {FlowchartData, TermData} from '../Interfaces/Interfaces';
 import { exampleTermData } from '../JSON/TermData';
 
 
 
 
 interface ContextProps {
-  readonly flowchart: TermData[] | null;
-  readonly setFlowchart: (flowchart: TermData[]) => void;
+  readonly flowchart: FlowchartData | null;
+  readonly setFlowchart: (flowchart: FlowchartData) => void;
 }
 
 export const FlowchartContext = React.createContext<ContextProps>({
@@ -15,7 +15,7 @@ export const FlowchartContext = React.createContext<ContextProps>({
   setFlowchart: () => null
 })
 export const FlowchartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [flowchart, setFlowchart] = useState<TermData[] | null>(null)
+  const [flowchart, setFlowchart] = useState<FlowchartData | null>(null)
 
   const value = {
     flowchart,

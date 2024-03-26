@@ -4,19 +4,21 @@ import SideBar from '../Components/TSX/SideBar';
 import {FlowchartContext, FlowchartProvider} from '../Context/FlowchartProvider';
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
-import {exampleTermData} from "../JSON/TermData";
 import axios, {AxiosResponse} from "axios";
-import {FlowchartData, FlowchartResponse, TermData} from "../Interfaces/Interfaces";
+import {FlowchartData, FlowchartResponse } from "../Interfaces/Interfaces";
+import {TestSideBar} from "../Components/TSX/TestSideBar";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
+    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartData[]>([]);
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
+    const [loading, setLoading] = useState<boolean>(true);
 
     let getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartResponse> = await axios.get("http://localhost:8080/api/FlowchartTemplates/352");
-        let temp: FlowchartData = JSON.parse(res.data.flowchart)
-        let termData: TermData[] = temp.termData.slice(1);
-        setFlowchart(termData);
+        let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
+        let allFlowcharts: FlowchartData[] = res.data.map((response : FlowchartResponse) => JSON.parse(response.flowchart))
+       setAllFlowcharts(allFlowcharts)
+        //setFlowchart(termData);
     }
     useEffect(() => {
         getFlowcharts();
@@ -24,13 +26,20 @@ const Home = () => {
     return (
         <div className='Home'>
             <div className='sideBar'>
-                <SideBar></SideBar>
+                {/*<SideBar></SideBar>*/}
+                <TestSideBar AllFlowcharts={allFlowchartData} setLoading={setLoading}></TestSideBar>
             </div>
             <div className='topBar'>
                 <TopBar></TopBar>
             </div>
             <div className='grid'>
-                <Grid setTotalUnits={setTotalUnits}></Grid>
+                {flowchart ? (
+                    <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
+                ) : (
+                    <div className='noFlowchartMessage'>
+                        No flowchart selected
+                    </div>
+                )}
             </div>
             <div className="totalUnits">
                 Total Units: {totalUnits}

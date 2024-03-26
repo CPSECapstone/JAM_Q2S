@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import '../CSS/Grid.css';
 import Term from './Term';
-import { DragDropContext, DropResult } from '@hello-pangea/dnd';
-import axios, { AxiosResponse } from 'axios';
+import {DragDropContext, DropResult} from '@hello-pangea/dnd';
+import axios, {AxiosResponse} from 'axios';
 import {
     ClassDBClass,
     ContextMenuData,
@@ -10,20 +10,21 @@ import {
     QuarterClassData,
     TermData
 } from '../../Interfaces/Interfaces';
-import { FlowchartContext } from '../../Context/FlowchartProvider';
-import { useContextMenu } from '../../Hooks/useContextMenu';
+import {FlowchartContext} from '../../Context/FlowchartProvider';
+import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
 
 interface GridProps {
     setTotalUnits: (units: number) => void;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
 }
 
-function Grid({ setTotalUnits }: GridProps) {
+function Grid({setTotalUnits, loading, setLoading}: GridProps) {
     const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
-    const [loading, setLoading] = useState<boolean>(true);
-    const { flowchart, setFlowchart } = useContext(FlowchartContext);
-    const { clicked, setClicked, coords, setCoords } = useContextMenu();
-    const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({ classUUID: "", termId: "" });
+    const {flowchart, setFlowchart} = useContext(FlowchartContext);
+    const {clicked, setClicked, coords, setCoords} = useContextMenu();
+    const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classUUID: "", termId: ""});
 
     const handleRightClick = (term: string, classId: string, x: number, y: number) => {
         setContextMenuClass({
@@ -31,7 +32,7 @@ function Grid({ setTotalUnits }: GridProps) {
             termId: term
         });
         setClicked(true);
-        setCoords({ x, y });
+        setCoords({x, y});
     }
 
     let onDragEnd = (result: DropResult): void => {
@@ -39,7 +40,7 @@ function Grid({ setTotalUnits }: GridProps) {
             return;
         }
 
-        const { destination, source, draggableId } = result;
+        const {destination, source, draggableId} = result;
         if (!destination) {
             return;
         }
@@ -47,7 +48,7 @@ function Grid({ setTotalUnits }: GridProps) {
             destination.index === source.index) {
             return;
         }
-        let updatedTerms = [...flowchart];
+        let updatedTerms = [...flowchart.termData];
 
         let start: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === source.droppableId);
         let finish: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === destination.droppableId);
@@ -72,13 +73,13 @@ function Grid({ setTotalUnits }: GridProps) {
             finish.courses = finishClasses;
         }
 
-        setFlowchart(updatedTerms);
+        setFlowchart({...flowchart, termData: updatedTerms});
     };
 
     const calculateTotalUnits = () => {
         let total = 0;
         if (flowchart) {
-            flowchart.forEach((term) => {
+            flowchart.termData.forEach((term) => {
                 total += Number(term.tUnits) || 0;
             });
         }
@@ -90,8 +91,8 @@ function Grid({ setTotalUnits }: GridProps) {
             return null;
         }
         try {
-            const termClassData: { [ClassId: string]: ClassDBClass } = { ...classDB };
-            const promises = flowchart.map(async (term: TermData) => {
+            const termClassData: { [ClassId: string]: ClassDBClass } = {...classDB};
+            const promises = flowchart.termData.slice(1).map(async (term: TermData) => {
                 let termTotalUnits = 0;
                 await Promise.all(
                     term.courses.map(async (flowchartClass: FlowchartClass) => {
@@ -116,7 +117,6 @@ function Grid({ setTotalUnits }: GridProps) {
                                 }
                             } else {
                                 termTotalUnits += Number(flowchartClass.customUnits);
-
                                 let classData: QuarterClassData = {
                                     id: flowchartClass.customId ? flowchartClass.customId : "",
                                     displayName: flowchartClass.customDisplayName ? flowchartClass.customDisplayName : "",
@@ -141,7 +141,6 @@ function Grid({ setTotalUnits }: GridProps) {
 
             await Promise.all(promises);
             setClassDB(termClassData);
-            setLoading(false);
             calculateTotalUnits();
             return null;
         } catch (error) {
@@ -150,10 +149,12 @@ function Grid({ setTotalUnits }: GridProps) {
     };
 
     useEffect(() => {
-        if (flowchart && flowchart.length > 0) {
-            fetchQuarterClassData();
+        if (flowchart && flowchart.termData.length > 0) {
+            fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
         }
+        console.log(loading)
     }, [flowchart]);
+
 
     return (
         <div className='grid'>
@@ -165,20 +166,18 @@ function Grid({ setTotalUnits }: GridProps) {
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    flowchart ? (
-                        flowchart.map((term: TermData) => {
+                    flowchart && (
+                        flowchart.termData.slice(1).map((term: TermData) => {
                             const classes: ClassDBClass[] =
                                 term.courses.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.uuid]);
                             return (
                                 <div className='term' key={term.tIndex}>
                                     <Term year={term.tIndex.toString()} classList={classes}
                                           totalUnits={Number(term.tUnits) || 0}
-                                          id={term.tIndex.toString()} handleRightClick={handleRightClick} />
+                                          id={term.tIndex.toString()} handleRightClick={handleRightClick}/>
                                 </div>
                             );
                         })
-                    ) : (
-                        <p>No Flowchart Selected</p>
                     )
                 )}
             </DragDropContext>
