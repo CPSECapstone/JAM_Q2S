@@ -13,6 +13,7 @@ import {
 import {FlowchartContext} from '../../Context/FlowchartProvider';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
+import {Loader} from "./Loader";
 
 interface GridProps {
     setTotalUnits: (units: number) => void;
@@ -93,7 +94,7 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
         try {
             const termClassData: { [ClassId: string]: ClassDBClass } = {...classDB};
             const promises = flowchart.termData.slice(1).map(async (term: TermData) => {
-                let termTotalUnits = 0;
+                let termTotalUnits: number = 0;
                 await Promise.all(
                     term.courses.map(async (flowchartClass: FlowchartClass) => {
                         if (flowchartClass.uuid in classDB) {
@@ -152,7 +153,6 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
         if (flowchart && flowchart.termData.length > 0) {
             fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
         }
-        console.log(loading)
     }, [flowchart]);
 
 
@@ -164,7 +164,7 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
             <DragDropContext onDragEnd={onDragEnd}
                              onDragStart={() => setClicked(false)}>
                 {loading ? (
-                    <p>Loading...</p>
+                    <Loader/>
                 ) : (
                     flowchart && (
                         flowchart.termData.slice(1).map((term: TermData) => {

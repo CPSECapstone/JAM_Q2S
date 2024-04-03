@@ -8,7 +8,7 @@ export const StyledSideBarItem = styled.div<{$selected: boolean}>`
     if(props.$selected){
       return 'lightgray'
     } else {
-      return '#fff0d7a1'
+      return '#fff6e7;'
     }
   }};
           //

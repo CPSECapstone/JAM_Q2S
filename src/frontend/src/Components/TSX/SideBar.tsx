@@ -1,147 +1,90 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from "react";
+import {FlowchartData, FlowchartResponse} from "../../Interfaces/Interfaces";
+import {FlowchartContext} from "../../Context/FlowchartProvider";
 import SideBarItem from "./SideBarItem";
-import '../CSS/SideBar.css';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import {IconButton, Stack, Tooltip} from "@mui/material";
+import '../CSS/SideBar.css'
+import {IconButton, Tooltip} from "@mui/material";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 
 
-function SideBarTab () : JSX.Element {
-    const [flowcharts, setFlowcharts] = useState({
-        all_flowcharts: [
-            {
-                id: BigInt(1231),
-                name: 'All Flowcharts 12344',
-            },
-            {
-                id: BigInt(1232),
-                name: 'All Flowcharts 2',
-            },
-            {
-                id: BigInt(1233),
-                name: 'All Flowcharts 3 Extra LongExtraLongExtra Long Name',
-            },
-        ],
-        favorite_flowcharts: [
-            {
-                id: BigInt(121),
-                name: 'Favorite 12',
-            },
-            {
-                id: BigInt(122),
-                name: 'Favorite 23',
-            },
-        ],
-        main_flowchart: [
-            {
-                id: BigInt(11),
-                name: 'Main Flowchart',
-            },
-        ],
-    });
+interface TestSideBarProps {
+    allFlowcharts: FlowchartResponse[];
+    setAllFlowcharts: (allFlowcharts: FlowchartResponse[]) => void;
+    setLoading: (loading: boolean) => void;
+}
 
-    const handleStarClick = (id: bigint) => {
-        setFlowcharts(prevFlowcharts => {
-            const allFlowchartToRemoveIndex = prevFlowcharts.all_flowcharts.findIndex(flowchart => flowchart.id === id);
-            const favoriteFlowchartToRemoveIndex = prevFlowcharts.favorite_flowcharts.findIndex(flowchart => flowchart.id === id);
-            let updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, ...prevFlowcharts.main_flowchart];
-            let updatedFavoriteFlowcharts = [...prevFlowcharts.favorite_flowcharts];
-            let updatedMainFlowchart = prevFlowcharts.main_flowchart;
+export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideBarProps) => {
+    const {setFlowchart} = useContext(FlowchartContext);
+    const [selected, setSelected] = useState<string | null>(null);
 
-            if (allFlowchartToRemoveIndex !== -1) {
-                updatedMainFlowchart = [prevFlowcharts.all_flowcharts[allFlowchartToRemoveIndex]];
-                updatedAllFlowcharts.splice(allFlowchartToRemoveIndex, 1);
-            } else if (favoriteFlowchartToRemoveIndex !== -1) {
-                updatedMainFlowchart = [prevFlowcharts.favorite_flowcharts[favoriteFlowchartToRemoveIndex]];
-                updatedFavoriteFlowcharts.splice(favoriteFlowchartToRemoveIndex, 1);
-            }
-
-            return {
-                ...prevFlowcharts,
-                all_flowcharts: updatedAllFlowcharts,
-                favorite_flowcharts: updatedFavoriteFlowcharts,
-                main_flowchart: updatedMainFlowchart,
-            };
-        });
+    const handleSelectedClick = (flowchart: FlowchartData) => {
+        if (!selected || selected !== flowchart.name) {
+            setLoading(true);
+            setFlowchart(flowchart);
+            setSelected(flowchart.name);
+        }
     };
 
-
-    const handleFavoriteClick = (id: bigint) => {
-        setFlowcharts(prevFlowcharts => {
-            const flowchartToMove = prevFlowcharts.all_flowcharts.find(flowchart => flowchart.id === id);
-            const flowchartToMove2 = prevFlowcharts.favorite_flowcharts.find(flowchart => flowchart.id === id);
-
-            if (flowchartToMove) {
-                const updatedAllFlowcharts = prevFlowcharts.all_flowcharts.filter(flowchart => flowchart.id !== id);
-                const updatedFavoriteFlowcharts = [...prevFlowcharts.favorite_flowcharts, flowchartToMove];
-
-                return {
-                    ...prevFlowcharts,
-                    all_flowcharts: updatedAllFlowcharts,
-                    favorite_flowcharts: updatedFavoriteFlowcharts,
-                };
-            }
-            else if(flowchartToMove2){
-                const updatedFavFlowcharts = prevFlowcharts.favorite_flowcharts.filter(flowchart => flowchart.id !== id);
-                const updatedAllFlowcharts = [...prevFlowcharts.all_flowcharts, flowchartToMove2];
-
-                return {
-                    ...prevFlowcharts,
-                    all_flowcharts: updatedAllFlowcharts,
-                    favorite_flowcharts: updatedFavFlowcharts,
-                };
-            }
-
-            return prevFlowcharts;
-        });
+    const handleFavoriteClick = (current: FlowchartResponse) => {
+        const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
+        const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
+        updatedAllFlowcharts[currentIndex].favorite = !current.favorite;
+        setAllFlowcharts(updatedAllFlowcharts);
     };
 
-    const handleAddClick = () => {
-        alert('add flowchart');
-    }
+    const handleMainClick = (current: FlowchartResponse) => {
+        const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
+        const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
+        const currentMainIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart.main);
+        if (currentMainIndex !== -1) {
+            updatedAllFlowcharts[currentMainIndex].main = false;
+
+        }
+        updatedAllFlowcharts[currentIndex].main = true;
+        setAllFlowcharts(updatedAllFlowcharts);
+    };
+
+    const renderFlowchartItems = (filterCondition: (current: FlowchartResponse) => boolean) => {
+        return allFlowcharts
+            .filter(filterCondition)
+            .map((current: FlowchartResponse) => {
+                const flowchartData: FlowchartData = JSON.parse(current.flowchart);
+                return (
+                    <SideBarItem
+                        key={flowchartData.name}
+                        handleSelectedClick={handleSelectedClick}
+                        handleMainClick={handleMainClick}
+                        responseData={current}
+                        handleFavoriteClick={handleFavoriteClick}
+                        data={flowchartData}
+                        selected={selected === flowchartData.name}
+                    />
+                );
+            });
+    };
 
     return (
         <div className="sideBar">
-            <div className="sideBarItems">
-                <div className="sideBarGroup">
-                    <span className="sideBarTitle"> MAIN FLOWCHART </span>
-                    <AllFlowcharts flowcharts={flowcharts.main_flowchart} group={"main"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
+            <div className="sidebarRow" id="main">
+                <p>Main</p>
+                {/*{renderFlowchartItems((current: FlowchartResponse) => current.main)}*/}
 
+            </div>
+            <div className="sidebarRow" id="favorites">
+                <p>Favorites</p>
+                {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
+            </div>
+            <div className="sidebarRow" id="all">
+                <div id="allFlowchartsHeader">
+                    <p>All Flowcharts</p>
+                    <Tooltip title="Create a new Flow" placement="right" arrow>
+                        <IconButton aria-label="favorite flowchart" size="small">
+                            <AddBoxOutlinedIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </div>
-                <div className="sideBarGroup">
-                    <span className="sideBarTitle"> FAVORITES </span>
-                    <AllFlowcharts flowcharts={flowcharts.favorite_flowcharts} group={"favorite"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
-                </div>
-                <div className="sideBarGroup">
-                    <Stack direction="row" justifyContent="flex-end"
-                           alignItems="center" spacing={0}>
-                        <span className="sideBarTitle"> ALL FLOWCHARTS </span>
-                        <Tooltip title="Create a new Flow" placement="right" arrow>
-                            <IconButton aria-label="favorite flowchart" size = "small"
-                                        onClick={handleAddClick}>
-                                <AddBoxOutlinedIcon/>
-                            </IconButton>
-                        </Tooltip>
-                    </Stack>
-                    <AllFlowcharts flowcharts={flowcharts.all_flowcharts} group={"all"} onFavoriteClick={handleFavoriteClick} onStarClick={handleStarClick}/>
-                </div>
+                {renderFlowchartItems((current: FlowchartResponse) => true)}
             </div>
         </div>
     );
-}
-export interface flowchartProps {
-    flowcharts: { id: bigint; name: string }[];
-    group: string;
-    onFavoriteClick: (id: bigint) => void;
-    onStarClick: (id: bigint) => void;
-}
-function AllFlowcharts(props: flowchartProps): JSX.Element  {
-    const sideBarItems = props.flowcharts.map(({id, name}) => {
-        return(
-            <SideBarItem key={id} id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
-        );
-    });
-    return <>{sideBarItems}</>;
-}
-
-export default SideBarTab
-
+};

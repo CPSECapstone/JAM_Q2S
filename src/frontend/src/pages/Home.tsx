@@ -1,17 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Grid from '../Components/TSX/Grid';
-import SideBar from '../Components/TSX/SideBar';
-import {FlowchartContext, FlowchartProvider} from '../Context/FlowchartProvider';
+import {FlowchartContext} from '../Context/FlowchartProvider';
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
 import axios, {AxiosResponse} from "axios";
-import {FlowchartData, FlowchartResponse} from "../Interfaces/Interfaces";
-import {TestSideBar} from "../Components/TSX/TestSideBar";
+import {FlowchartResponse} from "../Interfaces/Interfaces";
+import {SideBar} from "../Components/TSX/SideBar";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
     const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
-    const {flowchart, setFlowchart} = useContext(FlowchartContext);
+    const {flowchart} = useContext(FlowchartContext);
     const [loading, setLoading] = useState<boolean>(true);
 
     let getFlowcharts = async () => {
@@ -20,14 +19,13 @@ const Home = () => {
 
     }
     useEffect(() => {
-        getFlowcharts();
+        getFlowcharts().catch(console.error);
     }, []);
     return (
         <div className='Home'>
             <div className='sideBar'>
-                {/*<SideBar></SideBar>*/}
-                <TestSideBar allFlowcharts={allFlowchartData} setLoading={setLoading}
-                             setAllFlowcharts={setAllFlowcharts}></TestSideBar>
+                <SideBar allFlowcharts={allFlowchartData} setLoading={setLoading}
+                         setAllFlowcharts={setAllFlowcharts}></SideBar>
             </div>
             <div className='topBar'>
                 <TopBar></TopBar>
@@ -37,7 +35,7 @@ const Home = () => {
                     <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
                 ) : (
                     <div className='noFlowchartMessage'>
-                        No flowchart selected
+                        <p>No flowchart selected, please select or create a flowchart</p>
                     </div>
                 )}
             </div>

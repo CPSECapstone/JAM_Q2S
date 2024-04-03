@@ -89,8 +89,6 @@ public class FlowchartTemplateController {
     static String makeJsonFrontendCompatable(String originalFlowchart) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
-        ((ObjectNode) coursesNode).put("favorite", false);
-        ((ObjectNode) coursesNode).put("main", false);
         JsonNode termData = coursesNode.get("termData");
         for(JsonNode term : termData){
             JsonNode classes = term.get("courses");
