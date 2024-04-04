@@ -13,13 +13,13 @@ Permission Levels:
     They have the ability to edit, add flowchart, save flowchart, and download their own flowcharts.
 2. View Only: This is one permission level above student, expected to be for professors/mentors. 
     They have the ability to look up students by Cal Poly email address and view their flowcharts.
-4. Suggest Access: Expected to be for college advisors.
+3. Suggest Access: Expected to be for college advisors.
     They have the ability to look up students and suggest edits to their flowcharts as well as create
     new flowcharts on their behalf. 
-6. Full Control: 
+4. Full Control: 
     This user has the ability to make changes to the supporting data in order to maintain accuracy.
     They control permissions for those accessing student profiles. This user can also pull reports.
-8. Builder Admin: To start off as the project team itself.
+5. Builder Admin: To start off as the project team itself.
     Would have the ability to assign the Full Control access. All Permissions. 
 
 Developer Set Up:
@@ -32,7 +32,15 @@ You can apply for a free educational license at the following link:
 The project also requires Java v.20, available here:
 
       https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html
-The project is using ESLint setup with Github Actions to lint the code on every pull request to ensure clean and consistent code.
-Github Actions is also setup to build and test the code on every pull request to ensure continous testing and integration.
+The project is using ESLint setup with GitHub Actions to lint the code on every pull request to ensure clean and consistent code.
+GitHub Actions is also setup to build and test the code on every pull request to ensure continuous testing and integration.
 
-//There is currently no runnable code and no deployment. Respective info to come. 
+How to Run the Application Locally:
+
+    Back-end: Through IntelliJ run the "Q2SSeniorProjectApplication" file. The APIs can be accessed through "http://localhost:8080/api".
+
+    Front-end: Once the back-end is running, run "npm start" in the terminal from the "src/frontend" directory. A tab should open in your browser. 
+
+Testing:
+    
+    Backend JUnit tests can be run through IntelliJ and can be found in the "src/test/java" directory.

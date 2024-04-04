@@ -1,0 +1,25 @@
+.sideBar{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff6e7;
+
+}
+.sidebarRow{
+    min-height: 20%;
+    font-size: 1.2em;
+    margin-left: 5%;
+}
+#main{
+
+}
+#favorites{
+
+}
+#allFlowchartsHeader{
+    display:flex;
+
+}
+#all{
+
+}
