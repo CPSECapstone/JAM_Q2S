@@ -1,0 +1,35 @@
+.Home {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(8, 1fr) auto;
+    height: 100%;
+    font-family: Inter;
+}
+
+
+.sideBar {
+    grid-area: 2 / 1 / 10 / 3;
+}
+
+.topBar {
+    grid-area: 1 / 1 / 2 / 10;
+}
+
+.grid {
+    grid-area: 2 / 3 / 9 / 10;
+    overflow: scroll;
+}
+
+.noFlowchartMessage{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 2em;
+}
+
+.totalUnits {
+    display: flex;
+    justify-content: right;
+    margin-right: 1%;
+    grid-area: 9 / 3 / 9 / 10;
+}

@@ -1,0 +1,40 @@
+.courseCode{
+    display:flex;
+    justify-content: center;
+}
+.courseName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: .75em;
+    margin-left:2%;
+    margin-right:2%;
+}
+
+.collapsibleIcon {
+    display: flex;
+    justify-content: right;
+    font-size: .75em;
+    margin-right: 4%;
+    margin-bottom: 4%;
+}
+.collapsibleIcon:hover {
+    color: white;
+}
+
+.infoIcon {
+    display:flex;
+    justify-content: flex-end;
+}
+.embeddedClasses {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+

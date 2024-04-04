@@ -6,121 +6,150 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC123',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH141',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'COMS101',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Winter 2027',
     classes: [
       {
         id: 'CSC101',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH142',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'ENGL134',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Spring 2027',
     classes: [
       {
         id: 'CSC202',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH143',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'COMS126',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
-    ]
+    ],
+    totalUnits : 12
   },
   {
     termName: 'Fall 2028',
     classes: [
       {
         id: 'CSC203',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CSC225',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH241',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CHEM124',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
-    ]
+    ],
+    totalUnits : 16
   },
   {
     termName: 'Winter 2028',
     classes: [
       {
         id: 'CSC357',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CSC248',
-        color: '#FFFFFF'
+        color: '#e54a4a',
+        taken: false
       },
       {
         id: 'MATH244',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CHEM125',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
-    ]
+    ],
+    totalUnits : 16
   },
   {
     termName: 'Spring 2028',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Fall 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Winter 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Spring 2029',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Fall 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Winter 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   },
   {
     termName: 'Spring 2030',
-    classes: []
+    classes: [],
+    totalUnits : 0
   }
 ];
 

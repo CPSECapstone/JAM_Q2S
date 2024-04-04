@@ -1,9 +1,7 @@
 import React from "react";
-import "./Class.css";
-import {Tooltip} from 'react-tooltip'
-import { Simulate } from 'react-dom/test-utils';
-import click = Simulate.click;
-import {EmbeddedSemesterClassData} from "../Interfaces/Interfaces";
+import "../CSS/EmbeddedClass.css";
+
+import {EmbeddedSemesterClassData} from "../../Interfaces/Interfaces";
 
 interface classProps {
     data: EmbeddedSemesterClassData
@@ -12,10 +10,10 @@ interface classProps {
 function EmbeddedClass({ data }: classProps) {
     return (
         <div className="embeddedClass" id={data.id}>
-            <div className="courseCode">
+            <div className="embeddedCourseCode">
               <p>{data.id + " (" + data.units + ")"}</p>
             </div>
-            <div className="courseName">
+            <div className="embeddedCourseName">
               <p>{data.displayName}</p>
             </div>
         </div>

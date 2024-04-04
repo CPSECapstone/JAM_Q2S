@@ -2,8 +2,8 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplate;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateData;
-import com.Q2S.Q2S_Senior_Project.Repositories.FlowchartTemplateRepo;
-import com.fasterxml.jackson.core.type.TypeReference;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +35,11 @@ class FlowchartTemplateControllerTest {
         assertEquals("Catalog", testData.getCatalog());
         assertEquals("Major", testData.getMajor());
         assertEquals("Example Concentration", testData.getConcentration());
-        assertEquals(new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath())), testData.getFlowchart());
+        String fileContent = new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath()));
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode expectedJson = mapper.readTree(fileContent);
+        JsonNode actualJson = mapper.readTree(testData.getFlowchart());
+        assertEquals(expectedJson, actualJson);
     }
 
     /**

@@ -1,0 +1,14 @@
+.topBar{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: 2fr;
+    background: #2D5A48;
+}
+.titleBar{
+    grid-area: 1 / 3 / 2 / 10;
+}
+.editBar{
+    grid-area: 2 / 3 / 3 / 10;
+}

@@ -45,7 +45,7 @@ const Login = () => {
 
                 <button type='submit'>Login</button>
 
-                <Grid container justifyContent={"center"}>
+                <Grid container>
                     <Grid item>
                         <Link to="/register">Don't have an account? Register</Link>
                     </Grid>
