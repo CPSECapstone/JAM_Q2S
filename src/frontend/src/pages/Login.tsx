@@ -7,75 +7,51 @@ import {
     Button,
     Grid,
 } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import {Link, Link as RouterLink} from "react-router-dom";
-
+import axios from "axios";
+import './Login.css';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
 
-    const handleLogin = () => {    };
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('/api/user/login', {
+                email: email,
+                password: password,
+            });
+            window.location.href = '/home';
+
+        } catch (error) {
+            console.error('Error logging in user:', error);
+        }
+    };
 
     return (
-        <>
-            <Container maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        mt: 20,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    <Typography variant="h5">Welcome Back!</Typography>
-                    <Box sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoFocus
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+        <div className='Login'>
+            <h2>Welcome Back!</h2>
+            <form onSubmit={handleLogin}>
+                <label htmlFor='email'>Email:</label><br/>
+                <input type='email' id='email' name='email' value={email}
+                       onChange={(event) => setEmail(event.target.value)} required/><br/>
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="password"
-                            name="password"
-                            label="Password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                        />
+                <label htmlFor='password'>Password:</label><br/>
+                <input type='password' id='password' name='password' value={password}
+                       onChange={(event) => setPassword(event.target.value)} required/><br/>
 
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2}} //add bgcolor: '' here to change button color
-                            onClick={handleLogin}
-                            component={RouterLink}
-                            to='/'
-                        >
-                            Login
-                        </Button>
-                        <Grid container justifyContent={"center"}>
-                            <Grid item>
-                                <Link to="/register">Don't have an account? Register</Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-            </Container>
-        </>
+                <button type='submit'>Login</button>
+
+                <Grid container justifyContent={"center"}>
+                    <Grid item>
+                        <Link to="/register">Don't have an account? Register</Link>
+                    </Grid>
+                </Grid>
+            </form>
+        </div>
     );
 };
 

@@ -1,0 +1,68 @@
+/* Register.css */
+
+.Register {
+    font-style: normal;
+    font-weight: 250;
+    font-size: 14px;
+
+    padding: 20px;
+}
+
+.Register form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Register label {
+    margin-bottom: 5px;
+}
+
+.Register input {
+    box-sizing: border-box;
+
+    width: 367px;
+    height: 34px;
+    left: 122px;
+    top: 267px;
+
+    border: 1px solid #154734;
+    border-radius: 50px;
+
+    padding: 10px;
+}
+
+.Register button {
+    width: 365px;
+    height: 34px;
+    left: 124px;
+    top: 419px;
+
+    background: #154734;
+    border-radius: 50px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+
+    margin-bottom: 10px;
+}
+
+.Register link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+}
+
+.Register button:hover {
+    background-color: #0056b3;
+}
+
+.Register p {
+    margin-top: 10px;
+}
