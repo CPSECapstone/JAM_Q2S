@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import DeleteIcon from "@mui/icons-material/Delete";
+import LogoutIcon from '@mui/icons-material/Logout';
+import Paper from "@mui/material/Paper";
 
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,16 +55,26 @@ export interface MenuProps {
 }
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
-    ({ onClose }, ref) => {
+    ({ onClose }) => {
         return (
-            <StyledContextMenu ref={ref} top={65} left={20}>
-                <ul>
-                    <li>Account</li>
-                    <li>Settings</li>
-                    <li>
-                        <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
-                    </li>
-                </ul>
+            <StyledContextMenu $top={65} $left={20}>
+                <Paper sx={{width: 320, maxWidth: '100%'}}>
+                    <MenuList>
+                        <MenuItem>
+                            <ListItemIcon>
+                                <LogoutIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
+                        </MenuItem>
+                        <Divider/>
+                        <MenuItem>
+                            <ListItemIcon>
+                                <DeleteIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <ListItemText>Delete Account</ListItemText>
+                        </MenuItem>
+                    </MenuList>
+                </Paper>
             </StyledContextMenu>
         );
     }

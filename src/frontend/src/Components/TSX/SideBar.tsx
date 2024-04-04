@@ -1,15 +1,12 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, ChangeEvent} from "react";
 import {FlowchartData, FlowchartResponse} from "../../Interfaces/Interfaces";
 import {FlowchartContext} from "../../Context/FlowchartProvider";
-import React, { useState, ChangeEvent, useEffect } from 'react';
 import SideBarItem from "./SideBarItem";
 import '../CSS/SideBar.css'
 import {IconButton, Tooltip} from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import '../CSS/SideBar.css';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
-import { IconButton, Stack, Tooltip } from "@mui/material";
+import '../CSS/SideBar.css';
 
 
 interface TestSideBarProps {
@@ -21,6 +18,7 @@ interface TestSideBarProps {
 export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideBarProps) => {
     const {setFlowchart} = useContext(FlowchartContext);
     const [selected, setSelected] = useState<string | null>(null);
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
     const handleSelectedClick = (flowchart: FlowchartData) => {
         if (!selected || selected !== flowchart.name) {
@@ -79,18 +77,20 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
     const handleSubmitForm = (inputValue: string) => {
         if (inputValue.trim() !== '') {
             const newFlowchart = {
-                id: BigInt(Date.now()),
-                name: inputValue.trim(),
+                id: 12345,
+                major: "CS",
+                catalog: "2022-26",
+                flowchart: "new",
+                concentration: "AI",
+                favorite: false,
+                main: false
             };
 
             // Create a new array with the new flowchart added
-            const updatedFlowcharts = [...flowcharts.all_flowcharts, newFlowchart];
+            const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts, newFlowchart];
 
             // Update the state with the new array
-            setFlowcharts(prevFlowcharts => ({
-                ...prevFlowcharts,
-                all_flowcharts: updatedFlowcharts,
-            }));
+            setAllFlowcharts(updatedAllFlowcharts);
 
             handleCloseForm();
         }
@@ -122,21 +122,6 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
         </div>
     );
 };
-}
-export interface flowchartProps {
-    flowcharts: { id: bigint; name: string }[];
-    group: string;
-    onFavoriteClick: (id: bigint) => void;
-    onStarClick: (id: bigint) => void;
-}
-function AllFlowcharts(props: flowchartProps): JSX.Element  {
-    const sideBarItems = props.flowcharts.map(({id, name}) => {
-        return(
-            <SideBarItem key={id} id={id} name={name} group={props.group} onFavoriteClick={props.onFavoriteClick} onStarClick={props.onStarClick}/>
-        );
-    });
-    return <>{sideBarItems}</>;
-}
 
 interface NewFlowFormProps {
     isOpen: boolean;
@@ -171,4 +156,3 @@ function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormProps) {
     );
 }
 
-export default SideBarTab;
