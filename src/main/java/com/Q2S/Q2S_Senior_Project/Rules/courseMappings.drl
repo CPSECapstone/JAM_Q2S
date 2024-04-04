@@ -6,5 +6,6 @@ rule "CSC101"
 when
     QuarterClass(id == "CSC101")
 then
+    System.out.println("+++++++++++++++++++CSC101 rule fired+++++++++++++++++++++");
     mapping.setMapping(Arrays.asList("CSC1001", "CSC1002"));
 end

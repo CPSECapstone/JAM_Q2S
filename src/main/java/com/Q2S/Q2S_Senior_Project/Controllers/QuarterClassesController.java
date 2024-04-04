@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/q")
 public class QuarterClassesController {
     @Autowired
     private ClassConversionService classConversionService;
@@ -40,15 +41,15 @@ public class QuarterClassesController {
     }
 
 //1st try:
-//    @RequestMapping(value = "/mapQuarterToSemesterCourse", method = RequestMethod.GET, produces = "application/json")
-//    public List<String> getMapping(@RequestParam(required = true) String classId, @RequestParam(required = true) String ruleName) {
-//        List<String> semesterClasses = classConversionService.convertQuarterToSemester(classId, ruleName);
+//    @RequestMapping(value = "/get-mapping", method = RequestMethod.GET, produces = "application/json")
+//    public CourseMapping getMapping(@RequestParam(required = true) String classId) {
+//        CourseMapping semesterClasses = classConversionService.getMapping(classId);
 //        return semesterClasses;
 //    }
 
-    //website: https://medium.com/javarevisited/spring-boot-drools-rule-engine-example-965eea437ee9
+//    //website: https://medium.com/javarevisited/spring-boot-drools-rule-engine-example-965eea437ee9
     @PostMapping("/get-mapping")
-    public ResponseEntity<CourseMapping> getMapping(@RequestBody String courseID) {
+    public ResponseEntity<CourseMapping> getMapping(@RequestParam("courseID") String courseID) {
         CourseMapping mapping = classConversionService.getMapping(courseID);
         return new ResponseEntity<>(mapping, HttpStatus.OK);
     }
