@@ -3,7 +3,9 @@
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(8, 1fr) auto;
     height: 100%;
+    font-family: Inter;
 }
+
 
 .sideBar {
     grid-area: 2 / 1 / 10 / 3;
@@ -16,6 +18,13 @@
 .grid {
     grid-area: 2 / 3 / 9 / 10;
     overflow: scroll;
+}
+
+.noFlowchartMessage{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    font-size: 2em;
 }
 
 .totalUnits {

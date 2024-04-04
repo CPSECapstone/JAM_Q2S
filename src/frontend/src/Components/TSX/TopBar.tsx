@@ -4,7 +4,8 @@ import TitleBar from "./TitleBar";
 import EditBar from "./EditBar";
 import UserMenu from "./UserMenu";
 
-function TopBar() : JSX.Element{
+
+function TopBar(): JSX.Element {
     return (
         <div className='topBar'>
             <div className='profile'>

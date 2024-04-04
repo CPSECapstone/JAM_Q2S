@@ -1,22 +1,27 @@
 .sideBar{
     display: flex;
-    height:100%;
-    width: 100%;
-    overflow-x: scroll;
+    flex-direction: column;
+    height: 100%;
+    background: #fff6e7;
+
 }
-.sideBarGroup{
-    margin-top: 20px;
-    display: inline;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+.sidebarRow{
+    min-height: 20%;
+    font-size: 1.2em;
+    margin-left: 5%;
 }
-.sideBarTitle {
-    padding: 8px;
-    width: 100%;
-    color: rgb(125, 125, 125);
-    text-align: left;
-    font-size: 14px;
+#main{
+
+}
+#favorites{
+
+}
+#allFlowchartsHeader{
+    display:flex;
+
+}
+#all{
+
 }
 
 .custom-popup {

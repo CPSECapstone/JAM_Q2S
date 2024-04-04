@@ -6,15 +6,18 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC123',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH141',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'COMS101',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
     ],
     totalUnits : 12
@@ -24,15 +27,18 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC101',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH142',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'ENGL134',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
     ],
     totalUnits : 12
@@ -42,15 +48,18 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC202',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH143',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'COMS126',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
     ],
     totalUnits : 12
@@ -60,19 +69,23 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC203',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CSC225',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'MATH241',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CHEM124',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
     ],
     totalUnits : 16
@@ -82,19 +95,23 @@ export const exampleTermData = [
     classes: [
       {
         id: 'CSC357',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CSC248',
-        color: '#FFFFFF'
+        color: '#e54a4a',
+        taken: false
       },
       {
         id: 'MATH244',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       },
       {
         id: 'CHEM125',
-        color: '#FFEA9E'
+        color: '#FFEA9E',
+        taken: false
       }
     ],
     totalUnits : 16

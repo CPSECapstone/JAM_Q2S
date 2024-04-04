@@ -10,7 +10,8 @@ import {Tooltip} from "react-tooltip";
 interface classProps {
     classData: ClassDBClass;
     index: number;
-    handleRightClick: (classId: string, x: number, y: number) => void;
+    handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
+    term: string;
 }
 
 const mockData: EmbeddedSemesterClassData[] = [
@@ -30,7 +31,7 @@ const tooltipStyles = {
     'zIndex': '999'
 }
 
-function Class({index, classData, handleRightClick}: classProps) {
+function Class({index, classData, handleRightClick, term}: classProps) {
     const data: QuarterClassData = classData.classData;
     const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
 
@@ -39,9 +40,9 @@ function Class({index, classData, handleRightClick}: classProps) {
     };
 
     return (
-        <Draggable draggableId={data.id}
+        <Draggable draggableId={classData.uuid}
                    index={index}
-                   key={data.id}>
+                   key={classData.uuid}>
             {(provided) => (
                 <StyledClass
                     {...provided.dragHandleProps}
@@ -49,13 +50,14 @@ function Class({index, classData, handleRightClick}: classProps) {
                     {...provided.draggableProps} style={{...provided.draggableProps.style}}
                     color={classData.color}
                     $expanded={isEmbeddedClassOpen}
+                    $taken={classData.taken}
                     onContextMenu={(e) => {
                         e.preventDefault()
-                        handleRightClick(data.id, e.pageX, e.pageY)
+                        handleRightClick(term, classData.uuid, e.pageX, e.pageY)
                     }}
                     onClick={toggleEmbeddedClass}>
                     <div className="infoIcon">
-                        <InfoOutlinedIcon fontSize="small" id={data.id}/>
+                        <InfoOutlinedIcon fontSize="small" id={"id" + classData.uuid}/>
                     </div>
                     <div className='courseCode'>
                         <p>{data.id + ' (' + data.units + ')'}</p>
@@ -72,7 +74,7 @@ function Class({index, classData, handleRightClick}: classProps) {
                         {isEmbeddedClassOpen ? '▲' : '▼'}
                     </div>
                     <Tooltip
-                        anchorSelect={"#" + data.id}
+                        anchorSelect={"#id" + classData.uuid}
                         place="right"
                         className="classInfo"
                         delayShow={100}

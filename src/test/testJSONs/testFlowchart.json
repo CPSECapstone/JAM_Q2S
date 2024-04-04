@@ -2,13 +2,19 @@
   "name": "Test Code",
   "termData": [
     {
-      "tIndex": -1
+      "tIndex": -1,
+      "tUnits": "0",
+      "courses": []
     },
     {
-      "tIndex": 1
+      "tIndex": 1,
+      "tUnits": "0",
+      "courses": []
     },
     {
-      "tIndex": 2
+      "tIndex": 2,
+      "tUnits": "0",
+      "courses": []
     }
   ]
 }
