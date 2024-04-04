@@ -1,19 +1,10 @@
 import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
+import java.util.Arrays;
+global com.Q2S.Q2S_Senior_Project.Models.CourseMapping mapping;
 
 rule "CSC101"
 when
-    $quarterClass : QuarterClass(id == "CSC101")
+    QuarterClass(id == "CSC101")
 then
-    //eventually pull from database here
-    SemesterClass semesterClass1 = new SemesterClass();
-    semesterClass1.setId("1001");
-    insert(semesterClass1);
-
-    SemesterClass semesterClass2 = new SemesterClass();
-    semesterClass2.setId("1002");
-    insert(semesterClass2);
-
-    retract($quarterClass);
+    mapping.setMapping(Arrays.asList("CSC1001", "CSC1002"));
 end
-
-//only need strings
