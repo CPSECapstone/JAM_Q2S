@@ -1,29 +1,12 @@
-.sideBarItem{
-    width: 100%;
-    display: flex;
-    border-bottom: rgba(74,72,76,0.62) solid 2px;
-    background: rgba(255,240,215,0.63);
-}
-
 .barItemTitle{
     width: 100%;
-    float: left;
+    /*float: left;*/
     word-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
-    text-align: left;
     display: inline;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
-.text{
-    font-family: "Inter";
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    margin-left: 10px;
-}

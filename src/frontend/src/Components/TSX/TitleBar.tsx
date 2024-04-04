@@ -2,6 +2,7 @@ import React from 'react';
 import '../CSS/TitleBar.css';
 import {Typography} from "@mui/material";
 
+
 function TitleBar() : JSX.Element{
     return (
         <div className="titleBar">

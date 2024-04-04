@@ -3,9 +3,11 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplate;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateData;
 import com.Q2S.Q2S_Senior_Project.Repositories.FlowchartTemplateRepo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class FlowchartTemplateController {
@@ -38,7 +41,6 @@ public class FlowchartTemplateController {
         String templateDataFilePath = "data/2022-2026FlowTemplateData.json";
         File dataFile = new File(templateDataFilePath);
         List<FlowchartTemplateData> flowDataList = mapper.readValue(dataFile, new TypeReference<>(){});
-
         List<FlowchartTemplate> flowchartTemplateList = new ArrayList<>();
         File dir = new File("data/flows");
         File[] directoryListing = dir.listFiles();
@@ -80,8 +82,23 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setFlowchart(content);
+        template.setFlowchart(makeJsonFrontendCompatable(content));
         return template;
+    }
+
+    static String makeJsonFrontendCompatable(String originalFlowchart) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
+        JsonNode termData = coursesNode.get("termData");
+        for(JsonNode term : termData){
+            JsonNode classes = term.get("courses");
+            for(JsonNode flowchartClass : classes){
+                ((ObjectNode) flowchartClass).put("taken", false);
+                UUID uuid = UUID.randomUUID();
+                ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
+            }
+        }
+        return objectMapper.writeValueAsString(coursesNode);
     }
 
     @PostMapping("/api/FlowchartTemplates")
@@ -89,6 +106,7 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.save(flowchartTemplate);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates/{id}")
     FlowchartTemplate getFlowchartTemplateById(@PathVariable long id) {
         return flowchartTemplateRepo.findById(id).orElse(null);
@@ -104,7 +122,5 @@ public class FlowchartTemplateController {
     void deleteAllFlowchartTemplates(){
         flowchartTemplateRepo.deleteAll();
     }
-
-
 
 }
