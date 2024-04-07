@@ -19,11 +19,13 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<User> findAllUsers() {
         return (List<User>) userRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
         Optional<User> user = userRepository.findById(id);

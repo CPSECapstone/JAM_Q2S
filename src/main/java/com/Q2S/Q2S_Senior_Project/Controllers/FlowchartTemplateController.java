@@ -112,7 +112,7 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates")
     List<FlowchartTemplate> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();
