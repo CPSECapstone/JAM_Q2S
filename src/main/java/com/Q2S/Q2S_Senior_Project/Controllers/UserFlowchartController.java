@@ -74,7 +74,7 @@ public class UserFlowchartController {
             termSeasonIterator++;
         }
 
-        String updatedJsonString = mapper.writeValueAsString(rootNode);
+        String updatedJsonString = "{\"termData\":" + mapper.writeValueAsString(terms) + "}";
         System.out.println(updatedJsonString);
         return updatedJsonString;
     }
