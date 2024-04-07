@@ -82,11 +82,11 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setFlowchart(makeJsonFrontendCompatable(content));
+        template.setFlowchart(makeJsonFrontendCompatible(content));
         return template;
     }
 
-    static String makeJsonFrontendCompatable(String originalFlowchart) throws JsonProcessingException {
+    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
         JsonNode termData = coursesNode.get("termData");

@@ -74,9 +74,7 @@ public class UserFlowchartController {
             termSeasonIterator++;
         }
 
-        String updatedJsonString = "{\"termData\":" + mapper.writeValueAsString(terms) + "}";
-        System.out.println(updatedJsonString);
-        return updatedJsonString;
+        return "{\"termData\":" + mapper.writeValueAsString(terms) + "}";
     }
 
     static boolean isQuarterTerm(TermSeason season, int year){
