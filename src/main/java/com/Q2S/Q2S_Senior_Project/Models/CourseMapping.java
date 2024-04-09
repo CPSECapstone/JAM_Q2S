@@ -9,5 +9,5 @@ import java.util.List;
 @Getter
 @Setter
 public class CourseMapping {
-    private List<String> mapping = new ArrayList<>();
+    private String mapping;
 }

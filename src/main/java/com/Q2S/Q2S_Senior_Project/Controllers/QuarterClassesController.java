@@ -2,6 +2,7 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
 import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
+import com.Q2S.Q2S_Senior_Project.Models.RulesClass;
 import com.Q2S.Q2S_Senior_Project.Repositories.QuarterClassRepo;
 import com.Q2S.Q2S_Senior_Project.Services.ClassConversionService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/q")
 public class QuarterClassesController {
     @Autowired
     private ClassConversionService classConversionService;
@@ -48,12 +48,14 @@ public class QuarterClassesController {
 //    }
 
 //    //website: https://medium.com/javarevisited/spring-boot-drools-rule-engine-example-965eea437ee9
-    @PostMapping("/get-mapping")
-    public ResponseEntity<CourseMapping> getMapping(@RequestParam("courseID") String courseID) {
-        CourseMapping mapping = classConversionService.getMapping(courseID);
-        return new ResponseEntity<>(mapping, HttpStatus.OK);
+    @GetMapping("/get-mapping/{courseID}")
+    public CourseMapping getMapping(@PathVariable String courseID) {
+        CourseMapping mapping = new CourseMapping();
+        RulesClass course = new RulesClass(courseID);
+        classConversionService.getMapping(course, mapping);
+        return mapping;
+        //System.out.println("test test estetestes");
     }
 
-//when rules are called, do in a separate function to mock
-//wrap all the stuff in a function and do unit tests
+
 }
