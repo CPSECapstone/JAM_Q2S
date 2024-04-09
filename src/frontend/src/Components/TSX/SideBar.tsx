@@ -51,7 +51,7 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
                 const flowchartData: FlowchartData = JSON.parse(current.flowchart);
                 return (
                     <SideBarItem
-                        key={flowchartData.name}
+                        key={flowchartData.id}
                         handleSelectedClick={handleSelectedClick}
                         handleMainClick={handleMainClick}
                         responseData={current}

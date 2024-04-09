@@ -149,7 +149,7 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
         }
     };
 
-    useEffect(() => {
+    useEffect((): void => {
         if (flowchart && flowchart.termData.length > 0) {
             fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
         }

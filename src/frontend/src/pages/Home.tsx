@@ -4,7 +4,7 @@ import {FlowchartContext} from '../Context/FlowchartProvider';
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
 import axios, {AxiosResponse} from "axios";
-import {FlowchartResponse} from "../Interfaces/Interfaces";
+import {FlowchartResponse, QuarterClassData} from "../Interfaces/Interfaces";
 import {SideBar} from "../Components/TSX/SideBar";
 
 const Home = () => {
@@ -18,8 +18,13 @@ const Home = () => {
         setAllFlowcharts(res.data)
 
     }
+
+    let loadClassCache = async() => {
+        let res:AxiosResponse<QuarterClassData[]> = await axios.get("")
+    }
     useEffect(() => {
         getFlowcharts().catch(console.error);
+
     }, []);
     return (
         <div className='Home'>
