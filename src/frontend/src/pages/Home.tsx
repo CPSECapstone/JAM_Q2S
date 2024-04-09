@@ -35,7 +35,8 @@ const Home = () => {
                     <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
                 ) : (
                     <div className='noFlowchartMessage'>
-                        <p>No flowchart selected, please select or create a flowchart</p>
+                        <h3>No flowchart selected</h3>
+                        <p>Please select or create a flowchart</p>
                     </div>
                 )}
             </div>
