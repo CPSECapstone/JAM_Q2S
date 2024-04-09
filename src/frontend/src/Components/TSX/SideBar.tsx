@@ -99,17 +99,17 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
     return (
         <div className="sideBar">
             <div className="sidebarRow" id="main">
-                <p>Main</p>
+                <p>MAIN</p>
                 {/*{renderFlowchartItems((current: FlowchartResponse) => current.main)}*/}
 
             </div>
             <div className="sidebarRow" id="favorites">
-                <p>Favorites</p>
+                <p>FAVORITES</p>
                 {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
             </div>
             <div className="sidebarRow" id="all">
                 <div id="allFlowchartsHeader">
-                    <p>All Flowcharts</p>
+                    <p>ALL FLOWCHARTS</p>
                     <Tooltip title="Create a new Flow" placement="right" arrow>
                         <IconButton aria-label="favorite flowchart" size="small">
                             <AddBoxOutlinedIcon/>

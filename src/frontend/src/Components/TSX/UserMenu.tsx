@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -41,7 +41,12 @@ function UserMenu(): JSX.Element {
 
     return (
         <div className="profile" onClick={handleClick}>
-            <AccountCircleOutlinedIcon style={{ color: 'white', fontSize: 40 }} />
+            <AccountCircleOutlinedIcon sx={{
+                stroke: "#2D5A48",
+                strokeWidth: 1,
+                fontSize: 40,
+                color: "white",
+            }} />
             <p className="userName">User Name</p>
             {isMenuOpen && (
                 <ContextMenu ref={menuRef} onClose={handleCloseMenu} />
@@ -62,16 +67,16 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                     <MenuList>
                         <MenuItem>
                             <ListItemIcon>
-                                <LogoutIcon fontSize="small"/>
+                                <DeleteIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
+                            <ListItemText>Delete Account</ListItemText>
                         </MenuItem>
                         <Divider/>
                         <MenuItem>
                             <ListItemIcon>
-                                <DeleteIcon fontSize="small"/>
+                                <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <ListItemText>Delete Account</ListItemText>
+                            <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
                         </MenuItem>
                     </MenuList>
                 </Paper>
