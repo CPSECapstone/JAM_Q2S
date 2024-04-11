@@ -9,7 +9,7 @@ import org.hibernate.type.SqlTypes;
 @Getter
 @Setter
 @Entity
-@Table(name = "2022-2026flowchartTemplate")
+@Table(name = "flowchartTemplates2022-2026")
 public class FlowchartTemplateModel {
 
     @Id
@@ -19,5 +19,5 @@ public class FlowchartTemplateModel {
     private String major;
     private String concentration;
     @JdbcTypeCode(SqlTypes.JSON)
-    private String flowchart;
+    private String termData;
 }

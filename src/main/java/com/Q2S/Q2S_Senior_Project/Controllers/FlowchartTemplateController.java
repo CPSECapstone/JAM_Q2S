@@ -82,11 +82,11 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setFlowchart(makeJsonFrontendCompatable(content));
+        template.setTermData(makeJsonFrontendCompatible(content));
         return template;
     }
 
-    static String makeJsonFrontendCompatable(String originalFlowchart) throws JsonProcessingException {
+    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
         JsonNode termData = coursesNode.get("termData");
@@ -98,7 +98,7 @@ public class FlowchartTemplateController {
                 ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
             }
         }
-        return objectMapper.writeValueAsString(coursesNode);
+        return "{\"termData\":" + objectMapper.writeValueAsString(termData) + "}";
     }
 
     @PostMapping("/api/FlowchartTemplates")
@@ -112,7 +112,7 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates")
     List<FlowchartTemplateModel> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();

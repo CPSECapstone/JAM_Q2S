@@ -37,8 +37,8 @@ class FlowchartTemplateControllerTest {
         assertEquals("Example Concentration", testData.getConcentration());
         String fileContent = new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath()));
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode expectedJson = mapper.readTree(fileContent);
-        JsonNode actualJson = mapper.readTree(testData.getFlowchart());
+        JsonNode expectedJson = mapper.readTree(fileContent).get("termData");
+        JsonNode actualJson = mapper.readTree(testData.getTermData()).get("termData");
         assertEquals(expectedJson, actualJson);
     }
 
