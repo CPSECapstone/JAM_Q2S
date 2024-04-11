@@ -3,11 +3,11 @@
 .Register {
     font-style: normal;
     font-weight: 250;
-    font-size: 14px;
+    font-size: 1em;
     margin-top: 10%;
     margin-left: 35%;
 
-    padding: 3%;
+    padding: 0.8em;
 }
 
 .Register form {
@@ -24,21 +24,21 @@
 
     width: 45%;
 
-    border: 1px solid #154734;
-    border-radius: 50px;
+    border: 0.1em solid #154734;
+    border-radius: 10em;
 
-    padding: 10px;
+    padding: 0.8em;
 }
 
 .Register button {
     width: 45%;
 
     background: #154734;
-    border-radius: 50px;
+    border-radius: 10em;
 
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1em;
     line-height: 160%;
 
     color: #FFFFFF;
