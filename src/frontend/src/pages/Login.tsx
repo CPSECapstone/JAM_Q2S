@@ -11,11 +11,13 @@ import React, { useState } from "react";
 import {Link, Link as RouterLink} from "react-router-dom";
 import axios from "axios";
 import './Login.css';
+import { useAuth } from '../Hooks/useAuth';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const { login } = useAuth();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -24,6 +26,10 @@ const Login = () => {
                 email: email,
                 password: password,
             });
+            // login({
+            //
+            // })
+            console.log(response);
             window.location.href = '/home';
 
         } catch (error) {

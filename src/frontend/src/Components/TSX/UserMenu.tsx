@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import { useAuth } from '../../Hooks/useAuth';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
@@ -15,6 +16,7 @@ import Paper from "@mui/material/Paper";
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const { logout } = useAuth();
 
     const handleClick = () => {
         setIsMenuOpen(prevState => !prevState);
@@ -61,6 +63,7 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
+        const { logout } = useAuth();
         return (
             <StyledContextMenu $top={65} $left={20}>
                 <Paper sx={{width: 320, maxWidth: '100%'}}>
@@ -76,7 +79,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                             <ListItemIcon>
                                 <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/login" onClick={onClose}>Logout</Link>
+                            <Link style={{ color: 'red' }} to="/" onClick={logout}>Logout</Link>
                         </MenuItem>
                     </MenuList>
                 </Paper>
