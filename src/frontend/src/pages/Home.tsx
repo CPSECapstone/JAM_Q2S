@@ -32,16 +32,17 @@ const Home = () => {
             </div>
             <div className='grid'>
                 {flowchart ? (
-                    <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
+                    <><Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
+                        <div className="totalUnits">
+                            Total Units: {totalUnits}
+                        </div>
+                    </>
                 ) : (
                     <div className='noFlowchartMessage'>
                         <h3>No flowchart selected</h3>
                         <p>Please select or create a flowchart</p>
                     </div>
                 )}
-            </div>
-            <div className="totalUnits">
-                Total Units: {totalUnits}
             </div>
         </div>
     )
