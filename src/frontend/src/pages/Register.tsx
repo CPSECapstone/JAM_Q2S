@@ -1,112 +1,60 @@
-import {
-    Container,
-    CssBaseline,
-    Box,
-    Typography,
-    TextField,
-    Button,
-    Grid,
-} from "@mui/material";
-import { useState } from "react";
-import {Link, Link as RouterLink} from "react-router-dom";
+import React, { useState } from 'react';
+import '../Components/CSS/Register.css';
+import axios from "axios";
 
+const Register: React.FC = () => {
+    const [username, setUsername] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(false);
 
-const Register = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [major, setMajor] = useState("");
-    const [termStarted, setTermStarted] = useState("");
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('/api/user/register', {
+                username: username,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password,
+            });
+            window.location.href = '/home';
 
-    const handleRegister = () => {    };
+        } catch (error) {
+            console.error('Error registering user:', error);
+        }
+    };
 
     return (
-        <>
-            <Container maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        mt: 20,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    <Typography variant="h5">Sign Up</Typography>
-                    <Box sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoFocus
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+        <div className='Register'>
+            <h2>Welcome!</h2>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor='username'>User Name:</label><br/>
+                <input type='username' id='username' name='username' value={username}
+                       onChange={(event) => setUsername(event.target.value)} required/><br/>
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="password"
-                            name="password"
-                            label="Password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                        />
+                <label htmlFor='firstname'>First Name:</label><br/>
+                <input type='firstname' id='firstname' name='firstname' value={firstname}
+                       onChange={(event) => setFirstname(event.target.value)} required/><br/>
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="major"
-                            name="major"
-                            label="Major"
-                            type="major"
-                            value={major}
-                            onChange={(e) => {
-                                setMajor(e.target.value);
-                            }}
-                        />
+                <label htmlFor='lastname'>Last Name:</label><br/>
+                <input type='lastname' id='lastname' name='lastname' value={lastname}
+                       onChange={(event) => setLastname(event.target.value)} required/><br/>
 
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="termStarted"
-                            name="termStarted"
-                            label="Term Started"
-                            type="termStarted"
-                            value={termStarted}
-                            onChange={(e) => {
-                                setTermStarted(e.target.value);
-                            }}
-                        />
+                <label htmlFor='email'>Email:</label><br/>
+                <input type='email' id='email' name='email' value={email}
+                       onChange={(event) => setEmail(event.target.value)} required/><br/>
 
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2}} //add bgcolor: '' here to change button color
-                            onClick={handleRegister}
-                            component={RouterLink}
-                            to='/'
-                        >
-                            Register
-                        </Button>
-                        <Grid container justifyContent={"center"}>
-                            <Grid item>
-                                <Link to="/login">Already have an account? Login</Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-            </Container>
-        </>
+                <label htmlFor='password'>Password:</label><br/>
+                <input type='password' id='password' name='password' value={password}
+                       onChange={(event) => setPassword(event.target.value)} required/><br/>
+
+                <button type='submit'>Register</button>
+            </form>
+        </div>
     );
-};
+}
 
 export default Register;

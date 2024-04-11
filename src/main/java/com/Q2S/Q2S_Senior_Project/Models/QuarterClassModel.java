@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="QuarterClasses")
-public class QuarterClass {
+public class QuarterClassModel {
     @Id
     private String id;
     private String catalog;
