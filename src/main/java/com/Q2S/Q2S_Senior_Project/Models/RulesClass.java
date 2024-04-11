@@ -8,7 +8,7 @@ import lombok.Setter;
 public class RulesClass {
     private String start;
 
-    public RulesClass(String start) {
+    public RulesClass(String start){
         this.start = start;
     }
 }

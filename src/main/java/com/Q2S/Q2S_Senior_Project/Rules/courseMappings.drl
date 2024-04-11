@@ -1,13 +1,16 @@
 import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
 import com.Q2S.Q2S_Senior_Project.Models.RulesClass;
+import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
 import java.util.Arrays;
 global com.Q2S.Q2S_Senior_Project.Models.CourseMapping mapping;
+dialect "java"
 
-
-rule "CSC101"
+rule "test rule"
 when
-    RulesClass(start == "CSC101")
+    eval ( true )
+    //$course: RulesClass(start == "CSC101")
 then
     System.out.println("+++++++++++++++++++CSC101 rule fired+++++++++++++++++++++");
+
     mapping.setMapping("CSC1001 CSC1002");
 end

@@ -20,10 +20,11 @@ public class ClassConversionService {
 
     public CourseMapping getMapping(RulesClass course, CourseMapping mapping) {
         KieSession kieSession = kieContainer.newKieSession();
+        //kieSession.setGlobal("mapping", mapping);
         kieSession.insert(course);
-        kieSession.setGlobal("mapping", mapping);
         kieSession.fireAllRules();
         kieSession.dispose();
+        System.out.println("INSIDE GETMAPPING");
         return mapping;
     }
 }

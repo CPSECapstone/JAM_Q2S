@@ -48,12 +48,13 @@ public class QuarterClassesController {
 //    }
 
 //    //website: https://medium.com/javarevisited/spring-boot-drools-rule-engine-example-965eea437ee9
-    @GetMapping("/get-mapping/{courseID}")
-    public CourseMapping getMapping(@PathVariable String courseID) {
-        CourseMapping mapping = new CourseMapping();
+    @GetMapping("/get-course-mapping/{courseID}")
+    public CourseMapping getMappingForClass(@PathVariable String courseID) {
+        CourseMapping mapping = new CourseMapping(courseID);
         RulesClass course = new RulesClass(courseID);
-        classConversionService.getMapping(course, mapping);
-        return mapping;
+        CourseMapping mapping2 = classConversionService.getMapping(course, mapping);
+        System.out.println("AT THE END OF GETMAPPINGFORCLASS");
+        return mapping2;
         //System.out.println("test test estetestes");
     }
 

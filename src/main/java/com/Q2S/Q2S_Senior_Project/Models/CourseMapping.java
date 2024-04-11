@@ -10,4 +10,8 @@ import java.util.List;
 @Setter
 public class CourseMapping {
     private String mapping;
+
+    public CourseMapping(String mapping) {
+        this.mapping = mapping;
+    }
 }
