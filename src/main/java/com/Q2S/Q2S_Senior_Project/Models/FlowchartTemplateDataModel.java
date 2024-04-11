@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FlowchartTemplateData {
+public class FlowchartTemplateDataModel {
 
     private String id;
     private String catalog;

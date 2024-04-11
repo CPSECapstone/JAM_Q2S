@@ -1,6 +1,6 @@
 package com.Q2S.Q2S_Senior_Project.Services;
 
-import com.Q2S.Q2S_Senior_Project.Models.User;
+import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean addUser(User user) {
+    public boolean addUser(UserModel user) {
         // Check if the email already exists
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return false; // User with this email already exists
@@ -57,20 +57,20 @@ public class UserService {
 
     @Transactional
     public boolean authenticateUser(String email, String password) {
-        User user = userRepository.findByEmail(email);
+        UserModel user = userRepository.findByEmail(email);
 
         // Check if the user exists and the password matches
         return user != null && hashPassword(password).equals(user.getPassword());
     }
 
     @Transactional
-    public List<User> findAllUsers() {
-        return (List<User>) userRepository.findAll();
+    public List<UserModel> findAllUsers() {
+        return (List<UserModel>) userRepository.findAll();
     }
 
     @Transactional
-    public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
-        Optional<User> user = userRepository.findById(id);
+    public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
+        Optional<UserModel> user = userRepository.findById(id);
 
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
                 () -> ResponseEntity.notFound().build()
@@ -80,7 +80,7 @@ public class UserService {
     @Transactional
     public boolean deleteUserById(long userId) {
         // Check if the user exists
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<UserModel> optionalUser = userRepository.findById(userId);
         if (optionalUser.isPresent()) {
             userRepository.deleteById(userId);
             return true; // User deleted successfully
