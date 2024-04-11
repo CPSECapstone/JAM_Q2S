@@ -38,7 +38,7 @@ class FlowchartTemplateControllerTest {
         String fileContent = new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath()));
         ObjectMapper mapper = new ObjectMapper();
         JsonNode expectedJson = mapper.readTree(fileContent).get("termData");
-        JsonNode actualJson = mapper.readTree(testData.getFlowchart()).get("termData");
+        JsonNode actualJson = mapper.readTree(testData.getTermData()).get("termData");
         assertEquals(expectedJson, actualJson);
     }
 

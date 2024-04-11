@@ -82,7 +82,7 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setFlowchart(makeJsonFrontendCompatible(content));
+        template.setTermData(makeJsonFrontendCompatible(content));
         return template;
     }
 
