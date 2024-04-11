@@ -1,0 +1,9 @@
+import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
+
+
+rule "mapping for csc101"
+    when
+        courseMap: CourseMapping(startCourse=="CSC101")
+    then
+        courseMap.setMapping("CSC1001 CSC1002");
+    end

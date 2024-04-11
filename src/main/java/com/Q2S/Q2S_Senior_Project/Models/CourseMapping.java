@@ -9,9 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 public class CourseMapping {
+    private String startCourse;
     private String mapping;
-
-    public CourseMapping(String mapping) {
-        this.mapping = mapping;
-    }
 }
