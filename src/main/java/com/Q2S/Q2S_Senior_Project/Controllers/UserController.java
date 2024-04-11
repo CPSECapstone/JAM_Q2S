@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
-            ResponseEntity<User> loggedInUser = userService.findUserByEmail(user.getEmail());
+            ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
             if (loggedInUser != null) {
                 return ResponseEntity.ok(loggedInUser); // Return user data upon successful login
             } else {

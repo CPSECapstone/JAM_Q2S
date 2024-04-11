@@ -57,7 +57,7 @@ public class UserService {
 
     @Transactional
     public boolean authenticateUser(String email, String password) {
-        Optioanl<UserModel> user = userRepository.findByEmail(email);
+        Optional<UserModel> user = userRepository.findByEmail(email);
 
         // Check if the user exists and the password matches
         return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
@@ -78,7 +78,7 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseEntity<User> findUserByEmail(@PathVariable(value = "email") String email) {
+    public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
         Optional<UserModel> user = userRepository.findByEmail(email);
 
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
