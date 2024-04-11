@@ -1,0 +1,64 @@
+/* Login.css */
+
+.Login {
+    font-style: normal;
+    font-weight: 250;
+    font-size: .75em;
+    margin-top: 10%;
+    margin-left: 35%;
+
+    padding: 3%;
+}
+
+.Login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login label {
+    display:flex;
+}
+
+.Login input {
+    box-sizing: border-box;
+
+    width: 45%;
+
+    border: 0.1em solid #154734;
+    border-radius: 10em;
+
+    padding: 1.2%;
+}
+
+.Login button {
+    width: 45%;
+
+    background: #154734;
+    border-radius: 10em;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 160%;
+
+    color: #FFFFFF;
+
+    margin-bottom: 2%;
+}
+
+.Login link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 160%;
+
+    color: #FFFFFF;
+}
+
+.Login button:hover {
+    background-color: #0056b3;
+}
+
+.Login p {
+    margin-top: 1%;
+}
