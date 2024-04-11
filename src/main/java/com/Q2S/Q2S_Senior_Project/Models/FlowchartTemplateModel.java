@@ -10,7 +10,7 @@ import org.hibernate.type.SqlTypes;
 @Setter
 @Entity
 @Table(name = "2022-2026flowchartTemplate")
-public class FlowchartTemplate {
+public class FlowchartTemplateModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,0 +1,16 @@
+.term{
+    width:250px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+.title{
+    background-color: #DFD6C4;
+    display:flex;
+    justify-content: center;
+}
+.body{
+    border: solid #BD8B13;
+    height: 100%;
+    overflow-y: scroll;
+}
