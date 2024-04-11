@@ -14,17 +14,18 @@ const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     let getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        setAllFlowcharts(res.data)
-
+        // let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
+        // setAllFlowcharts(res.data)
     }
 
     let loadClassCache = async() => {
-        let res:AxiosResponse<QuarterClassData[]> = await axios.get("")
+        let res:AxiosResponse<QuarterClassData[]> = await axios.get("http://localhost:8080/getAllQuarterClasses");
+
+
     }
     useEffect(() => {
         getFlowcharts().catch(console.error);
-
+        loadClassCache().catch(console.error);
     }, []);
     return (
         <div className='Home'>

@@ -19,7 +19,7 @@ public class QuarterClassesController {
 
     private final QuarterClassRepo quarterClassRepo;
 
-    QuarterClassesController(QuarterClassRepo quarterClassRepo){
+    QuarterClassesController(QuarterClassRepo quarterClassRepo) {
         this.quarterClassRepo = quarterClassRepo;
     }
 
@@ -27,17 +27,22 @@ public class QuarterClassesController {
     List<QuarterClass> updateQuarterClasses() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("data/courses/2022-2026.json");
-        List<QuarterClass> quarterClassList = mapper.readValue(file, new TypeReference<>(){});
+        List<QuarterClass> quarterClassList = mapper.readValue(file, new TypeReference<>() {
+        });
         quarterClassRepo.saveAll(quarterClassList);
         return quarterClassList;
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/QuarterClass/{id}")
     QuarterClass getQuarterClassById(@PathVariable String id) {
         return quarterClassRepo.findById(id).orElse(null);
     }
 
-
-
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getAllQuarterClasses")
+    List<QuarterClass> getAllQuarterClasses() {
+        return quarterClassRepo.findAll();
+    }
 
 }
