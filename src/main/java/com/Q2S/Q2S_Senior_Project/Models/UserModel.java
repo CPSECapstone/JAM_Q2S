@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "user")
-public class User {
+public class UserModel {
 
     public enum AdmitType{
         FIRST_YEAR_FRESHMAN,
@@ -17,6 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="userId")
     private long id;
     private String user_name;
     private String first_name;
@@ -31,8 +32,8 @@ public class User {
     private String concentration;
     private String minor;
 
-    public User(){}
-    public User (long userId, String userName, String firstName, String lastName, String email, String password){
+    public UserModel(){}
+    public UserModel(long userId, String userName, String firstName, String lastName, String email, String password){
         this.id = userId;
         this.user_name = userName;
         this.first_name = firstName;
