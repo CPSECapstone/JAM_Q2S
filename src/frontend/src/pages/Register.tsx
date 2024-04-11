@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Register.css';
+import '../Components/CSS/Register.css';
 import axios from "axios";
 
 const Register: React.FC = () => {
