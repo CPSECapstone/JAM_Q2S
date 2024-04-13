@@ -1,6 +1,6 @@
 package com.Q2S.Q2S_Senior_Project;
 
-import com.Q2S.Q2S_Senior_Project.Models.User;
+import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,9 +35,9 @@ class UserServiceTest {
     void testAddUser() {
         when(userRepository.findByEmail(anyString())).thenReturn(null);
 
-        when(userRepository.save(any(User.class))).thenReturn(new User(1L, "testUser", "John", "Doe", "test@example.com", "hashedPassword"));
+        when(userRepository.save(any(UserModel.class))).thenReturn(new UserModel("testUser", "John", "Doe", "test@example.com", "hashedPassword"));
 
-        User user = new User(1L, "testUser", "John", "Doe", "test@example.com", "password");
+        UserModel user = new UserModel("testUser", "John", "Doe", "test@example.com", "password");
 
         boolean result = userService.addUser(user);
 
@@ -48,9 +48,9 @@ class UserServiceTest {
 
     @Test
     void testAddUserEmailTaken() {
-        when(userRepository.findByEmail(anyString())).thenReturn(new User());
+        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel());
 
-        User user = new User();
+        UserModel user = new UserModel();
         user.setEmail("test@example.com");
         user.setPassword("password");
 
@@ -58,7 +58,7 @@ class UserServiceTest {
 
         assertFalse(result, "User with the same email already exists");
         verify(userRepository, times(1)).findByEmail("test@example.com");
-        verify(userRepository, never()).save(any(User.class));
+        verify(userRepository, never()).save(any(UserModel.class));
     }
 
     @Test
@@ -66,7 +66,7 @@ class UserServiceTest {
         String password = "password";
         String hashedPassword = userService.hashPassword(password);
 
-        when(userRepository.findByEmail(anyString())).thenReturn(new User(1L, "testUser", "John", "Doe", "test@example.com", hashedPassword));
+        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel("testUser", "John", "Doe", "test@example.com", hashedPassword));
 
         boolean result = userService.authenticateUser("test@example.com", password);
 
@@ -76,7 +76,7 @@ class UserServiceTest {
 
     @Test
     void testAuthenticateUserInvalidPassword() {
-        when(userRepository.findByEmail(anyString())).thenReturn(new User(1L, "testUser", "John", "Doe", "test@example.com", "differentHashedPassword"));
+        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel("testUser", "John", "Doe", "test@example.com", "differentHashedPassword"));
 
         boolean result = userService.authenticateUser("test@example.com", "password");
 
@@ -87,7 +87,7 @@ class UserServiceTest {
     @Test
     void testFindUserById() {
         long userId = 1L;
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new User()));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(new UserModel()));
 
         var result = userService.findUserById(userId);
 

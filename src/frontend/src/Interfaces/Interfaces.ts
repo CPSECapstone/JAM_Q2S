@@ -47,7 +47,7 @@ export interface FlowchartResponse {
     id: number;
     major: string;
     catalog: string;
-    flowchart: string;
+    termData: string;
     concentration: string;
     favorite: boolean;
     main: boolean;

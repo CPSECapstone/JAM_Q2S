@@ -1,6 +1,7 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-import com.Q2S.Q2S_Senior_Project.Models.User;
+
+import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody User user) {
+    public ResponseEntity<String> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
             return ResponseEntity.ok("User registered successfully");
         } else {
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
+    public ResponseEntity<String> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
             return ResponseEntity.ok("Login successful");
         } else {
@@ -36,12 +37,13 @@ public class UserController {
     }
 
     @GetMapping("/allUsers")
-    public List<User> findAllUsers() {
+    public List<UserModel> findAllUsers() {
         return userService.findAllUsers();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         return userService.findUserById(id);
     }
 }

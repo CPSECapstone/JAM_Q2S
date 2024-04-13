@@ -4,7 +4,7 @@ import {FlowchartContext} from '../Context/FlowchartProvider';
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
 import axios, {AxiosResponse} from "axios";
-import {FlowchartResponse, QuarterClassData} from "../Interfaces/Interfaces";
+import {ClassDBClass, FlowchartResponse, QuarterClassData} from "../Interfaces/Interfaces";
 import {SideBar} from "../Components/TSX/SideBar";
 
 const Home = () => {
@@ -12,17 +12,19 @@ const Home = () => {
     const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
     const {flowchart} = useContext(FlowchartContext);
     const [loading, setLoading] = useState<boolean>(true);
-
+    const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({})
     let getFlowcharts = async () => {
         let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        console.log(res)
-        setAllFlowcharts(res.data)
+
     }
 
-    let loadClassCache = async() => {
-        let res:AxiosResponse<QuarterClassData[]> = await axios.get("http://localhost:8080/getAllQuarterClasses");
-
-
+    let loadClassCache = async () => {
+        let tempCache = {}
+        let quarterClassesResponse: AxiosResponse<QuarterClassData[]> = await axios.get("http://localhost:8080/getAllQuarterClasses");
+        quarterClassesResponse.data.forEach((quarterClass: QuarterClassData) => {
+            quarterClassCache[quarterClass.id] = quarterClass
+        })
+        setQuarterClassCache(tempCache);
     }
     useEffect(() => {
         getFlowcharts().catch(console.error);
@@ -31,24 +33,24 @@ const Home = () => {
     return (
         <div className='Home'>
             <div className='sideBar'>
-                <SideBar allFlowcharts={allFlowchartData} setLoading={setLoading}
-                         setAllFlowcharts={setAllFlowcharts}></SideBar>
+                {/*<SideBar allFlowcharts={allFlowchartData} setLoading={setLoading}*/}
+                {/*         setAllFlowcharts={setAllFlowcharts}></SideBar>*/}
             </div>
             <div className='topBar'>
                 <TopBar></TopBar>
             </div>
             <div className='grid'>
-                {flowchart ? (
-                    <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
-                ) : (
-                    <div className='noFlowchartMessage'>
-                        <p>No flowchart selected, please select or create a flowchart</p>
-                    </div>
-                )}
+                {/*{flowchart ? (*/}
+                {/*    <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>*/}
+                {/*) : (*/}
+                {/*    <div className='noFlowchartMessage'>*/}
+                {/*        <p>No flowchart selected, please select or create a flowchart</p>*/}
+                {/*    </div>*/}
+                {/*)}*/}
             </div>
-            <div className="totalUnits">
-                Total Units: {totalUnits}
-            </div>
+            {/*<div className="totalUnits">*/}
+            {/*    Total Units: {totalUnits}*/}
+            {/*</div>*/}
         </div>
     )
 }

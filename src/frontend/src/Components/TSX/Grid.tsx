@@ -151,7 +151,7 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
 
     useEffect((): void => {
         if (flowchart && flowchart.termData.length > 0) {
-            fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
+            //fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
         }
     }, [flowchart]);
 
@@ -163,23 +163,24 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
             )}
             <DragDropContext onDragEnd={onDragEnd}
                              onDragStart={() => setClicked(false)}>
-                {loading ? (
-                    <Loader/>
-                ) : (
-                    flowchart && (
-                        flowchart.termData.slice(1).map((term: TermData) => {
-                            const classes: ClassDBClass[] =
-                                term.courses.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.uuid]);
-                            return (
-                                <div className='term' key={term.tIndex}>
-                                    <Term year={term.tIndex.toString()} classList={classes}
-                                          totalUnits={Number(term.tUnits) || 0}
-                                          id={term.tIndex.toString()} handleRightClick={handleRightClick}/>
-                                </div>
-                            );
-                        })
-                    )
-                )}
+                <Loader/>
+                {/*{loading ? (*/}
+                {/*    <Loader/>*/}
+                {/*) : (*/}
+                {/*    flowchart && (*/}
+                {/*        flowchart.termData.slice(1).map((term: TermData) => {*/}
+                {/*            const classes: ClassDBClass[] =*/}
+                {/*                term.courses.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.uuid]);*/}
+                {/*            return (*/}
+                {/*                <div className='term' key={term.tIndex}>*/}
+                {/*                    <Term year={term.tIndex.toString()} classList={classes}*/}
+                {/*                          totalUnits={Number(term.tUnits) || 0}*/}
+                {/*                          id={term.tIndex.toString()} handleRightClick={handleRightClick}/>*/}
+                {/*                </div>*/}
+                {/*            );*/}
+                {/*        })*/}
+                {/*    )*/}
+                {/*)}*/}
             </DragDropContext>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Register.css';
+import '../Components/CSS/Register.css';
 import axios from "axios";
 
 const Register: React.FC = () => {
@@ -14,9 +14,9 @@ const Register: React.FC = () => {
         event.preventDefault();
         try {
             const response = await axios.post('/api/user/register', {
-                username: username,
-                firstname: firstname,
-                lastname: lastname,
+                user_name: username,
+                first_name: firstname,
+                last_name: lastname,
                 email: email,
                 password: password,
             });

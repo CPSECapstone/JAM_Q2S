@@ -48,17 +48,18 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
         return allFlowcharts
             .filter(filterCondition)
             .map((current: FlowchartResponse) => {
-                const flowchartData: FlowchartData = JSON.parse(current.flowchart);
+                const flowchartData: FlowchartData = JSON.parse(current.termData);
                 return (
-                    <SideBarItem
-                        key={flowchartData.id}
-                        handleSelectedClick={handleSelectedClick}
-                        handleMainClick={handleMainClick}
-                        responseData={current}
-                        handleFavoriteClick={handleFavoriteClick}
-                        data={flowchartData}
-                        selected={selected === flowchartData.name}
-                    />
+                    <p>Flowchart</p>
+                    // <SideBarItem
+                    //     key={flowchartData.id}
+                    //     handleSelectedClick={handleSelectedClick}
+                    //     handleMainClick={handleMainClick}
+                    //     responseData={current}
+                    //     handleFavoriteClick={handleFavoriteClick}
+                    //     data={flowchartData}
+                    //     selected={selected === flowchartData.name}
+                    // />
                 );
             });
     };
@@ -83,7 +84,7 @@ export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideB
                         </IconButton>
                     </Tooltip>
                 </div>
-                {renderFlowchartItems((current: FlowchartResponse) => true)}
+                {renderFlowchartItems(() => true)}
             </div>
         </div>
     );
