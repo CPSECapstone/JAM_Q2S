@@ -1,13 +1,23 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
+import com.Q2S.Q2S_Senior_Project.Models.UserFlowchartModel;
+import com.Q2S.Q2S_Senior_Project.Repositories.UserFlowchartRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
 
+@Service
+@RestController
 public class UserFlowchartController {
 
     private static final int SEMESTER_TRANSITION_YEAR = 2026;
@@ -24,6 +34,19 @@ public class UserFlowchartController {
         Summer,
         Fall,
         Winter
+    }
+
+    @Autowired
+    private UserFlowchartRepo userFlowchartRepo;
+
+    @GetMapping("/api/UserFlowcharts")
+    List<UserFlowchartModel> getAllFlowcharts(){
+        return userFlowchartRepo.findAll();
+    }
+
+    @GetMapping("/api/UserFlowcharts/{userId}")
+    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
+        return userFlowchartRepo.findByUserIdId(userId);
     }
 
     /**
@@ -74,9 +97,7 @@ public class UserFlowchartController {
             termSeasonIterator++;
         }
 
-        String updatedJsonString = mapper.writeValueAsString(rootNode);
-        System.out.println(updatedJsonString);
-        return updatedJsonString;
+        return "{\"termData\":" + mapper.writeValueAsString(terms) + "}";
     }
 
     static boolean isQuarterTerm(TermSeason season, int year){

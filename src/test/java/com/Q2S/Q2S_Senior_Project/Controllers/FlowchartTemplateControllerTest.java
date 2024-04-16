@@ -1,7 +1,7 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplate;
-import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateData;
+import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateModel;
+import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateDataModel;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,20 +25,20 @@ class FlowchartTemplateControllerTest {
     @Test
     void testGetFlowchartTemplate_ValidMatch() throws IOException {
         File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
-        FlowchartTemplateData CS_Data = new FlowchartTemplateData();
+        FlowchartTemplateDataModel CS_Data = new FlowchartTemplateDataModel();
         CS_Data.setCatalog("Catalog");
         CS_Data.setCode("Test Code");
         CS_Data.setConcName("Example Concentration");
         CS_Data.setMajorName("Major");
-        List<FlowchartTemplateData> flowDataList = new ArrayList<>(List.of(CS_Data));
-        FlowchartTemplate testData = FlowchartTemplateController.getFlowchartTemplate(CS_GeneralFlowchartFile, flowDataList);
+        List<FlowchartTemplateDataModel> flowDataList = new ArrayList<>(List.of(CS_Data));
+        FlowchartTemplateModel testData = FlowchartTemplateController.getFlowchartTemplate(CS_GeneralFlowchartFile, flowDataList);
         assertEquals("Catalog", testData.getCatalog());
         assertEquals("Major", testData.getMajor());
         assertEquals("Example Concentration", testData.getConcentration());
         String fileContent = new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath()));
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode expectedJson = mapper.readTree(fileContent);
-        JsonNode actualJson = mapper.readTree(testData.getFlowchart());
+        JsonNode expectedJson = mapper.readTree(fileContent).get("termData");
+        JsonNode actualJson = mapper.readTree(testData.getTermData()).get("termData");
         assertEquals(expectedJson, actualJson);
     }
 
@@ -49,7 +49,7 @@ class FlowchartTemplateControllerTest {
     @Test
     void testGetFlowchartTemplate_InvalidMatch() throws IOException {
         File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
-        List<FlowchartTemplateData> flowDataList = new ArrayList<>();
+        List<FlowchartTemplateDataModel> flowDataList = new ArrayList<>();
         Exception exception = assertThrows(IOException.class, () -> {
             FlowchartTemplateController.getFlowchartTemplate(CS_GeneralFlowchartFile, flowDataList);
         });
@@ -67,11 +67,11 @@ class FlowchartTemplateControllerTest {
     @Test
     void testGetFlowchartTemplate_ConflictingMatch() throws IOException {
         File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
-        FlowchartTemplateData data1 = new FlowchartTemplateData();
+        FlowchartTemplateDataModel data1 = new FlowchartTemplateDataModel();
         data1.setCode("Test Code");
-        FlowchartTemplateData data2_conflicting = new FlowchartTemplateData();
+        FlowchartTemplateDataModel data2_conflicting = new FlowchartTemplateDataModel();
         data2_conflicting.setCode("Test Code");
-        List<FlowchartTemplateData> flowDataList = new ArrayList<>(List.of(data1, data2_conflicting));
+        List<FlowchartTemplateDataModel> flowDataList = new ArrayList<>(List.of(data1, data2_conflicting));
         Exception exception = assertThrows(IOException.class, () -> {
             FlowchartTemplateController.getFlowchartTemplate(CS_GeneralFlowchartFile, flowDataList);
         });

@@ -14,8 +14,8 @@ const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     let getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        setAllFlowcharts(res.data)
+        //let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
+        //setAllFlowcharts(res.data)
 
     }
     useEffect(() => {

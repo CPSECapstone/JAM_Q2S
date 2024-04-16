@@ -1,6 +1,6 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
+import com.Q2S.Q2S_Senior_Project.Models.QuarterClassModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.QuarterClassRepo;
 import com.Q2S.Q2S_Senior_Project.Services.CourseMappingService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,16 +21,16 @@ public class QuarterClassesController {
     }
 
     @PostMapping("/updateQuarterClasses")
-    List<QuarterClass> updateQuarterClasses() throws IOException {
+    List<QuarterClassModel> updateQuarterClasses() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("data/courses/2022-2026.json");
-        List<QuarterClass> quarterClassList = mapper.readValue(file, new TypeReference<>(){});
+        List<QuarterClassModel> quarterClassList = mapper.readValue(file, new TypeReference<>(){});
         quarterClassRepo.saveAll(quarterClassList);
         return quarterClassList;
     }
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/QuarterClass/{id}")
-    QuarterClass getQuarterClassById(@PathVariable String id) {
+    QuarterClassModel getQuarterClassById(@PathVariable String id) {
         return quarterClassRepo.findById(id).orElse(null);
     }
 
