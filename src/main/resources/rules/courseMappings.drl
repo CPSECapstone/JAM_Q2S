@@ -1,101 +1,102 @@
 package rules
 import com.Q2S.Q2S_Senior_Project.Models.CourseMapping
-import java.util.Arrays;
+import java.util.Arrays
+import java.util.List;
 
 rule "Mapping for CSC101"
 	when
-		productObject: CourseMapping(startCourse=="CSC101")
+		courseMapping: CourseMapping(startCourse=="CSC101")
 	then
-		productObject.setMapping(Arrays.asList("CSC1001", "CSC1002"));
+		courseMapping.setMapping(Arrays.asList("CSC1001", "CSC1002"));
 	end
 
 rule "Mapping for CSC202"
 	when
-		productObject: CourseMapping(startCourse=="CSC202")
+		courseMapping: CourseMapping(startCourse=="CSC202")
 	then
-		productObject.setMapping(Arrays.asList("CSC2001", "CSC2002"));
+		courseMapping.setMapping(Arrays.asList("CSC2001", "CSC2002"));
 	end
 
 rule "Mapping for CSC123"
 	when
-		productObject: CourseMapping(startCourse=="CSC123")
+		courseMapping: CourseMapping(startCourse=="CSC123")
 	then
-		productObject.setMapping(Arrays.asList("CSC1000", "CSC1024"));
+		courseMapping.setMapping(Arrays.asList("CSC1000", "CSC1024"));
 	end
 
 rule "Mapping for CSC203"
 	when
-		productObject: CourseMapping(startCourse=="CSC203")
+		courseMapping: CourseMapping(startCourse=="CSC203")
 	then
-		productObject.setMapping(Arrays.asList("CSC1002", "CSC2002"));
+		courseMapping.setMapping(Arrays.asList("CSC1002", "CSC2002"));
 	end
 
 rule "Mapping for CSC/CPE357"
 	when
-		productObject: CourseMapping(startCourse=="CSC357" || startCourse=="CPE357")
+		courseMapping: CourseMapping(startCourse=="CSC357" || startCourse=="CPE357")
 	then
-		productObject.setMapping(Arrays.asList("CSC2050"));
+		courseMapping.setMapping(List.of("CSC2050"));
 	end
 
 rule "Mapping for CSC225"
 	when
-		productObject: CourseMapping(startCourse=="CSC225")
+		courseMapping: CourseMapping(startCourse=="CSC225")
 	then
-		productObject.setMapping(Arrays.asList("CPE2300"));
+		courseMapping.setMapping(List.of("CPE2300"));
 	end
 
 rule "Mapping for CSC307"
 	when
-		productObject: CourseMapping(startCourse=="CSC307")
+		courseMapping: CourseMapping(startCourse=="CSC307")
 	then
-		productObject.setMapping(Arrays.asList("CSC3100"));
+		courseMapping.setMapping(List.of("CSC3100"));
 	end
 
 rule "Mapping for CSC430"
 	when
-		productObject: CourseMapping(startCourse=="CSC430")
+		courseMapping: CourseMapping(startCourse=="CSC430")
 	then
-		productObject.setMapping(Arrays.asList("CSC3300"));
+		courseMapping.setMapping(List.of("CSC3300"));
 	end
 
 rule "Mapping for CSC349"
 	when
-		productObject: CourseMapping(startCourse=="CSC349")
+		courseMapping: CourseMapping(startCourse=="CSC349")
 	then
-		productObject.setMapping(Arrays.asList("CSC3449"));
+		courseMapping.setMapping(List.of("CSC3449"));
 	end
 
 rule "Mapping for CSC453"
 	when
-		productObject: CourseMapping(startCourse=="CSC453")
+		courseMapping: CourseMapping(startCourse=="CSC453")
 	then
-		productObject.setMapping(Arrays.asList("CSC4553"));
+		courseMapping.setMapping(List.of("CSC4553"));
 	end
 
 rule "Mapping for CSC365"
 	when
-		productObject: CourseMapping(startCourse=="CSC365")
+		courseMapping: CourseMapping(startCourse=="CSC365")
 	then
-		productObject.setMapping(Arrays.asList("CSC3665"));
+		courseMapping.setMapping(List.of("CSC3665"));
 	end
 
 rule "Mapping for CSC445"
 	when
-		productObject: CourseMapping(startCourse=="CSC445")
+		courseMapping: CourseMapping(startCourse=="CSC445")
 	then
-		productObject.setMapping(Arrays.asList("CSC3445"));
+		courseMapping.setMapping(List.of("CSC3445"));
 	end
 
 rule "Mapping for CSC308 or CSC309"
 	when
-		productObject: CourseMapping(startCourse=="CSC308" || startCourse=="CSC309")
+		courseMapping: CourseMapping(startCourse=="CSC308" || startCourse=="CSC309")
 	then
-		productObject.setMapping(Arrays.asList("CSC3100"));
+		courseMapping.setMapping(List.of("CSC3100"));
 	end
 
 rule "Mapping for CSC321 or CSC323 or CSC325"
 	when
-		productObject: CourseMapping(startCourse=="CSC321" || startCourse=="CSC323" || startCourse=="CSC325")
+		courseMapping: CourseMapping(startCourse=="CSC321" || startCourse=="CSC323" || startCourse=="CSC325")
 	then
-		productObject.setMapping(Arrays.asList("CSC3201"));
+		courseMapping.setMapping(List.of("CSC3201"));
 	end
