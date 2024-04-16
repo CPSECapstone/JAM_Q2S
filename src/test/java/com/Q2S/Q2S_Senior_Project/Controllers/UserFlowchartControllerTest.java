@@ -137,8 +137,7 @@ class UserFlowchartControllerTest {
                 "Spring 2026",
                 new String(Files.readAllBytes(testJSONFile.toPath())));
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(resultingFlowchart);
-        JsonNode terms = jsonNode.get("termData");
+        JsonNode terms = objectMapper.readTree(resultingFlowchart);
         if (terms.isArray()){
             for (int i = 0; i < terms.size(); i++){
                 JsonNode term = terms.get(i);
@@ -175,8 +174,7 @@ class UserFlowchartControllerTest {
                 "Summer 2026",
                 new String(Files.readAllBytes(testJSONFile.toPath())));
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(resultingFlowchart);
-        JsonNode terms = jsonNode.get("termData");
+        JsonNode terms = objectMapper.readTree(resultingFlowchart);
         if (terms.isArray()){
             for (int i = 0; i < terms.size(); i++){
                 JsonNode term = terms.get(i);
@@ -213,8 +211,7 @@ class UserFlowchartControllerTest {
                 "Fall 2026",
                 new String(Files.readAllBytes(testJSONFile.toPath())));
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(resultingFlowchart);
-        JsonNode terms = jsonNode.get("termData");
+        JsonNode terms = objectMapper.readTree(resultingFlowchart);
         if (terms.isArray()){
             for (int i = 0; i < terms.size(); i++){
                 JsonNode term = terms.get(i);
@@ -251,8 +248,7 @@ class UserFlowchartControllerTest {
                 "Winter 2025",
                 new String(Files.readAllBytes(testJSONFile.toPath())));
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(resultingFlowchart);
-        JsonNode terms = jsonNode.get("termData");
+        JsonNode terms = objectMapper.readTree(resultingFlowchart);
         if (terms.isArray()){
             for (int i = 0; i < terms.size(); i++){
                 JsonNode term = terms.get(i);
