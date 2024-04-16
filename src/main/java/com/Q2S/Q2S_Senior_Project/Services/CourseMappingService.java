@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
-import com.Q2S.Q2S_Senior_Project.Models.RulesClass;
 
 
 @Service
