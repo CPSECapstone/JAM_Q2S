@@ -7,21 +7,22 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "UserFlowcharts")
 public class UserFlowchartModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
-    private long userId;
+    private UserModel userId;
     private String catalogYear;
     private String Major;
     private String Concentration;
-    private String isMain;
-    private String isFavorite;
-    @ManyToOne
+    private boolean isMain;
+    private boolean isFavorite;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userFlowchartId")
-    private long termDataId;
+    private UserTermDataModel termDataId;
 }
