@@ -1,38 +1,35 @@
 import java.util.List;
 import java.util.Arrays;
+import com.Q2S.Q2S_Senior_Project.Models.Requirement;
 
-import com.Q2S.Q2S_Senior_Project.Models.QuarterClass;
-import java.util.List;
-global Boolean requirementMet;
-
+rule "CSC101 Requirement"
+when
+    req: Requirement(courses != null)
+then
+    req.setMet(req.getCourses().contains("CSC101"));
+end
 
 rule "Life Science Elective"
 when
-    $classes: List() // list contains class codes
-    eval(
-        ($classes.contains("BIO111") ||
-        $classes.contains("BIO161") ||
-        $classes.contains("BOT121") ||
-        $classes.contains("MCRO221") ||
-        $classes.contains("MCRO224")) ||
-        ($classes.contains("BIO213") && $classes.contains("BMED213"))
-    )
+    req: Requirement(courses != null)
 then
-    insert(Boolean.TRUE); //might need a class later to show WHICH requirement not met
+    req.setMet(req.getCourses().contains("BIO111") ||
+                req.getCourses().contains("BIO161") ||
+                req.getCourses().contains("BOT121") ||
+                req.getCourses().contains("MCRO221") ||
+                req.getCourses().contains("MCRO224") ||
+                (req.getCourses().contains("BIO213") && req.getCourses().contains("BMED213")));
 end
 
 rule "Math Elective"
 when
-    $classes: List()
-    eval(
-            $classes.contains("MATH248") ||
-            $classes.contains("MATH304") ||
-            $classes.contains("MATH335") ||
-            $classes.contains("MATH336") ||
-            $classes.contains("MATH451")
-        )
+    req: Requirement(courses != null)
 then
-    insert(Boolean.TRUE);
+    req.setMet(req.getCourses().contains("MATH248") ||
+                    req.getCourses().contains("MATH304") ||
+                    req.getCourses().contains("MATH335") ||
+                    req.getCourses().contains("MATH336") ||
+                    req.getCourses().contains("MATH451"));
 end
 
 

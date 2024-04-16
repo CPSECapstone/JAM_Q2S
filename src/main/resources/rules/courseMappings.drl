@@ -1,6 +1,6 @@
 package rules
-import com.Q2S.Q2S_Senior_Project.Models.CourseMapping
-import java.util.Arrays
+import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
+import java.util.Arrays;
 import java.util.List;
 
 rule "Mapping for CSC101"
