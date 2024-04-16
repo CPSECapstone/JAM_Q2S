@@ -16,7 +16,7 @@ public class CourseMappingService {
     @Autowired
     public CourseMappingService(KieContainer kieContainer){this.kieContainer = kieContainer;}
 
-    public CourseMapping getCourseMapping(CourseMapping courseMapping) {
+    public CourseMapping mappingService(CourseMapping courseMapping) {
         KieBase kBase = kieContainer.getKieBase("rules");
         KieSession kieSession = kBase.newKieSession();
         kieSession.insert(courseMapping);

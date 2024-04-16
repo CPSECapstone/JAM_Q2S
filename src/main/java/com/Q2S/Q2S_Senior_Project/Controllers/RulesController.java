@@ -15,13 +15,13 @@ public class RulesController {
         this.courseMappingService = courseMappingService;
     }
 
-    @RequestMapping(value = "/getMapping", method = RequestMethod.GET, produces = "application/json")
-    public CourseMapping getQuestions(@RequestParam(required = true) String courseID) {
+    @RequestMapping(value = "/getCourseMapping", method = RequestMethod.GET, produces = "application/json")
+    public CourseMapping getCourseMapping(@RequestParam(required = true) String courseID) {
 
         CourseMapping courseMapping = new CourseMapping();
         courseMapping.setStartCourse(courseID);
 
-        courseMappingService.getCourseMapping(courseMapping);
+        courseMappingService.mappingService(courseMapping);
 
         return courseMapping;
     }

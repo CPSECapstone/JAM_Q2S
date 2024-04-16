@@ -43,3 +43,59 @@ rule "Mapping for CSC225"
 	then
 		productObject.setMapping(Arrays.asList("CPE2300"));
 	end
+
+rule "Mapping for CSC307"
+	when
+		productObject: CourseMapping(startCourse=="CSC307")
+	then
+		productObject.setMapping(Arrays.asList("CSC3100"));
+	end
+
+rule "Mapping for CSC430"
+	when
+		productObject: CourseMapping(startCourse=="CSC430")
+	then
+		productObject.setMapping(Arrays.asList("CSC3300"));
+	end
+
+rule "Mapping for CSC349"
+	when
+		productObject: CourseMapping(startCourse=="CSC349")
+	then
+		productObject.setMapping(Arrays.asList("CSC3449"));
+	end
+
+rule "Mapping for CSC453"
+	when
+		productObject: CourseMapping(startCourse=="CSC453")
+	then
+		productObject.setMapping(Arrays.asList("CSC4553"));
+	end
+
+rule "Mapping for CSC365"
+	when
+		productObject: CourseMapping(startCourse=="CSC365")
+	then
+		productObject.setMapping(Arrays.asList("CSC3665"));
+	end
+
+rule "Mapping for CSC445"
+	when
+		productObject: CourseMapping(startCourse=="CSC445")
+	then
+		productObject.setMapping(Arrays.asList("CSC3445"));
+	end
+
+rule "Mapping for CSC308 or CSC309"
+	when
+		productObject: CourseMapping(startCourse=="CSC308" || startCourse=="CSC309")
+	then
+		productObject.setMapping(Arrays.asList("CSC3100"));
+	end
+
+rule "Mapping for CSC321 or CSC323 or CSC325"
+	when
+		productObject: CourseMapping(startCourse=="CSC321" || startCourse=="CSC323" || startCourse=="CSC325")
+	then
+		productObject.setMapping(Arrays.asList("CSC3201"));
+	end
