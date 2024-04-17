@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import {User} from "../Interfaces/Interfaces";
 
-
 interface AuthContext {
     user: User | null;
     setUser: (user: User | null) => void;

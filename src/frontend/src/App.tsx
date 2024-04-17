@@ -8,7 +8,7 @@ import { AuthContext } from "./Context/AuthContext";
 import { useAuth } from "./Hooks/useAuth";
 
 function App() {
-    const { user, login, logout, setUser } = useAuth();
+    const { user, setUser } = useAuth();
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

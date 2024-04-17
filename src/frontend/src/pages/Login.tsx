@@ -11,7 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const { login } = useAuth();
+    const { login, getUser } = useAuth();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -20,10 +20,20 @@ const Login = () => {
                 email: email,
                 password: password,
             });
-            // login({
-            //
-            // })
-            console.log(response);
+            login({
+                user_name: "test.user",
+                id: "1",
+                first_name: "Test",
+                last_name: "Tester",
+                email: "test@example.com",
+                term_admitted: "Fall 2022",
+                admit_type: "Freshman",
+                catalog_year: "2022-2026",
+                major: "SE",
+                concentration: "",
+                minor: ""
+            })
+            // console.log(response);
             window.location.href = '/home';
 
         } catch (error) {
