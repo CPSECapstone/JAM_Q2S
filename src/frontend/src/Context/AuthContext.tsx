@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {ReactNode, useState} from "react";
 import {User} from "../Interfaces/Interfaces";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
 

@@ -16,10 +16,10 @@ const Login = () => {
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            // const response = await axios.post('/api/user/login', {
-            //     email: email,
-            //     password: password,
-            // });
+            const response = await axios.post('/api/user/login', {
+                email: email,
+                password: password,
+            });
             setUser({
                 user_name: "test.user",
                 id: "1",
@@ -33,7 +33,7 @@ const Login = () => {
                 concentration: "",
                 minor: ""
             });
-            // console.log(response);
+            console.log(response);
             window.location.href = '/home';
         } catch (error) {
             console.error('Error logging in user:', error);
