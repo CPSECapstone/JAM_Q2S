@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
-import { useAuth } from '../../Hooks/useAuth';
-import {useLocalStorage} from "../../Hooks/useLocalStorage";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,18 +11,12 @@ import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Paper from "@mui/material/Paper";
-import {User} from "../../Interfaces/Interfaces";
+import {AuthContext} from "../../Context/AuthContext";
 
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const { getItem } = useLocalStorage();
-    const [user] = useState<User | null>(() => {
-        const userFromStorage = getItem("user");
-        if (userFromStorage) {
-            return JSON.parse(userFromStorage);
-        }
-    });
+    const { user } = useContext(AuthContext);
 
     const handleClick = () => {
         setIsMenuOpen(prevState => !prevState);
@@ -57,7 +49,7 @@ function UserMenu(): JSX.Element {
                 fontSize: 35,
                 color: "white",
             }} />
-            <p className="userName">{user?.first_name}{user?.last_name}</p>
+            <p className="userName">{user?.first_name} {user?.last_name}</p>
             {isMenuOpen && (
                 <ContextMenu ref={menuRef} onClose={handleCloseMenu} />
             )}
@@ -71,14 +63,8 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
-        const { logout } = useAuth();
-        const { getItem } = useLocalStorage();
-        const [user] = useState<User | null>(() => {
-            const userFromStorage = getItem("user");
-            if (userFromStorage) {
-                return JSON.parse(userFromStorage);
-            }
-        });
+        const { user, setUser } = useContext(AuthContext);
+
         return (
             <StyledContextMenu $top={65} $left={20}>
                 <Paper sx={{width: 320, maxWidth: '100%'}}>
@@ -100,7 +86,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                             <ListItemIcon>
                                 <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/" onClick={logout}>Logout</Link>
+                            <Link style={{ color: 'red' }} to="/">Logout</Link>
                         </MenuItem>
                     </MenuList>
                 </Paper>

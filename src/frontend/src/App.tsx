@@ -4,14 +4,12 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthContext } from "./Context/AuthContext";
-import { useAuth } from "./Hooks/useAuth";
+import { UserAuthProvider } from "./Context/AuthContext";
+
 
 function App() {
-    const { user, setUser } = useAuth();
-
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <UserAuthProvider>
             <div className='App'>
                 <Routes>
                     <Route path='/' element={<Login />} />
@@ -19,7 +17,7 @@ function App() {
                     <Route path='/home' element={<Home />} />
                 </Routes>
             </div>
-        </AuthContext.Provider>
+        </UserAuthProvider>
     );
 }
 

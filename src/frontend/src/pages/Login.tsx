@@ -1,26 +1,26 @@
 import {
     Grid,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, Link as RouterLink} from "react-router-dom";
 import axios from "axios";
 import '../Components/CSS/Login.css';
-import { useAuth } from '../Hooks/useAuth';
+import {AuthContext} from "../Context/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const { login } = useAuth();
+    const {user, setUser} = useContext(AuthContext);
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api/user/login', {
-                email: email,
-                password: password,
-            });
-            login({
+            // const response = await axios.post('/api/user/login', {
+            //     email: email,
+            //     password: password,
+            // });
+            setUser({
                 user_name: "test.user",
                 id: "1",
                 first_name: "Test",
@@ -32,14 +32,17 @@ const Login = () => {
                 major: "SE",
                 concentration: "",
                 minor: ""
-            })
+            });
             // console.log(response);
             window.location.href = '/home';
-
         } catch (error) {
             console.error('Error logging in user:', error);
         }
     };
+
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
 
     return (
         <div className='Login'>
