@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import {createContext, useContext} from "react";
 import {User} from "../Interfaces/Interfaces";
 
 interface AuthContext {
@@ -10,3 +10,7 @@ export const AuthContext = createContext<AuthContext>({
     user: null,
     setUser: () => {},
 });
+
+export const useAuthContext = () => {
+    return useContext(AuthContext);
+};

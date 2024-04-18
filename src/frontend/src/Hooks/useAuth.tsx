@@ -20,16 +20,9 @@ export const useAuth = () => {
         addUser(user);
     };
 
-    const getUser = () => {
-        const user1 = getItem("user");
-        if (user1) {
-            addUser(JSON.parse(user1));
-        }
-    }
-
     const logout = () => {
         removeUser();
     };
 
-    return { user, login, logout, getUser, setUser };
+    return { user, login, logout, setUser };
 };
