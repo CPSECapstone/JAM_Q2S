@@ -6,9 +6,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import {PublicClientApplication} from "@azure/msal-browser";
 import { MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate } from '@azure/msal-react';
-import {loginRequest} from "./authConfig";
-import { Container, Button } from 'react-bootstrap';
-import {IdTokenData} from "./Components/JSX/DataDisplay";
 
 interface AppProps {
     instance: PublicClientApplication;
@@ -25,17 +22,17 @@ const MainContent = () => {
 
     return (
         <div className="App">
-            <AuthenticatedTemplate>
-                {activeAccount ? (
-                    <Route path='/home' element={<Home/>}/>
-                ) : null}
-            </AuthenticatedTemplate>
             <UnauthenticatedTemplate>
                 <Routes>
                     <Route path='/' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
                 </Routes>
             </UnauthenticatedTemplate>
+            <AuthenticatedTemplate>
+                <Routes>
+                    <Route path='/home' element={<Home/>}/>
+                </Routes>
+            </AuthenticatedTemplate>
         </div>
     );
 };

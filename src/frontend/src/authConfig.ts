@@ -13,10 +13,10 @@ import { LogLevel } from '@azure/msal-browser';
 
 export const msalConfig = {
     auth: {
-        clientId: '9a71ceac-f758-4395-a9f5-eb11e2d5a34c', // This is the ONLY mandatory field that you need to supply.
+        clientId: 'e55e28cf-2866-436a-b380-5384a9db98ba', // This is the ONLY mandatory field that you need to supply.
         authority: 'https://login.microsoftonline.com/common',
-        redirectUri: '/', // Points to window.location.origin. You must register this URI on Azure Portal/App Registration.
-        postLogoutRedirectUri: '/home', // Indicates the page to navigate after logout.
+        redirectUri: '/home', // Points to window.location.origin. You must register this URI on Azure Portal/App Registration.
+        postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
         navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {

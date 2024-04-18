@@ -4,11 +4,11 @@ import {
 import React, { useState } from "react";
 import {Link, Link as RouterLink} from "react-router-dom";
 import axios from "axios";
-import {UnauthenticatedTemplate, useMsal} from "@azure/msal-react";
 import {loginRequest} from "../authConfig";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import '../Components/CSS/Login.css';
+import { useMsal } from '@azure/msal-react';
 
 const Login = () => {
     const { instance } = useMsal();
