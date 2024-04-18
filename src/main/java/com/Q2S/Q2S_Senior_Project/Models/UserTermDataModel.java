@@ -15,7 +15,7 @@ import org.hibernate.type.SqlTypes;
 @Table(name="UserTermData")
 public class UserTermDataModel {
     @Id
-    @Column(name = "userFlowchartId")
+    @Column(name = "userTermDataId")
     private long id;
     @JdbcTypeCode(SqlTypes.JSON)
     private String termData;
