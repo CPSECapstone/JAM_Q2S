@@ -5,14 +5,14 @@ import java.util.List;
 public class Requirement {
     private String courses;
     private boolean met;
-    private String which;
+    private String name;
 
-    public String getWhich() {
-        return which;
+    public String getName() {
+        return name;
     }
 
-    public void setWhich(String which) {
-        this.which = which;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isMet() {
