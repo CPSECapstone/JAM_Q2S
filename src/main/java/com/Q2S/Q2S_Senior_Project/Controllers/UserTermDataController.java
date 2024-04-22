@@ -21,11 +21,13 @@ public class UserTermDataController {
         return userTermDataRepo.save(flowchartTemplate);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/UserTermData/{id}")
     UserTermDataModel getFlowchartTemplateById(@PathVariable long id) {
         return userTermDataRepo.findById(id).orElse(null);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/UserTermData")
     List<UserTermDataModel> getAllUserTermData() {
         return userTermDataRepo.findAll();
