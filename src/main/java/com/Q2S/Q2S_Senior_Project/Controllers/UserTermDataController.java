@@ -17,13 +17,13 @@ public class UserTermDataController {
     private UserTermDataRepo userTermDataRepo;
 
     @PostMapping("/api/UserTermData")
-    public UserTermDataModel saveFlowchartTemplate(@Validated @RequestBody UserTermDataModel flowchartTemplate) {
-        return userTermDataRepo.save(flowchartTemplate);
+    public UserTermDataModel saveUserTermData(@Validated @RequestBody UserTermDataModel userTermData) {
+        return userTermDataRepo.save(userTermData);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/UserTermData/{id}")
-    UserTermDataModel getFlowchartTemplateById(@PathVariable long id) {
+    UserTermDataModel getUserTermDataById(@PathVariable long id) {
         return userTermDataRepo.findById(id).orElse(null);
     }
 
