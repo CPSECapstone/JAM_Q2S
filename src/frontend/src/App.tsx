@@ -5,11 +5,13 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import {PublicClientApplication} from "@azure/msal-browser";
+import { UserAuthProvider } from "./Context/AuthContext";
 import { MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate } from '@azure/msal-react';
 
 interface AppProps {
     instance: PublicClientApplication;
 }
+
 
 const MainContent = () => {
     /**
@@ -22,17 +24,19 @@ const MainContent = () => {
 
     return (
         <div className="App">
-            <UnauthenticatedTemplate>
-                <Routes>
-                    <Route path='/' element={<Login/>}/>
-                    <Route path='/register' element={<Register/>}/>
-                </Routes>
-            </UnauthenticatedTemplate>
-            <AuthenticatedTemplate>
-                <Routes>
-                    <Route path='/home' element={<Home/>}/>
-                </Routes>
-            </AuthenticatedTemplate>
+            <UserAuthProvider>
+                <UnauthenticatedTemplate>
+                    <Routes>
+                        <Route path='/' element={<Login/>}/>
+                        <Route path='/register' element={<Register/>}/>
+                    </Routes>
+                </UnauthenticatedTemplate>
+                <AuthenticatedTemplate>
+                    <Routes>
+                        <Route path='/home' element={<Home/>}/>
+                    </Routes>
+                </AuthenticatedTemplate>
+            </UserAuthProvider>
         </div>
     );
 };
