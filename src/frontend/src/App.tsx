@@ -5,12 +5,12 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import {PublicClientApplication} from "@azure/msal-browser";
+import { UserAuthProvider } from "./Context/AuthContext";
 import { MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate } from '@azure/msal-react';
 
 interface AppProps {
     instance: PublicClientApplication;
 }
-import { UserAuthProvider } from "./Context/AuthContext";
 
 
 const MainContent = () => {

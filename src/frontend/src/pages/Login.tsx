@@ -45,21 +45,6 @@ const Login = () => {
             } else {
                 // Handle unsuccessful login [ TO DO ]
             }
-            setUser({
-                user_name: "test.user",
-                id: "1",
-                first_name: "Test",
-                last_name: "Tester",
-                email: "test@example.com",
-                term_admitted: "Fall 2022",
-                admit_type: "Freshman",
-                catalog_year: "2022-2026",
-                major: "SE",
-                concentration: "",
-                minor: ""
-            });
-            console.log(response);
-            window.location.href = '/home';
         } catch (error) {
             console.error('Error logging in user:', error);
         }
