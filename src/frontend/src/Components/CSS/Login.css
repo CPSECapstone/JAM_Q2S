@@ -39,7 +39,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 1em;
-    line-height: 160%;
+    line-height: 190%;
 
     color: #FFFFFF;
 
@@ -62,3 +62,15 @@
 .Login p {
     margin-top: 1%;
 }
+
+.microsoft-sign-in {
+    margin-left: 0.5rem; /* Adjust the space between the icon and text */
+    text-transform: none; /* Override the default uppercase text transform */
+
+    /* Add any other styles you want to match the font with the rest of the page */
+}
+
+.divider {
+    width: 45%;
+}
+
