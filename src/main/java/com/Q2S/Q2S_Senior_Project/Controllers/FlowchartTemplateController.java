@@ -98,7 +98,7 @@ public class FlowchartTemplateController {
                 ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
             }
         }
-        return "{\"termData\":" + objectMapper.writeValueAsString(termData) + "}";
+        return objectMapper.writeValueAsString(termData);
     }
 
     @PostMapping("/api/FlowchartTemplates")

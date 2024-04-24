@@ -97,7 +97,7 @@ public class UserFlowchartController {
             termSeasonIterator++;
         }
 
-        return "{\"termData\":" + mapper.writeValueAsString(terms) + "}";
+        return mapper.writeValueAsString(terms);
     }
 
     static boolean isQuarterTerm(TermSeason season, int year){
