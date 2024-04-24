@@ -7,19 +7,49 @@
 }
 .sidebarRow{
     min-height: 20%;
-    font-size: 1.2em;
+    font-size: 1em;
     margin-left: 5%;
 }
 #main{
-
+    color: #727272;
+    font-size: 0.9em;
 }
 #favorites{
-
+    color: #727272;
+    font-size: 0.9em;
 }
 #allFlowchartsHeader{
-    display:flex;
-
+    display: flex;
+    justify-content: space-between;
+    color: #727272;
+    font-size: 0.9em;
 }
 #all{
 
+}
+
+.custom-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it appears above other elements */
+    /* Additional styling */
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.popup-text{
+    font-weight: bold;
+    display: block;
+    color: #2D5A48;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-left: 10px;
+}
+
+.closed {
+    display: none;
 }
