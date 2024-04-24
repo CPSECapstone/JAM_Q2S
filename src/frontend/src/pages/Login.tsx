@@ -1,13 +1,14 @@
 import {
     Grid,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, Link as RouterLink} from "react-router-dom";
 import axios from "axios";
 import {loginRequest} from "../authConfig";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import '../Components/CSS/Login.css';
+import {AuthContext} from "../Context/AuthContext";
 import { useMsal } from '@azure/msal-react';
 
 const Login = () => {
@@ -29,6 +30,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const {user, setUser} = useContext(AuthContext);
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
