@@ -6,7 +6,7 @@ import axios, {AxiosResponse} from 'axios';
 import {
     ClassDBClass,
     ContextMenuData,
-    FlowchartClass,
+    FlowchartClass, FlowchartTermData,
     QuarterClassData,
     TermData
 } from '../../Interfaces/Interfaces';
@@ -19,9 +19,11 @@ interface GridProps {
     setTotalUnits: (units: number) => void;
     loading: boolean;
     setLoading: (loading: boolean) => void;
+    selectedTermData: FlowchartTermData[];
+    quarterClassCache: { [classId: string]: QuarterClassData };
 }
 
-function Grid({setTotalUnits, loading, setLoading}: GridProps) {
+function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClassCache}: GridProps) {
     const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
     const {flowchart, setFlowchart} = useContext(FlowchartContext);
     const {clicked, setClicked, coords, setCoords} = useContextMenu();
@@ -87,73 +89,9 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
         setTotalUnits(total);
     };
 
-    const fetchQuarterClassData = async () => {
-        if (!flowchart) {
-            return null;
-        }
-        try {
-            const termClassData: { [ClassId: string]: ClassDBClass } = {...classDB};
-            const promises = flowchart.termData.slice(1).map(async (term: TermData) => {
-                let termTotalUnits: number = 0;
-                await Promise.all(
-                    term.courses.map(async (flowchartClass: FlowchartClass) => {
-                        if (flowchartClass.uuid in classDB) {
-                            termTotalUnits += Number(classDB[flowchartClass.uuid].classData.units);
-                            termClassData[flowchartClass.uuid] = {
-                                classData: classDB[flowchartClass.uuid].classData,
-                                color: flowchartClass.color,
-                                taken: flowchartClass.taken,
-                                uuid: flowchartClass.uuid
-                            };
-                        } else {
-                            if (flowchartClass.id) {
-                                const response: AxiosResponse<QuarterClassData> =
-                                    await axios.get('http://localhost:8080/get/QuarterClass/' + flowchartClass.id);
-                                termTotalUnits += Number(response.data.units);
-                                termClassData[flowchartClass.uuid] = {
-                                    classData: response.data,
-                                    color: flowchartClass.color,
-                                    taken: flowchartClass.taken,
-                                    uuid: flowchartClass.uuid
-                                }
-                            } else {
-                                termTotalUnits += Number(flowchartClass.customUnits);
-                                let classData: QuarterClassData = {
-                                    id: flowchartClass.customId ? flowchartClass.customId : "",
-                                    displayName: flowchartClass.customDisplayName ? flowchartClass.customDisplayName : "",
-                                    units: flowchartClass.customUnits ? flowchartClass.customUnits : "",
-                                    desc: flowchartClass.customDesc ? flowchartClass.customDesc : "",
-                                    addl: "",
-                                    gwrCourse: false,
-                                    uscpCourse: false
-                                }
-                                termClassData[flowchartClass.uuid] = {
-                                    classData: classData,
-                                    color: flowchartClass.color,
-                                    taken: flowchartClass.taken,
-                                    uuid: flowchartClass.uuid
-                                };
-                            }
-                        }
-                    })
-                );
-                term.tUnits = termTotalUnits.toString();
-            });
-
-            await Promise.all(promises);
-            setClassDB(termClassData);
-            calculateTotalUnits();
-            return null;
-        } catch (error) {
-            console.error('Error fetching QuarterClass:', error);
-        }
-    };
-
     useEffect((): void => {
-        if (flowchart && flowchart.termData.length > 0) {
-            //fetchQuarterClassData().finally(() => setLoading(false)).catch(console.error);
-        }
-    }, [flowchart]);
+
+    }, []);
 
 
     return (
@@ -163,24 +101,16 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
             )}
             <DragDropContext onDragEnd={onDragEnd}
                              onDragStart={() => setClicked(false)}>
-                <Loader/>
-                {/*{loading ? (*/}
-                {/*    <Loader/>*/}
-                {/*) : (*/}
-                {/*    flowchart && (*/}
-                {/*        flowchart.termData.slice(1).map((term: TermData) => {*/}
-                {/*            const classes: ClassDBClass[] =*/}
-                {/*                term.courses.map((flowchartClass: FlowchartClass) => classDB[flowchartClass.uuid]);*/}
-                {/*            return (*/}
-                {/*                <div className='term' key={term.tIndex}>*/}
-                {/*                    <Term year={term.tIndex.toString()} classList={classes}*/}
-                {/*                          totalUnits={Number(term.tUnits) || 0}*/}
-                {/*                          id={term.tIndex.toString()} handleRightClick={handleRightClick}/>*/}
-                {/*                </div>*/}
-                {/*            );*/}
-                {/*        })*/}
-                {/*    )*/}
-                {/*)}*/}
+                {selectedTermData && selectedTermData.map((term: TermData) => {
+                    return (
+                        <div className='term' key={term.tIndex}>
+                            <Term year={term.tIndex.toString()} classList={term.courses}
+                                  totalUnits={Number(term.tUnits) || 0}
+                                  id={term.tIndex.toString()} handleRightClick={handleRightClick}
+                                  quarterClassCache={quarterClassCache}/>
+                        </div>
+                    );
+                })}
             </DragDropContext>
         </div>
     );

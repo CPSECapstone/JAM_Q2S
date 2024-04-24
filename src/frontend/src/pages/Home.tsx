@@ -4,18 +4,19 @@ import {FlowchartContext} from '../Context/FlowchartProvider';
 import '../Components/CSS/Home.css'
 import TopBar from '../Components/TSX/TopBar';
 import axios, {AxiosResponse} from "axios";
-import {ClassDBClass, FlowchartResponse, QuarterClassData} from "../Interfaces/Interfaces";
+import {FlowchartMetaData, QuarterClassData} from "../Interfaces/Interfaces";
 import {SideBar} from "../Components/TSX/SideBar";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
-    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
-    const {flowchart} = useContext(FlowchartContext);
+    const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+    const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null)
     const [loading, setLoading] = useState<boolean>(true);
     const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({})
     let getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
+        console.log(res.data)
+        setAllUserFlowcharts(res.data);
     }
 
     let loadClassCache = async () => {
@@ -33,20 +34,24 @@ const Home = () => {
     return (
         <div className='Home'>
             <div className='sideBar'>
-                {/*<SideBar allFlowcharts={allFlowchartData} setLoading={setLoading}*/}
-                {/*         setAllFlowcharts={setAllFlowcharts}></SideBar>*/}
+                <SideBar allFlowcharts={allUserFlowcharts} setLoading={setLoading}
+                         selectedUserFlowchart={selectedUserFlowchart}
+                         setSelectedUserFlowchart={setSelectedUserFlowchart}/>
             </div>
             <div className='topBar'>
                 <TopBar></TopBar>
             </div>
             <div className='grid'>
-                {/*{flowchart ? (*/}
-                {/*    <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>*/}
-                {/*) : (*/}
-                {/*    <div className='noFlowchartMessage'>*/}
-                {/*        <p>No flowchart selected, please select or create a flowchart</p>*/}
-                {/*    </div>*/}
-                {/*)}*/}
+                {selectedUserFlowchart ? (
+                    <p>something selected</p>
+                    // <Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}
+                    //       selectedTermData={JSON.parse(selectedUserFlowchart.termData)}
+                    //       quarterClassCache={quarterClassCache}/>
+                ) : (
+                    <div className='noFlowchartMessage'>
+                        <p>No flowchart selected, please select or create a flowchart</p>
+                    </div>
+                )}
             </div>
             {/*<div className="totalUnits">*/}
             {/*    Total Units: {totalUnits}*/}
