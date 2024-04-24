@@ -17,6 +17,7 @@ public class UserFlowchartModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
+    /*userModel info is not fetched*/
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId", nullable = false)
     /*flowchart data will be deleted when its associated user is deleted*/
