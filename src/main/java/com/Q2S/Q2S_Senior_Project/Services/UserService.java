@@ -57,10 +57,10 @@ public class UserService {
 
     @Transactional
     public boolean authenticateUser(String email, String password) {
-        UserModel user = userRepository.findByEmail(email);
+        Optional<UserModel> user = userRepository.findByEmail(email);
 
         // Check if the user exists and the password matches
-        return user != null && hashPassword(password).equals(user.getPassword());
+        return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
     }
 
     @Transactional
@@ -71,6 +71,15 @@ public class UserService {
     @Transactional
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         Optional<UserModel> user = userRepository.findById(id);
+
+        return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
+                () -> ResponseEntity.notFound().build()
+        );
+    }
+
+    @Transactional
+    public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
+        Optional<UserModel> user = userRepository.findByEmail(email);
 
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
                 () -> ResponseEntity.notFound().build()

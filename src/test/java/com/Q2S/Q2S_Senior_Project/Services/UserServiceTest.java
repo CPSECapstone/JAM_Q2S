@@ -98,6 +98,7 @@ class UserServiceTest {
         assertEquals(originalUserData.getAdmit_type(), actual.getAdmit_type());
     }
 
+
     @Mock
     private UserRepository userRepository;
 
@@ -127,7 +128,7 @@ class UserServiceTest {
 
     @Test
     void testAddUserEmailTaken() {
-        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel());
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel()));
 
         UserModel user = new UserModel();
         user.setEmail("test@example.com");
@@ -145,7 +146,7 @@ class UserServiceTest {
         String password = "password";
         String hashedPassword = userService.hashPassword(password);
 
-        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", hashedPassword));
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", hashedPassword)));
 
         boolean result = userService.authenticateUser("test@example.com", password);
 
@@ -155,7 +156,7 @@ class UserServiceTest {
 
     @Test
     void testAuthenticateUserInvalidPassword() {
-        when(userRepository.findByEmail(anyString())).thenReturn(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", "differentHashedPassword"));
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", "differentHashedPassword")));
 
         boolean result = userService.authenticateUser("test@example.com", "password");
 
