@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-			<version>6.1.0.Final</version>
+			<version>9.44.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
