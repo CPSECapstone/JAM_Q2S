@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 public class QuarterClassesController {
-
     private final QuarterClassRepo quarterClassRepo;
 
     QuarterClassesController(QuarterClassRepo quarterClassRepo){
@@ -32,8 +31,5 @@ public class QuarterClassesController {
     QuarterClassModel getQuarterClassById(@PathVariable String id) {
         return quarterClassRepo.findById(id).orElse(null);
     }
-
-
-
 
 }
