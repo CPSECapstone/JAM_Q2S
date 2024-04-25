@@ -2,11 +2,9 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.QuarterClassModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.QuarterClassRepo;
-import com.Q2S.Q2S_Senior_Project.Services.CourseMappingService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
