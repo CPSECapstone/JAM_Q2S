@@ -3,9 +3,10 @@ import '../CSS/Term.css';
 import {Droppable} from '@hello-pangea/dnd';
 import Class from './Class';
 import {ClassDBClass} from '../../Interfaces/Interfaces';
+import Grid from "./Grid";
 
 type Props = {
-    year: string;
+    year: number;
     classList: ClassDBClass[];
     id: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
@@ -13,10 +14,17 @@ type Props = {
 };
 
 function Term({year, classList, id, handleRightClick, totalUnits}: Props): JSX.Element {
+    const termType = year < 2026 ? "Q" : "S";
+
     return (
         <div className='term'>
             <div className='title'>
-                <p>{year}</p>
+                <div className="centered">
+                    <p style={{margin: 0}}>{year.toString()}</p>
+                </div>
+                <div className="right-aligned">
+                    <p style={{margin: 0}}>{termType}</p>
+                </div>
             </div>
             <Droppable droppableId={id}>
                 {(provided) => (
@@ -34,7 +42,7 @@ function Term({year, classList, id, handleRightClick, totalUnits}: Props): JSX.E
                     </div>
                 )}
             </Droppable>
-            <div className="termTotalUnits" style={{textAlign: 'center', margin: 0}}>
+            <div className="termTotalUnits">
                 <p style={{margin: 0}}>{totalUnits}</p>
             </div>
         </div>

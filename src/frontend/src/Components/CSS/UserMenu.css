@@ -1,12 +1,13 @@
 .profile{
     display: flex;
-    width: 80%;
-    padding-left: 4%;
+    width: 100%;
+    padding: 2%;
     align-items: center;
 }
 .userName {
     padding: 2%;
+    margin: 0;
     color: white;
     text-align: left;
-    font-size: 20px;
+    font-size: 1.15em;
 }

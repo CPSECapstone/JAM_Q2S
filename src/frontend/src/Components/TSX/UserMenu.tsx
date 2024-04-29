@@ -63,7 +63,7 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
-        const { user, setUser } = useContext(AuthContext);
+        const { user } = useContext(AuthContext);
 
         return (
             <StyledContextMenu $top={65} $left={20}>
@@ -71,9 +71,6 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                     <MenuList>
                         <MenuItem>
                             <ListItemText>{user?.user_name}</ListItemText>
-                        </MenuItem>
-                        <MenuItem>
-                            <ListItemText>{user?.major}</ListItemText>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon>
