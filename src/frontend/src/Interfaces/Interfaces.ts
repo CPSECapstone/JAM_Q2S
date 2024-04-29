@@ -14,9 +14,9 @@ export interface ClassDisplayInformation {
     units: string;
     desc: string;
     addl: string;
-    gwrCourse: boolean;
-    uscpCourse: boolean;
     color: string;
+    taken: boolean;
+    uuid: string;
 }
 
 export interface EmbeddedSemesterClassData {
@@ -32,13 +32,6 @@ export interface FlowchartClass {
     customId?: string;
     customUnits?: string;
     id: string | null;
-    taken: boolean;
-    uuid: string;
-}
-
-export interface ClassDBClass {
-    classData: QuarterClassData;
-    color: string;
     taken: boolean;
     uuid: string;
 }
@@ -81,11 +74,7 @@ export interface User {
     user_name: string
 }
 
-export interface FlowchartTermData {
-    tIndex: number;
-    courses: FlowchartClass[];
-    tUnits: string;
-}
+
 
 export interface FlowchartData {
     hash: string;

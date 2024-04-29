@@ -2,7 +2,7 @@ import React from 'react';
 import '../CSS/Term.css';
 import {Droppable} from '@hello-pangea/dnd';
 import Class from './Class';
-import {ClassDBClass, FlowchartClass, QuarterClassData} from '../../Interfaces/Interfaces';
+import {ClassDisplayInformation, FlowchartClass} from '../../Interfaces/Interfaces';
 
 type Props = {
     year: string;
@@ -10,10 +10,10 @@ type Props = {
     id: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     totalUnits: number;
-    quarterClassCache: { [classId: string]: QuarterClassData };
+    flowchartClassCache: { [classId: string]: ClassDisplayInformation };
 };
 
-function Term({year, classList, id, handleRightClick, totalUnits, quarterClassCache}: Props): JSX.Element {
+function Term({year, classList, id, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
     return (
         <div className='term'>
             <div className='title'>
@@ -27,10 +27,9 @@ function Term({year, classList, id, handleRightClick, totalUnits, quarterClassCa
                         {classList.map((currentClass: FlowchartClass, i: number) => (
                             <Class key={i}
                                    index={i}
-                                   classData={currentClass}
+                                   classData={flowchartClassCache[currentClass.uuid]}
                                    handleRightClick={handleRightClick}
-                                   term={id}
-                            quarterClassCache={quarterClassCache}/>
+                                   term={id}/>
                         ))}
                         {provided.placeholder}
                     </div>

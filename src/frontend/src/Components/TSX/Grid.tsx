@@ -1,31 +1,27 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../CSS/Grid.css';
 import Term from './Term';
 import {DragDropContext, DropResult} from '@hello-pangea/dnd';
-import axios, {AxiosResponse} from 'axios';
 import {
-    ClassDBClass,
+    ClassDisplayInformation,
     ContextMenuData,
-    FlowchartClass, FlowchartTermData,
-    QuarterClassData,
+    FlowchartClass, FlowchartMetaData,
     TermData
 } from '../../Interfaces/Interfaces';
-import {FlowchartContext} from '../../Context/FlowchartProvider';
 import {useContextMenu} from '../../Hooks/useContextMenu';
 import ContextMenu from './ContextMenu';
-import {Loader} from "./Loader";
 
 interface GridProps {
     setTotalUnits: (units: number) => void;
-    loading: boolean;
-    setLoading: (loading: boolean) => void;
-    selectedTermData: FlowchartTermData[];
-    quarterClassCache: { [classId: string]: QuarterClassData };
+    selectedUserFlowchart: FlowchartMetaData;
+    setSelectedUserFlowchart: (newFlowchart: FlowchartMetaData) => void;
+    flowchartClassCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }
+
 }
 
-function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClassCache}: GridProps) {
-    const [classDB, setClassDB] = useState<{ [ClassId: string]: ClassDBClass }>({});
-    const {flowchart, setFlowchart} = useContext(FlowchartContext);
+function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, flowchartClassCache}: GridProps) {
     const {clicked, setClicked, coords, setCoords} = useContextMenu();
     const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classUUID: "", termId: ""});
 
@@ -39,7 +35,7 @@ function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClas
     }
 
     let onDragEnd = (result: DropResult): void => {
-        if (!flowchart) {
+        if (!selectedUserFlowchart) {
             return;
         }
 
@@ -51,16 +47,16 @@ function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClas
             destination.index === source.index) {
             return;
         }
-        let updatedTerms = [...flowchart.termData];
+        let updatedTerms: TermData[] = JSON.parse(selectedUserFlowchart.termData)
 
         let start: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === source.droppableId);
         let finish: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === destination.droppableId);
         if (!start || !finish) return;
         const newFlowchartClass: FlowchartClass = {
-            id: classDB[draggableId].classData.id,
-            color: classDB[draggableId].color,
-            taken: classDB[draggableId].taken,
-            uuid: classDB[draggableId].uuid
+            id: flowchartClassCache[draggableId].id,
+            color: flowchartClassCache[draggableId].color,
+            taken: flowchartClassCache[draggableId].taken,
+            uuid: flowchartClassCache[draggableId].uuid
         }
         if (source.droppableId === destination.droppableId) {
             let newClasses: FlowchartClass[] = Array.from(start.courses);
@@ -76,13 +72,14 @@ function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClas
             finish.courses = finishClasses;
         }
 
-        setFlowchart({...flowchart, termData: updatedTerms});
+        setSelectedUserFlowchart({...selectedUserFlowchart, termData: JSON.stringify(updatedTerms)});
     };
+
 
     const calculateTotalUnits = () => {
         let total = 0;
-        if (flowchart) {
-            flowchart.termData.forEach((term) => {
+        if (selectedUserFlowchart) {
+            JSON.parse(selectedUserFlowchart.termData).termData.forEach((term: TermData) => {
                 total += Number(term.tUnits) || 0;
             });
         }
@@ -90,24 +87,25 @@ function Grid({setTotalUnits, loading, setLoading, selectedTermData, quarterClas
     };
 
     useEffect((): void => {
-
     }, []);
 
 
     return (
         <div className='grid'>
             {clicked && (
-                <ContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}></ContextMenu>
+                <ContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}
+                             flowchartClassCache={flowchartClassCache} selectedUserFlowchart={selectedUserFlowchart}
+                             setSelectedUserFlowchart={setSelectedUserFlowchart}></ContextMenu>
             )}
             <DragDropContext onDragEnd={onDragEnd}
                              onDragStart={() => setClicked(false)}>
-                {selectedTermData && selectedTermData.map((term: TermData) => {
+                {selectedUserFlowchart && JSON.parse(selectedUserFlowchart.termData).map((term: TermData) => {
                     return (
                         <div className='term' key={term.tIndex}>
                             <Term year={term.tIndex.toString()} classList={term.courses}
                                   totalUnits={Number(term.tUnits) || 0}
                                   id={term.tIndex.toString()} handleRightClick={handleRightClick}
-                                  quarterClassCache={quarterClassCache}/>
+                                  flowchartClassCache={flowchartClassCache}/>
                         </div>
                     );
                 })}

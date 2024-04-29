@@ -1,33 +1,75 @@
-import React from "react";
-import {FlowchartData, FlowchartMetaData} from "../../Interfaces/Interfaces";
-import {FlowchartContext} from "../../Context/FlowchartProvider";
+import React, {useEffect, useState} from "react";
+import {
+    ClassDisplayInformation,
+    FlowchartClass,
+    FlowchartMetaData,
+    QuarterClassData,
+    TermData
+} from "../../Interfaces/Interfaces";
 import SideBarItem from "./SideBarItem";
 import '../CSS/SideBar.css'
 import {IconButton, Tooltip} from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import axios, {AxiosResponse} from "axios";
 
 
 interface SideBarProps {
-    allFlowcharts: FlowchartMetaData[];
-    setLoading: (loading: boolean) => void;
     selectedUserFlowchart: FlowchartMetaData | null;
     setSelectedUserFlowchart: (selected: FlowchartMetaData) => void;
+    quarterClassCache: { [classId: string]: QuarterClassData };
+    setFlowchartClassCache: (newCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }) => void;
 }
 
 export const SideBar = ({
-                            allFlowcharts,
-                            setLoading,
+                            setFlowchartClassCache,
                             setSelectedUserFlowchart,
-                            selectedUserFlowchart
+                            selectedUserFlowchart,
+                            quarterClassCache,
                         }: SideBarProps) => {
-
+    const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+    const getFlowcharts = async () => {
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
+        setAllUserFlowcharts(res.data);
+    }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
         if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
-            setLoading(true);
+            let newClassCache: {
+                [classUUID: string]: ClassDisplayInformation
+            } = {}
+            let termData: TermData[] = JSON.parse(flowchart.termData);
+            termData.forEach((term: TermData) => {
+                term.courses.forEach((course: FlowchartClass) => {
+                    if (course.id) {
+                        newClassCache[course.uuid] = {
+                            ...quarterClassCache[course.id],
+                            color: course.color,
+                            taken: course.taken,
+                            uuid: course.uuid
+                        };
+                    } else {
+                        newClassCache[course.uuid] = {
+                            color: course.color,
+                            taken: course.taken,
+                            displayName: course.customDisplayName ? course.customDisplayName : "",
+                            id: course.customId ? course.customId : "",
+                            units: course.customUnits ? course.customUnits : "",
+                            desc: course.customDesc ? course.customDesc : "",
+                            addl: "",
+                            uuid: course.uuid
+                        }
+                    }
+                })
+            })
+            setFlowchartClassCache(newClassCache)
             setSelectedUserFlowchart(flowchart);
-
         }
     };
+
+    useEffect(() => {
+        getFlowcharts().catch(console.error);
+    }, [])
 
     // const handleFavoriteClick = (current: FlowchartResponse) => {
     //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
@@ -49,7 +91,7 @@ export const SideBar = ({
     // };
 
     const renderFlowchartItems = (filterCondition: (current: FlowchartMetaData) => boolean) => {
-        return allFlowcharts
+        return allUserFlowcharts
             .filter(filterCondition)
             .map((current: FlowchartMetaData) => {
                 return (

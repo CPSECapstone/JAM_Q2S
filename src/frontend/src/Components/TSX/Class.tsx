@@ -1,24 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import '../CSS/Class.css';
 import {Draggable} from '@hello-pangea/dnd';
 import {StyledClass} from '../StyledComponents/ClassStyles';
 import {
-    ClassDBClass,
     ClassDisplayInformation,
     EmbeddedSemesterClassData,
-    FlowchartClass,
-    QuarterClassData
 } from '../../Interfaces/Interfaces';
 import EmbeddedClass from "./EmbeddedClass";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {Tooltip} from "react-tooltip";
 
 interface classProps {
-    classData: FlowchartClass;
+    classData: ClassDisplayInformation;
     index: number;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     term: string;
-    quarterClassCache: { [classId: string]: QuarterClassData };
 }
 
 const mockData: EmbeddedSemesterClassData[] = [
@@ -38,45 +34,11 @@ const tooltipStyles = {
     'zIndex': '999'
 }
 
-function Class({index, classData, handleRightClick, term, quarterClassCache}: classProps) {
+function Class({index, classData, handleRightClick, term}: classProps) {
     const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
-    const [classDisplayInfo, setClassDisplayInfo] = useState<ClassDisplayInformation>({
-        addl: "",
-        color: "",
-        desc: "",
-        displayName: "",
-        gwrCourse: false,
-        id: "",
-        units: "",
-        uscpCourse: false
-    })
     const toggleEmbeddedClass = () => {
         setEmbeddedClassOpen(!isEmbeddedClassOpen);
     };
-
-    useEffect(() => {
-        if(classData.id){
-            let cachedInfo: QuarterClassData = quarterClassCache[classData.id];
-            let classInfo: ClassDisplayInformation = {
-                ...cachedInfo,
-                color: classData.color,
-            }
-            setClassDisplayInfo(classInfo);
-        }
-        else{
-            let classInfo: ClassDisplayInformation = {
-                addl: "",
-                color: classData.color,
-                desc: classData.customDesc ? classData.customDesc : "",
-                displayName: classData.customDisplayName ? classData.customDisplayName : "",
-                gwrCourse: false,
-                id: classData.customId ? classData.customId : "",
-                units: classData.customUnits ? classData.customUnits : "",
-                uscpCourse: false
-            }
-            setClassDisplayInfo(classInfo);
-        }
-    }, []);
 
     return (
         <Draggable draggableId={classData.uuid}
@@ -99,10 +61,10 @@ function Class({index, classData, handleRightClick, term, quarterClassCache}: cl
                         <InfoOutlinedIcon fontSize="small" id={"id" + classData.uuid}/>
                     </div>
                     <div className='courseCode'>
-                        <p>{classDisplayInfo.id + ' (' + classDisplayInfo.units + ')'}</p>
+                        <p>{classData.id + ' (' + classData.units + ')'}</p>
                     </div>
                     <div className='courseName'>
-                        <p>{classDisplayInfo.displayName}</p>
+                        <p>{classData.displayName}</p>
                     </div>
                     <div className="embeddedClasses">
                         {isEmbeddedClassOpen && mockData.map((data, index) => (
@@ -119,12 +81,12 @@ function Class({index, classData, handleRightClick, term, quarterClassCache}: cl
                         delayShow={100}
                         opacity={100}
                         style={tooltipStyles}>
-                        <b>{classDisplayInfo.id + "\n"}</b><br></br>
-                        {classDisplayInfo.displayName}<br></br>
+                        <b>{classData.id + "\n"}</b><br></br>
+                        {classData.displayName}<br></br>
                         <hr></hr>
-                        {classDisplayInfo.desc}
+                        {classData.desc}
                         <hr></hr>
-                        {classDisplayInfo.addl}
+                        {classData.addl}
                     </Tooltip>
                 </StyledClass>)}
         </Draggable>
