@@ -3,6 +3,7 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody UserModel user) {
+    public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
-            return ResponseEntity.ok("Login successful");
+            ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser != null) {
+                return ResponseEntity.ok(loggedInUser); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
         } else {
             return ResponseEntity.badRequest().body("Invalid email or password");
         }
@@ -39,6 +45,15 @@ public class UserController {
     @GetMapping("/allUsers")
     public List<UserModel> findAllUsers() {
         return userService.findAllUsers();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable(value = "id") long id,
+                                                @RequestBody UserModel updatedUser) {
+        if (userService.updateUserInfo(id, updatedUser)){
+            return ResponseEntity.ok("User Update Successful");
+        }
+        return ResponseEntity.badRequest().body("Invalid User Id");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

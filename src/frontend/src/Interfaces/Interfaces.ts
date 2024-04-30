@@ -91,3 +91,18 @@ export interface FlowchartData {
     unitTotal: string;
     version: string;
 }
+
+export interface User {
+    id: string;
+    authToken?: string;
+    user_name: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    term_admitted: string;
+    admit_type: string;
+    catalog_year: string;
+    major: string;
+    concentration: string;
+    minor: string;
+}

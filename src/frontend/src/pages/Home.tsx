@@ -48,10 +48,15 @@ const Home = () => {
                 </div>
                 <div className='grid'>
                     {selectedUserFlowchart ? (
-                        <Grid setTotalUnits={setTotalUnits}
-                              selectedUserFlowchart={selectedUserFlowchart}
-                              setSelectedUserFlowchart={setSelectedUserFlowchart}
-                              flowchartClassCache={flowchartClassCache}/>
+                        <>
+                            <Grid setTotalUnits={setTotalUnits}
+                                  selectedUserFlowchart={selectedUserFlowchart}
+                                  setSelectedUserFlowchart={setSelectedUserFlowchart}
+                                  flowchartClassCache={flowchartClassCache}/>
+                            <div className="totalUnits">
+                                Total Units: {totalUnits}
+                            </div>
+                        </>
                     ) : (
                         <div className='noFlowchartMessage'>
                             <p>No flowchart selected, please select or create a flowchart</p>

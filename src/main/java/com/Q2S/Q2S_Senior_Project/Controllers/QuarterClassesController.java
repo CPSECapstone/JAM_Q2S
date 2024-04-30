@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 public class QuarterClassesController {
-
     private final QuarterClassRepo quarterClassRepo;
 
     QuarterClassesController(QuarterClassRepo quarterClassRepo) {
