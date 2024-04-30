@@ -3,8 +3,7 @@ import '../CSS/Term.css';
 import {Droppable} from '@hello-pangea/dnd';
 import Class from './Class';
 import {ClassDisplayInformation, FlowchartClass} from '../../Interfaces/Interfaces';
-import {ClassDBClass} from '../../Interfaces/Interfaces';
-import Grid from "./Grid";
+
 
 type Props = {
     year: string;
@@ -17,8 +16,7 @@ type Props = {
     flowchartClassCache: { [classId: string]: ClassDisplayInformation };
 };
 
-function Term({year, classList, id, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
-function Term({year, classList, id, termName, termType, handleRightClick, totalUnits}: Props): JSX.Element {
+function Term({year, classList, id, termName, termType, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
     const termAsLetter = termType.match("Quarter") ? "Q" : "S";
 
     return (

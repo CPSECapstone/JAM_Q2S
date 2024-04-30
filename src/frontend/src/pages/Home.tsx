@@ -1,30 +1,26 @@
-import React, {useEffect, useState} from 'react'; // Removed unused imports
+import React, {useContext, useEffect, useState} from 'react'; // Removed unused imports
 import Grid from '../Components/TSX/Grid';
 import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
-import axios from 'axios'; // Removed AxiosResponse import as it's not needed
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
-import axios, {AxiosResponse} from "axios";
-import {FlowchartClass, FlowchartResponse, TermData} from "../Interfaces/Interfaces";
-import {SideBar} from "../Components/TSX/SideBar";
-import {AuthContext} from "../Context/AuthContext";
+import {AuthContext} from '../Context/AuthContext'
+import axios from "axios";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
+
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
     const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null); // Removed explicit type as it's inferred
     const [loading, setLoading] = useState<boolean>(true);
+    const {setUser} = useContext(AuthContext);
+    const {getItem} = useLocalStorage();
     const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({});
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
     }>({})
 
-    let getFlowcharts = async () => {
-        //let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        //setAllFlowcharts(res.data)
-    }
 
     let getUser = async () => {
         const storedUser = getItem("user");
@@ -34,6 +30,7 @@ const Home = () => {
     }
 
     useEffect(() => {
+        getUser().catch(console.error);
         const loadClassCache = async () => {
             try {
                 const quarterClassesResponse = await axios.get("http://localhost:8080/getAllQuarterClasses");
