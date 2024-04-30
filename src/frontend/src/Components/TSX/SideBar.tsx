@@ -1,158 +1,168 @@
-import React, {useContext, useState, ChangeEvent} from "react";
-import {FlowchartData, FlowchartResponse} from "../../Interfaces/Interfaces";
-import {FlowchartContext} from "../../Context/FlowchartProvider";
+import React, {ChangeEvent, useEffect, useState} from "react";
+import {
+    ClassDisplayInformation,
+    FlowchartClass,
+    FlowchartMetaData,
+    QuarterClassData,
+    TermData
+} from "../../Interfaces/Interfaces";
+
 import SideBarItem from "./SideBarItem";
 import '../CSS/SideBar.css'
 import {IconButton, Tooltip} from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import IndeterminateCheckBoxOutlinedIcon from '@mui/icons-material/IndeterminateCheckBoxOutlined';
+import axios, {AxiosResponse} from "axios";
 import '../CSS/SideBar.css';
+import NewFlowForm from "./NewFlowForm";
 
 
-interface TestSideBarProps {
-    allFlowcharts: FlowchartResponse[];
-    setAllFlowcharts: (allFlowcharts: FlowchartResponse[]) => void;
-    setLoading: (loading: boolean) => void;
+interface SideBarProps {
+    selectedUserFlowchart: FlowchartMetaData | null;
+    setSelectedUserFlowchart: (selected: FlowchartMetaData) => void;
+    quarterClassCache: { [classId: string]: QuarterClassData };
+    setFlowchartClassCache: (newCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }) => void;
 }
 
-export const SideBar = ({allFlowcharts, setLoading, setAllFlowcharts}: TestSideBarProps) => {
-    const {setFlowchart} = useContext(FlowchartContext);
-    const [selected, setSelected] = useState<string | null>(null);
-    const [isFormOpen, setIsFormOpen] = useState(false);
-
-    const handleSelectedClick = (flowchart: FlowchartData) => {
-        if (!selected || selected !== flowchart.name) {
-            setLoading(true);
-            setFlowchart(flowchart);
-            setSelected(flowchart.name);
+export const SideBar = ({
+                            setFlowchartClassCache,
+                            setSelectedUserFlowchart,
+                            selectedUserFlowchart,
+                            quarterClassCache,
+                        }: SideBarProps) => {
+        const [isFormOpen, setIsFormOpen] = useState(false);
+        const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+        const getFlowcharts = async () => {
+            let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
+            setAllUserFlowcharts(res.data);
         }
-    };
+        const handleSelectedClick = (flowchart: FlowchartMetaData) => {
+            if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
+                let newClassCache: {
+                    [classUUID: string]: ClassDisplayInformation
+                } = {}
+                let termData: TermData[] = JSON.parse(flowchart.termData);
+                termData.forEach((term: TermData) => {
+                    term.courses.forEach((course: FlowchartClass) => {
+                        if (course.id) {
+                            newClassCache[course.uuid] = {
+                                ...quarterClassCache[course.id],
+                                color: course.color,
+                                taken: course.taken,
+                                uuid: course.uuid
+                            };
+                        } else {
+                            newClassCache[course.uuid] = {
+                                color: course.color,
+                                taken: course.taken,
+                                displayName: course.customDisplayName ? course.customDisplayName : "",
+                                id: course.customId ? course.customId : "",
+                                units: course.customUnits ? course.customUnits : "",
+                                desc: course.customDesc ? course.customDesc : "",
+                                addl: "",
+                                uuid: course.uuid
+                            }
+                        }
+                    })
+                })
+                setFlowchartClassCache(newClassCache)
+                setSelectedUserFlowchart(flowchart);
 
-    const handleFavoriteClick = (current: FlowchartResponse) => {
-        const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
-        const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
-        updatedAllFlowcharts[currentIndex].favorite = !current.favorite;
-        setAllFlowcharts(updatedAllFlowcharts);
-    };
+            }
+        };
+        useEffect(() => {
+            getFlowcharts().catch(console.error);
+        }, [])
 
-    const handleMainClick = (current: FlowchartResponse) => {
-        const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
-        const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
-        const currentMainIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart.main);
-        if (currentMainIndex !== -1) {
-            updatedAllFlowcharts[currentMainIndex].main = false;
+        // const handleFavoriteClick = (current: FlowchartResponse) => {
+        //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
+        //     const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
+        //     updatedAllFlowcharts[currentIndex].favorite = !current.favorite;
+        //     setAllFlowcharts(updatedAllFlowcharts);
+        // };
 
-        }
-        updatedAllFlowcharts[currentIndex].main = true;
-        setAllFlowcharts(updatedAllFlowcharts);
-    };
+        // const handleMainClick = (current: FlowchartResponse) => {
+        //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
+        //     const currentIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart === current);
+        //     const currentMainIndex: number = allFlowcharts.findIndex((flowchart: FlowchartResponse) => flowchart.main);
+        //     if (currentMainIndex !== -1) {
+        //         updatedAllFlowcharts[currentMainIndex].main = false;
+        //
+        //     }
+        //     updatedAllFlowcharts[currentIndex].main = true;
+        //     setAllFlowcharts(updatedAllFlowcharts);
+        // };
 
-    const renderFlowchartItems = (filterCondition: (current: FlowchartResponse) => boolean) => {
-        return allFlowcharts
-            .filter(filterCondition)
-            .map((current: FlowchartResponse) => {
-                const flowchartData: FlowchartData = JSON.parse(current.flowchart);
-                return (
-                    <SideBarItem
-                        key={flowchartData.name}
-                        handleSelectedClick={handleSelectedClick}
-                        handleMainClick={handleMainClick}
-                        responseData={current}
-                        handleFavoriteClick={handleFavoriteClick}
-                        data={flowchartData}
-                        selected={selected === flowchartData.name}
-                    />
-                );
-            });
-    };
+        const renderFlowchartItems = (filterCondition: (current: FlowchartMetaData) => boolean) => {
+            return allUserFlowcharts
+                .filter(filterCondition)
+                .map((current: FlowchartMetaData) => {
+                    return (
+                        <SideBarItem
+                            key={current.id}
+                            handleSelectedClick={handleSelectedClick}
+                            // handleMainClick={handleMainClick}
+                            // responseData={current}
+                            // handleFavoriteClick={handleFavoriteClick}
+                            data={current}
+                            selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
+                        />
+                    );
+                });
+        };
 
-    const handleAddClick = () => {
-        setIsFormOpen(true);
-    };
+        const handleAddClick = () => {
+            setIsFormOpen(true);
+        };
 
-    const handleCloseForm = () => {
-        setIsFormOpen(false);
-    };
+        const handleCloseForm = () => {
+            setIsFormOpen(false);
+        };
 
-    const handleSubmitForm = (inputValue: string) => {
-        if (inputValue.trim() !== '') {
-            const newFlowchart = {
-                id: 12345,
-                major: "CS",
-                catalog: "2022-26",
-                flowchart: "new",
-                concentration: "AI",
-                favorite: false,
-                main: false
-            };
-
-            // Create a new array with the new flowchart added
-            const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts, newFlowchart];
-
-            // Update the state with the new array
-            setAllFlowcharts(updatedAllFlowcharts);
+        const handleSubmitForm = (inputValue: string) => {
+            // if (inputValue.trim() !== '') {
+            //     const newFlowchart = {
+            //         id: 12345,
+            //         major: "CS",
+            //         catalog: "2022-26",
+            //         flowchart: "new",
+            //         concentration: "AI",
+            //         favorite: false,
+            //         main: false
+            //     };
+            //
+            //     // Create a new array with the new flowchart added
+            //     // const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts, newFlowchart];
+            //     //
+            //     // // Update the state with the new array
+            //     // setAllFlowcharts(updatedAllFlowcharts);
 
             handleCloseForm();
         }
-    };
 
-    return (
-        <div className="sideBar">
-            <div className="sidebarRow" id="main">
-                <p>MAIN</p>
-                {/*{renderFlowchartItems((current: FlowchartResponse) => current.main)}*/}
-
-            </div>
-            <div className="sidebarRow" id="favorites">
-                <p>FAVORITES</p>
-                {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
-            </div>
-            <div className="sidebarRow" id="all">
-                <div id="allFlowchartsHeader">
-                    <p>ALL FLOWCHARTS</p>
-                    <Tooltip title="Create a new Flow" placement="right" arrow>
-                        <IconButton aria-label="favorite flowchart" size="small">
-                            <AddBoxOutlinedIcon/>
-                        </IconButton>
-                    </Tooltip>
+        return (
+            <div className="sideBar">
+                <div className="sidebarRow" id="main">
+                    <p>MAIN</p>
+                    {/*{renderFlowchartItems((current: FlowchartResponse) => current.main)}*/}
                 </div>
-                {renderFlowchartItems((current: FlowchartResponse) => true)}
-                <NewFlowForm isOpen={isFormOpen} onClose={handleCloseForm} onSubmit={handleSubmitForm} />
+                <div className="sidebarRow" id="favorites">
+                    <p>FAVORITES</p>
+                    {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
+                </div>
+                <div className="sidebarRow" id="all">
+                    <div id="allFlowchartsHeader">
+                        <p>ALL FLOWCHARTS</p>
+                        <Tooltip title="Create a new Flow" placement="right" arrow>
+                            <IconButton aria-label="favorite flowchart" size="small">
+                                <AddBoxOutlinedIcon/>
+                            </IconButton>
+                        </Tooltip>
+                    </div>
+                    {renderFlowchartItems(() => true)}
+                    <NewFlowForm isOpen={isFormOpen} onClose={handleCloseForm} onSubmit={handleSubmitForm}/>
+                </div>
             </div>
-        </div>
-    );
-};
-
-interface NewFlowFormProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (inputValue: string) => void;
-}
-
-function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormProps) {
-    const [inputValue, setInputValue] = useState('');
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleSubmit = () => {
-        onSubmit(inputValue);
-        setInputValue('');
-    };
-
-    return (
-        <div className={`custom-popup ${isOpen ? 'open' : 'closed'}`}>
-            <div className="custom-popup-content">
-                <IconButton aria-label="close-btn" size="small"
-                            onClick={onClose}>
-                    <IndeterminateCheckBoxOutlinedIcon/>
-                </IconButton>
-                <text className="popup-text">ENTER NEW FLOW NAME</text>
-                <input type="text" value={inputValue} onChange={handleChange} />
-                <button onClick={handleSubmit}>Submit</button>
-            </div>
-        </div>
-    );
-}
-
+        );
+    }

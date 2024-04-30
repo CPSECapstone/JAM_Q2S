@@ -1,8 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react'; // Removed unused imports
 import Grid from '../Components/TSX/Grid';
-import {FlowchartContext} from '../Context/FlowchartProvider';
-import '../Components/CSS/Home.css'
+import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
+import axios from 'axios'; // Removed AxiosResponse import as it's not needed
+import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
+import {SideBar} from '../Components/TSX/SideBar';
+import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
 import axios, {AxiosResponse} from "axios";
 import {FlowchartClass, FlowchartResponse, TermData} from "../Interfaces/Interfaces";
 import {SideBar} from "../Components/TSX/SideBar";
@@ -11,11 +14,12 @@ import {useLocalStorage} from "../Hooks/useLocalStorage";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
-    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
-    const {flowchart, setFlowchart} = useContext(FlowchartContext);
-    const {setUser} = useContext(AuthContext);
-    const {getItem} = useLocalStorage();
+    const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null); // Removed explicit type as it's inferred
     const [loading, setLoading] = useState<boolean>(true);
+    const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({});
+    const [flowchartClassCache, setFlowchartClassCache] = useState<{
+        [classUUID: string]: ClassDisplayInformation
+    }>({})
 
     let getFlowcharts = async () => {
         //let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
@@ -30,41 +34,58 @@ const Home = () => {
     }
 
     useEffect(() => {
-        getFlowcharts().catch(console.error);
-        getUser().catch(console.error);
-    }, []);
+        const loadClassCache = async () => {
+            try {
+                const quarterClassesResponse = await axios.get("http://localhost:8080/getAllQuarterClasses");
+                const tempCache: { [classId: string]: QuarterClassData } = {};
+                quarterClassesResponse.data.forEach((quarterClass: QuarterClassData) => {
+                    tempCache[quarterClass.id] = quarterClass;
+                });
+                setQuarterClassCache(tempCache);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+            }
+        };
 
-    useEffect(() => {
-        console.log(flowchart);
+        loadClassCache();
     }, []);
 
     return (
-        <div className='Home'>
-            <div className='sideBar'>
-                <SideBar allFlowcharts={allFlowchartData} setLoading={setLoading}
-                         setAllFlowcharts={setAllFlowcharts}></SideBar>
-            </div>
-            <div className='topBar'>
-                <TopBar></TopBar>
-            </div>
-            <div className='grid'>
-                {flowchart ? (
-                    <><Grid setTotalUnits={setTotalUnits} loading={loading} setLoading={setLoading}/>
-                    </>
-                ) : (
-                    <div className='noFlowchartMessage'>
-                        <h3>No flowchart selected</h3>
-                        <p>Please select or create a flowchart</p>
-                    </div>
-                )}
-            </div>
-            {flowchart ? (
-                <div className="totalUnits">
-                    Total Units: {totalUnits}
+        loading ? <Loader/> : (
+            <div className='Home'>
+                <div className='sideBar'>
+                    <SideBar
+                        quarterClassCache={quarterClassCache}
+                        selectedUserFlowchart={selectedUserFlowchart}
+                        setSelectedUserFlowchart={setSelectedUserFlowchart}
+                        setFlowchartClassCache={setFlowchartClassCache}/>
                 </div>
-            ) : null}
-        </div>
-    )
-}
+                <div className='topBar'>
+                    <TopBar/>
+                </div>
+                <div className='grid'>
+                    {selectedUserFlowchart ? (
+                        <>
+                            <Grid setTotalUnits={setTotalUnits}
+                                  selectedUserFlowchart={selectedUserFlowchart}
+                                  setSelectedUserFlowchart={setSelectedUserFlowchart}
+                                  flowchartClassCache={flowchartClassCache}/>
+                        </>
+                    ) : (
+                        <div className='noFlowchartMessage'>
+                            <p>No flowchart selected, please select or create a flowchart</p>
+                        </div>
+                    )}
+                </div>
+                {selectedUserFlowchart ? (
+                    <div className="totalUnits">
+                        Total Units: {totalUnits}
+                    </div>
+                ) : null}
+            </div>
+        )
+    );
+};
 
 export default Home;

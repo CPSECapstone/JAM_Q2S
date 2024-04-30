@@ -8,6 +8,17 @@ export interface QuarterClassData {
     uscpCourse: boolean;
 }
 
+export interface ClassDisplayInformation {
+    id: string;
+    displayName: string;
+    units: string;
+    desc: string;
+    addl: string;
+    color: string;
+    taken: boolean;
+    uuid: string;
+}
+
 export interface EmbeddedSemesterClassData {
     id: string;
     displayName: string;
@@ -25,13 +36,6 @@ export interface FlowchartClass {
     uuid: string;
 }
 
-export interface ClassDBClass {
-    classData: QuarterClassData;
-    color: string;
-    taken: boolean;
-    uuid: string;
-}
-
 export interface TermData {
     tIndex: number;
     courses: FlowchartClass[];
@@ -45,15 +49,34 @@ export interface ContextMenuData {
     termId: string
 }
 
-export interface FlowchartResponse {
-    id: number;
-    major: string;
-    catalog: string;
-    flowchart: string;
-    concentration: string;
-    favorite: boolean;
-    main: boolean;
+export interface FlowchartMetaData {
+    user: User;
+    termData: string;
+    catalogYear: string,
+    concentration: string,
+    favorite: boolean,
+    id: number,
+    main: boolean,
+    major: string,
+    name: string
 }
+
+export interface User {
+    admit_type: string,
+    catalog_year: string,
+    concentration: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+    major: string,
+    minor: string,
+    password: string,
+    term_admitted: string,
+    userId: number,
+    user_name: string
+}
+
+
 
 export interface FlowchartData {
     hash: string;

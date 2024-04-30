@@ -2,19 +2,22 @@ import React from 'react';
 import '../CSS/Term.css';
 import {Droppable} from '@hello-pangea/dnd';
 import Class from './Class';
+import {ClassDisplayInformation, FlowchartClass} from '../../Interfaces/Interfaces';
 import {ClassDBClass} from '../../Interfaces/Interfaces';
 import Grid from "./Grid";
 
 type Props = {
-    year: number;
-    classList: ClassDBClass[];
+    year: string;
+    classList: FlowchartClass[];
     id: string;
     termName: string;
     termType: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     totalUnits: number;
+    flowchartClassCache: { [classId: string]: ClassDisplayInformation };
 };
 
+function Term({year, classList, id, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
 function Term({year, classList, id, termName, termType, handleRightClick, totalUnits}: Props): JSX.Element {
     const termAsLetter = termType.match("Quarter") ? "Q" : "S";
 
@@ -33,10 +36,10 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
                     <div className='body'
                          ref={provided.innerRef}
                          {...provided.droppableProps}>
-                        {classList.map((currentClass: ClassDBClass, i: number) => (
+                        {classList.map((currentClass: FlowchartClass, i: number) => (
                             <Class key={i}
                                    index={i}
-                                   classData={currentClass}
+                                   classData={flowchartClassCache[currentClass.uuid]}
                                    handleRightClick={handleRightClick}
                                    term={id}/>
                         ))}

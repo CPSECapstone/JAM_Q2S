@@ -2,13 +2,16 @@ import React, {useState} from 'react';
 import '../CSS/Class.css';
 import {Draggable} from '@hello-pangea/dnd';
 import {StyledClass} from '../StyledComponents/ClassStyles';
-import {ClassDBClass, EmbeddedSemesterClassData, QuarterClassData} from '../../Interfaces/Interfaces';
+import {
+    ClassDisplayInformation,
+    EmbeddedSemesterClassData,
+} from '../../Interfaces/Interfaces';
 import EmbeddedClass from "./EmbeddedClass";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {Tooltip} from "react-tooltip";
 
 interface classProps {
-    classData: ClassDBClass;
+    classData: ClassDisplayInformation;
     index: number;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     term: string;
@@ -32,9 +35,7 @@ const tooltipStyles = {
 }
 
 function Class({index, classData, handleRightClick, term}: classProps) {
-    const data: QuarterClassData = classData.classData;
     const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
-
     const toggleEmbeddedClass = () => {
         setEmbeddedClassOpen(!isEmbeddedClassOpen);
     };
@@ -60,10 +61,10 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                         <InfoOutlinedIcon fontSize="small" id={"id" + classData.uuid}/>
                     </div>
                     <div className='courseCode'>
-                        <p>{data.id + ' (' + data.units + ')'}</p>
+                        <p>{classData.id + ' (' + classData.units + ')'}</p>
                     </div>
                     <div className='courseName'>
-                        <p>{data.displayName}</p>
+                        <p>{classData.displayName}</p>
                     </div>
                     <div className="embeddedClasses">
                         {isEmbeddedClassOpen && mockData.map((data, index) => (
@@ -80,12 +81,12 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                         delayShow={100}
                         opacity={100}
                         style={tooltipStyles}>
-                        <b>{data.id + "\n"}</b><br></br>
-                        {data.displayName}<br></br>
+                        <b>{classData.id + "\n"}</b><br></br>
+                        {classData.displayName}<br></br>
                         <hr></hr>
-                        {data.desc}
+                        {classData.desc}
                         <hr></hr>
-                        {data.addl}
+                        {classData.addl}
                     </Tooltip>
                 </StyledClass>)}
         </Draggable>

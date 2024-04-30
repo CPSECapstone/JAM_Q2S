@@ -1,0 +1,189 @@
+package rules
+import com.Q2S.Q2S_Senior_Project.Models.CourseMapping
+import java.util.Arrays
+import java.util.List;
+
+rule "Mapping for CSC101"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC101")
+	then
+		courseMapping.setMapping(Arrays.asList("CSC1001", "CSC1002"));
+	end
+
+rule "Mapping for CSC202"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC202")
+	then
+		courseMapping.setMapping(Arrays.asList("CSC2001", "CSC2002"));
+	end
+
+rule "Mapping for CSC123"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC123")
+	then
+		courseMapping.setMapping(Arrays.asList("CSC1000", "CSC1024"));
+	end
+
+rule "Mapping for CSC203"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC203")
+	then
+		courseMapping.setMapping(Arrays.asList("CSC1002", "CSC2002"));
+	end
+
+rule "Mapping for CSC/CPE357"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC357" || startCourse=="CPE357")
+	then
+		courseMapping.setMapping(List.of("CSC2050"));
+	end
+
+rule "Mapping for CSC225"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC225")
+	then
+		courseMapping.setMapping(List.of("CPE2300"));
+	end
+
+rule "Mapping for CSC307"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC307")
+	then
+		courseMapping.setMapping(List.of("CSC3100"));
+	end
+
+rule "Mapping for CSC430"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC430")
+	then
+		courseMapping.setMapping(List.of("CSC3300"));
+	end
+
+rule "Mapping for CSC349"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC349")
+	then
+		courseMapping.setMapping(List.of("CSC3449"));
+	end
+
+rule "Mapping for CSC453"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC453")
+	then
+		courseMapping.setMapping(List.of("CSC4553"));
+	end
+
+rule "Mapping for CSC365"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC365")
+	then
+		courseMapping.setMapping(List.of("CSC3665"));
+	end
+
+rule "Mapping for CSC445"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC445")
+	then
+		courseMapping.setMapping(List.of("CSC3445"));
+	end
+
+rule "Mapping for CSC308 or CSC309"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC308" || startCourse=="CSC309")
+	then
+		courseMapping.setMapping(List.of("CSC3100"));
+	end
+
+rule "Mapping for CSC321 or CSC323 or CSC325"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC321" || startCourse=="CSC323" || startCourse=="CSC325")
+	then
+		courseMapping.setMapping(List.of("CSC3201"));
+	end
+
+rule "Mapping for CSC364"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC364")
+	then
+		courseMapping.setMapping(List.of("CSC3001"));
+	end
+
+rule "Mapping for CSC464"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC464")
+	then
+		courseMapping.setMapping(List.of("CSC4464"));
+	end
+
+rule "Mapping for CSC469"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC469")
+	then
+		courseMapping.setMapping(List.of("CSC4669"));
+	end
+
+//DOUBLE CHECK THIS ONE
+rule "Mapping for CSC491"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC491")
+	then
+		courseMapping.setMapping(List.of("CSC4460"));
+	end
+
+//rule "Mapping for CSC492"
+//	when
+//		courseMapping: CourseMapping(startCourse=="CSC492")
+//	then
+//		courseMapping.setMapping(List.of("CSC4460"));
+//	end
+
+rule "Mapping for CSC248"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC248")
+	then
+		courseMapping.setMapping(List.of("MATH2031"));
+	end
+
+rule "Mapping for MATH206 or MATH244"
+	when
+		courseMapping: CourseMapping(startCourse=="MATH206" || startCourse=="MATH244")
+	then
+		courseMapping.setMapping(List.of("MATH1151"));
+	end
+
+rule "Mapping for CSC300 or PHIL323"
+	when
+		courseMapping: CourseMapping(startCourse=="CSC300" || startCourse=="PHIL323")
+	then
+		courseMapping.setMapping(List.of("PHIL3323"));
+	end
+
+rule "Mapping for PHYS141"
+	when
+		courseMapping: CourseMapping(startCourse=="PHYS141")
+	then
+		courseMapping.setMapping(List.of("PHYS1141"));
+	end
+
+rule "Mapping for CHEM124"
+	when
+		courseMapping: CourseMapping(startCourse=="CHEM124")
+	then
+		courseMapping.setMapping(List.of("CHEM1120"));
+	end
+
+rule "Mapping for STAT312"
+	when
+		courseMapping: CourseMapping(startCourse=="STAT312")
+	then
+		courseMapping.setMapping(List.of("STAT3210"));
+	end
+
+//COME BACK TO
+rule "Mapping for ES/WGQS350"
+	when
+		courseMapping: CourseMapping(startCourse=="ES350" || startCourse=="ES350" || startCourse=="ES351")
+	then
+		courseMapping.setMapping(List.of("WGQS3350"));
+	end
+
