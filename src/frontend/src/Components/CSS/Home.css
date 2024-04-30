@@ -1,23 +1,28 @@
 .Home {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(8, 1fr) auto;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     height: 100%;
     font-family: Inter;
 }
 
-
-.sideBar {
-    grid-area: 2 / 1 / 10 / 3;
-}
 
 .topBar {
     grid-area: 1 / 1 / 2 / 10;
 }
 
 .grid {
-    grid-area: 2 / 3 / 9 / 10;
     overflow: scroll;
+    flex: 4;
+}
+.sideBar {
+    flex: 1;
+}
+
+.bottom-screen {
+    grid-area: 2 / 1 / 6 / 6;
+    display: flex;
+
 }
 
 .noFlowchartMessage {

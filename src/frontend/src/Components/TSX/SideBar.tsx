@@ -148,7 +148,7 @@ function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormProps) {
                             onClick={onClose}>
                     <IndeterminateCheckBoxOutlinedIcon/>
                 </IconButton>
-                <text className="popup-text">ENTER NEW FLOW NAME</text>
+                <p className="popup-text">ENTER NEW FLOW NAME</p>
                 <input type="text" value={inputValue} onChange={handleChange} />
                 <button onClick={handleSubmit}>Submit</button>
             </div>

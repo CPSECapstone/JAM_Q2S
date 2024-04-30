@@ -11,11 +11,13 @@ function TopBar(): JSX.Element {
             <div className='profile'>
                 <UserMenu></UserMenu>
             </div>
-            <div className='titleBar'>
-                <TitleBar></TitleBar>
-            </div>
-            <div className='editBar'>
-                <EditBar></EditBar>
+            <div className="flowchartInfo">
+                <div className='titleBar'>
+                    <TitleBar></TitleBar>
+                </div>
+                <div className='editBar'>
+                    <EditBar></EditBar>
+                </div>
             </div>
         </div>
     )
