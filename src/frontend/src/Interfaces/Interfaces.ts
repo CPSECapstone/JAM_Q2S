@@ -36,6 +36,8 @@ export interface TermData {
     tIndex: number;
     courses: FlowchartClass[];
     tUnits: string;
+    termName: string;
+    termType: string;
 }
 
 export interface ContextMenuData {

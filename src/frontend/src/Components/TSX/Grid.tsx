@@ -174,7 +174,8 @@ function Grid({setTotalUnits, loading, setLoading}: GridProps) {
                                 <div className='term' key={term.tIndex}>
                                     <Term year={term.tIndex} classList={classes}
                                           totalUnits={Number(term.tUnits) || 0}
-                                          id={term.tIndex.toString()} handleRightClick={handleRightClick}/>
+                                          id={term.tIndex.toString()} handleRightClick={handleRightClick} 
+                                          termName={term.termName} termType={term.termType}/>
                                 </div>
                             );
                         })

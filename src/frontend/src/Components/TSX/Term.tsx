@@ -9,21 +9,23 @@ type Props = {
     year: number;
     classList: ClassDBClass[];
     id: string;
+    termName: string;
+    termType: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     totalUnits: number;
 };
 
-function Term({year, classList, id, handleRightClick, totalUnits}: Props): JSX.Element {
-    const termType = year < 2026 ? "Q" : "S";
+function Term({year, classList, id, termName, termType, handleRightClick, totalUnits}: Props): JSX.Element {
+    const termAsLetter = termType.match("Quarter") ? "Q" : "S";
 
     return (
         <div className='term'>
             <div className='title'>
                 <div className="centered">
-                    <p style={{margin: 0}}>{year.toString()}</p>
+                    <p style={{margin: 0}}>{termName}</p>
                 </div>
                 <div className="right-aligned">
-                    <p style={{margin: 0}}>{termType}</p>
+                    <p style={{margin: 0}}>{termAsLetter}</p>
                 </div>
             </div>
             <Droppable droppableId={id}>
