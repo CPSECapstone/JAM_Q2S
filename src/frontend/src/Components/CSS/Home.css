@@ -13,10 +13,13 @@
 
 .grid {
     overflow: scroll;
-    flex: 4;
+    width:100%;
+    flex:4;
+    background-color: #ffffff;
+    z-index:999999;
 }
 .sideBar {
-    flex: 1;
+    /*margin-right:-25%;*/
 }
 
 .bottom-screen {

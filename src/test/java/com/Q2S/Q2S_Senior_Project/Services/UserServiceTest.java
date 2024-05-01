@@ -22,7 +22,7 @@ class UserServiceTest {
     @Test
     void getUpdatedUser_fromNullStartUser() {
         UserModel originalUserData = new UserModel();
-        UserModel updatedUserData = new UserModel(1,"testUN", "testFName", "lastName","badEmail", "badPassword");
+        UserModel updatedUserData = new UserModel("testUN", "testFName", "lastName","badEmail", "badPassword");
         UserModel actual = UserService.getUpdatedUser(originalUserData, updatedUserData);
 
         assertEquals(updatedUserData.getUser_name(), actual.getUser_name());
@@ -30,14 +30,14 @@ class UserServiceTest {
         assertEquals(updatedUserData.getLast_name(), actual.getLast_name());
         assertEquals(updatedUserData.getUser_name(), actual.getUser_name());
         //id, password, and email should remain unchanged
-        assertEquals(originalUserData.getId(), actual.getId());
+        assertEquals(originalUserData.getUserId(), actual.getUserId());
         assertNull(actual.getEmail());
         assertNull(actual.getPassword());
     }
 
     @Test
     void getUpdatedUser_fromNullNewUser() {
-        UserModel originalUserData = new UserModel(1,"testUN", "testFName", "lastName","badEmail", "badPassword");
+        UserModel originalUserData = new UserModel("testUN", "testFName", "lastName","badEmail", "badPassword");
         originalUserData.setMajor("testMajor");
         originalUserData.setMinor("testMinor");
         originalUserData.setConcentration("testConc");
@@ -49,7 +49,7 @@ class UserServiceTest {
         UserModel actual = UserService.getUpdatedUser(originalUserData, updatedUserData);
 
         //all fields should remain unchanged
-        assertEquals(originalUserData.getId(), actual.getId());
+        assertEquals(originalUserData.getUserId(), actual.getUserId());
         assertEquals(originalUserData.getUser_name(), actual.getUser_name());
         assertEquals(originalUserData.getFirst_name(), actual.getFirst_name());
         assertEquals(originalUserData.getLast_name(), actual.getLast_name());
@@ -66,13 +66,13 @@ class UserServiceTest {
 
     @Test
     void getUpdatedUser_fromMixedNullInfo() {
-        UserModel originalUserData = new UserModel(1,"testUN", "testFName", "lastName","badEmail", "badPassword");
+        UserModel originalUserData = new UserModel("testUN", "testFName", "lastName","badEmail", "badPassword");
         originalUserData.setMajor("testMajor");
         originalUserData.setMinor("testMinor");
         originalUserData.setConcentration("testConc");
         originalUserData.setCatalog_year("2022-2026");
         originalUserData.setTerm_admitted("test 2024");
-        UserModel updatedUserData = new UserModel(1, "newUN", null, null, "newEmail", "newPassword");
+        UserModel updatedUserData = new UserModel("newUN", null, null, "newEmail", "newPassword");
         updatedUserData.setMajor("newMajor");
         //null minor
         updatedUserData.setConcentration("newConc");
@@ -86,7 +86,7 @@ class UserServiceTest {
         assertEquals(updatedUserData.getConcentration(), actual.getConcentration());
 
         //all other fields should remain unchanged
-        assertEquals(originalUserData.getId(), actual.getId());
+        assertEquals(originalUserData.getUserId(), actual.getUserId());
         assertEquals(originalUserData.getFirst_name(), actual.getFirst_name());
         assertEquals(originalUserData.getLast_name(), actual.getLast_name());
         assertEquals(originalUserData.getUser_name(), actual.getUser_name());
@@ -115,9 +115,9 @@ class UserServiceTest {
     void testAddUser() {
         when(userRepository.findByEmail(anyString())).thenReturn(null);
 
-        when(userRepository.save(any(UserModel.class))).thenReturn(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", "hashedPassword"));
+        when(userRepository.save(any(UserModel.class))).thenReturn(new UserModel( "testUser", "John", "Doe", "test@example.com", "hashedPassword"));
 
-        UserModel user = new UserModel(1L, "testUser", "John", "Doe", "test@example.com", "password");
+        UserModel user = new UserModel("testUser", "John", "Doe", "test@example.com", "password");
 
         boolean result = userService.addUser(user);
 
@@ -146,7 +146,7 @@ class UserServiceTest {
         String password = "password";
         String hashedPassword = userService.hashPassword(password);
 
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", hashedPassword)));
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel("testUser", "John", "Doe", "test@example.com", hashedPassword)));
 
         boolean result = userService.authenticateUser("test@example.com", password);
 
@@ -156,7 +156,7 @@ class UserServiceTest {
 
     @Test
     void testAuthenticateUserInvalidPassword() {
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel(1L, "testUser", "John", "Doe", "test@example.com", "differentHashedPassword")));
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(new UserModel("testUser", "John", "Doe", "test@example.com", "differentHashedPassword")));
 
         boolean result = userService.authenticateUser("test@example.com", "password");
 

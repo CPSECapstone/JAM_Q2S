@@ -4,8 +4,10 @@ import TitleBar from "./TitleBar";
 import EditBar from "./EditBar";
 import UserMenu from "./UserMenu";
 
-
-function TopBar(): JSX.Element {
+interface TopBarProps {
+    toggleSideBar: () => void;
+}
+function TopBar({toggleSideBar} : TopBarProps): JSX.Element {
     return (
         <div className='topBar'>
             <div className='profile'>
@@ -16,7 +18,7 @@ function TopBar(): JSX.Element {
                     <TitleBar></TitleBar>
                 </div>
                 <div className='editBar'>
-                    <EditBar></EditBar>
+                    <EditBar toggleSideBar={toggleSideBar}></EditBar>
                 </div>
             </div>
         </div>
