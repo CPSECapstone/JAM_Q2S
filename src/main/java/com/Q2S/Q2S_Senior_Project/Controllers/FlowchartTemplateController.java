@@ -79,7 +79,8 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setTermData(content);
+        JsonNode termData = jsonNode.get("termData");
+        template.setTermData(objectMapper.writeValueAsString(termData));
         return template;
     }
 

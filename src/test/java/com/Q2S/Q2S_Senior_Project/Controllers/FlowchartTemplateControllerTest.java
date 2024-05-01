@@ -24,7 +24,7 @@ class FlowchartTemplateControllerTest {
      */
     @Test
     void testGetFlowchartTemplate_ValidMatch() throws IOException {
-        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
+        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchartTemplate.json");
         FlowchartTemplateDataModel CS_Data = new FlowchartTemplateDataModel();
         CS_Data.setCatalog("Catalog");
         CS_Data.setCode("Test Code");
@@ -48,7 +48,7 @@ class FlowchartTemplateControllerTest {
      */
     @Test
     void testGetFlowchartTemplate_InvalidMatch() throws IOException {
-        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
+        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchartTemplate.json");
         List<FlowchartTemplateDataModel> flowDataList = new ArrayList<>();
         Exception exception = assertThrows(IOException.class, () -> {
             FlowchartTemplateController.getFlowchartTemplate(CS_GeneralFlowchartFile, flowDataList);
@@ -66,7 +66,7 @@ class FlowchartTemplateControllerTest {
      */
     @Test
     void testGetFlowchartTemplate_ConflictingMatch() throws IOException {
-        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchart.json");
+        File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchartTemplate.json");
         FlowchartTemplateDataModel data1 = new FlowchartTemplateDataModel();
         data1.setCode("Test Code");
         FlowchartTemplateDataModel data2_conflicting = new FlowchartTemplateDataModel();
