@@ -125,7 +125,7 @@ class UserFlowchartControllerTest {
         Exception exception = assertThrows(IllegalStateException.class, () ->
                 UserFlowchartController.createNewUserQuarterFlowchart("Spring 2026", "{\"termData\": \"hello\"}"));
 
-        String expectedMessage = "\"termData\" field is improperly formatted. It should be an array.";
+        String expectedMessage = "Flowchart template is improperly formatted. It should be an array.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage,actualMessage);
     }

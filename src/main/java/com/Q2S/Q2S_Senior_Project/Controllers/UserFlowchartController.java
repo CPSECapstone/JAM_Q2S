@@ -60,7 +60,7 @@ public class UserFlowchartController {
         ObjectMapper mapper = new ObjectMapper();
         int[] intInfo = getValidatedTermAdmittedYearAndOrdinal(termAdmitted);
         JsonNode rootNode = getValidatedFlowchartTemplateInfo(flowchartTemplate);
-        ArrayNode terms = (ArrayNode) rootNode.get("termData");
+        ArrayNode terms = (ArrayNode) rootNode;
         int termSeasonIterator = intInfo[1] -1; //iterate from one term before when the students started
         int year = (TermSeason.values()[intInfo[1]] == TermSeason.Winter) ? intInfo[0] - 1: intInfo[0];
         int offset = 0;
@@ -141,9 +141,8 @@ public class UserFlowchartController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             rootNode = objectMapper.readTree(flowchartTemplate);
-            JsonNode terms = rootNode.get("termData");
-            if (!terms.isArray()){
-                throw new IllegalStateException("\"termData\" field is improperly formatted. It should be an array.");
+            if (!rootNode.isArray()){
+                throw new IllegalStateException("Flowchart template is improperly formatted. It should be an array.");
             }
         } catch (JsonProcessingException e){
             throw new IllegalStateException("Flowchart is in invalid JSON format.");
