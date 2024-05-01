@@ -82,23 +82,8 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setTermData(makeJsonFrontendCompatible(content));
+        template.setTermData(content);
         return template;
-    }
-
-    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
-        JsonNode termData = coursesNode.get("termData");
-        for(JsonNode term : termData){
-            JsonNode classes = term.get("courses");
-            for(JsonNode flowchartClass : classes){
-                ((ObjectNode) flowchartClass).put("taken", false);
-                UUID uuid = UUID.randomUUID();
-                ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
-            }
-        }
-        return objectMapper.writeValueAsString(termData);
     }
 
     @PostMapping("/api/FlowchartTemplates")

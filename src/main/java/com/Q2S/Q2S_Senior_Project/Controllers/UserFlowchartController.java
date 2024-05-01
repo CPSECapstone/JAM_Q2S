@@ -10,10 +10,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RestController
@@ -43,10 +45,10 @@ public class UserFlowchartController {
         return userFlowchartRepo.findAll();
     }
 
-//    @GetMapping("/api/UserFlowcharts/{userId}")
-//    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
-//        return userFlowchartRepo.findByUserIdId(userId);
-//    }
+    @GetMapping("/api/UserFlowcharts/{userId}")
+    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
+        return userFlowchartRepo.findByUserIdUserId(userId);
+    }
 
     /**
      * Personalizes the given quarter flowchart template to match the given term admitted
@@ -148,6 +150,26 @@ public class UserFlowchartController {
             throw new IllegalStateException("Flowchart is in invalid JSON format.");
         }
         return rootNode;
+    }
+
+    /**
+     *
+     * @param originalFlowchart flowchart template string from database
+     * @return JSON String with taken and uuid fields for each course
+     * @throws JsonProcessingException - invalid JSON
+     */
+    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
+        for(JsonNode term : coursesNode){
+            JsonNode classes = term.get("courses");
+            for(JsonNode flowchartClass : classes){
+                ((ObjectNode) flowchartClass).put("taken", false);
+                UUID uuid = UUID.randomUUID();
+                ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
+            }
+        }
+        return objectMapper.writeValueAsString(coursesNode);
     }
 
     /**
