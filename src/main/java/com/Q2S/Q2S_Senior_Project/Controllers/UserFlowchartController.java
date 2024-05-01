@@ -83,6 +83,7 @@ public class UserFlowchartController {
         }
         String jsonTermData;
         try {
+            //when termAdmitted is forced to be NonNull in UserModel we can grab it from the UserModel instead
             jsonTermData = makeJsonFrontendCompatible(createNewUserQuarterFlowchart(dto.getTerm_admitted(), flowchartTemplateModel.getTermData()));
         } catch (IOException e) {
             return ResponseEntity.unprocessableEntity().build();
