@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable(value = "id") long id,
+    public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
                                                 @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");
