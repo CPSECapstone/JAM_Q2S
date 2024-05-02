@@ -6,6 +6,7 @@ import axios from 'axios'; // Removed AxiosResponse import as it's not needed
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
+import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
@@ -15,6 +16,7 @@ const Home = () => {
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
     }>({})
+    const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
     useEffect(() => {
         const loadClassCache = async () => {
             try {
@@ -33,35 +35,40 @@ const Home = () => {
         loadClassCache();
     }, []);
 
+    const toggleSideBar = () => {
+        setSidebarVisible(!sidebarVisible);
+    }
     return (
         loading ? <Loader/> : (
             <div className='Home'>
-                <div className='sideBar'>
-                    <SideBar
-                        quarterClassCache={quarterClassCache}
-                        selectedUserFlowchart={selectedUserFlowchart}
-                        setSelectedUserFlowchart={setSelectedUserFlowchart}
-                        setFlowchartClassCache={setFlowchartClassCache}/>
-                </div>
                 <div className='topBar'>
-                    <TopBar/>
+                    <TopBar toggleSideBar={toggleSideBar}/>
                 </div>
-                <div className='grid'>
-                    {selectedUserFlowchart ? (
-                        <>
-                            <Grid setTotalUnits={setTotalUnits}
-                                  selectedUserFlowchart={selectedUserFlowchart}
-                                  setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                  flowchartClassCache={flowchartClassCache}/>
-                            <div className="totalUnits">
-                                Total Units: {totalUnits}
+                <div className="bottom-screen">
+
+                    <StyledSideBar $open={sidebarVisible}>
+                        <SideBar
+                            quarterClassCache={quarterClassCache}
+                            selectedUserFlowchart={selectedUserFlowchart}
+                            setSelectedUserFlowchart={setSelectedUserFlowchart}
+                            setFlowchartClassCache={setFlowchartClassCache}/>
+                    </StyledSideBar>
+
+                    <div className='grid'>
+                        {selectedUserFlowchart ? (
+                            <>
+                                <Grid setTotalUnits={setTotalUnits}
+                                      selectedUserFlowchart={selectedUserFlowchart}
+                                      setSelectedUserFlowchart={setSelectedUserFlowchart}
+                                      flowchartClassCache={flowchartClassCache}/>
+                            </>
+                        ) : (
+                            <div className='noFlowchartMessage'>
+                                <h3>No flowchart selected</h3>
+                                <p>Please select or create a flowchart</p>
                             </div>
-                        </>
-                    ) : (
-                        <div className='noFlowchartMessage'>
-                            <p>No flowchart selected, please select or create a flowchart</p>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         )
