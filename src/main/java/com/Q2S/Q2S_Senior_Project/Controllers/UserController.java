@@ -59,7 +59,7 @@ public class UserController {
         return ResponseEntity.badRequest().body("Invalid User Id");
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         return userService.findUserById(id);

@@ -51,16 +51,19 @@ public class UserFlowchartController {
     @Autowired
     private FlowchartTemplateController flowchartTemplateController;
 
+    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/api/UserFlowcharts")
     List<UserFlowchartModel> getAllFlowcharts(){
         return userFlowchartRepo.findAll();
     }
 
+    @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/api/UserFlowcharts/{userId}")
     List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
         return userFlowchartRepo.findByUserIdUserId(userId);
     }
 
+    @CrossOrigin(origins="http://localhost:3000")
     @PostMapping("/api/UserFlowcharts/{userId}")
     ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@PathVariable long userId,
                                                           @Validated @RequestBody NewUserFlowchartDTO dto){
