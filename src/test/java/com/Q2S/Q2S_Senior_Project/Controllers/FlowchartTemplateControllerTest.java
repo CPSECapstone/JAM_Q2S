@@ -25,6 +25,7 @@ class FlowchartTemplateControllerTest {
     @Test
     void testGetFlowchartTemplate_ValidMatch() throws IOException {
         File CS_GeneralFlowchartFile = new File("src/test/testJSONs/testFlowchartTemplate.json");
+        File result = new File("src/test/testJSONs/testFlowchartTemplateDatabaseVersion.json");
         FlowchartTemplateDataModel CS_Data = new FlowchartTemplateDataModel();
         CS_Data.setCatalog("Catalog");
         CS_Data.setCode("Test Code");
@@ -35,7 +36,7 @@ class FlowchartTemplateControllerTest {
         assertEquals("Catalog", testData.getCatalog());
         assertEquals("Major", testData.getMajor());
         assertEquals("Example Concentration", testData.getConcentration());
-        String fileContent = new String(Files.readAllBytes(CS_GeneralFlowchartFile.toPath()));
+        String fileContent = new String(Files.readAllBytes(result.toPath()));
         ObjectMapper mapper = new ObjectMapper();
         JsonNode expectedJson = mapper.readTree(fileContent).get("termData");
         JsonNode actualJson = mapper.readTree(testData.getTermData());
