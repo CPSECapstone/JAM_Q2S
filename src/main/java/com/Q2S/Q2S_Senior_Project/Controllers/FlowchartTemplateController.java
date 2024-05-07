@@ -37,6 +37,9 @@ public class FlowchartTemplateController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/FlowchartTemplates/fromScratch")
     List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
+
+        flowchartTemplateRepo.deleteByCatalog("2022-2026");
+
         ObjectMapper mapper = new ObjectMapper();
         String templateDataFilePath = "data/2022-2026FlowTemplateData.json";
         File dataFile = new File(templateDataFilePath);

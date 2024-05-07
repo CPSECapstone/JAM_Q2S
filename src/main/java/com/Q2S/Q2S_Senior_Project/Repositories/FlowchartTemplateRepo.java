@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface FlowchartTemplateRepo extends JpaRepository<FlowchartTemplateModel, Long> {
 
     Optional<FlowchartTemplateModel> findByCatalogAndAndMajorAndConcentration(String catalog, String major, String concentration);
+
+    void deleteByCatalog(String catalog);
 }
