@@ -3,9 +3,11 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateModel;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateDataModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.FlowchartTemplateRepo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class FlowchartTemplateController {
@@ -80,9 +83,25 @@ public class FlowchartTemplateController {
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
         JsonNode termData = jsonNode.get("termData");
-        template.setTermData(objectMapper.writeValueAsString(termData));
+        template.setTermData(removeTIndex(termData));
         return template;
     }
+
+    /**
+     * Removes the unnecessary tIndex field from each term
+     *
+     * @param termData JsonNode for the list of terms from a flowchart template
+     * @return  String representation of the final template
+     * @throws JsonProcessingException for invalid JSON
+     */
+    public static String removeTIndex(JsonNode termData) throws JsonProcessingException {
+        for(JsonNode term : termData){
+            ((ObjectNode) term).remove("tIndex");
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(termData);
+    }
+
 
     @PostMapping("/api/FlowchartTemplates")
     public FlowchartTemplateModel saveFlowchartTemplate(@Validated @RequestBody FlowchartTemplateModel flowchartTemplate) {
