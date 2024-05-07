@@ -3,14 +3,18 @@
     height: 100%;
     display: flex;
     flex-flow: column;
+    border-right: solid #BD8B13;
+    border-bottom: solid #BD8B13;
 }
 .title{
     background-color: #DFD6C4;
     display:flex;
     justify-content: center;
 }
+.title p{
+    align-items: center;
+}
 .body{
-    border: solid #BD8B13;
     height: 100%;
     overflow-y: scroll;
 }

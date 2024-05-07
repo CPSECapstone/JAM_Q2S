@@ -3,6 +3,8 @@
     flex-direction: column;
     height: 100%;
     background: #fff6e7;
+    border-right: solid #BD8B13;
+
 
 }
 .sidebarRow{

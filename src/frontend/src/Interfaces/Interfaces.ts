@@ -38,6 +38,8 @@ export interface FlowchartClass {
 
 export interface TermData {
     tIndex: number;
+    termName: string;
+    termType: string;
     courses: FlowchartClass[];
     tUnits: string;
 }

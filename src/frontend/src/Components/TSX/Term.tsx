@@ -9,11 +9,10 @@ type Props = {
     classList: FlowchartClass[];
     id: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
-    totalUnits: number;
     flowchartClassCache: { [classId: string]: ClassDisplayInformation };
 };
 
-function Term({year, classList, id, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
+function Term({year, classList, id, handleRightClick, flowchartClassCache}: Props): JSX.Element {
     return (
         <div className='term'>
             <div className='title'>
@@ -36,7 +35,12 @@ function Term({year, classList, id, handleRightClick, totalUnits, flowchartClass
                 )}
             </Droppable>
             <div className="termTotalUnits" style={{textAlign: 'center', margin: 0}}>
-                <p style={{margin: 0}}>{totalUnits}</p>
+                <p style={{ margin: 0 }}>
+                    {classList.reduce((sum: number, course: FlowchartClass) => (
+                        sum + Number(flowchartClassCache[course.uuid].units)
+                    ), 0)}
+                </p>
+
             </div>
         </div>
     );
