@@ -13,17 +13,30 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing user-related operations.
+ */
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for UserService.
+     *
+     * @param userRepository The UserRepository instance to use
+     */
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    // Helper method to hash passwords using SHA-256
+    /**
+     * Hashes the given password using SHA-256.
+     *
+     * @param password The password to hash
+     * @return The hashed password
+     */
     public String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -40,6 +53,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param user The user to register
+     * @return true if the user is registered successfully, false otherwise
+     */
     @Transactional
     public boolean addUser(UserModel user) {
         // Check if the email already exists
@@ -55,6 +74,13 @@ public class UserService {
         return true;
     }
 
+    /**
+     * Authenticates a user.
+     *
+     * @param email    The user's email
+     * @param password The user's password
+     * @return true if the user is authenticated, false otherwise
+     */
     @Transactional
     public boolean authenticateUser(String email, String password) {
         Optional<UserModel> user = userRepository.findByEmail(email);
@@ -63,11 +89,22 @@ public class UserService {
         return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
     }
 
+    /**
+     * Retrieves all users.
+     *
+     * @return The list of all users
+     */
     @Transactional
     public List<UserModel> findAllUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Retrieves a user by ID.
+     *
+     * @param id The ID of the user to retrieve
+     * @return The user with the specified ID, or null if not found
+     */
     @Transactional
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         Optional<UserModel> user = userRepository.findById(id);
@@ -77,6 +114,12 @@ public class UserService {
         );
     }
 
+    /**
+     * Retrieves a user by email.
+     *
+     * @param email The email of the user to retrieve
+     * @return The user with the specified email, or null if not found
+     */
     @Transactional
     public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
         Optional<UserModel> user = userRepository.findByEmail(email);
@@ -86,7 +129,12 @@ public class UserService {
         );
     }
 
-    @Transactional
+    /**
+     * Deletes a user by ID.
+     *
+     * @param userId The ID of the user to delete
+     * @return true if the user is deleted successfully, false otherwise
+     */
     public boolean deleteUserById(long userId) {
         // Check if the user exists
         Optional<UserModel> optionalUser = userRepository.findById(userId);
@@ -98,6 +146,13 @@ public class UserService {
         }
     }
 
+    /**
+     * Updates user information.
+     *
+     * @param id          The ID of the user to update
+     * @param updatedUser The updated user information
+     * @return true if the user information is updated successfully, false otherwise
+     */
     public boolean updateUserInfo(long id, UserModel updatedUser) {
         // Retrieve the user entity by its ID
         UserModel user = userRepository.findById(id).orElse(null);
@@ -110,8 +165,15 @@ public class UserService {
         return false;
     }
 
+    /**
+     * Updates a UserModel instance with the provided changes.
+     *
+     * @param user         The original UserModel instance
+     * @param updatedUser  The UserModel instance with the updates
+     * @return The updated UserModel instance
+     */
     public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
-        //can update any field expect email and password which must be done with a distinct call
+        //can update any field except email and password which must be done with a distinct call
         if (updatedUser.getUser_name() != null){
             user.setUser_name(updatedUser.getUser_name());
         }
@@ -142,4 +204,3 @@ public class UserService {
         return user;
     }
 }
-

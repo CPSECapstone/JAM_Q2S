@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import About from './pages/About';
 import {PublicClientApplication} from "@azure/msal-browser";
 import { UserAuthProvider } from "./Context/AuthContext";
 import { MsalProvider, AuthenticatedTemplate, useMsal, UnauthenticatedTemplate } from '@azure/msal-react';
@@ -34,6 +35,7 @@ const MainContent = () => {
                 <AuthenticatedTemplate>
                     <Routes>
                         <Route path='/home' element={<Home/>}/>
+                        <Route path='/about' element={<About/>}/>
                     </Routes>
                 </AuthenticatedTemplate>
             </UserAuthProvider>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -74,6 +75,12 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                         </MenuItem>
                         <MenuItem>
                             <ListItemText>{user?.major}</ListItemText>
+                        </MenuItem>
+                        <MenuItem >
+                            <ListItemIcon>
+                                <EmojiPeopleIcon/>
+                            </ListItemIcon>
+                            <Link to="/about">About Us</Link>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon>
