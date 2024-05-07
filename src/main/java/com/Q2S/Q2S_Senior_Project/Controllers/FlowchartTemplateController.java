@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 @RestController
 public class FlowchartTemplateController {
 
@@ -28,15 +31,18 @@ public class FlowchartTemplateController {
     }
 
     /**
-     * API to compile data of Poly Flow Builder's quarter flowchart templates and
-     * input as rows into our database
+     * API that
+     *      deletes all current 2022-2026 flowcharts
+     *      compiles data of Poly Flow Builder's quarter flowchart templates and
+     *          input as rows into our database
      *
      * @return          the list of flowchart templates added to the database
      * @throws IOException  thrown on invalid file paths or by object mapper
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @Transactional
+    @CrossOrigin(origins = "*")
     @PostMapping("/api/FlowchartTemplates/fromScratch")
-    List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
+    public List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
 
         flowchartTemplateRepo.deleteByCatalog("2022-2026");
 
