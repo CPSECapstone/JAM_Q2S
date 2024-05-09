@@ -63,6 +63,15 @@ public class UserFlowchartController {
         return userFlowchartRepo.findByUserIdUserId(userId);
     }
 
+    /**
+     *
+     * @param userId id of user creating a flowchart
+     * @param dto   Data Transfer Object with info about flowchart to be made
+     * @return      ResponseEntity with the created flowchart if successful,
+     *              ResponseEntity.badRequest() if the userId is invalid,
+     *              ResponseEntity.notFound() if no template exists meeting the info of the dto, or
+     *              ResponseEntity.unprocessableEntity() if there is an error creating the flowchart JSON
+     */
     @CrossOrigin(origins="http://localhost:3000")
     @PostMapping("/api/UserFlowcharts/{userId}")
     ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@PathVariable long userId,
