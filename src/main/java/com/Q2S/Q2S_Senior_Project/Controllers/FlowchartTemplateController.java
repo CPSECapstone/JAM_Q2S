@@ -123,6 +123,15 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
 
+    /**
+     * Find a flowchart template by Catalog Major and Concentration (exact match of all 3)
+     *  Currently used to get the template to match user input when creating a new user flowchart
+     *
+     * @param catalog   catalog in YYYY-YYYY format (ex: "2022-2026")
+     * @param major     Major
+     * @param concentration Concentration
+     * @return  Corresponding Flowchart Template object or null if none exists
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/api/FlowchartTemplates/Search")
     FlowchartTemplateModel getFlowchartTemplateByCatalogMajorAndCon(@RequestParam(required = true) String catalog,
