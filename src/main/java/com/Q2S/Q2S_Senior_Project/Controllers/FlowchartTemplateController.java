@@ -106,18 +106,30 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.save(flowchartTemplate);
     }
 
+    /**
+     * Find flowchart template by its database id
+     *
+     * @param id    template id
+     * @return      corresponding template or null if none exist
+     */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates/{id}")
     FlowchartTemplateModel getFlowchartTemplateById(@PathVariable long id) {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
 
+    /**
+     * @return  all flowchart templates regardless of catalog, etc.
+     */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates")
     List<FlowchartTemplateModel> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();
     }
 
+    /**
+     * Delete All Flowcharts
+     */
     @DeleteMapping("/api/FlowchartTemplates")
     void deleteAllFlowchartTemplates(){
         flowchartTemplateRepo.deleteAll();
