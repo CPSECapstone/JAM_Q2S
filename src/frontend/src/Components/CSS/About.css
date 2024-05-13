@@ -1,22 +1,44 @@
 /* About.css */
 
 .About {
-    font-style: normal;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: white;
 }
 
-.about-section {
-    padding: 5%;
-    height: 100%;
-    text-align: center;
-    color: black;
-    background: white;
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
 }
 
+.topBar{
+    background-color: #2D5A48;
+    justify-content: space-between;
+}
+
+.divider{
+    width: 80%;
+    background: #2D5A48;
+    margin: 5%;
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FFFBF3;
+}
+
+.about-section {
+    padding: 2%;
+    width: 70%;
+    text-align: justify;
+    color: black;
+}
 
 .column {
     float: left;
@@ -25,12 +47,13 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 5%;
+    text-align: center;
 }
 
 .row{
     display: table;
-    background-color: #2D5A48;
-    width: 40%;
+    width: 70%;
+    padding: 2%;
 }
 
 .title {
@@ -42,17 +65,12 @@
     border: none;
     outline: 0;
     display: inline-block;
-    padding: 8px;
+    padding-right: 5%;
     color: white;
     background-color: #2D5A48;
     text-align: center;
     cursor: pointer;
-    width: 100%;
     border-radius: 10px;
-}
-
-.button:hover {
-    background-color: #555;
 }
 
 

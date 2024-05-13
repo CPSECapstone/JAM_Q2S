@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import '../Components/CSS/About.css';
 import {Link} from "react-router-dom";
+import Divider from "@mui/material/Divider";
 
 const About = () => {
     useEffect(() => {
@@ -8,51 +9,85 @@ const About = () => {
 
     return(
         <div className='About'>
-            <div className="about-section">
-                <h1>About Poly Planner Pro</h1>
-                <div>
-                    <p>Some text about who we are and what we do.</p>
-                    <p>Resize the browser window to see that this page is responsive by the way.</p>
-                </div>
-                <div>
-                    <button className='button'>
-                        <Link style={{color:'white', textDecoration: 'none'}} to="/home">HOME</Link>
-                    </button>
-                </div>
+            <div className='topBar'>
+                <h1 className="userName">PolyPlannerPro</h1>
+                <button className='button'>
+                    <Link style={{color:'white', textDecoration: 'none'}} to="/home">HOME</Link>
+                </button>
             </div>
-
-            <div className="row">
-                <h2 style={{padding: '2%', color: 'white', textAlign: 'center'}}>Our Team</h2>
-                <div className="column">
-                    <div className="card">
-                        <img src="/w3images/team1.jpg" alt="Jane" style={{width: "100%"}} />
-                            <div className="container">
-                                <h2>Jane Doe</h2>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            </div>
+            <div className="mainPage">
+                <div className="about-section">
+                    <h2 style={{textAlign: 'center', padding: '3%'}}>About Poly Planner Pro</h2>
+                    <div>
+                        <p>Poly Planner Pro is an interactive website that provides quarter-to-semester mappings and allows students to efficiently plan/visualize
+                            possible paths to graduation. It is a tool designed to assist students through their journey transitioning to semesters and beyond.</p>
+                        <p>Poly Planner Pro was initially commissioned by the Engineering Student Services at Cal Poly SLO as a Software
+                            Engineering Capstone project in Fall 2023. As of Fall 2023, Cal Poly was the last campus within the California State University system
+                            still on the quarter calendar. At the request of the Office of the Chancellor, the university was informed in October of 2021 that it
+                            would begin the process of converting to a semester calendar, which would be implemented by the start of the 2026-2027 academic year.
+                            As a result, students enrolled at Cal Poly will be going through the transition to semesters. It will be vital to ensure students are
+                            meeting their degree requirements throughout this period. Poly Planner Pro is a a web-based curriculum planner solution that will help
+                            alleviate advisor workload and provide clarity to students on their required courses.
+                        </p>
                     </div>
                 </div>
 
-                <div className="column">
-                    <div className="card">
-                        <img src="/w3images/team2.jpg" alt="Mike" style={{width: "100%"}}/>
-                            <div className="container">
-                                <h2>Mike Ross</h2>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            </div>
-                    </div>
-                </div>
+                <Divider sx={{ height: 2 }} className='divider'/>
 
-                <div className="column">
-                    <div className="card">
-                        <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
+                <div className="row">
+                    <h2 style={{padding: '3%', textAlign: 'center'}}>About Our Team</h2>
+                    <p>The original creators of Poly Planner Pro are a Software Engineering Capstone team called JAM.
+                        Team JAM consists of Andrew Estrada, Archie Jones, Jamie Luna, Jenny Ferriol and Mitashi Parikh,
+                        who were all 4th year Software Engineering majors at the time. JAM began working on Poly Planner
+                        Pro in Fall 2023 as a commission from the Engineering Student Services at Cal Poly.</p>
+                    <div className="column">
+                        <div className="card">
+                            <img src="/w3images/team1.jpg" alt="Jane" style={{width: "100%"}} />
                             <div className="container">
-                                <h2>John Doe</h2>
+                                <h3>Andrew Estrada</h3>
                                 <p className="title">SOFTWARE ENGINEER</p>
-                                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="column">
+                        <div className="card">
+                            <img src="/w3images/team2.jpg" alt="Mike" style={{width: "100%"}}/>
+                            <div className="container">
+                                <h3>Archie Jones</h3>
+                                <p className="title">SOFTWARE ENGINEER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="column">
+                        <div className="card">
+                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
+                            <div className="container">
+                                <h3>Jamie Luna</h3>
+                                <p className="title">SOFTWARE ENGINEER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="column">
+                        <div className="card">
+                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
+                            <div className="container">
+                                <h3>Jenny Ferriol</h3>
+                                <p className="title">SOFTWARE ENGINEER</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="column">
+                        <div className="card">
+                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
+                            <div className="container">
+                                <h3>Mitashi Parikh</h3>
+                                <p className="title">SOFTWARE ENGINEER</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
