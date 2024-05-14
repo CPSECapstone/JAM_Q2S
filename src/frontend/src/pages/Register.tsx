@@ -9,6 +9,8 @@ const Register: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const currentYear = new Date().getFullYear();
+
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -53,6 +55,9 @@ const Register: React.FC = () => {
 
                 <button type='submit'>Register</button>
             </form>
+            <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
+                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+            </footer>
         </div>
     );
 }

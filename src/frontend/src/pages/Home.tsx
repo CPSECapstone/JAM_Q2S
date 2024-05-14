@@ -17,6 +17,8 @@ const Home = () => {
         [classUUID: string]: ClassDisplayInformation
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
+    const currentYear = new Date().getFullYear();
+
     useEffect(() => {
         const loadClassCache = async () => {
             try {

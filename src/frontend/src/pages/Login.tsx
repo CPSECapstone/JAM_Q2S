@@ -13,6 +13,7 @@ import { useMsal } from '@azure/msal-react';
 
 const Login = () => {
     const { instance } = useMsal();
+    const currentYear = new Date().getFullYear();
 
     const handleLoginRedirect = () => {
         instance
@@ -74,6 +75,9 @@ const Login = () => {
                     <Link to="/register">Don't have an account? Register</Link>
                 </Grid>
             </Grid>
+            <footer style={{position: 'fixed', bottom: 9, color: 'grey', fontSize: '3', padding: "1%"}}>
+                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+            </footer>
         </div>
     );
 };

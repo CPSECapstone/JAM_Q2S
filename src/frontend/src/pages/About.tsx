@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import Divider from "@mui/material/Divider";
 
 const About = () => {
+    const currentYear = new Date().getFullYear();
+
     useEffect(() => {
     }, []);
 
@@ -91,6 +93,9 @@ const About = () => {
                     </div>
                 </div>
             </div>
+            <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
+                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+            </footer>
         </div>
     )
 
