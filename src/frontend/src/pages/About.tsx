@@ -46,7 +46,6 @@ const About = () => {
                         <div className="container">
                             <h3>Andrew Estrada</h3>
                             <p className="title">SOFTWARE ENGINEER</p>
-                            <p>LINKEDIN</p>
                         </div>
                     </div>
 
@@ -73,7 +72,7 @@ const About = () => {
 
                     <div className="card">
                         <div className="container">
-                            <h3>Mitashi Parikh</h3>
+                            <h4>Mitashi Parikh</h4>
                             <p className="title">SOFTWARE ENGINEER</p>
                         </div>
                     </div>

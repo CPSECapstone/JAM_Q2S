@@ -44,14 +44,15 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 2%;
     text-align: center;
+    alignment: center;
     width: 50%;
 }
 
 .row{
-    grid-template-columns: repeat(5, 1fr);
-    display: grid;
+    display: table;
     width: 70%;
     padding: 2%;
+    text-align: justify;
 }
 
 .title {
