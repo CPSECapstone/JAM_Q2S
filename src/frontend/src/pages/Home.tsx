@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'; // Removed unused imports
+import React, {useContext, useEffect, useState} from 'react'; // Removed unused imports
 import Grid from '../Components/TSX/Grid';
 import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
@@ -7,6 +7,7 @@ import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../I
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
 import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
+import {AuthContext} from "../Context/AuthContext";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
@@ -17,6 +18,8 @@ const Home = () => {
         [classUUID: string]: ClassDisplayInformation
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
+    const { user, setUser } = useContext(AuthContext);
+
     useEffect(() => {
         const loadClassCache = async () => {
             try {
@@ -32,6 +35,23 @@ const Home = () => {
             }
         };
 
+        setUser({
+            admit_type: 'Freshman',
+            catalog_year: '2022-26',
+            concentration: 'None',
+            email: 'mdpar',
+            first_name: 'Mitashi',
+            last_name: 'Parikh',
+            major: 'Software Engineering',
+            minor: 'None',
+            password: 'gfds',
+            term_admitted: '2022',
+            userId: 2002,
+            user_name: 'mdparikh',
+            id: 'wert'
+        })
+
+        console.log(user);
         loadClassCache();
     }, []);
 

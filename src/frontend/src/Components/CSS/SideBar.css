@@ -31,7 +31,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999; /* Ensure it appears above other elements */
+    z-index: 1000100; /* Ensure it appears above other elements */
     /* Additional styling */
     background: white;
     padding: 20px;
