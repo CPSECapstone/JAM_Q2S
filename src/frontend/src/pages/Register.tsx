@@ -55,7 +55,7 @@ const Register: React.FC = () => {
 
                 <button type='submit'>Register</button>
             </form>
-            <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
+            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
                 <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
             </footer>
         </div>
