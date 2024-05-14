@@ -42,53 +42,39 @@ const About = () => {
                         Team JAM consists of Andrew Estrada, Archie Jones, Jamie Luna, Jenny Ferriol and Mitashi Parikh,
                         who were all 4th year Software Engineering majors at the time. JAM began working on Poly Planner
                         Pro in Fall 2023 as a commission from the Engineering Student Services at Cal Poly.</p>
-                    <div className="column">
-                        <div className="card">
-                            <img src="/w3images/team1.jpg" alt="Jane" style={{width: "100%"}} />
-                            <div className="container">
-                                <h3>Andrew Estrada</h3>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                            </div>
+                    <div className="card">
+                        <div className="container">
+                            <h3>Andrew Estrada</h3>
+                            <p className="title">SOFTWARE ENGINEER</p>
+                            <p>LINKEDIN</p>
                         </div>
                     </div>
 
-                    <div className="column">
-                        <div className="card">
-                            <img src="/w3images/team2.jpg" alt="Mike" style={{width: "100%"}}/>
-                            <div className="container">
-                                <h3>Archie Jones</h3>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                            </div>
+                    <div className="card">
+                        <div className="container">
+                            <h3>Archie Jones</h3>
+                            <p className="title">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
 
-                    <div className="column">
-                        <div className="card">
-                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
-                            <div className="container">
-                                <h3>Jamie Luna</h3>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                            </div>
+                    <div className="card">
+                        <div className="container">
+                            <h3>Jamie Luna</h3>
+                            <p className="title">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
 
-                    <div className="column">
-                        <div className="card">
-                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
-                            <div className="container">
-                                <h3>Jenny Ferriol</h3>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                            </div>
+                    <div className="card">
+                        <div className="container">
+                            <h3>Jenny Ferriol</h3>
+                            <p className="title">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
 
-                    <div className="column">
-                        <div className="card">
-                            <img src="/w3images/team3.jpg" alt="John" style={{width: "100%"}}/>
-                            <div className="container">
-                                <h3>Mitashi Parikh</h3>
-                                <p className="title">SOFTWARE ENGINEER</p>
-                            </div>
+                    <div className="card">
+                        <div className="container">
+                            <h3>Mitashi Parikh</h3>
+                            <p className="title">SOFTWARE ENGINEER</p>
                         </div>
                     </div>
                 </div>

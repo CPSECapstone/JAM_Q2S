@@ -40,18 +40,16 @@
     color: black;
 }
 
-.column {
-    float: left;
-}
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 5%;
+    margin: 2%;
     text-align: center;
+    width: 50%;
 }
 
 .row{
-    display: table;
+    grid-template-columns: repeat(5, 1fr);
+    display: grid;
     width: 70%;
     padding: 2%;
 }
