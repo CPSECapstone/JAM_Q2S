@@ -1,17 +1,17 @@
-[
+{
+  "name": "Test Code",
+  "termData": [
     {
-      "tIndex": -1,
       "tUnits": "0",
       "courses": []
     },
     {
-      "tIndex": 1,
       "tUnits": "0",
       "courses": []
     },
     {
-      "tIndex": 2,
       "tUnits": "0",
       "courses": []
     }
-]
+  ]
+}

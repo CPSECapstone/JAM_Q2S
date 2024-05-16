@@ -2,6 +2,7 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,11 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
+
     private final UserService userService;
 
+    @Autowired
+    UserController (UserService userService){
     /**
      * Constructor for UserController.
      *
@@ -79,7 +83,7 @@ public class UserController {
      * @return ResponseEntity indicating success or failure of user update.
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable(value = "id") long id,
+    public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
                                                 @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");

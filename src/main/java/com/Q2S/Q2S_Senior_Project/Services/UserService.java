@@ -19,6 +19,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+
     private final UserRepository userRepository;
 
     /**
@@ -120,6 +121,10 @@ public class UserService {
      * @param email The email of the user to retrieve
      * @return The user with the specified email, or null if not found
      */
+    public Optional<UserModel> findUserModelById( long id) {
+        return userRepository.findById(id);
+    }
+
     @Transactional
     public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
         Optional<UserModel> user = userRepository.findByEmail(email);
