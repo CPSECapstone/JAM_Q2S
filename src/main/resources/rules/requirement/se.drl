@@ -1,3 +1,4 @@
+package rules.requirement
 import java.util.List;
 import java.util.Arrays;
 import com.Q2S.Q2S_Senior_Project.Models.Requirement;
@@ -33,37 +34,37 @@ then
 end
 
 
-
-rule "Check all requirements"
-salience -1
-when
-    // Count the number of met requirements
-    $count: Number(intValue >= 1) from accumulate(
-        Requirement(met == true),
-        count()
-    )
-    // Count the total number of requirements
-    $total: Number(intValue > 0) from accumulate(
-        Requirement(),
-        count()
-    )
-    // Ensure all requirements are met
-    eval($count == $total)
-    // Collect the names of requirements that are not met
-    $failedReqs: List() from accumulate(
-        Requirement(!met),
-        collectList(name)
-    )
-then
-    if ($count == $total) {
-        System.out.println("All requirements are met!");
-    } else {
-        System.out.println("Some requirements are not met:");
-        for (String reqName : $failedReqs) {
-            System.out.println("- " + reqName);
-        }
-    }
-end
+//
+//rule "Check all requirements"
+//salience -1
+//when
+//    // Count the number of met requirements
+//    $count: Number(intValue >= 1) from accumulate(
+//        Requirement(met == true),
+//        count()
+//    )
+//    // Count the total number of requirements
+//    $total: Number(intValue > 0) from accumulate(
+//        Requirement(),
+//        count()
+//    )
+//    // Ensure all requirements are met
+//    eval($count == $total)
+//    // Collect the names of requirements that are not met
+//    $failedReqs: List() from accumulate(
+//        Requirement(!met),
+//        collectList(name)
+//    )
+//then
+//    if ($count == $total) {
+//        System.out.println("All requirements are met!");
+//    } else {
+//        System.out.println("Some requirements are not met:");
+//        for (String reqName : $failedReqs) {
+//            System.out.println("- " + reqName);
+//        }
+//    }
+//end
 
 //make degree object that has a map of requirements
 

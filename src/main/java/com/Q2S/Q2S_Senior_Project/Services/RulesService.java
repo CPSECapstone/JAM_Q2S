@@ -18,7 +18,7 @@ public class RulesService {
     public RulesService(KieContainer kieContainer){this.kieContainer = kieContainer;}
 
     public CourseMapping mappingService(CourseMapping courseMapping) {
-        KieBase kBase = kieContainer.getKieBase("rules");
+        KieBase kBase = kieContainer.getKieBase("courseMappingBase");
         KieSession kieSession = kBase.newKieSession();
         kieSession.insert(courseMapping);
         kieSession.fireAllRules();
@@ -27,7 +27,7 @@ public class RulesService {
     }
 
     public Requirement requirementService(Requirement requirement) {
-        KieBase kBase = kieContainer.getKieBase("rules");
+        KieBase kBase = kieContainer.getKieBase("requirementBase");
         KieSession kieSession = kBase.newKieSession();
         kieSession.insert(requirement);
         kieSession.fireAllRules();
