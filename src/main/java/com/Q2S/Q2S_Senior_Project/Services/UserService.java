@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -57,20 +58,33 @@ public class UserService {
 
     @Transactional
     public boolean authenticateUser(String email, String password) {
-        UserModel user = userRepository.findByEmail(email);
+        Optional<UserModel> user = userRepository.findByEmail(email);
 
         // Check if the user exists and the password matches
-        return user != null && hashPassword(password).equals(user.getPassword());
+        return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
     }
 
     @Transactional
     public List<UserModel> findAllUsers() {
-        return (List<UserModel>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Transactional
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         Optional<UserModel> user = userRepository.findById(id);
+
+        return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
+                () -> ResponseEntity.notFound().build()
+        );
+    }
+
+    public Optional<UserModel> findUserModelById( long id) {
+        return userRepository.findById(id);
+    }
+
+    @Transactional
+    public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
+        Optional<UserModel> user = userRepository.findByEmail(email);
 
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
                 () -> ResponseEntity.notFound().build()
@@ -89,5 +103,48 @@ public class UserService {
         }
     }
 
+    public boolean updateUserInfo(long id, UserModel updatedUser) {
+        // Retrieve the user entity by its ID
+        UserModel user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            UserModel userV2 = UserService.getUpdatedUser(user, updatedUser);
+            // Save the modified entity
+            userRepository.save(userV2);
+            return true;
+        }
+        return false;
+    }
+
+    public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
+        //can update any field expect email and password which must be done with a distinct call
+        if (updatedUser.getUser_name() != null){
+            user.setUser_name(updatedUser.getUser_name());
+        }
+        if (updatedUser.getFirst_name() != null){
+            user.setFirst_name(updatedUser.getFirst_name());
+        }
+        if (updatedUser.getLast_name() != null){
+            user.setLast_name(updatedUser.getLast_name());
+        }
+        if (updatedUser.getTerm_admitted() != null){
+            user.setTerm_admitted(updatedUser.getTerm_admitted());
+        }
+        if (updatedUser.getAdmit_type() != null){
+            user.setAdmit_type(updatedUser.getAdmit_type());
+        }
+        if (updatedUser.getCatalog_year() != null){
+            user.setCatalog_year(updatedUser.getCatalog_year());
+        }
+        if (updatedUser.getMajor() != null){
+            user.setMajor(updatedUser.getMajor());
+        }
+        if (updatedUser.getConcentration() != null){
+            user.setConcentration(updatedUser.getConcentration());
+        }
+        if (updatedUser.getMinor() != null){
+            user.setMinor(updatedUser.getMinor());
+        }
+        return user;
+    }
 }
 

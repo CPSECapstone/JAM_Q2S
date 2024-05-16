@@ -1,4 +1,4 @@
-import styled  from 'styled-components'
+import styled, {css} from 'styled-components'
 
 export const StyledSideBarItem = styled.div<{$selected: boolean}>`
   width: 100%;
@@ -17,4 +17,12 @@ export const StyledSideBarItem = styled.div<{$selected: boolean}>`
   ;
   }
 `;
+export const StyledSideBar = styled.div<{$open: boolean}> `
+  background-color: #0056b3;
+  transition: margin 500ms;
+  flex: 1;
+  ${ props => props.$open && css`
+    margin-right: -25%;
+  `};
+`
 

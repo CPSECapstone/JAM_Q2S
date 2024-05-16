@@ -19,7 +19,7 @@ public class RulesController {
 
     @RequestMapping(value = "/getCourseMapping", method = RequestMethod.GET, produces = "application/json")
     public CourseMapping getCourseMapping(@RequestParam(required = true) String courseID) {
-
+        //if invalid courseID, mapping will return as null
         CourseMapping courseMapping = new CourseMapping();
         courseMapping.setStartCourse(courseID);
 
