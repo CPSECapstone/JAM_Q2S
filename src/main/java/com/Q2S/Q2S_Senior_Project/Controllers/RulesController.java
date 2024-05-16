@@ -1,10 +1,13 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.Models.CourseMapping;
+import com.Q2S.Q2S_Senior_Project.Models.Degree;
 import com.Q2S.Q2S_Senior_Project.Models.Requirement;
 import com.Q2S.Q2S_Senior_Project.Services.RulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -29,14 +32,21 @@ public class RulesController {
     }
 
     @RequestMapping(value = "/checkRequirement", method = RequestMethod.GET, produces = "application/json")
-    public Requirement checkRequirement(@RequestParam(required = true) String courses) {
+    public Degree checkRequirement(@RequestParam(required = true) List<String> courses) {
+        Requirement r1 = new Requirement("CSC101 Requirement");
+        Requirement r2 = new Requirement("Life Science Elective");
+        Requirement r3 = new Requirement("Math Elective");
+        List<Requirement> reqs = Arrays.asList(r1, r2, r3);
+        Degree se = new Degree(reqs, "Software Engineering");
+        se.setCourses(courses);
 
-        Requirement requirement = new Requirement();
-        requirement.setCourses(courses);
+        for (Requirement req : se.getRequirements()) {
+            rulesService.requirementService(req, se);
+        }
 
-        rulesService.requirementService(requirement);
+        se.checkRequirementsMet();
 
-        return requirement;
+        return se;
     }
 
 }

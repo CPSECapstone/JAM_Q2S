@@ -2,35 +2,39 @@ package rules.requirement
 import java.util.List;
 import java.util.Arrays;
 import com.Q2S.Q2S_Senior_Project.Models.Requirement;
+import com.Q2S.Q2S_Senior_Project.Models.Degree;
 
 rule "CSC101 Requirement"
 when
-    req: Requirement(name == "CSC101", courses != null)
+    req: Requirement(name == "CSC101 Requirement")
+    degree: Degree(courses != null)
 then
-    req.setMet(req.getCourses().contains("CSC101"));
+    req.setMet(degree.getCourses().contains("CSC101"));
 end
 
 rule "Life Science Elective"
 when
-    req: Requirement(name == "Life Science Elective", courses != null)
+    req: Requirement(name == "Life Science Elective")
+    degree: Degree(courses != null)
 then
-    req.setMet(req.getCourses().contains("BIO111") ||
-                req.getCourses().contains("BIO161") ||
-                req.getCourses().contains("BOT121") ||
-                req.getCourses().contains("MCRO221") ||
-                req.getCourses().contains("MCRO224") ||
-                (req.getCourses().contains("BIO213") && req.getCourses().contains("BMED213")));
+    req.setMet(degree.getCourses().contains("BIO111") ||
+                degree.getCourses().contains("BIO161") ||
+                degree.getCourses().contains("BOT121") ||
+                degree.getCourses().contains("MCRO221") ||
+                degree.getCourses().contains("MCRO224") ||
+                (degree.getCourses().contains("BIO213") && degree.getCourses().contains("BMED213")));
 end
 
 rule "Math Elective"
 when
-    req: Requirement(name == "Math Elective", courses != null)
+    req: Requirement(name == "Math Elective")
+    degree: Degree(courses != null)
 then
-    req.setMet(req.getCourses().contains("MATH248") ||
-                    req.getCourses().contains("MATH304") ||
-                    req.getCourses().contains("MATH335") ||
-                    req.getCourses().contains("MATH336") ||
-                    req.getCourses().contains("MATH451"));
+    req.setMet(degree.getCourses().contains("MATH248") ||
+                    degree.getCourses().contains("MATH304") ||
+                    degree.getCourses().contains("MATH335") ||
+                    degree.getCourses().contains("MATH336") ||
+                    degree.getCourses().contains("MATH451"));
 end
 
 
