@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     ClassDisplayInformation,
     FlowchartClass,
@@ -42,7 +42,7 @@ export const SideBar = ({
     }
 
     const getNewFlowchart = async (inputValue: string) => {
-        const userId = user?.userId;
+        const userId = user?.user_id;
         const newUserFlowchartDTO = {
             flowchartName: inputValue,
             catalogYear: user?.catalog_year,
