@@ -7,7 +7,6 @@ import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../I
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
 import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
-import {AuthContext} from "../Context/AuthContext";
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
@@ -18,7 +17,6 @@ const Home = () => {
         [classUUID: string]: ClassDisplayInformation
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
-    const { setUser } = useContext(AuthContext);
 
     useEffect(() => {
         const loadClassCache = async () => {
@@ -34,20 +32,6 @@ const Home = () => {
                 setLoading(false);
             }
         };
-
-        setUser({
-            admit_type: "",
-            catalog_year: "2022-2026",
-            concentration: "Non-Concentration Option",
-            email: "mdparikh@calpoly.edu",
-            first_name: "Mitashi",
-            last_name: "Parikh",
-            major: "Computer Science",
-            minor: "",
-            term_admitted: "Fall 2022",
-            user_id: "2002",
-            user_name: "mdparikh"
-        })
 
         loadClassCache();
     }, []);

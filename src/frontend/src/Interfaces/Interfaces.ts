@@ -43,20 +43,20 @@ export interface TermData {
 }
 
 export interface ContextMenuData {
-    classUUID: string,
-    termId: string
+    classUUID: string;
+    termId: string;
 }
 
 export interface FlowchartMetaData {
     user: User;
     termData: string;
-    catalogYear: string,
-    concentration: string,
-    favorite: boolean,
-    id: number,
-    main: boolean,
-    major: string,
-    name: string
+    catalogYear: string;
+    concentration: string;
+    favorite: boolean;
+    id: number;
+    main: boolean;
+    major: string;
+    name: string;
 }
 
 export interface FlowchartData {
