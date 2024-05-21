@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 @RestController
 public class FlowchartTemplateController {
 
@@ -28,15 +31,21 @@ public class FlowchartTemplateController {
     }
 
     /**
-     * API to compile data of Poly Flow Builder's quarter flowchart templates and
-     * input as rows into our database
+     * API that
+     *      deletes all current 2022-2026 flowcharts
+     *      compiles data of Poly Flow Builder's quarter flowchart templates and
+     *          input as rows into our database
      *
      * @return          the list of flowchart templates added to the database
      * @throws IOException  thrown on invalid file paths or by object mapper
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @Transactional
+    @CrossOrigin(origins = "*")
     @PostMapping("/api/FlowchartTemplates/fromScratch")
-    List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
+    public List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
+
+        flowchartTemplateRepo.deleteByCatalog("2022-2026");
+
         ObjectMapper mapper = new ObjectMapper();
         String templateDataFilePath = "data/2022-2026FlowTemplateData.json";
         File dataFile = new File(templateDataFilePath);
@@ -82,22 +91,23 @@ public class FlowchartTemplateController {
         template.setCatalog(data.getCatalog());
         template.setMajor(data.getMajorName());
         template.setConcentration(data.getConcName());
-        template.setTermData(makeJsonFrontendCompatible(content));
+        JsonNode termData = jsonNode.get("termData");
+        template.setTermData(removeTIndex(termData));
         return template;
     }
 
-    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
-        JsonNode termData = coursesNode.get("termData");
+    /**
+     * Removes the unnecessary tIndex field from each term
+     *
+     * @param termData JsonNode for the list of terms from a flowchart template
+     * @return  String representation of the final template
+     * @throws JsonProcessingException for invalid JSON
+     */
+    public static String removeTIndex(JsonNode termData) throws JsonProcessingException {
         for(JsonNode term : termData){
-            JsonNode classes = term.get("courses");
-            for(JsonNode flowchartClass : classes){
-                ((ObjectNode) flowchartClass).put("taken", false);
-                UUID uuid = UUID.randomUUID();
-                ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
-            }
+            ((ObjectNode) term).remove("tIndex");
         }
+        ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(termData);
     }
 
@@ -119,9 +129,23 @@ public class FlowchartTemplateController {
     }
 
     /**
-     * @return  all flowchart templates regardless of catalog, etc.
+     * Find a flowchart template by Catalog Major and Concentration (exact match of all 3)
+     *  Currently used to get the template to match user input when creating a new user flowchart
+     *
+     * @param catalog   catalog in YYYY-YYYY format (ex: "2022-2026")
+     * @param major     Major
+     * @param concentration Concentration
+     * @return  Corresponding Flowchart Template object or null if none exists
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/FlowchartTemplates/Search")
+    FlowchartTemplateModel getFlowchartTemplateByCatalogMajorAndCon(@RequestParam(required = true) String catalog,
+                                                                    @RequestParam(required = true) String major,
+                                                                    @RequestParam(required = true) String concentration) {
+        return flowchartTemplateRepo.findByCatalogAndAndMajorAndConcentration(catalog, major, concentration).orElse(null);
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/FlowchartTemplates")
     List<FlowchartTemplateModel> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();

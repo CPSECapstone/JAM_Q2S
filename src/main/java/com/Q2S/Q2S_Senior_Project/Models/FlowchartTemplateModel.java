@@ -9,7 +9,7 @@ import org.hibernate.type.SqlTypes;
 @Getter
 @Setter
 @Entity
-@Table(name = "flowchartTemplates2022-2026")
+@Table(name = "flowchartTemplate")
 public class FlowchartTemplateModel {
 
     @Id

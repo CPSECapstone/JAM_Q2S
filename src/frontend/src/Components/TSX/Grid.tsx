@@ -105,7 +105,8 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
                             <Term year={term.tIndex.toString()} classList={term.courses}
                                   totalUnits={Number(term.tUnits) || 0}
                                   id={term.tIndex.toString()} handleRightClick={handleRightClick}
-                                  flowchartClassCache={flowchartClassCache}/>
+                                  flowchartClassCache={flowchartClassCache}
+                                  termName={term.termName} termType={term.termType}/>
                         </div>
                     );
                 })}

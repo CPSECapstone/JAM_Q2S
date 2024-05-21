@@ -109,6 +109,10 @@ public class UserService {
         );
     }
 
+    public Optional<UserModel> findUserModelById( long id) {
+        return userRepository.findById(id);
+    }
+
     /**
      * Find User by Email
      *
