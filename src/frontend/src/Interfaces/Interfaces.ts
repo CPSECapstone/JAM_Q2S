@@ -59,23 +59,6 @@ export interface FlowchartMetaData {
     name: string
 }
 
-export interface User {
-    admit_type: string,
-    catalog_year: string,
-    concentration: string,
-    email: string,
-    first_name: string,
-    last_name: string,
-    major: string,
-    minor: string,
-    password: string,
-    term_admitted: string,
-    userId: number,
-    user_name: string
-}
-
-
-
 export interface FlowchartData {
     hash: string;
     id: string;
@@ -93,7 +76,7 @@ export interface FlowchartData {
 }
 
 export interface User {
-    id: string;
+    user_id: string;
     authToken?: string;
     user_name: string;
     first_name: string;
