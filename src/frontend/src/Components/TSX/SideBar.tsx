@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
     ClassDisplayInformation,
     FlowchartClass,
@@ -14,6 +14,7 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import axios, {AxiosResponse} from "axios";
 import '../CSS/SideBar.css';
 import NewFlowForm from "./NewFlowForm";
+import usePrevious from "../../Hooks/usePrevious";
 
 
 interface SideBarProps {
@@ -23,19 +24,43 @@ interface SideBarProps {
     setFlowchartClassCache: (newCache: {
         [classUUID: string]: ClassDisplayInformation
     }) => void;
+    flowchartClassCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }
 }
 
 export const SideBar = ({
                             setFlowchartClassCache,
+                            flowchartClassCache,
                             setSelectedUserFlowchart,
                             selectedUserFlowchart,
                             quarterClassCache,
                         }: SideBarProps) => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+    const selectedUserFlowchartRef = useRef<FlowchartMetaData | null>(null);
+    const flowchartClassCacheRef = useRef<{
+        [classUUID: string]: ClassDisplayInformation
+    }>({});
+    const prevSelectedFlowchart = usePrevious({selectedUserFlowchart, flowchartClassCache})
+    selectedUserFlowchartRef.current = selectedUserFlowchart
+    flowchartClassCacheRef.current = flowchartClassCache
     const getFlowcharts = async () => {
         let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
         setAllUserFlowcharts(res.data);
+    }
+    const updatedFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }): string => {
+        let newTermData: TermData[] = JSON.parse(currentSelectedFlowchart.termData)
+        newTermData.forEach((term: TermData) => {
+            term.courses.forEach((course: FlowchartClass) => {
+                course.color = classCache[course.uuid].color;
+                course.taken = classCache[course.uuid].taken;
+            })
+        })
+        console.log(newTermData)
+        return JSON.stringify(newTermData);
     }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
         if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
@@ -66,14 +91,76 @@ export const SideBar = ({
                     }
                 })
             })
+            if(selectedUserFlowchart){
+                axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchart.id, [{
+                        "op": "replace",
+                        "path": "/termData",
+                        "value": updatedFlowchartClassData(selectedUserFlowchart, flowchartClassCache)
+                    }], {
+                        headers: {
+                            'Content-Type': 'application/json-patch+json',
+                        }
+                    }
+                ).catch(console.error)
+            }
             setFlowchartClassCache(newClassCache)
             setSelectedUserFlowchart(flowchart);
 
         }
     };
+
+
+
     useEffect(() => {
         getFlowcharts().catch(console.error);
     }, [])
+
+    const handleUpdatingFlowchartOnNewSelection = async (): Promise<void> => {
+        if (prevSelectedFlowchart?.selectedUserFlowchart) {
+            console.log("Updating flowcharts")
+            axios.patch("http://localhost:8080/api/updateFlowchart/" + prevSelectedFlowchart.selectedUserFlowchart.id, [{
+                    "op": "replace",
+                    "path": "/termData",
+                    "value": updatedFlowchartClassData(prevSelectedFlowchart.selectedUserFlowchart, prevSelectedFlowchart.flowchartClassCache)
+                }], {
+                    headers: {
+                        'Content-Type': 'application/json-patch+json',
+                    }
+                }
+            ).catch(console.error)
+        }
+    }
+
+    const handleUpdatingFlowchartBeforeUnload = async () => {
+        if (selectedUserFlowchartRef.current) {
+            axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchartRef.current.id, [{
+                    "op": "replace",
+                    "path": "/termData",
+                    "value": updatedFlowchartClassData(selectedUserFlowchartRef.current, flowchartClassCacheRef.current)
+                }], {
+                    headers: {
+                        'Content-Type': 'application/json-patch+json',
+                    }
+                }
+            ).catch(console.error)
+        }
+    };
+
+    // useEffect(() => {
+    //     window.addEventListener('beforeunload', handleUpdatingFlowchart);
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleUpdatingFlowchart);
+    //     };
+    // }, []);
+
+    // document.addEventListener("visibilitychange", () => {
+    //     if (document.visibilityState === "hidden") {
+    //         handleFlowchartSave();
+    //         axios.patch("http://localhost:8080/api/testSave", {
+    //             name: "test"
+    //         })
+    //     }
+    // });
 
     // const handleFavoriteClick = (current: FlowchartResponse) => {
     //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];

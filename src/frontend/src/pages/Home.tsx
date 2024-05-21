@@ -48,6 +48,7 @@ const Home = () => {
 
                     <StyledSideBar $open={sidebarVisible}>
                         <SideBar
+                            flowchartClassCache={flowchartClassCache}
                             quarterClassCache={quarterClassCache}
                             selectedUserFlowchart={selectedUserFlowchart}
                             setSelectedUserFlowchart={setSelectedUserFlowchart}
