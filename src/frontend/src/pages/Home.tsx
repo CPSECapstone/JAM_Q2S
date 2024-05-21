@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react'; // Removed unused imports
+import React, {useContext, useEffect, useState} from 'react'; // Removed unused imports
 import Grid from '../Components/TSX/Grid';
 import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
-import axios from 'axios'; // Removed AxiosResponse import as it's not needed
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
-import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
+import {Loader} from '../Components/TSX/Loader';
+import {AuthContext} from "../Context/AuthContext";
+import {useLocalStorage} from "../Hooks/useLocalStorage";
+import axios from 'axios';
 import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
 
 const Home = () => {
@@ -13,11 +15,23 @@ const Home = () => {
     const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null); // Removed explicit type as it's inferred
     const [loading, setLoading] = useState<boolean>(true);
     const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({});
+    const { setUser } = useContext(AuthContext);
+    const { getItem } = useLocalStorage();
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
+
+
+    let getUser = async () => {
+        const storedUser = getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }
+
     useEffect(() => {
+        getUser().catch(console.error);
         const loadClassCache = async () => {
             try {
                 const quarterClassesResponse = await axios.get("http://localhost:8080/getAllQuarterClasses");
@@ -38,6 +52,7 @@ const Home = () => {
     const toggleSideBar = () => {
         setSidebarVisible(!sidebarVisible);
     }
+
     return (
         loading ? <Loader/> : (
             <div className='Home'>
@@ -70,6 +85,11 @@ const Home = () => {
                         )}
                     </div>
                 </div>
+                {selectedUserFlowchart ? (
+                    <div className="totalUnits">
+                        Total Units: {totalUnits}
+                    </div>
+                ) : null}
             </div>
         )
     );
