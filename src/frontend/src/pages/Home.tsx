@@ -8,14 +8,12 @@ import {Loader} from '../Components/TSX/Loader';
 import {AuthContext} from "../Context/AuthContext";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
 import axios from 'axios';
-
+import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
 
 const Home = () => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
     const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null); // Removed explicit type as it's inferred
     const [loading, setLoading] = useState<boolean>(true);
-    const {setUser} = useContext(AuthContext);
-    const {getItem} = useLocalStorage();
     const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({});
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
@@ -30,6 +28,7 @@ const Home = () => {
         }
     }
 
+    const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
     useEffect(() => {
         getUser().catch(console.error);
         const loadClassCache = async () => {
@@ -48,6 +47,10 @@ const Home = () => {
 
         loadClassCache();
     }, []);
+
+    const toggleSideBar = () => {
+        setSidebarVisible(!sidebarVisible);
+    }
 
     return (
         loading ? <Loader/> : (
@@ -75,6 +78,34 @@ const Home = () => {
                             <p>No flowchart selected, please select or create a flowchart</p>
                         </div>
                     )}
+                <div className='topBar'>
+                    <TopBar toggleSideBar={toggleSideBar}/>
+                </div>
+                <div className="bottom-screen">
+
+                    <StyledSideBar $open={sidebarVisible}>
+                        <SideBar
+                            quarterClassCache={quarterClassCache}
+                            selectedUserFlowchart={selectedUserFlowchart}
+                            setSelectedUserFlowchart={setSelectedUserFlowchart}
+                            setFlowchartClassCache={setFlowchartClassCache}/>
+                    </StyledSideBar>
+
+                    <div className='grid'>
+                        {selectedUserFlowchart ? (
+                            <>
+                                <Grid setTotalUnits={setTotalUnits}
+                                      selectedUserFlowchart={selectedUserFlowchart}
+                                      setSelectedUserFlowchart={setSelectedUserFlowchart}
+                                      flowchartClassCache={flowchartClassCache}/>
+                            </>
+                        ) : (
+                            <div className='noFlowchartMessage'>
+                                <h3>No flowchart selected</h3>
+                                <p>Please select or create a flowchart</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 {selectedUserFlowchart ? (
                     <div className="totalUnits">

@@ -4,9 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../CSS/EditBar.css';
 
-function EditBar() : JSX.Element{
+interface EditBarProps {
+    toggleSideBar: () => void;
+}
+function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
     let clickEvent = () => {
     };
     return (
@@ -16,7 +20,7 @@ function EditBar() : JSX.Element{
                          placement="right"
                          arrow>
                     <IconButton aria-label="add class"
-                                onClick={() => {alert('add class');}}>
+                                onClick={() => {toggleSideBar();}}>
                         <AddIcon className="icon"/>
                     </IconButton>
                 </Tooltip>
@@ -48,6 +52,16 @@ function EditBar() : JSX.Element{
                     <IconButton aria-label="save flow"
                                 onClick={() => {alert('save flow');}}>
                         <SaveIcon className="icon"/>
+                    </IconButton>
+                </Tooltip>
+            </div>
+            <div className="buttons">
+                <Tooltip title="Toggle Sidebar"
+                         placement="right"
+                         arrow>
+                    <IconButton aria-label="Toggle Sidebar"
+                                onClick={() => toggleSideBar()}>
+                        <VisibilityIcon className="icon"/>
                     </IconButton>
                 </Tooltip>
             </div>
