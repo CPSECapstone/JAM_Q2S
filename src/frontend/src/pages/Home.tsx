@@ -15,6 +15,8 @@ const Home = () => {
     const [selectedUserFlowchart, setSelectedUserFlowchart] = useState<FlowchartMetaData | null>(null); // Removed explicit type as it's inferred
     const [loading, setLoading] = useState<boolean>(true);
     const [quarterClassCache, setQuarterClassCache] = useState<{ [classId: string]: QuarterClassData }>({});
+    const { setUser } = useContext(AuthContext);
+    const { getItem } = useLocalStorage();
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
     }>({})
@@ -28,7 +30,6 @@ const Home = () => {
         }
     }
 
-    const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
     useEffect(() => {
         getUser().catch(console.error);
         const loadClassCache = async () => {
@@ -55,29 +56,6 @@ const Home = () => {
     return (
         loading ? <Loader/> : (
             <div className='Home'>
-                <div className='sideBar'>
-                    <SideBar
-                        quarterClassCache={quarterClassCache}
-                        selectedUserFlowchart={selectedUserFlowchart}
-                        setSelectedUserFlowchart={setSelectedUserFlowchart}
-                        setFlowchartClassCache={setFlowchartClassCache}/>
-                </div>
-                <div className='topBar'>
-                    <TopBar/>
-                </div>
-                <div className='grid'>
-                    {selectedUserFlowchart ? (
-                        <>
-                            <Grid setTotalUnits={setTotalUnits}
-                                  selectedUserFlowchart={selectedUserFlowchart}
-                                  setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                  flowchartClassCache={flowchartClassCache}/>
-                        </>
-                    ) : (
-                        <div className='noFlowchartMessage'>
-                            <p>No flowchart selected, please select or create a flowchart</p>
-                        </div>
-                    )}
                 <div className='topBar'>
                     <TopBar toggleSideBar={toggleSideBar}/>
                 </div>
