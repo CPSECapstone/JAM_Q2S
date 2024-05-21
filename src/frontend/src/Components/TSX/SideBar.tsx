@@ -145,7 +145,7 @@ export const SideBar = ({
             <div className="sideBar">
                 <div className="sidebarRow" id="main">
                     <p>MAIN</p>
-                    {/*{renderFlowchartItems((current: FlowchartResponse) => current.main)}*/}
+                    {renderFlowchartItems((current: FlowchartMetaData) => current.main)}
                 </div>
                 <div className="sidebarRow" id="favorites">
                     <p>FAVORITES</p>

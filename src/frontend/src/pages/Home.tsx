@@ -4,10 +4,10 @@ import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
-import {Loader} from '../Components/TSX/Loader'; // Assuming you have a Loader component
-import {AuthContext} from '../Context/AuthContext'
-import axios from "axios";
+import {Loader} from '../Components/TSX/Loader';
+import {AuthContext} from "../Context/AuthContext";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
+import axios from 'axios';
 
 
 const Home = () => {
@@ -20,6 +20,7 @@ const Home = () => {
     const [flowchartClassCache, setFlowchartClassCache] = useState<{
         [classUUID: string]: ClassDisplayInformation
     }>({})
+    const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
 
     let getUser = async () => {
