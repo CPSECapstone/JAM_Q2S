@@ -34,7 +34,7 @@ export const SideBar = ({
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
     const getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/user-flowcharts");
         setAllUserFlowcharts(res.data);
     }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {

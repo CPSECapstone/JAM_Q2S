@@ -4,14 +4,13 @@ package com.Q2S.Q2S_Senior_Project.Controllers;
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -28,7 +27,7 @@ public class UserController {
      * @return      ResponseEntity.ok if the action was successful
      *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<String> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
             return ResponseEntity.ok("User registered successfully");
@@ -44,7 +43,7 @@ public class UserController {
      * @return      Response Entity with user entity successfully signed in OR
      *              ResponseEntity.badRequest() if log in unsuccessful
      */
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
             ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
@@ -62,7 +61,7 @@ public class UserController {
      *
      * @return  list of all users
      */
-    @GetMapping("/allUsers")
+    @GetMapping("/users")
     public List<UserModel> findAllUsers() {
         return userService.findAllUsers();
     }
@@ -75,7 +74,7 @@ public class UserController {
      * @return      ResponseEntity.ok if update was successful
      *              ResponseEntity.badRequest() if there is no associated user with the given id
      */
-    @PatchMapping("/{id}")
+    @PatchMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
                                                 @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
@@ -92,7 +91,7 @@ public class UserController {
      *             ResponseEntity.notFound() if not found
      */
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         return userService.findUserById(id);
     }

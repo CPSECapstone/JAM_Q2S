@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class RulesController {
 
     private final CourseMappingService courseMappingService;
@@ -23,7 +24,7 @@ public class RulesController {
      * @return      The corresponding course(s) of the opposite term type set in the "mapping" field
      *              "mapping" field left as null if there is no corresponding rule
      */
-    @RequestMapping(value = "/getCourseMapping", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/course-mapping", method = RequestMethod.GET, produces = "application/json")
     public CourseMapping getCourseMapping(@RequestParam(required = true) String courseID) {
         //if invalid courseID, mapping will return as null
         CourseMapping courseMapping = new CourseMapping();

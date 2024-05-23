@@ -34,7 +34,7 @@ const Home = () => {
         getUser().catch(console.error);
         const loadClassCache = async () => {
             try {
-                const quarterClassesResponse = await axios.get("http://localhost:8080/getAllQuarterClasses");
+                const quarterClassesResponse = await axios.get("http://localhost:8080/api/quarter-classes");
                 const tempCache: { [classId: string]: QuarterClassData } = {};
                 quarterClassesResponse.data.forEach((quarterClass: QuarterClassData) => {
                     tempCache[quarterClass.id] = quarterClass;
