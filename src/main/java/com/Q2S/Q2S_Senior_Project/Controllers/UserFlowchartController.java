@@ -1,7 +1,11 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
+import com.Q2S.Q2S_Senior_Project.DataTransferObjects.NewUserFlowchartDTO;
+import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateModel;
 import com.Q2S.Q2S_Senior_Project.Models.UserFlowchartModel;
+import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Repositories.UserFlowchartRepo;
+import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,12 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RestController
@@ -44,15 +52,71 @@ public class UserFlowchartController {
     private UserFlowchartRepo userFlowchartRepo;
 
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private FlowchartTemplateController flowchartTemplateController;
+
+    @CrossOrigin(origins="http://localhost:3000")
+
     @GetMapping("/api/UserFlowcharts")
     List<UserFlowchartModel> getAllFlowcharts() {
         return userFlowchartRepo.findAll();
     }
 
-    //    @GetMapping("/api/UserFlowcharts/{userId}")
-//    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
-//        return userFlowchartRepo.findByUserIdId(userId);
-//    }
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping("/api/UserFlowcharts/{userId}")
+    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
+        return userFlowchartRepo.findByUserIdUserId(userId);
+    }
+
+    /**
+     *
+     * @param userId id of user creating a flowchart
+     * @param dto   Data Transfer Object with info about flowchart to be made
+     * @return      ResponseEntity with the created flowchart if successful,
+     *              ResponseEntity.badRequest() if the userId is invalid,
+     *              ResponseEntity.notFound() if no template exists meeting the info of the dto, or
+     *              ResponseEntity.unprocessableEntity() if there is an error creating the flowchart JSON
+     */
+    @CrossOrigin(origins="http://localhost:3000")
+    @PostMapping("/api/UserFlowcharts/{userId}")
+    ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@PathVariable long userId,
+                                                          @Validated @RequestBody NewUserFlowchartDTO dto){
+        UserFlowchartModel newFlowchart = new UserFlowchartModel();
+        Optional<UserModel> user = userService.findUserModelById(userId);
+        if (user.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+        newFlowchart.setUserId(user.get());
+        newFlowchart.setName(dto.getFlowchartName());
+        newFlowchart.setCatalogYear(dto.getCatalogYear());
+        newFlowchart.setMajor(dto.getMajor());
+        newFlowchart.setConcentration(dto.getConcentration());
+        //by default main and favorite are false
+        newFlowchart.setMain(false);
+        newFlowchart.setFavorite(false);
+        FlowchartTemplateModel flowchartTemplateModel = flowchartTemplateController.getFlowchartTemplateByCatalogMajorAndCon(dto.getCatalogYear(), dto.getMajor(), dto.getConcentration());
+        if (flowchartTemplateController == null){
+            return ResponseEntity.notFound().build();
+        }
+        String jsonTermData;
+        try {
+            //when termAdmitted is forced to be NonNull in UserModel we can grab it from the UserModel instead
+            jsonTermData = makeJsonFrontendCompatible(createNewUserQuarterFlowchart(dto.getTerm_admitted(), flowchartTemplateModel.getTermData()));
+        } catch (IOException e) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
+        newFlowchart.setTermData(jsonTermData);
+
+        return ResponseEntity.ok().body(userFlowchartRepo.save(newFlowchart));
+
+    }
+
+
+
+
 
     private UserFlowchartModel applyPatchToFlowchart(JsonPatch patch, UserFlowchartModel targetFlowchart) throws JsonPatchException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -86,9 +150,10 @@ public class UserFlowchartController {
         ObjectMapper mapper = new ObjectMapper();
         int[] intInfo = getValidatedTermAdmittedYearAndOrdinal(termAdmitted);
         JsonNode rootNode = getValidatedFlowchartTemplateInfo(flowchartTemplate);
-        ArrayNode terms = (ArrayNode) rootNode.get("termData");
-        int termSeasonIterator = intInfo[1] - 1; //iterate from one term before when the students started
-        int year = (TermSeason.values()[intInfo[1]] == TermSeason.Winter) ? intInfo[0] - 1 : intInfo[0];
+
+        ArrayNode terms = (ArrayNode) rootNode;
+        int termSeasonIterator = intInfo[1] -1; //iterate from one term before when the students started
+        int year = (TermSeason.values()[intInfo[1]] == TermSeason.Winter) ? intInfo[0] - 1: intInfo[0];
         int offset = 0;
         String termType = QUARTER_TAG;
         int enumModNumber = QUARTER_MOD_NUMBER;
@@ -167,14 +232,34 @@ public class UserFlowchartController {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             rootNode = objectMapper.readTree(flowchartTemplate);
-            JsonNode terms = rootNode.get("termData");
-            if (!terms.isArray()) {
-                throw new IllegalStateException("\"termData\" field is improperly formatted. It should be an array.");
+            if (!rootNode.isArray()){
+                throw new IllegalStateException("Flowchart template is improperly formatted. It should be an array.");
+
             }
         } catch (JsonProcessingException e) {
             throw new IllegalStateException("Flowchart is in invalid JSON format.");
         }
         return rootNode;
+    }
+
+    /**
+     *
+     * @param originalFlowchart flowchart template string from database
+     * @return JSON String with taken and uuid fields for each course
+     * @throws JsonProcessingException - invalid JSON
+     */
+    static String makeJsonFrontendCompatible(String originalFlowchart) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode coursesNode = objectMapper.readTree(originalFlowchart);
+        for(JsonNode term : coursesNode){
+            JsonNode classes = term.get("courses");
+            for(JsonNode flowchartClass : classes){
+                ((ObjectNode) flowchartClass).put("taken", false);
+                UUID uuid = UUID.randomUUID();
+                ((ObjectNode) flowchartClass).put("uuid", String.valueOf(uuid));
+            }
+        }
+        return objectMapper.writeValueAsString(coursesNode);
     }
 
     /**

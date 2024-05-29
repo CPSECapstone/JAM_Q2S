@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -75,6 +76,10 @@ public class UserService {
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
                 () -> ResponseEntity.notFound().build()
         );
+    }
+
+    public Optional<UserModel> findUserModelById( long id) {
+        return userRepository.findById(id);
     }
 
     @Transactional

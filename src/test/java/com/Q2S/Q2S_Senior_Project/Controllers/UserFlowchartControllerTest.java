@@ -1,5 +1,6 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -125,7 +126,7 @@ class UserFlowchartControllerTest {
         Exception exception = assertThrows(IllegalStateException.class, () ->
                 UserFlowchartController.createNewUserQuarterFlowchart("Spring 2026", "{\"termData\": \"hello\"}"));
 
-        String expectedMessage = "\"termData\" field is improperly formatted. It should be an array.";
+        String expectedMessage = "Flowchart template is improperly formatted. It should be an array.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage,actualMessage);
     }
@@ -275,6 +276,42 @@ class UserFlowchartControllerTest {
             }
         } else {
             throw new IOException("The \"termData\" field does not contain an array.");
+        }
+    }
+
+    @Test
+    void makeJsonFrontendCompatible() throws JsonProcessingException {
+        String testFlowchart = "[\n" +
+                "    {\n" +
+                "      \"courses\": []\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"courses\": [\n" +
+                "        {\n" +
+                "          \"id\": \"CSC123\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": \"MATH141\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": \"COMS101\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": null\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }" +
+                " ]";
+
+        String feCompatible = UserFlowchartController.makeJsonFrontendCompatible(testFlowchart);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode coursesNode = objectMapper.readTree(feCompatible);
+        for(JsonNode term : coursesNode){
+            JsonNode classes = term.get("courses");
+            for(JsonNode flowchartClass : classes) {
+                assertEquals("false", flowchartClass.get("taken").asText());
+                assertTrue(flowchartClass.hasNonNull("uuid"));
+            }
         }
     }
 }

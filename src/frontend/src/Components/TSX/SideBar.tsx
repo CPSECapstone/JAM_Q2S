@@ -38,6 +38,7 @@ export const SideBar = ({
                         }: SideBarProps) => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+    const [selectedUserFlowchartId, setSelectedUserFlowchartId] = useState<number>(0);
     const selectedUserFlowchartRef = useRef<FlowchartMetaData | null>(null);
     const flowchartClassCacheRef = useRef<{
         [classUUID: string]: ClassDisplayInformation
@@ -49,7 +50,7 @@ export const SideBar = ({
         let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
         setAllUserFlowcharts(res.data);
     }
-    const updatedFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache: {
+    const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache: {
         [classUUID: string]: ClassDisplayInformation
     }): string => {
         let newTermData: TermData[] = JSON.parse(currentSelectedFlowchart.termData)
@@ -59,7 +60,6 @@ export const SideBar = ({
                 course.taken = classCache[course.uuid].taken;
             })
         })
-        console.log(newTermData)
         return JSON.stringify(newTermData);
     }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
@@ -91,18 +91,18 @@ export const SideBar = ({
                     }
                 })
             })
-            if(selectedUserFlowchart){
-                axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchart.id, [{
-                        "op": "replace",
-                        "path": "/termData",
-                        "value": updatedFlowchartClassData(selectedUserFlowchart, flowchartClassCache)
-                    }], {
-                        headers: {
-                            'Content-Type': 'application/json-patch+json',
-                        }
-                    }
-                ).catch(console.error)
-            }
+
+            // if (selectedUserFlowchart) {
+            //     const updatedTermData: string = updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache);
+            //     console.log(updatedTermData)
+            //     let newAllUserFlowcharts: FlowchartMetaData[] = allUserFlowcharts;
+            //     let currentFlowchart: FlowchartMetaData | undefined = newAllUserFlowcharts
+            //         .find((flowchart: FlowchartMetaData) => flowchart.id = selectedUserFlowchart.id)
+            //     if(currentFlowchart){
+            //         currentFlowchart.termData = updatedTermData;
+            //     }
+            //     //setAllUserFlowcharts(newAllUserFlowcharts);
+            // }
             setFlowchartClassCache(newClassCache)
             setSelectedUserFlowchart(flowchart);
 
@@ -110,41 +110,40 @@ export const SideBar = ({
     };
 
 
-
     useEffect(() => {
         getFlowcharts().catch(console.error);
     }, [])
 
-    const handleUpdatingFlowchartOnNewSelection = async (): Promise<void> => {
-        if (prevSelectedFlowchart?.selectedUserFlowchart) {
-            console.log("Updating flowcharts")
-            axios.patch("http://localhost:8080/api/updateFlowchart/" + prevSelectedFlowchart.selectedUserFlowchart.id, [{
-                    "op": "replace",
-                    "path": "/termData",
-                    "value": updatedFlowchartClassData(prevSelectedFlowchart.selectedUserFlowchart, prevSelectedFlowchart.flowchartClassCache)
-                }], {
-                    headers: {
-                        'Content-Type': 'application/json-patch+json',
-                    }
-                }
-            ).catch(console.error)
-        }
-    }
+    // const handleUpdatingFlowchartOnNewSelection = async (): Promise<void> => {
+    //     if (prevSelectedFlowchart?.selectedUserFlowchart) {
+    //         console.log("Updating flowcharts")
+    //         axios.patch("http://localhost:8080/api/updateFlowchart/" + prevSelectedFlowchart.selectedUserFlowchart.id, [{
+    //                 "op": "replace",
+    //                 "path": "/termData",
+    //                 "value": updatedFlowchartClassData(prevSelectedFlowchart.selectedUserFlowchart, prevSelectedFlowchart.flowchartClassCache)
+    //             }], {
+    //                 headers: {
+    //                     'Content-Type': 'application/json-patch+json',
+    //                 }
+    //             }
+    //         ).catch(console.error)
+    //     }
+    // }
 
-    const handleUpdatingFlowchartBeforeUnload = async () => {
-        if (selectedUserFlowchartRef.current) {
-            axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchartRef.current.id, [{
-                    "op": "replace",
-                    "path": "/termData",
-                    "value": updatedFlowchartClassData(selectedUserFlowchartRef.current, flowchartClassCacheRef.current)
-                }], {
-                    headers: {
-                        'Content-Type': 'application/json-patch+json',
-                    }
-                }
-            ).catch(console.error)
-        }
-    };
+    // const handleUpdatingFlowchartBeforeUnload = async () => {
+    //     if (selectedUserFlowchartRef.current) {
+    //         axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchartRef.current.id, [{
+    //                 "op": "replace",
+    //                 "path": "/termData",
+    //                 "value": updatedFlowchartClassData(selectedUserFlowchartRef.current, flowchartClassCacheRef.current)
+    //             }], {
+    //                 headers: {
+    //                     'Content-Type': 'application/json-patch+json',
+    //                 }
+    //             }
+    //         ).catch(console.error)
+    //     }
+    // };
 
     // useEffect(() => {
     //     window.addEventListener('beforeunload', handleUpdatingFlowchart);
@@ -153,14 +152,6 @@ export const SideBar = ({
     //     };
     // }, []);
 
-    // document.addEventListener("visibilitychange", () => {
-    //     if (document.visibilityState === "hidden") {
-    //         handleFlowchartSave();
-    //         axios.patch("http://localhost:8080/api/testSave", {
-    //             name: "test"
-    //         })
-    //     }
-    // });
 
     // const handleFavoriteClick = (current: FlowchartResponse) => {
     //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
@@ -190,7 +181,6 @@ export const SideBar = ({
                         key={current.id}
                         handleSelectedClick={handleSelectedClick}
                         // handleMainClick={handleMainClick}
-                        // responseData={current}
                         // handleFavoriteClick={handleFavoriteClick}
                         data={current}
                         selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
