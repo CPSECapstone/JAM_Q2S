@@ -26,6 +26,7 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
     const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classUUID: "", termId: ""});
 
     const handleRightClick = (term: string, classId: string, x: number, y: number) => {
+        console.log(term, classId)
         setContextMenuClass({
             classUUID: classId,
             termId: term
