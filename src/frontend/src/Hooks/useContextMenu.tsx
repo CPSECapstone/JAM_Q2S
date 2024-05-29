@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 
 export const useContextMenu = () => {
     // boolean value to determine if the user has right clicked
-    const [clicked, setClicked] = useState(false)
+    const [classClicked, setClassClicked] = useState(false)
+    const [termClicked, setTermClicked] = useState(false)
+
     // allows us to track the x,y coordinates of the users right click
     const [coords, setCoords] = useState({
         x: 0,
@@ -12,10 +14,11 @@ export const useContextMenu = () => {
     useEffect(() => {
         // reset clicked to false on user click
         const handleClick = () => {
-            setClicked(false)
+            setClassClicked(false);
+            setTermClicked(false);
         }
 
-        // add listener for user click
+        //add listener for user click
         document.addEventListener("click", handleClick)
 
         // clean up listener function to avoid memory leaks
@@ -25,8 +28,10 @@ export const useContextMenu = () => {
     }, [])
 
     return {
-        clicked,
-        setClicked,
+        classClicked,
+        setClassClicked,
+        termClicked,
+        setTermClicked,
         coords,
         setCoords
     }

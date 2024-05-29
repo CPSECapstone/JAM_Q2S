@@ -20,10 +20,10 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
     const termAsLetter = termType.match("Quarter") ? "Q" : "S";
     return (
         <div className='term'
-             onContextMenu={(e) => {
-                 e.preventDefault()
-                 handleRightClick(termName, "", e.pageX, e.pageY)
-             }}>
+        onContextMenu={(e) => {
+            e.preventDefault()
+            handleRightClick(termName, "", e.pageX, e.pageY)
+        }}>
             <div className='title'>
                 <div className="centered">
                     <p style={{margin: 0}}>{termName}</p>
