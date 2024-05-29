@@ -32,7 +32,7 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
                     <p style={{margin: 0}}>{termAsLetter}</p>
                 </div>
             </div>
-            <Droppable droppableId={id}>
+            <Droppable droppableId={termName}>
                 {(provided) => (
                     <div className='body'
                          ref={provided.innerRef}
@@ -42,7 +42,7 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
                                    index={i}
                                    classData={flowchartClassCache[currentClass.uuid]}
                                    handleRightClick={handleRightClick}
-                                   term={id}/>
+                                   term={termName}/>
                         ))}
                         {provided.placeholder}
                     </div>

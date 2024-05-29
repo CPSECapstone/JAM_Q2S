@@ -50,8 +50,8 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
         }
         let updatedTerms: TermData[] = JSON.parse(selectedUserFlowchart.termData)
 
-        let start: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === source.droppableId);
-        let finish: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === destination.droppableId);
+        let start: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.termName === source.droppableId);
+        let finish: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.termName === destination.droppableId);
         if (!start || !finish) return;
         const newFlowchartClass: FlowchartClass = {
             id: flowchartClassCache[draggableId].id,
@@ -102,10 +102,10 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
                              onDragStart={() => setClicked(false)}>
                 {selectedUserFlowchart && JSON.parse(selectedUserFlowchart.termData).map((term: TermData) => {
                     return (
-                        <div className='term' key={term.tIndex}>
-                            <Term year={term.tIndex.toString()} classList={term.courses}
+                        <div className='term' key={term.termName}>
+                            <Term year={term.termName} classList={term.courses}
                                   totalUnits={Number(term.tUnits) || 0}
-                                  id={term.tIndex.toString()} handleRightClick={handleRightClick}
+                                  id={term.termName} handleRightClick={handleRightClick}
                                   flowchartClassCache={flowchartClassCache}
                                   termName={term.termName} termType={term.termType}/>
                         </div>
