@@ -54,16 +54,29 @@ export const SideBar = ({
         [classUUID: string]: ClassDisplayInformation
     }): string => {
         let newTermData: TermData[] = JSON.parse(currentSelectedFlowchart.termData)
+        console.log(newTermData)
         newTermData.forEach((term: TermData) => {
             term.courses.forEach((course: FlowchartClass) => {
                 course.color = classCache[course.uuid].color;
                 course.taken = classCache[course.uuid].taken;
             })
         })
+        console.log(newTermData)
         return JSON.stringify(newTermData);
     }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
-        if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
+        if (selectedUserFlowchart) {
+            // const updatedTermData: string = updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache);
+            let newAllUserFlowcharts: FlowchartMetaData[] = allUserFlowcharts;
+            let currentFlowchart: FlowchartMetaData | undefined = newAllUserFlowcharts
+                .find((flowchart: FlowchartMetaData) => flowchart.id = selectedUserFlowchart.id)
+            if(currentFlowchart){
+                currentFlowchart.termData = selectedUserFlowchart.termData;
+            }
+            setAllUserFlowcharts(newAllUserFlowcharts);
+        }
+
+        if(!selectedUserFlowchart){
             let newClassCache: {
                 [classUUID: string]: ClassDisplayInformation
             } = {}
@@ -92,18 +105,11 @@ export const SideBar = ({
                 })
             })
 
-            // if (selectedUserFlowchart) {
-            //     const updatedTermData: string = updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache);
-            //     console.log(updatedTermData)
-            //     let newAllUserFlowcharts: FlowchartMetaData[] = allUserFlowcharts;
-            //     let currentFlowchart: FlowchartMetaData | undefined = newAllUserFlowcharts
-            //         .find((flowchart: FlowchartMetaData) => flowchart.id = selectedUserFlowchart.id)
-            //     if(currentFlowchart){
-            //         currentFlowchart.termData = updatedTermData;
-            //     }
-            //     //setAllUserFlowcharts(newAllUserFlowcharts);
-            // }
             setFlowchartClassCache(newClassCache)
+        }
+
+        if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
+
             setSelectedUserFlowchart(flowchart);
 
         }

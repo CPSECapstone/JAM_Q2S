@@ -23,23 +23,25 @@ function Term({year, classList, id, handleRightClick, flowchartClassCache}: Prop
                     <div className='body'
                          ref={provided.innerRef}
                          {...provided.droppableProps}>
-                        {classList.map((currentClass: FlowchartClass, i: number) => (
-                            <Class key={i}
-                                   index={i}
-                                   classData={flowchartClassCache[currentClass.uuid]}
-                                   handleRightClick={handleRightClick}
-                                   term={id}/>
-                        ))}
+                        {classList.map((currentClass: FlowchartClass, i: number) => {
+                            return (
+                                <Class key={i}
+                                       index={i}
+                                       classData={flowchartClassCache[currentClass.uuid]}
+                                       handleRightClick={handleRightClick}
+                                       term={id}/>
+                            )
+                        })}
                         {provided.placeholder}
                     </div>
                 )}
             </Droppable>
             <div className="termTotalUnits" style={{textAlign: 'center', margin: 0}}>
-                <p style={{ margin: 0 }}>
-                    {classList.reduce((sum: number, course: FlowchartClass) => (
-                        sum + Number(flowchartClassCache[course.uuid].units)
-                    ), 0)}
-                </p>
+                {/*<p style={{ margin: 0 }}>*/}
+                {/*    {classList.reduce((sum: number, course: FlowchartClass) => (*/}
+                {/*        sum + Number(flowchartClassCache[course.uuid].units)*/}
+                {/*    ), 0)}*/}
+                {/*</p>*/}
 
             </div>
         </div>
