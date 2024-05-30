@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
     private final UserService userService;
 
     UserController (UserService userService){
@@ -20,9 +20,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserModel user) {
+    public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
-            return ResponseEntity.ok("User registered successfully");
+            return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.badRequest().body("User with this email already exists");
         }
@@ -31,9 +31,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
-            ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
-            if (loggedInUser != null) {
-                return ResponseEntity.ok(loggedInUser); // Return user data upon successful login
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
             } else {
                 return ResponseEntity.badRequest().body("User not found");
             }
@@ -42,11 +42,26 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/loginMicrosoftUser")
+    public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
+        if (!userService.authenticateMicrosoftUser(user)) {
+            userService.addMicrosoftUser(user);
+        }
+        Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+        if (loggedInUser.isPresent()) {
+            return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+        } else {
+            return ResponseEntity.badRequest().body("User not found");
+        }
+    }
+
     @GetMapping("/allUsers")
     public List<UserModel> findAllUsers() {
         return userService.findAllUsers();
     }
 
+    @CrossOrigin(origins = "*")
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable(value = "id") long id,
                                                 @RequestBody UserModel updatedUser) {

@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
 import '../Components/CSS/Register.css';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {AccountInfo, IPublicClientApplication} from "@azure/msal-browser";
 
-const Register: React.FC = () => {
+interface registerProps {
+    setLoadingUser: React.Dispatch<React.SetStateAction<Boolean>>;
+}
+const Register = ({setLoadingUser}: registerProps) => {
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await axios.post('/api/user/register', {
-                username: username,
-                firstname: firstname,
-                lastname: lastname,
+                user_name: username,
+                first_name: firstname,
+                last_name: lastname,
                 email: email,
                 password: password,
             });
-            window.location.href = '/home';
-
+            if (response.status === 200) {
+                setLoadingUser(true);
+                navigate("/newUserForm", { state: { userId: response.data.id } });
+            } else {
+                // Handle unsuccessful register [ TO DO ]
+            }
         } catch (error) {
             console.error('Error registering user:', error);
         }

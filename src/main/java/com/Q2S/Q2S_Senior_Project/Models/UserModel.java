@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "user")
 public class UserModel {
-
     public enum AdmitType{
         FIRST_YEAR_FRESHMAN,
         TRANSFER
