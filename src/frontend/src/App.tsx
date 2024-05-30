@@ -49,6 +49,6 @@ const App: React.FC<AppProps> = ({ instance }) => {
             </div>
         </MsalProvider>
     );
-}
+};
 
 export default App;
