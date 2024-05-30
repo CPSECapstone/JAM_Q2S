@@ -65,18 +65,24 @@ export const SideBar = ({
         return JSON.stringify(newTermData);
     }
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
+        console.log(JSON.parse(flowchart.termData))
+
         if (selectedUserFlowchart) {
             // const updatedTermData: string = updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache);
-            let newAllUserFlowcharts: FlowchartMetaData[] = allUserFlowcharts;
-            let currentFlowchart: FlowchartMetaData | undefined = newAllUserFlowcharts
-                .find((flowchart: FlowchartMetaData) => flowchart.id = selectedUserFlowchart.id)
-            if(currentFlowchart){
-                currentFlowchart.termData = selectedUserFlowchart.termData;
+            const flowchartIndex = allUserFlowcharts.findIndex(fc => fc.id === selectedUserFlowchart.id);
+
+            if (flowchartIndex !== -1 && allUserFlowcharts[flowchartIndex].termData !== selectedUserFlowchart.termData) {
+                const newAllUserFlowcharts = [...allUserFlowcharts];
+                newAllUserFlowcharts[flowchartIndex] = {
+                    ...newAllUserFlowcharts[flowchartIndex],
+                    termData: selectedUserFlowchart.termData,
+                };
+                setAllUserFlowcharts(newAllUserFlowcharts);
             }
-            setAllUserFlowcharts(newAllUserFlowcharts);
         }
 
-        if(!selectedUserFlowchart){
+
+        if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
             let newClassCache: {
                 [classUUID: string]: ClassDisplayInformation
             } = {}
@@ -106,12 +112,7 @@ export const SideBar = ({
             })
 
             setFlowchartClassCache(newClassCache)
-        }
-
-        if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
-
             setSelectedUserFlowchart(flowchart);
-
         }
     };
 
