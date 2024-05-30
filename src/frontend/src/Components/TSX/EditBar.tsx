@@ -20,7 +20,7 @@ function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
                          placement="right"
                          arrow>
                     <IconButton aria-label="add class"
-                                onClick={() => {toggleSideBar();}}>
+                                onClick={() => {alert('add class');}}>
                         <AddIcon className="icon"/>
                     </IconButton>
                 </Tooltip>
