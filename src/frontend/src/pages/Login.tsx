@@ -10,7 +10,6 @@ import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import '../Components/CSS/Login.css';
 import {AuthContext} from "../Context/AuthContext";
 import { useMsal } from '@azure/msal-react';
-import {ClassDBClass} from "../Interfaces/Interfaces";
 import {AccountInfo, IPublicClientApplication} from "@azure/msal-browser";
 
 interface loginProps {
@@ -29,10 +28,6 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
             .catch((error) => console.log(error));
     };
 
-    const handleLogoutRedirect = () => { // need to create button to do this and move to home page
-        instance.logoutRedirect().catch((error) => console.log(error));
-    };
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
@@ -46,7 +41,7 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                 email: email,
                 password: password,
             });
-            if (response.status === 200 && response.data.statusCode === "OK") {
+            if (response.status === 200) {
                 setLoadingUser(true);
                 navigate("/home");
             } else {

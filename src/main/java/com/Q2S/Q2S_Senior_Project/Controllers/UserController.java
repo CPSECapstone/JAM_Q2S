@@ -28,9 +28,11 @@ public class UserController {
      * @return      ResponseEntity.ok if the action was successful
      *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
+            //Optional<UserModel> userWithId = userService.findUserByEmail(user.getEmail());
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.badRequest().body("User with this email already exists");
@@ -44,6 +46,7 @@ public class UserController {
      * @return      Response Entity with user entity successfully signed in OR
      *              ResponseEntity.badRequest() if log in unsuccessful
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {

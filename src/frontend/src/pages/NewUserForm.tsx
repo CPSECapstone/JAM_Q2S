@@ -16,13 +16,13 @@ const NewUserForm = () => {
     const location = useLocation();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        const userId = location.state.userId;
-        console.log("PASSED IN ID: " + userId);
+        const searchParams = new URLSearchParams(location.search);
+        const userId = searchParams.get('userId');
 
         event.preventDefault();
         try {
             if (admitType != "FIRST_YEAR_FRESHMAN" && admitType != "TRANSFER") {
-                console.log("You need to choose a valid admitType!");
+                console.log("You need to choose a valid admitType!"); // we will change this to a dropdown
             }
             const response = await axios.patch(`/api/user/${userId}`, {
                 term_admitted: termAdmitted,

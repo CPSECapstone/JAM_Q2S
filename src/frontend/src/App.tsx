@@ -24,7 +24,7 @@ const MainContent = () => {
     const [loadingUser, setLoadingUser] = useState<Boolean>(false);
 
     console.log("MICROSOFT ACCOUNT: " + activeAccount);
-    console.log("MANUAL ACCOUNT: " + loadingUser);
+    console.log("LOGGED IN: " + loadingUser);
     return (
         <div className="App">
             <UserAuthProvider>

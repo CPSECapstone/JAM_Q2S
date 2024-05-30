@@ -6,8 +6,6 @@ import TopBar from '../Components/TSX/TopBar';
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader';
-import {FlowchartResponse} from "../Interfaces/Interfaces";
-import {SideBar} from "../Components/TSX/SideBar";
 import {AuthContext} from "../Context/AuthContext";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
 import axios from 'axios';
@@ -24,7 +22,6 @@ interface homeProps {
 
 const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
     const [totalUnits, setTotalUnits] = useState<number>(0);
-    const [allFlowchartData, setAllFlowcharts] = useState<FlowchartResponse[]>([]);
     const {flowchart} = useContext(FlowchartContext);
     const {setUser} = useContext(AuthContext);
     const {getItem} = useLocalStorage();
@@ -39,6 +36,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
     console.log("ACTIVE ACCOUNT IN HOME: " + activeAccount);
+
     if (isAuthenticated && !activeAccount) {
         window.location.reload();
     }
@@ -55,7 +53,6 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
         }
     }
 
-    /*
     const authenticateUser = async () => {
         if (activeAccount) {
             const email = activeAccount.username;
@@ -69,21 +66,19 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                 password: "microsoft-user"
             });
 
-            console.log("RESPONSE DATA: " + response.data);
-            if (response.status === 200 && response.data.statusCode === 'OK') {
+            if (response.status === 200) {
                 setLoadingUser(true);
                 if (!response.data.major) { // checking if first time registering
-                    navigate('/newUserForm', {state: {userId: response.data.id}});
+                    navigate(`/newUserForm?userId=${response.data.userId}`);
                 }
             }
         }
-    }*/
+    }
 
     useEffect(() => {
-        /*
         if (!loadingUser) {
             authenticateUser().catch(console.error);
-        }*/
+        }
         getFlowcharts().catch(console.error);
         getUser().catch(console.error);
         const loadClassCache = async () => {
@@ -103,13 +98,10 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
         loadClassCache();
     }, []);
 
-    console.log("ACTIVE ACCOUNT IN HOME3: " + activeAccount);
 
     if (!loadingUser) {
         return(<div></div>) // [TO DO] add a message here that the account is not active and you have to login
     } else {
-        console.log("LOADING USER: " + loadingUser);
-
         const toggleSideBar = () => {
             setSidebarVisible(!sidebarVisible);
         }

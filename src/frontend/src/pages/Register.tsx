@@ -28,7 +28,7 @@ const Register = ({setLoadingUser}: registerProps) => {
             });
             if (response.status === 200) {
                 setLoadingUser(true);
-                navigate("/newUserForm", { state: { userId: response.data.id } });
+                navigate(`/newUserForm?userId=${response.data.userId}`);
             } else {
                 // Handle unsuccessful register [ TO DO ]
             }
