@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import {AuthContext} from "../../Context/AuthContext";
 import {useMsal} from "@azure/msal-react";
 import {Button} from "react-bootstrap";
+import {useLocalStorage} from "../../Hooks/useLocalStorage";
 
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,14 +67,16 @@ export interface MenuProps {
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
         const { user, setUser } = useContext(AuthContext);
+        const { removeItem } = useLocalStorage();
         const { instance } = useMsal();
         const navigate = useNavigate();
 
         const handleLogoutRedirect = () => {
+            removeItem("user");
             if (instance.getActiveAccount()) {
                 instance.logoutRedirect().catch((error) => console.log(error));
             } else {
-            navigate("/");
+                navigate("/");
             }
         };
 

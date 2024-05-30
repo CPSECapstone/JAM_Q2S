@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {StyledContextMenu} from '../StyledComponents/RightClickMenuStyle';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
@@ -9,64 +9,47 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
-import {ContextMenuData, FlowchartClass, TermData} from '../../Interfaces/Interfaces';
-import {FlowchartContext} from '../../Context/FlowchartProvider';
+import {
+    ClassDisplayInformation,
+    ContextMenuData,
+    FlowchartClass,
+    FlowchartMetaData,
+    TermData
+} from '../../Interfaces/Interfaces';
 
 interface ClassProps {
     top: number;
     left: number;
     classData: ContextMenuData;
+    flowchartClassCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }
+    selectedUserFlowchart: FlowchartMetaData;
+    setSelectedUserFlowchart: (updated: FlowchartMetaData) => void;
 }
 
-const ContextMenu = ({top, left, classData}: ClassProps) => {
-    const {flowchart, setFlowchart} = useContext(FlowchartContext);
+const ContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlowchart, setSelectedUserFlowchart}: ClassProps) => {
     const [classTaken, setClassTaken] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (!flowchart || !classData.classUUID) {
-            return;
-        }
-        const term: TermData | undefined = flowchart.termData.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
-        if (!term) {
-            return;
-        }
-        const classIndex: number = term.courses.findIndex((termClass: FlowchartClass): boolean => termClass.uuid === classData.classUUID);
-        if (classIndex === -1) {
-            return;
-        }
-        const selectedClass: FlowchartClass = term.courses[classIndex];
-        setClassTaken(selectedClass.taken);
-    }, [classData, flowchart]);
-
-    const updateFlowchart = (callback: (term: TermData, classIndex: number, selectedClass: FlowchartClass) => void) => {
-        if (!flowchart || !classData.classUUID) {
-            return;
-        }
-        const updatedFlowchart: TermData[] = [...flowchart.termData];
-        const termIndex: number = updatedFlowchart.findIndex((term: TermData) => term.tIndex.toString() === classData.termId);
-        if (termIndex === -1) {
-            return;
-        }
-        const term: TermData = updatedFlowchart[termIndex];
-        const classIndex: number = term.courses.findIndex((termClass: FlowchartClass) => termClass.uuid === classData.classUUID);
-        if (classIndex === -1) {
-            return;
-        }
-        const selectedClass: FlowchartClass = term.courses[classIndex];
-        callback(term, classIndex, selectedClass);
-        setFlowchart({...flowchart, termData: updatedFlowchart});
-    };
-
     const handleDelete = () => {
-        updateFlowchart((term, classIndex) => {
-            term.courses.splice(classIndex, 1);
-        });
+        if (!classData || !selectedUserFlowchart) {
+            return;
+        }
+        let updatedTerms: TermData[] = JSON.parse(selectedUserFlowchart.termData)
+        let term: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
+        if(!term){
+            return;
+        }
+        let classes: FlowchartClass[] = Array.from(term.courses);
+        const classIndex: number = term.courses.findIndex((termClass: FlowchartClass) => termClass.uuid === classData.classUUID);
+        classes.splice(classIndex, 1);
+        term.courses = classes;
+        setSelectedUserFlowchart({...selectedUserFlowchart, termData: JSON.stringify(updatedTerms)});
+
     };
 
     const handleMarkTaken = () => {
-        updateFlowchart((term, classIndex, selectedClass) => {
-            selectedClass.taken = !selectedClass.taken;
-        });
+        flowchartClassCache[classData.classUUID].taken = !flowchartClassCache[classData.classUUID].taken;
     };
 
     return (

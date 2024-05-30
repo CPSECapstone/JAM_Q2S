@@ -1,4 +1,6 @@
-[
+{
+  "name": "Test Code",
+  "termData": [
     {
       "tIndex": -1,
       "tUnits": "0",
@@ -14,4 +16,5 @@
       "tUnits": "0",
       "courses": []
     }
-]
+  ]
+}

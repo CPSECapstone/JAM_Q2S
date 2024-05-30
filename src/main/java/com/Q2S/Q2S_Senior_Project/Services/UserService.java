@@ -23,7 +23,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // Helper method to hash passwords using SHA-256
+    /**
+     * Helper method to hash passwords using SHA-256
+     *
+     * @param password  Un-encoded password from user input
+     * @return      hashed/encoded password string
+     */
     public String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -40,6 +45,13 @@ public class UserService {
         }
     }
 
+    /**
+     * Add User to Database
+     *
+     * @param user  user entity to be added
+     * @return  true if user was added successfully
+     *          false otherwise (user email already exists)
+     */
     @Transactional
     public boolean addUser(UserModel user) {
         // Check if the email already exists
@@ -63,6 +75,14 @@ public class UserService {
         }
     }
 
+    /**
+     * Authenticate user login
+     *
+     * @param email     email for user login
+     * @param password      password for user login
+     * @return      true if the login credentials pass,
+     *              false otherwise
+     */
     @Transactional
     public boolean authenticateUser(String email, String password) {
         Optional<UserModel> user = userRepository.findByEmail(email);
@@ -78,11 +98,23 @@ public class UserService {
         return user.isPresent();
     }
 
+    /**
+     * Get All Users
+     *
+     * @return  list of all user entities
+     */
     @Transactional
     public List<UserModel> findAllUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Find User by ID
+     *
+     * @param id     id of desired user
+     * @return     ResponseEntity with desired user entity if found,
+     *             ResponseEntity.notFound() otherwise
+     */
     @Transactional
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         Optional<UserModel> user = userRepository.findById(id);
@@ -92,11 +124,28 @@ public class UserService {
         );
     }
 
+    public Optional<UserModel> findUserModelById( long id) {
+        return userRepository.findById(id);
+    }
+
+    /**
+     * Find User by Email
+     *
+     * @param email     email of desired user
+     * @return     ResponseEntity with desired user entity if found,
+     *             ResponseEntity.notFound() otherwise
+     */
     @Transactional
     public Optional<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * Delete User By ID
+     *
+     * @param userId    id of user to be deleted
+     * @return true if operation successful, false otherwise
+     */
     @Transactional
     public boolean deleteUserById(long userId) {
         // Check if the user exists
@@ -109,6 +158,14 @@ public class UserService {
         }
     }
 
+    /**
+     * Update the fields of user with id '{id}' to match fields of updatedUser
+     *      except email and password
+     *
+     * @param id    user id
+     * @param updatedUser  user entity with modified fields
+     * @return  true if operation successful, false otherwise
+     */
     @Transactional
     public boolean updateUserInfo(long id, UserModel updatedUser) {
         // Retrieve the user entity by its ID
@@ -122,6 +179,14 @@ public class UserService {
         return false;
     }
 
+    /**
+     * Update user entity fields except email and password
+     *
+     * @param user      original user entity
+     * @param updatedUser   user entity with modified fields
+     * @return      original user entity with fields changed to match the modified fields of
+     *              the updated user
+     */
     public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
         //can update any field expect email and password which must be done with a distinct call
         if (updatedUser.getUser_name() != null){

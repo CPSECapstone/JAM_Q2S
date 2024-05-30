@@ -4,34 +4,31 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "../CSS/SideBarItem.css";
 import {StyledSideBarItem} from "../StyledComponents/SideBarStyle";
-import {FlowchartData, FlowchartResponse} from "../../Interfaces/Interfaces";
+import {FlowchartMetaData} from "../../Interfaces/Interfaces";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 
 
 export interface SideBarItemProps {
-    data: FlowchartData;
+    data: FlowchartMetaData;
     selected: boolean;
-    handleSelectedClick: (current: FlowchartData) => void;
-    handleFavoriteClick: (current: FlowchartResponse) => void;
-    handleMainClick: (current: FlowchartResponse) => void;
-    responseData: FlowchartResponse;
+    handleSelectedClick: (current: FlowchartMetaData) => void;
+    // handleFavoriteClick: (current: FlowchartMetaData) => void;
+    // handleMainClick: (current: FlowchartMetaData) => void;
+    // responseData: FlowchartMetaData;
 }
 
 function SideBarItem({
                              data,
                              selected,
                              handleSelectedClick,
-                             responseData,
-                             handleFavoriteClick,
-                             handleMainClick
                          }: SideBarItemProps): JSX.Element {
     const renderIcon = (iconType: string): JSX.Element => {
         switch (iconType) {
             case "favorite":
-                return responseData.favorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>;
+                return data.favorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>;
             case "star":
-                return responseData.main ? <StarIcon/> : <StarBorderIcon/>;
+                return data.main ? <StarIcon/> : <StarBorderIcon/>;
             default:
                 return <></>;
         }
