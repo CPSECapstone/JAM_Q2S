@@ -9,12 +9,31 @@
 .title{
     background-color: #DFD6C4;
     display:flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+    border-right: solid #BD8B13;
+}
+.centered {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.right-aligned {
+    text-align: right;
+    font-size: 5%;
+    color: #BD8B13;
 }
 .title p{
     align-items: center;
 }
 .body{
+    border-right: solid #BD8B13;
     height: 100%;
     overflow-y: scroll;
+}
+.termTotalUnits{
+    text-align: center;
+    margin: 0;
+    border-right: solid #BD8B13;
 }

@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Paper from "@mui/material/Paper";
 import {AuthContext} from "../../Context/AuthContext";
+import {useLocalStorage} from "../../Hooks/useLocalStorage";
 
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,7 +64,12 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
-        const { user, setUser } = useContext(AuthContext);
+        const { user } = useContext(AuthContext);
+        const { removeItem } = useLocalStorage();
+
+        const handleLogout = () => {
+            removeItem("user");
+        }
 
         return (
             <StyledContextMenu $top={65} $left={20}>
@@ -71,9 +77,6 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                     <MenuList>
                         <MenuItem>
                             <ListItemText>{user?.user_name}</ListItemText>
-                        </MenuItem>
-                        <MenuItem>
-                            <ListItemText>{user?.major}</ListItemText>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon>
@@ -86,7 +89,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                             <ListItemIcon>
                                 <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/">Logout</Link>
+                            <Link style={{ color: 'red' }} to="/" onClick={handleLogout}>Logout</Link>
                         </MenuItem>
                     </MenuList>
                 </Paper>

@@ -56,6 +56,10 @@ public class UserFlowchartController {
     @Autowired
     private FlowchartTemplateController flowchartTemplateController;
 
+    /**
+     * Get all User Flowcharts
+     * @return  all user flowcharts in the database
+     */
     @CrossOrigin(origins="http://localhost:3000")
 
     @GetMapping("/api/UserFlowcharts")
@@ -191,7 +195,15 @@ public class UserFlowchartController {
         return mapper.writeValueAsString(terms);
     }
 
-    static boolean isQuarterTerm(TermSeason season, int year) {
+
+    /**
+     *
+     * @param season Fall, Winter, Spring, or Summer
+     * @param year  Calendar year in YYYY, ex: 2027
+     * @return      true if the term comes before the transition to semesters
+     *              false otherwise
+     */
+    static boolean isQuarterTerm(TermSeason season, int year){
         return year < SEMESTER_TRANSITION_YEAR || (year == SEMESTER_TRANSITION_YEAR & season != TermSeason.Fall);
     }
 
@@ -199,9 +211,10 @@ public class UserFlowchartController {
      * Validates that the term admitted data is of the correct format and
      * returns corresponding integer information
      *
-     * @param termAdmitted Term Admitted string
-     * @return Array containing the integer values of the start year
-     * and the starting ordinal for iterating
+
+     * @param termAdmitted  Term Admitted string
+     * @return      Array containing the integer values of the start year
+     *                 and the starting ordinal for iterating
      */
     public static int[] getValidatedTermAdmittedYearAndOrdinal(String termAdmitted) {
         String[] splitTermAdmitted = termAdmitted.split(" ");

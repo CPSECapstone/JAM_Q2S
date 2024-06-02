@@ -127,7 +127,8 @@ function Grid({
                         <div className='term' key={term.termName}>
                             <Term year={term.termName} classList={term.courses}
                                   id={term.termName} handleRightClick={handleRightClick}
-                                  flowchartClassCache={flowchartClassCache}/>
+                                  flowchartClassCache={flowchartClassCache}
+                                  termName={term.termName} termType={term.termType}/>
                         </div>
                     );
                 })}

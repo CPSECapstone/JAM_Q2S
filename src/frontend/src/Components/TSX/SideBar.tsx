@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {
     ClassDisplayInformation,
     FlowchartClass,
@@ -15,6 +15,7 @@ import axios, {AxiosResponse} from "axios";
 import '../CSS/SideBar.css';
 import NewFlowForm from "./NewFlowForm";
 import usePrevious from "../../Hooks/usePrevious";
+import {AuthContext} from "../../Context/AuthContext";
 
 
 interface SideBarProps {
@@ -48,6 +49,8 @@ export const SideBar = ({
     selectedUserFlowchartRef.current = selectedUserFlowchart
     flowchartClassCacheRef.current = flowchartClassCache
     allUserFlowchartRef.current = allUserFlowcharts
+    const { user } = useContext(AuthContext);
+
     const getFlowcharts = async () => {
         let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
         setAllUserFlowcharts(res.data);
@@ -78,6 +81,27 @@ export const SideBar = ({
             }
         }
     }
+
+
+    const getNewFlowchart = async (inputValue: string) => {
+        const userId = user?.user_id;
+        const newUserFlowchartDTO = {
+            flowchartName: inputValue,
+            catalogYear: user?.catalog_year,
+            major: user?.major,
+            concentration: user?.concentration,
+            term_admitted: user?.term_admitted
+        };
+        try {
+            let res = await axios.post(`http://localhost:8080/api/UserFlowcharts/${userId}`, newUserFlowchartDTO);
+            const newFlowchart = res.data;
+            const updatedAllFlowcharts = [...allUserFlowcharts, newFlowchart];
+            setAllUserFlowcharts(updatedAllFlowcharts);
+        } catch (error) {
+            console.error("Error adding new flowchart:", error);
+        }
+    }
+
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
         saveFlowchart()
         if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
@@ -198,22 +222,10 @@ export const SideBar = ({
     };
 
     const handleSubmitForm = (inputValue: string) => {
-        // if (inputValue.trim() !== '') {
-        //     const newFlowchart = {
-        //         id: 12345,
-        //         major: "CS",
-        //         catalog: "2022-26",
-        //         flowchart: "new",
-        //         concentration: "AI",
-        //         favorite: false,
-        //         main: false
-        //     };
-        //
-        //     // Create a new array with the new flowchart added
-        //     // const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts, newFlowchart];
-        //     //
-        //     // // Update the state with the new array
-        //     // setAllFlowcharts(updatedAllFlowcharts);
+        if (inputValue.trim() !== '') {
+            console.log(inputValue)
+            getNewFlowchart(inputValue).catch(console.error);
+        }
 
         handleCloseForm();
     }
@@ -232,7 +244,7 @@ export const SideBar = ({
                 <div id="allFlowchartsHeader">
                     <p>ALL FLOWCHARTS</p>
                     <Tooltip title="Create a new Flow" placement="right" arrow>
-                        <IconButton aria-label="favorite flowchart" size="small">
+                        <IconButton aria-label="favorite flowchart" size="small" onClick={handleAddClick}>
                             <AddBoxOutlinedIcon/>
                         </IconButton>
                     </Tooltip>

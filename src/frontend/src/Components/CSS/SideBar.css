@@ -37,7 +37,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 9999; /* Ensure it appears above other elements */
+    z-index: 1000100; /* Ensure it appears above other elements */
     /* Additional styling */
     background: white;
     padding: 20px;
@@ -49,9 +49,16 @@
     font-weight: bold;
     display: block;
     color: #2D5A48;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-left: 10px;
+    text-align: center;
+}
+
+.submitButton{
+    border: none;
+    display: inline-block;
+    color: white;
+    background-color: #2D5A48;
+    text-align: center;
+    border-radius: 2px;
 }
 
 .closed {
