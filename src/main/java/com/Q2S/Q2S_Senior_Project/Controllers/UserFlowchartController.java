@@ -53,19 +53,19 @@ public class UserFlowchartController {
     private FlowchartTemplateController flowchartTemplateController;
 
     /**
-     * Get all User Flowcharts
-     * @return  all user flowcharts in the database
+     * If a userId is present, return all flowcharts associated with that userId
+     * Otherwise return all user flowcharts
+     *
+     * @param userId optional parameter for narrowing down list to a specific user
+     * @return  list of user flowcharts
      */
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/user-flowcharts")
-    List<UserFlowchartModel> getAllFlowcharts(){
+    List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam("userId") Optional<Long> userId) {
+        if (userId.isPresent()) {
+            return userFlowchartRepo.findByUserIdUserId(userId.get());
+        }
         return userFlowchartRepo.findAll();
-    }
-
-    @CrossOrigin(origins="http://localhost:3000")
-    @GetMapping("/user-flowcharts")
-    List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam(required = true) long userId) {
-        return userFlowchartRepo.findByUserIdUserId(userId);
     }
 
     /**
