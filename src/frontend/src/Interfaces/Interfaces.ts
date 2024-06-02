@@ -36,6 +36,15 @@ export interface FlowchartClass {
     uuid: string;
 }
 
+export interface PatchRequestDTO {
+    flowchartId: string,
+    patchRequest: {
+        op: string;
+        path: string;
+        value: string;
+    }[]
+}
+
 export interface TermData {
     tIndex: number;
     termName: string;
@@ -75,7 +84,6 @@ export interface User {
     userId: number,
     user_name: string
 }
-
 
 
 export interface FlowchartData {

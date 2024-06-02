@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {
     ClassDisplayInformation,
     FlowchartClass,
-    FlowchartMetaData,
+    FlowchartMetaData, PatchRequestDTO,
     QuarterClassData,
     TermData
 } from "../../Interfaces/Interfaces";
@@ -40,48 +40,46 @@ export const SideBar = ({
     const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
     const [selectedUserFlowchartId, setSelectedUserFlowchartId] = useState<number>(0);
     const selectedUserFlowchartRef = useRef<FlowchartMetaData | null>(null);
+    const allUserFlowchartRef = useRef<FlowchartMetaData[]>([]);
     const flowchartClassCacheRef = useRef<{
         [classUUID: string]: ClassDisplayInformation
     }>({});
     const prevSelectedFlowchart = usePrevious({selectedUserFlowchart, flowchartClassCache})
     selectedUserFlowchartRef.current = selectedUserFlowchart
     flowchartClassCacheRef.current = flowchartClassCache
+    allUserFlowchartRef.current = allUserFlowcharts
     const getFlowcharts = async () => {
         let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
         setAllUserFlowcharts(res.data);
     }
-    const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache: {
+    const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache:{
         [classUUID: string]: ClassDisplayInformation
     }): string => {
         let newTermData: TermData[] = JSON.parse(currentSelectedFlowchart.termData)
-        console.log(newTermData)
         newTermData.forEach((term: TermData) => {
             term.courses.forEach((course: FlowchartClass) => {
                 course.color = classCache[course.uuid].color;
                 course.taken = classCache[course.uuid].taken;
             })
         })
-        console.log(newTermData)
         return JSON.stringify(newTermData);
     }
-    const handleSelectedClick = (flowchart: FlowchartMetaData) => {
-        console.log(JSON.parse(flowchart.termData))
 
+    const saveFlowchart = () => {
         if (selectedUserFlowchart) {
-            // const updatedTermData: string = updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache);
-            const flowchartIndex = allUserFlowcharts.findIndex(fc => fc.id === selectedUserFlowchart.id);
-
-            if (flowchartIndex !== -1 && allUserFlowcharts[flowchartIndex].termData !== selectedUserFlowchart.termData) {
-                const newAllUserFlowcharts = [...allUserFlowcharts];
+            const flowchartIndex: number = allUserFlowcharts.findIndex(fc => fc.id === selectedUserFlowchart.id);
+            if (flowchartIndex !== -1) {
+                const newAllUserFlowcharts: FlowchartMetaData[] = [...allUserFlowcharts];
                 newAllUserFlowcharts[flowchartIndex] = {
                     ...newAllUserFlowcharts[flowchartIndex],
-                    termData: selectedUserFlowchart.termData,
+                    termData: updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache),
                 };
                 setAllUserFlowcharts(newAllUserFlowcharts);
             }
         }
-
-
+    }
+    const handleSelectedClick = (flowchart: FlowchartMetaData) => {
+        saveFlowchart()
         if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
             let newClassCache: {
                 [classUUID: string]: ClassDisplayInformation
@@ -89,7 +87,7 @@ export const SideBar = ({
             let termData: TermData[] = JSON.parse(flowchart.termData);
             termData.forEach((term: TermData) => {
                 term.courses.forEach((course: FlowchartClass) => {
-                    if (course.id) {
+                    if (course.id && course.id in quarterClassCache) {
                         newClassCache[course.uuid] = {
                             ...quarterClassCache[course.id],
                             color: course.color,
@@ -110,7 +108,6 @@ export const SideBar = ({
                     }
                 })
             })
-
             setFlowchartClassCache(newClassCache)
             setSelectedUserFlowchart(flowchart);
         }
@@ -121,43 +118,39 @@ export const SideBar = ({
         getFlowcharts().catch(console.error);
     }, [])
 
-    // const handleUpdatingFlowchartOnNewSelection = async (): Promise<void> => {
-    //     if (prevSelectedFlowchart?.selectedUserFlowchart) {
-    //         console.log("Updating flowcharts")
-    //         axios.patch("http://localhost:8080/api/updateFlowchart/" + prevSelectedFlowchart.selectedUserFlowchart.id, [{
-    //                 "op": "replace",
-    //                 "path": "/termData",
-    //                 "value": updatedFlowchartClassData(prevSelectedFlowchart.selectedUserFlowchart, prevSelectedFlowchart.flowchartClassCache)
-    //             }], {
-    //                 headers: {
-    //                     'Content-Type': 'application/json-patch+json',
-    //                 }
-    //             }
-    //         ).catch(console.error)
-    //     }
-    // }
 
-    // const handleUpdatingFlowchartBeforeUnload = async () => {
-    //     if (selectedUserFlowchartRef.current) {
-    //         axios.patch("http://localhost:8080/api/updateFlowchart/" + selectedUserFlowchartRef.current.id, [{
-    //                 "op": "replace",
-    //                 "path": "/termData",
-    //                 "value": updatedFlowchartClassData(selectedUserFlowchartRef.current, flowchartClassCacheRef.current)
-    //             }], {
-    //                 headers: {
-    //                     'Content-Type': 'application/json-patch+json',
-    //                 }
-    //             }
-    //         ).catch(console.error)
-    //     }
-    // };
 
-    // useEffect(() => {
-    //     window.addEventListener('beforeunload', handleUpdatingFlowchart);
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleUpdatingFlowchart);
-    //     };
-    // }, []);
+    const handleUpdatingFlowchart = async () => {
+        if (selectedUserFlowchartRef.current != null) {
+            const currentFlowchart = selectedUserFlowchartRef.current;
+            const patchRequests: PatchRequestDTO[] = [];
+            allUserFlowchartRef.current.forEach((flowchart: FlowchartMetaData) => {
+                patchRequests.push({
+                    flowchartId: flowchart.id.toString(),
+                    patchRequest: [{
+                        op: "replace",
+                        path: "/termData",
+                        value: flowchart.id === currentFlowchart.id
+                            ? updateFlowchartClassData(currentFlowchart, flowchartClassCacheRef.current)
+                            : flowchart.termData
+                    }]
+                });
+            });
+            axios.patch("http://localhost:8080/api/updateFlowcharts/" , patchRequests, {
+                    headers: {
+                        'Content-Type': 'application/json-patch+json',
+                    }
+                }
+            ).catch(console.error)
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', handleUpdatingFlowchart);
+        return () => {
+            window.removeEventListener('beforeunload', handleUpdatingFlowchart);
+        };
+    }, []);
 
 
     // const handleFavoriteClick = (current: FlowchartResponse) => {
@@ -184,14 +177,14 @@ export const SideBar = ({
             .filter(filterCondition)
             .map((current: FlowchartMetaData) => {
                 return (
-                    <SideBarItem
-                        key={current.id}
-                        handleSelectedClick={handleSelectedClick}
-                        // handleMainClick={handleMainClick}
-                        // handleFavoriteClick={handleFavoriteClick}
-                        data={current}
-                        selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
-                    />
+                        <SideBarItem
+                            key={current.id}
+                            handleSelectedClick={handleSelectedClick}
+                            // handleMainClick={handleMainClick}
+                            // handleFavoriteClick={handleFavoriteClick}
+                            data={current}
+                            selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
+                        />
                 );
             });
     };
@@ -235,7 +228,7 @@ export const SideBar = ({
                 <p>FAVORITES</p>
                 {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
             </div>
-            <div className="sidebarRow" id="all">
+            start<div className="sidebarRow" id="all">
                 <div id="allFlowchartsHeader">
                     <p>ALL FLOWCHARTS</p>
                     <Tooltip title="Create a new Flow" placement="right" arrow>

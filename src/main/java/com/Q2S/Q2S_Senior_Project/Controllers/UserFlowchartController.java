@@ -1,6 +1,7 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
 import com.Q2S.Q2S_Senior_Project.DataTransferObjects.NewUserFlowchartDTO;
+import com.Q2S.Q2S_Senior_Project.DataTransferObjects.PatchRequestDTO;
 import com.Q2S.Q2S_Senior_Project.Models.FlowchartTemplateModel;
 import com.Q2S.Q2S_Senior_Project.Models.UserFlowchartModel;
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
@@ -22,11 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Supplier;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RestController
@@ -124,18 +122,21 @@ public class UserFlowchartController {
         return objectMapper.treeToValue(patched, UserFlowchartModel.class);
     }
     @CrossOrigin(origins = "http://localhost:3000")
-    @PatchMapping(path = "api/updateFlowchart/{id}", consumes = "application/json-patch+json")
-    ResponseEntity<UserFlowchartModel> updateFlowchart(@PathVariable String id, @RequestBody JsonPatch patch) {
-        System.out.println(patch.toString());
-        try {
-            UserFlowchartModel userFlowchart = userFlowchartRepo.findById(Long.valueOf(id)).orElseThrow();
-            UserFlowchartModel userFlowchartPatched = applyPatchToFlowchart(patch, userFlowchart);
-            userFlowchartRepo.updateFlowchart(userFlowchartPatched.getTermData(), userFlowchartPatched.getId());
-            return ResponseEntity.ok(userFlowchartPatched);
-        } catch (JsonPatchException | JsonProcessingException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    @PatchMapping(path = "api/updateFlowcharts/", consumes = "application/json-patch+json")
+    ResponseEntity<List<UserFlowchartModel>> updateFlowchart(@RequestBody List<PatchRequestDTO> patches) {
+        System.out.println(patches);
+        List<UserFlowchartModel> patchedEntities = new ArrayList<>();
+        for(PatchRequestDTO patchRequestDTO : patches){
+            try {
+                UserFlowchartModel userFlowchart = userFlowchartRepo.findById(Long.valueOf(patchRequestDTO.getFlowchartId())).orElseThrow();
+                UserFlowchartModel userFlowchartPatched = applyPatchToFlowchart(patchRequestDTO.getPatchRequest(), userFlowchart);
+                userFlowchartRepo.updateFlowchart(userFlowchartPatched.getTermData(), userFlowchartPatched.getId());
+                patchedEntities.add(userFlowchartPatched);
+            } catch (JsonPatchException | JsonProcessingException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         }
-
+        return ResponseEntity.ok(patchedEntities);
     }
 
     /**

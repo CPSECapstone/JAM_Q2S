@@ -12,6 +12,10 @@
     font-size: 1em;
     margin-left: 5%;
 }
+
+#allFlowchartsHeader{
+    overflow-y: scroll;
+}
 #main{
     color: #727272;
     font-size: 0.9em;

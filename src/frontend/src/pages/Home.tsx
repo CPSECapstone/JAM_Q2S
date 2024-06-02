@@ -61,7 +61,8 @@ const Home = () => {
                                 <Grid setTotalUnits={setTotalUnits}
                                       selectedUserFlowchart={selectedUserFlowchart}
                                       setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                      flowchartClassCache={flowchartClassCache}/>
+                                      flowchartClassCache={flowchartClassCache}
+                                      quarterClassCache={quarterClassCache}/>
                             </>
                         ) : (
                             <div className='noFlowchartMessage'>

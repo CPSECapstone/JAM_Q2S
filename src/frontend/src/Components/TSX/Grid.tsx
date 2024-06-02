@@ -5,7 +5,7 @@ import {DragDropContext, DropResult} from '@hello-pangea/dnd';
 import {
     ClassDisplayInformation,
     ContextMenuData,
-    FlowchartClass, FlowchartMetaData,
+    FlowchartClass, FlowchartMetaData, QuarterClassData,
     TermData
 } from '../../Interfaces/Interfaces';
 import {useContextMenu} from '../../Hooks/useContextMenu';
@@ -18,10 +18,19 @@ interface GridProps {
     flowchartClassCache: {
         [classUUID: string]: ClassDisplayInformation
     }
+    quarterClassCache: {
+        [classUUID: string]: QuarterClassData
+    }
 
 }
 
-function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, flowchartClassCache}: GridProps) {
+function Grid({
+                  quarterClassCache,
+                  setTotalUnits,
+                  setSelectedUserFlowchart,
+                  selectedUserFlowchart,
+                  flowchartClassCache
+              }: GridProps) {
     const {clicked, setClicked, coords, setCoords} = useContextMenu();
     const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classUUID: "", termId: ""});
 
@@ -52,11 +61,25 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
         let start: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.termName === source.droppableId);
         let finish: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.termName === destination.droppableId);
         if (!start || !finish) return;
-        const newFlowchartClass: FlowchartClass = {
-            id: flowchartClassCache[draggableId].id,
-            color: flowchartClassCache[draggableId].color,
-            taken: flowchartClassCache[draggableId].taken,
-            uuid: flowchartClassCache[draggableId].uuid
+        let newFlowchartClass: FlowchartClass;
+        if (flowchartClassCache[draggableId].id in quarterClassCache) {
+            newFlowchartClass = {
+                id: flowchartClassCache[draggableId].id,
+                color: flowchartClassCache[draggableId].color,
+                taken: flowchartClassCache[draggableId].taken,
+                uuid: flowchartClassCache[draggableId].uuid
+            }
+        } else {
+            newFlowchartClass = {
+                id: null,
+                color: flowchartClassCache[draggableId].color,
+                taken: flowchartClassCache[draggableId].taken,
+                uuid: flowchartClassCache[draggableId].uuid,
+                customDesc: flowchartClassCache[draggableId].desc,
+                customDisplayName: flowchartClassCache[draggableId].displayName,
+                customId: flowchartClassCache[draggableId].id,
+                customUnits: flowchartClassCache[draggableId].units
+            }
         }
         if (source.droppableId === destination.droppableId) {
             let newClasses: FlowchartClass[] = Array.from(start.courses);
