@@ -2,12 +2,12 @@ import React, {useContext, useEffect, useState} from 'react'; // Removed unused 
 import Grid from '../Components/TSX/Grid';
 import '../Components/CSS/Home.css';
 import TopBar from '../Components/TSX/TopBar';
+import axios from 'axios'; // Removed AxiosResponse import as it's not needed
 import {ClassDisplayInformation, FlowchartMetaData, QuarterClassData} from '../Interfaces/Interfaces'; // Removed unused imports
 import {SideBar} from '../Components/TSX/SideBar';
 import {Loader} from '../Components/TSX/Loader';
 import {AuthContext} from "../Context/AuthContext";
 import {useLocalStorage} from "../Hooks/useLocalStorage";
-import axios from 'axios';
 import {StyledSideBar} from '../Components/StyledComponents/SideBarStyle';
 
 const Home = () => {

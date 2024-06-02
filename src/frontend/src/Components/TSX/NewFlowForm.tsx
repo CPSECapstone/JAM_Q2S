@@ -29,7 +29,7 @@ export default function NewFlowForm({ isOpen, onClose, onSubmit }: NewFlowFormPr
                 </IconButton>
                 <p className="popup-text">ENTER NEW FLOW NAME</p>
                 <input type="text" value={inputValue} onChange={handleChange} />
-                <button onClick={handleSubmit}>Submit</button>
+                <button className='submitButton' onClick={handleSubmit}>SUBMIT</button>
             </div>
         </div>
     );
