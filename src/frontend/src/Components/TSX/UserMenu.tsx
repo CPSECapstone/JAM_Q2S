@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import '../CSS/UserMenu.css';
 import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -12,6 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Paper from "@mui/material/Paper";
 import {AuthContext} from "../../Context/AuthContext";
+import {useMsal} from "@azure/msal-react";
+import {Button} from "react-bootstrap";
 import {useLocalStorage} from "../../Hooks/useLocalStorage";
 
 function UserMenu(): JSX.Element {
@@ -64,12 +66,19 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
-        const { user } = useContext(AuthContext);
+        const { user, setUser } = useContext(AuthContext);
         const { removeItem } = useLocalStorage();
+        const { instance } = useMsal();
+        const navigate = useNavigate();
 
-        const handleLogout = () => {
+        const handleLogoutRedirect = () => {
             removeItem("user");
-        }
+            if (instance.getActiveAccount()) {
+                instance.logoutRedirect().catch((error) => console.log(error));
+            } else {
+                navigate("/");
+            }
+        };
 
         return (
             <StyledContextMenu $top={65} $left={20}>
@@ -77,6 +86,9 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                     <MenuList>
                         <MenuItem>
                             <ListItemText>{user?.user_name}</ListItemText>
+                        </MenuItem>
+                        <MenuItem>
+                            <ListItemText>{user?.major}</ListItemText>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon>
@@ -89,7 +101,9 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                             <ListItemIcon>
                                 <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/" onClick={handleLogout}>Logout</Link>
+                            <Button variant="warning" onClick={handleLogoutRedirect}>
+                                Sign out
+                            </Button>
                         </MenuItem>
                     </MenuList>
                 </Paper>
