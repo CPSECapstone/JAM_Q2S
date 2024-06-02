@@ -51,7 +51,7 @@ export const SideBar = ({
             term_admitted: user?.term_admitted
         };
         try {
-            let res = await axios.post(`http://localhost:8080/api/UserFlowcharts/${userId}`, newUserFlowchartDTO);
+            let res = await axios.post(`http://localhost:8080/api/user-flowcharts?userId=${userId}`, newUserFlowchartDTO);
             const newFlowchart = res.data;
             const updatedAllFlowcharts = [...allUserFlowcharts, newFlowchart];
             setAllUserFlowcharts(updatedAllFlowcharts);
