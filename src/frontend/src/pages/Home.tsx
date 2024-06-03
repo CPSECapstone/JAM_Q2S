@@ -113,36 +113,6 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                         <TopBar toggleSideBar={toggleSideBar}/>
                     </div>
                     <div className="bottom-screen">
-    const toggleSideBar = () => {
-        setSidebarVisible(!sidebarVisible);
-    }
-
-    // const validateRequirements = async () => {
-    //     if (!selectedUserFlowchart) {
-    //         alert('No flowchart selected');
-    //         return;
-    //     }
-    //
-    //     const courses = selectedUserFlowchart.courses.map(course => course.id); // Assuming 'courses' is an array of course objects with 'id'
-    //     try {
-    //         const response = await axios.get('http://localhost:8080/checkRequirement', {
-    //             params: {
-    //                 courses: courses
-    //             }
-    //         });
-    //         console.log('Validation response:', response.data);
-    //     } catch (error) {
-    //         console.error('Error validating requirements:', error);
-    //     }
-    // };
-
-    return (
-        loading ? <Loader/> : (
-            <div className='Home'>
-                <div className='topBar'>
-                    <TopBar toggleSideBar={toggleSideBar}/>
-                </div>
-                <div className="bottom-screen">
 
                         <StyledSideBar $open={sidebarVisible}>
                             <SideBar
@@ -152,21 +122,6 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                 setFlowchartClassCache={setFlowchartClassCache}/>
                         </StyledSideBar>
 
-                    <div className='grid'>
-                        {selectedUserFlowchart ? (
-                            <>
-                                <Grid setTotalUnits={setTotalUnits}
-                                      selectedUserFlowchart={selectedUserFlowchart}
-                                      setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                      flowchartClassCache={flowchartClassCache}/>
-                                <button className='validateButton'>Validate</button>
-                            </>
-                        ) : (
-                            <div className='noFlowchartMessage'>
-                                <h3>No flowchart selected</h3>
-                                <p>Please select or create a flowchart</p>
-                            </div>
-                        )}
                         <div className='grid'>
                             {selectedUserFlowchart ? (
                                 <>
@@ -191,7 +146,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                 </div>
             )
         )
-    );
-};
+    }
+}
 
 export default Home;
