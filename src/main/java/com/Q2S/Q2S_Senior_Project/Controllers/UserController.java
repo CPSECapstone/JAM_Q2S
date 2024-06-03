@@ -64,14 +64,23 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping("/loginMicrosoftUser")
     public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
-        if (!userService.authenticateMicrosoftUser(user)) {
-            userService.addMicrosoftUser(user);
-        }
-        Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
-        if (loggedInUser.isPresent()) {
-            return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
-        } else {
-            return ResponseEntity.badRequest().body("User not found");
+        try {
+            if (!userService.authenticateMicrosoftUser(user)) {
+                userService.addMicrosoftUser(user);
+            }
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
+        } catch (Exception e) {
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
         }
     }
 
