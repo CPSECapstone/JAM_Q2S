@@ -21,6 +21,14 @@ public class RulesController {
         this.rulesService = rulesService;
     }
 
+    /**
+     * Find the "Course Mapping" affiliated with a course ID
+     *      Ex: The semester version of a quarter course
+     *
+     * @param courseID  Course ID (ex: CSC101)
+     * @return      The corresponding course(s) of the opposite term type set in the "mapping" field
+     *              "mapping" field left as null if there is no corresponding rule
+     */
     @RequestMapping(value = "/getCourseMapping", method = RequestMethod.GET, produces = "application/json")
     public CourseMapping getCourseMapping(@RequestParam(required = true) String courseID) {
         //if invalid courseID, mapping will return as null

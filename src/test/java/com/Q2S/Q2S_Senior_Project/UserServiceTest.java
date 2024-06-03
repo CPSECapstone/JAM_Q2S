@@ -33,7 +33,7 @@ class UserServiceTest {
 
     @Test
     void testAddUser() {
-        when(userRepository.findByEmail(anyString())).thenReturn(null);
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         when(userRepository.save(any(UserModel.class))).thenReturn(new UserModel("testUser", "John", "Doe", "test@example.com", "hashedPassword"));
 
