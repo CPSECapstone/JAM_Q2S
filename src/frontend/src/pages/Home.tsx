@@ -38,6 +38,26 @@ const Home = () => {
     const toggleSideBar = () => {
         setSidebarVisible(!sidebarVisible);
     }
+
+    // const validateRequirements = async () => {
+    //     if (!selectedUserFlowchart) {
+    //         alert('No flowchart selected');
+    //         return;
+    //     }
+    //
+    //     const courses = selectedUserFlowchart.courses.map(course => course.id); // Assuming 'courses' is an array of course objects with 'id'
+    //     try {
+    //         const response = await axios.get('http://localhost:8080/checkRequirement', {
+    //             params: {
+    //                 courses: courses
+    //             }
+    //         });
+    //         console.log('Validation response:', response.data);
+    //     } catch (error) {
+    //         console.error('Error validating requirements:', error);
+    //     }
+    // };
+
     return (
         loading ? <Loader/> : (
             <div className='Home'>
@@ -61,6 +81,7 @@ const Home = () => {
                                       selectedUserFlowchart={selectedUserFlowchart}
                                       setSelectedUserFlowchart={setSelectedUserFlowchart}
                                       flowchartClassCache={flowchartClassCache}/>
+                                <button className='validateButton'>Validate</button>
                             </>
                         ) : (
                             <div className='noFlowchartMessage'>
