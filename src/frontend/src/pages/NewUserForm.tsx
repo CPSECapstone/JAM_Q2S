@@ -51,8 +51,12 @@ const NewUserForm = () => {
                        onChange={(event) => setTermAdmitted(event.target.value)} required/><br/>
 
                 <label htmlFor='admitType'>Admit Type:</label><br/>
-                <input type='admitType' id='admitType' name='admitType' value={admitType}
-                       onChange={(event) => setAdmitType(event.target.value)} required/><br/>
+                <select id='admitType' name='admitType' value={admitType}
+                        onChange={(event) => setAdmitType(event.target.value)} required>
+                    <option value=''>Select Admit Type</option>
+                    <option value='FIRST_YEAR_FRESHMAN'>First Year Freshman</option>
+                    <option value='TRANSFER'>Transfer</option>
+                </select>
 
                 <label htmlFor='catalogYear'>Catalog Year:</label><br/>
                 <input type='catalogYear' id='catalogYear' name='catalogYear' value={catalogYear}
