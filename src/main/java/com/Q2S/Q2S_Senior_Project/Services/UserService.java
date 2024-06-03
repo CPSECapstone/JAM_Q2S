@@ -5,6 +5,7 @@ import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -67,11 +68,15 @@ public class UserService {
         return true;
     }
 
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void addMicrosoftUser(UserModel user) {
         // Check if the email already exists
         if (userRepository.findByEmail(user.getEmail()).isEmpty()) {
-            userRepository.save(user);
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+                System.out.println("Expected");
+            }
         }
     }
 

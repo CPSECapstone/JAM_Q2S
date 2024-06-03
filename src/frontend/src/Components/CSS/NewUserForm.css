@@ -19,14 +19,12 @@
     display:flex;
 }
 
-.NewUserForm input {
+.NewUserForm input,
+.NewUserForm select {
     box-sizing: border-box;
-
     width: 45%;
-
     border: 0.1em solid #154734;
     border-radius: 10em;
-
     padding: 0.8em;
 }
 
