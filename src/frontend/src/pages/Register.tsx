@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import '../Components/CSS/Register.css';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {AccountInfo, IPublicClientApplication} from "@azure/msal-browser";
+import {AuthContext} from "../Context/AuthContext";
 
 interface registerProps {
     setLoadingUser: React.Dispatch<React.SetStateAction<Boolean>>;
@@ -15,6 +16,7 @@ const Register = ({setLoadingUser}: registerProps) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const navigate = useNavigate();
+    const {setUser} = useContext(AuthContext);
     const currentYear = new Date().getFullYear();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -29,6 +31,7 @@ const Register = ({setLoadingUser}: registerProps) => {
             });
             if (response.status === 200) {
                 setLoadingUser(true);
+                setUser(response.data);
                 navigate(`/newUserForm?userId=${response.data.userId}`);
             } else {
                 // Handle unsuccessful register [ TO DO ]

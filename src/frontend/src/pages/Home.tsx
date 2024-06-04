@@ -140,6 +140,9 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                     <p>Please select or create a flowchart</p>
                                 </div>
                             )}
+                            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
+                                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+                            </footer>
                         </div>
                     </div>
                     {selectedUserFlowchart ? (

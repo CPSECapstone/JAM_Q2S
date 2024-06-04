@@ -32,7 +32,7 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const {user, setUser} = useContext(AuthContext);
+    const {setUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -44,6 +44,7 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
             });
             if (response.status === 200) {
                 setLoadingUser(true);
+                setUser(response.data);
                 navigate("/home");
             } else {
                 // Handle unsuccessful login [ TO DO ]
@@ -77,9 +78,9 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                     <Link to="/register">Don't have an account? Register</Link>
                 </Grid>
             </Grid>
-            <footer style={{position: 'fixed', bottom: 9, color: 'grey', fontSize: '3', padding: "1%"}}>
-                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
-            </footer>
+            {/*<footer style={{position: 'fixed', bottom: 9, color: 'grey', fontSize: '3', padding: "1%"}}>*/}
+            {/*    <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>*/}
+            {/*</footer>*/}
         </div>
     );
 };

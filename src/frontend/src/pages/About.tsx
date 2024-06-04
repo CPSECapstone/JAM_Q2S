@@ -44,36 +44,8 @@ const About = () => {
                         Pro in Fall 2023 as a commission from the Engineering Student Services at Cal Poly.</p>
                     <div className="card">
                         <div className="container">
-                            <h3>Andrew Estrada</h3>
-                            <p className="title">SOFTWARE ENGINEER</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <div className="container">
-                            <h3>Archie Jones</h3>
-                            <p className="title">SOFTWARE ENGINEER</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <div className="container">
-                            <h3>Jamie Luna</h3>
-                            <p className="title">SOFTWARE ENGINEER</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <div className="container">
-                            <h3>Jenny Ferriol</h3>
-                            <p className="title">SOFTWARE ENGINEER</p>
-                        </div>
-                    </div>
-
-                    <div className="card">
-                        <div className="container">
-                            <h4>Mitashi Parikh</h4>
-                            <p className="title">SOFTWARE ENGINEER</p>
+                            <h3 style={{padding: '1%'}}>Software Engineers</h3>
+                            <p className="title">ANDREW ESTRADA,  ARCHIE JONES,  JAMIE LUNA,  JENNY FERRIOL,  MITASHI PARIKH</p>
                         </div>
                     </div>
                 </div>
