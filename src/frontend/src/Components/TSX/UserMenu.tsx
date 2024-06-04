@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import '../CSS/UserMenu.css';
-import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import { StyledClassContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
@@ -81,7 +81,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
         };
 
         return (
-            <StyledContextMenu $top={65} $left={20}>
+            <StyledClassContextMenu $top={65} $left={20}>
                 <Paper sx={{width: 320, maxWidth: '100%'}}>
                     <MenuList>
                         <MenuItem>
@@ -107,7 +107,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                         </MenuItem>
                     </MenuList>
                 </Paper>
-            </StyledContextMenu>
+            </StyledClassContextMenu>
         );
     }
 );
