@@ -31,7 +31,7 @@ const mockData: EmbeddedSemesterClassData[] = [
 const tooltipStyles = {
     'background': '#2c372d',
     'maxWidth': '300px',
-    'zIndex': '999'
+    'zIndex': '115'
 }
 
 function Class({index, classData, handleRightClick, term}: classProps) {

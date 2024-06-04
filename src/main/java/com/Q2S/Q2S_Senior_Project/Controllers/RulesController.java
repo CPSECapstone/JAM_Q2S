@@ -81,22 +81,22 @@ public class RulesController {
                 new Requirement("MATH143 Requirement"),
                 new Requirement("MATH241 Requirement"),
                 new Requirement("MATH244 Requirement"),
-                new Requirement("PHIL230 or PHIL231 Requirement"),
-                new Requirement("PSY201/202 Requirement"),
-                new Requirement("PSY350 or COMS217 Requirement"),
-                new Requirement("STAT312 Requirement"),
-                new Requirement("Life Science Support Elective"),
-                new Requirement("Mathematics Support Elective"),
-                new Requirement("Physical Science Support Elective"),
-                new Requirement("GE Area A1 Requirement"),
-                new Requirement("GE Area A2 Requirement"),
-                new Requirement("GE Area A3 Requirement"),
-                new Requirement("GE Area C1 Requirement"),
-                new Requirement("GE Lower-Div C Elective Requirement"),
-                new Requirement("GE Upper-Division C Requirement"),
-                new Requirement("GE Area D1 Requirement"),
-                new Requirement("GE Area D Elective Requirement"),
-                new Requirement("GE Area F Requirement")
+                new Requirement("PHIL230 or PHIL231 Requirement")
+//                new Requirement("PSY201/202 Requirement"),
+//                new Requirement("PSY350 or COMS217 Requirement"),
+//                new Requirement("STAT312 Requirement")
+//                new Requirement("Life Science Support Elective"),
+//                new Requirement("Mathematics Support Elective"),
+//                new Requirement("Physical Science Support Elective"),
+//                new Requirement("GE Area A1 Requirement"),
+//                new Requirement("GE Area A2 Requirement"),
+//                new Requirement("GE Area A3 Requirement"),
+//                new Requirement("GE Area C1 Requirement"),
+//                new Requirement("GE Lower-Div C Elective Requirement"),
+//                new Requirement("GE Upper-Division C Requirement"),
+//                new Requirement("GE Area D1 Requirement"),
+//                new Requirement("GE Area D Elective Requirement"),
+//                new Requirement("GE Area F Requirement")
         ));
         Degree se = new Degree(requirements, "Software Engineering");
         se.setCourses(courses);

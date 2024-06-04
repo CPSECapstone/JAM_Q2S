@@ -1,5 +1,14 @@
-import React from 'react';
-import {IconButton, Tooltip } from '@mui/material/';
+import React, {useState} from 'react';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    Tooltip,
+    Typography
+} from '@mui/material/';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import SaveIcon from '@mui/icons-material/Save';
@@ -7,15 +16,56 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../CSS/EditBar.css';
 import {FlowchartMetaData} from "../../Interfaces/Interfaces";
+import axios from "axios";
 
 interface EditBarProps {
     toggleSideBar: () => void;
     selectedUserFlowchart: FlowchartMetaData | null;
 }
 
+const validateRequirements = async (termData : any) => {
+    try {
+        const courses = termData.flatMap((term: any) =>
+            Array.isArray(term.courses)
+                ? term.courses.map((course: any) => course.id).filter((id: string | null) => id !== null)
+                : []
+        ).join(',');
+
+        const response = await axios.get('/checkRequirement', {
+            params: {courses}
+        });
+
+        return response.data.unmetRequirements;
+    }
+    catch (error) {
+        console.log('Error validating requirements:', error)
+    }
+};
+
 function EditBar({toggleSideBar, selectedUserFlowchart} : EditBarProps) : JSX.Element{
+    const [popupOpen, setPopupOpen] = useState(false);
+    const [unmetRequirements, setUnmetRequirements] = useState<string[]>([]);
+
     let clickEvent = () => {
     };
+
+    const handleValidateClick = () => {
+        if (selectedUserFlowchart) {
+            try {
+                const termDataObject = JSON.parse(selectedUserFlowchart.termData);
+                validateRequirements(termDataObject)
+                    .then((unmetRequirements) => {
+                        setUnmetRequirements(unmetRequirements);
+                        setPopupOpen(true);
+                    })
+            } catch (error) {
+                console.error('Error parsing termData:', error);
+            }
+        } else {
+            console.log("No flowchart selected. Cannot validate degree requirements");
+        }
+    }
+
     return (
 
         <div className="editBar" onClick={() => clickEvent()}>
@@ -72,15 +122,23 @@ function EditBar({toggleSideBar, selectedUserFlowchart} : EditBarProps) : JSX.El
             </div>
         </div>
             <div className="buttons validate-button">
-                <Tooltip title="Validate"
-                         placement="right-end"
-                         arrow>
                     <button aria-label="validate requirements"
-                                onClick={() => {alert('validate requirements');}}>
+                                onClick={handleValidateClick}>
                         Validate
                     </button>
-                </Tooltip>
             </div>
+
+            <Dialog open={popupOpen} onClose={() => setPopupOpen(false)} className="popupContainer">
+                <DialogTitle>Unmet Requirements</DialogTitle>
+                <DialogContent>
+                    {unmetRequirements.map((requirement: string, index: number) => (
+                        <Typography key={index}>{requirement}</Typography>
+                    ))}
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={() => setPopupOpen(false)}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
