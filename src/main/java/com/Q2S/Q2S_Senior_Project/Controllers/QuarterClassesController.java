@@ -10,10 +10,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller class for managing quarter classes.
+ */
 @RestController
 public class QuarterClassesController {
     private final QuarterClassRepo quarterClassRepo;
 
+    /**
+     * Constructor for QuarterClassesController.
+     *
+     * @param quarterClassRepo The QuarterClassRepo instance to use
+     */
     QuarterClassesController(QuarterClassRepo quarterClassRepo) {
         this.quarterClassRepo = quarterClassRepo;
     }

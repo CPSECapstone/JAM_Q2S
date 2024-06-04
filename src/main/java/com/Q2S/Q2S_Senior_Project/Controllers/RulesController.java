@@ -11,11 +11,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controller class for handling course mapping-related endpoints.
+ */
+
 @RestController
 public class RulesController {
 
     private final RulesService rulesService;
 
+    /**
+     * Constructor for RulesController.
+     *
+     * @param rulesService The CourseMappingService instance to use
+     */
     @Autowired
     public RulesController(RulesService rulesService) {
         this.rulesService = rulesService;
@@ -39,19 +48,6 @@ public class RulesController {
 
         return courseMapping;
     }
-
-//    @RequestMapping(value = "/checkRequirement", method = RequestMethod.GET, produces = "application/json")
-//    public Degree checkRequirement(@RequestParam(required = true) List<String> courses) {
-//        Degree se = rulesService.parseJsonToDegree("Software Engineering");
-//        se.setCourses(courses);
-//
-//        for (Requirement req : se.getRequirements()) {
-//            rulesService.requirementService(req, se);
-//        }
-//
-//        se.checkRequirementsMet();
-//        return se;
-//    }
 
     @RequestMapping(value = "/checkRequirement", method = RequestMethod.GET, produces = "application/json")
     public Degree checkRequirement(@RequestParam(required = true) List<String> courses) {
@@ -108,27 +104,4 @@ public class RulesController {
         se.checkRequirementsMet();
         return se;
     }
-
-//    @RequestMapping(value = "/checkRequirement", method = RequestMethod.GET, produces = "application/json")
-//    public Degree checkRequirement(@RequestParam(required = true) List<String> courses) {
-//
-//        Requirement r1 = new Requirement("CSC101 Requirement");
-//        Requirement r2 = new Requirement("Life Science Elective");
-//        Requirement r3 = new Requirement("Math Elective");
-//        List<Requirement> reqs = Arrays.asList(r1, r2, r3);
-//        Degree se = new Degree(reqs, "Software Engineering");
-//        se.setCourses(courses);
-//
-//        for (Requirement req : se.getRequirements()) {
-//            rulesService.requirementService(req, se);
-//        }
-//
-//        se.checkRequirementsMet();
-//
-//        return se;
-//    }
-
-    //big json with all the requirements
-    //one table per catalog
-    //one row per major with a blob of rules
 }
