@@ -111,12 +111,17 @@ public class FlowchartTemplateController {
         return objectMapper.writeValueAsString(termData);
     }
 
-
     @PostMapping("/api/FlowchartTemplates")
     public FlowchartTemplateModel saveFlowchartTemplate(@Validated @RequestBody FlowchartTemplateModel flowchartTemplate) {
         return flowchartTemplateRepo.save(flowchartTemplate);
     }
 
+    /**
+     * Find flowchart template by its database id
+     *
+     * @param id    template id
+     * @return      corresponding template or null if none exist
+     */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/FlowchartTemplates/{id}")
     FlowchartTemplateModel getFlowchartTemplateById(@PathVariable long id) {
@@ -146,6 +151,9 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.findAll();
     }
 
+    /**
+     * Delete All Flowcharts
+     */
     @DeleteMapping("/api/FlowchartTemplates")
     void deleteAllFlowchartTemplates(){
         flowchartTemplateRepo.deleteAll();

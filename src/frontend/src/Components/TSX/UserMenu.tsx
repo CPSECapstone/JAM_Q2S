@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import '../CSS/UserMenu.css';
-import { StyledContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import { StyledClassContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import MenuList from "@mui/material/MenuList";
@@ -13,6 +13,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Paper from "@mui/material/Paper";
 import {AuthContext} from "../../Context/AuthContext";
+import {useMsal} from "@azure/msal-react";
+import {Button} from "react-bootstrap";
+import {useLocalStorage} from "../../Hooks/useLocalStorage";
 
 function UserMenu(): JSX.Element {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,9 +68,21 @@ export interface MenuProps {
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
         const { user, setUser } = useContext(AuthContext);
+        const { removeItem } = useLocalStorage();
+        const { instance } = useMsal();
+        const navigate = useNavigate();
+
+        const handleLogoutRedirect = () => {
+            removeItem("user");
+            if (instance.getActiveAccount()) {
+                instance.logoutRedirect().catch((error) => console.log(error));
+            } else {
+                navigate("/");
+            }
+        };
 
         return (
-            <StyledContextMenu $top={65} $left={20}>
+            <StyledClassContextMenu $top={65} $left={20}>
                 <Paper sx={{width: 320, maxWidth: '100%'}}>
                     <MenuList>
                         <MenuItem>
@@ -93,11 +108,13 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                             <ListItemIcon>
                                 <LogoutIcon fontSize="small"/>
                             </ListItemIcon>
-                            <Link style={{ color: 'red' }} to="/">Logout</Link>
+                            <Button variant="warning" onClick={handleLogoutRedirect}>
+                                Sign out
+                            </Button>
                         </MenuItem>
                     </MenuList>
                 </Paper>
-            </StyledContextMenu>
+            </StyledClassContextMenu>
         );
     }
 );

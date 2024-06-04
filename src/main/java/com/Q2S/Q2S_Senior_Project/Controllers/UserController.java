@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller class for handling user-related endpoints.
@@ -15,8 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
-
     private final UserService userService;
 
     @Autowired
@@ -31,32 +30,37 @@ public class UserController {
     }
 
     /**
-     * Endpoint for registering a new user.
+     * Register user api
      *
-     * @param user The UserModel representing the user to register.
-     * @return ResponseEntity indicating success or failure of user registration.
+     * @param user  new user entity to be added (JSON format)
+     * @return      ResponseEntity.ok if the action was successful
+     *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserModel user) {
+    public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
-            return ResponseEntity.ok("User registered successfully");
+            //Optional<UserModel> userWithId = userService.findUserByEmail(user.getEmail());
+            return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.badRequest().body("User with this email already exists");
         }
     }
 
     /**
-     * Endpoint for user login.
+     * User Login
      *
-     * @param user The UserModel representing the user attempting to login.
-     * @return ResponseEntity with user data upon successful login, or error message.
+     * @param user  User entity for attempted log in
+     * @return      Response Entity with user entity successfully signed in OR
+     *              ResponseEntity.badRequest() if log in unsuccessful
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
-            ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
-            if (loggedInUser != null) {
-                return ResponseEntity.ok(loggedInUser); // Return user data upon successful login
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
             } else {
                 return ResponseEntity.badRequest().body("User not found");
             }
@@ -65,10 +69,32 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/loginMicrosoftUser")
+    public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
+        try {
+            if (!userService.authenticateMicrosoftUser(user)) {
+                userService.addMicrosoftUser(user);
+            }
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
+        } catch (Exception e) {
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
+        }
+    }
+
     /**
-     * Endpoint for retrieving all users.
      *
-     * @return List of UserModel representing all users.
+     * @return  list of all users
      */
     @GetMapping("/allUsers")
     public List<UserModel> findAllUsers() {
@@ -76,12 +102,14 @@ public class UserController {
     }
 
     /**
-     * Endpoint for updating user information.
+     * Update User Info (expect password and email)
      *
-     * @param id ID of the user to update.
-     * @param updatedUser The updated UserModel.
-     * @return ResponseEntity indicating success or failure of user update.
+     * @param id    user id
+     * @param updatedUser  user entity with potentially modified information
+     * @return      ResponseEntity.ok if update was successful
+     *              ResponseEntity.badRequest() if there is no associated user with the given id
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
                                                 @RequestBody UserModel updatedUser) {
@@ -92,10 +120,11 @@ public class UserController {
     }
 
     /**
-     * Endpoint for retrieving a user by ID.
+     * Find User by ID
      *
-     * @param id The ID of the user to retrieve.
-     * @return ResponseEntity with UserModel if found, or error message.
+     * @param id    user id (from database)
+     * @return     Response Entity with the user affiliated with the id or
+     *             ResponseEntity.notFound() if not found
      */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")

@@ -40,41 +40,26 @@ export interface TermData {
     tIndex: number;
     courses: FlowchartClass[];
     tUnits: string;
+    termName: string;
+    termType: string;
 }
 
 export interface ContextMenuData {
-    classUUID: string,
-    termId: string
+    classUUID: string;
+    termId: string;
 }
 
 export interface FlowchartMetaData {
     user: User;
     termData: string;
-    catalogYear: string,
-    concentration: string,
-    favorite: boolean,
-    id: number,
-    main: boolean,
-    major: string,
-    name: string
+    catalogYear: string;
+    concentration: string;
+    favorite: boolean;
+    id: number;
+    main: boolean;
+    major: string;
+    name: string;
 }
-
-export interface User {
-    admit_type: string,
-    catalog_year: string,
-    concentration: string,
-    email: string,
-    first_name: string,
-    last_name: string,
-    major: string,
-    minor: string,
-    password: string,
-    term_admitted: string,
-    userId: number,
-    user_name: string
-}
-
-
 
 export interface FlowchartData {
     hash: string;
@@ -93,7 +78,7 @@ export interface FlowchartData {
 }
 
 export interface User {
-    id: string;
+    user_id: string;
     authToken?: string;
     user_name: string;
     first_name: string;

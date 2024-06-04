@@ -27,10 +27,11 @@ public class QuarterClassesController {
     }
 
     /**
-     * Updates quarter classes from a JSON file.
+     * Parses the file from Poly Flow Builder with all 2022-2026 Quarter Classes
+     * and input the information into the database
      *
-     * @return The list of updated QuarterClassModel objects
-     * @throws IOException if an I/O error occurs while reading the JSON file
+     * @return      all parsed courses
+     * @throws IOException   file contains invalid json
      */
     @PostMapping("/updateQuarterClasses")
     List<QuarterClassModel> updateQuarterClasses() throws IOException {
@@ -44,10 +45,10 @@ public class QuarterClassesController {
     }
 
     /**
-     * Retrieves a quarter class by its ID.
+     * Get Course info by course id
      *
-     * @param id The ID of the quarter class to retrieve
-     * @return The QuarterClassModel object representing the quarter class
+     * @param id    Course ID (ex: CSC101)
+     * @return      Corresponding course information or null if none exist
      */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/QuarterClass/{id}")
@@ -56,9 +57,8 @@ public class QuarterClassesController {
     }
 
     /**
-     * Retrieves all quarter classes.
      *
-     * @return The list of all QuarterClassModel objects
+     * @return all quarter course entries
      */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getAllQuarterClasses")

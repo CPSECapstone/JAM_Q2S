@@ -5,6 +5,7 @@ import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,7 +20,6 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-
     private final UserRepository userRepository;
 
     /**
@@ -33,10 +33,10 @@ public class UserService {
     }
 
     /**
-     * Hashes the given password using SHA-256.
+     * Helper method to hash passwords using SHA-256
      *
-     * @param password The password to hash
-     * @return The hashed password
+     * @param password  Un-encoded password from user input
+     * @return      hashed/encoded password string
      */
     public String hashPassword(String password) {
         try {
@@ -55,15 +55,16 @@ public class UserService {
     }
 
     /**
-     * Registers a new user.
+     * Add User to Database
      *
-     * @param user The user to register
-     * @return true if the user is registered successfully, false otherwise
+     * @param user  user entity to be added
+     * @return  true if user was added successfully
+     *          false otherwise (user email already exists)
      */
     @Transactional
     public boolean addUser(UserModel user) {
         // Check if the email already exists
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return false; // User with this email already exists
         }
 
@@ -75,12 +76,25 @@ public class UserService {
         return true;
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void addMicrosoftUser(UserModel user) {
+        // Check if the email already exists
+        if (userRepository.findByEmail(user.getEmail()).isEmpty()) {
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+                System.out.println("Expected");
+            }
+        }
+    }
+
     /**
-     * Authenticates a user.
+     * Authenticate user login
      *
-     * @param email    The user's email
-     * @param password The user's password
-     * @return true if the user is authenticated, false otherwise
+     * @param email     email for user login
+     * @param password      password for user login
+     * @return      true if the login credentials pass,
+     *              false otherwise
      */
     @Transactional
     public boolean authenticateUser(String email, String password) {
@@ -90,10 +104,17 @@ public class UserService {
         return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
     }
 
+    @Transactional
+    public boolean authenticateMicrosoftUser(UserModel userModel) {
+        Optional<UserModel> user = userRepository.findByEmail(userModel.getEmail());
+
+        return user.isPresent();
+    }
+
     /**
-     * Retrieves all users.
+     * Get All Users
      *
-     * @return The list of all users
+     * @return  list of all user entities
      */
     @Transactional
     public List<UserModel> findAllUsers() {
@@ -101,10 +122,11 @@ public class UserService {
     }
 
     /**
-     * Retrieves a user by ID.
+     * Find User by ID
      *
-     * @param id The ID of the user to retrieve
-     * @return The user with the specified ID, or null if not found
+     * @param id     id of desired user
+     * @return     ResponseEntity with desired user entity if found,
+     *             ResponseEntity.notFound() otherwise
      */
     @Transactional
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
@@ -115,31 +137,29 @@ public class UserService {
         );
     }
 
-    /**
-     * Retrieves a user by email.
-     *
-     * @param email The email of the user to retrieve
-     * @return The user with the specified email, or null if not found
-     */
     public Optional<UserModel> findUserModelById( long id) {
         return userRepository.findById(id);
     }
 
+    /**
+     * Find User by Email
+     *
+     * @param email     email of desired user
+     * @return     ResponseEntity with desired user entity if found,
+     *             ResponseEntity.notFound() otherwise
+     */
     @Transactional
-    public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<UserModel> user = userRepository.findByEmail(email);
-
-        return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
-                () -> ResponseEntity.notFound().build()
-        );
+    public Optional<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
+        return userRepository.findByEmail(email);
     }
 
     /**
-     * Deletes a user by ID.
+     * Delete User By ID
      *
-     * @param userId The ID of the user to delete
-     * @return true if the user is deleted successfully, false otherwise
+     * @param userId    id of user to be deleted
+     * @return true if operation successful, false otherwise
      */
+    @Transactional
     public boolean deleteUserById(long userId) {
         // Check if the user exists
         Optional<UserModel> optionalUser = userRepository.findById(userId);
@@ -152,12 +172,14 @@ public class UserService {
     }
 
     /**
-     * Updates user information.
+     * Update the fields of user with id '{id}' to match fields of updatedUser
+     *      except email and password
      *
-     * @param id          The ID of the user to update
-     * @param updatedUser The updated user information
-     * @return true if the user information is updated successfully, false otherwise
+     * @param id    user id
+     * @param updatedUser  user entity with modified fields
+     * @return  true if operation successful, false otherwise
      */
+    @Transactional
     public boolean updateUserInfo(long id, UserModel updatedUser) {
         // Retrieve the user entity by its ID
         UserModel user = userRepository.findById(id).orElse(null);
@@ -171,11 +193,12 @@ public class UserService {
     }
 
     /**
-     * Updates a UserModel instance with the provided changes.
+     * Update user entity fields except email and password
      *
-     * @param user         The original UserModel instance
-     * @param updatedUser  The UserModel instance with the updates
-     * @return The updated UserModel instance
+     * @param user      original user entity
+     * @param updatedUser   user entity with modified fields
+     * @return      original user entity with fields changed to match the modified fields of
+     *              the updated user
      */
     public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
         //can update any field except email and password which must be done with a distinct call
