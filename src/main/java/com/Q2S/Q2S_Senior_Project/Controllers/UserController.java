@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/loginMicrosoftUser")
+    @PostMapping("/user/loginMicrosoftUser")
     public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
         try {
             if (!userService.authenticateMicrosoftUser(user)) {
