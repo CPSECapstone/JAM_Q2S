@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import '../CSS/UserMenu.css';
 import { StyledClassContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -66,7 +67,7 @@ export interface MenuProps {
 
 const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
     ({ onClose }) => {
-        const { user, setUser } = useContext(AuthContext);
+        const { user } = useContext(AuthContext);
         const { removeItem } = useLocalStorage();
         const { instance } = useMsal();
         const navigate = useNavigate();
@@ -89,6 +90,12 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                         </MenuItem>
                         <MenuItem>
                             <ListItemText>{user?.major}</ListItemText>
+                        </MenuItem>
+                        <MenuItem >
+                            <ListItemIcon>
+                                <EmojiPeopleIcon/>
+                            </ListItemIcon>
+                            <Link to="/about">About Us</Link>
                         </MenuItem>
                         <MenuItem>
                             <ListItemIcon>

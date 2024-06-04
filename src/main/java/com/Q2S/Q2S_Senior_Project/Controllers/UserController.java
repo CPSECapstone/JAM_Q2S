@@ -1,6 +1,5 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +103,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
-                                                @RequestBody UserModel updatedUser) {
+                                             @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");
         }
