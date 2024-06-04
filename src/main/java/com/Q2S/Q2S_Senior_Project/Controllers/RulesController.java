@@ -58,7 +58,7 @@ public class RulesController {
                 new Requirement("CSC/CPE203 Requirement"),
                 new Requirement("CSC225 Requirement"),
                 new Requirement("CSC248 Requirement"),
-                new Requirement("CSC300 or PHIL323 Requirement"),
+//                new Requirement("CSC300 or PHIL323 Requirement"),
                 new Requirement("CSC305 Requirement"),
                 new Requirement("CSC308 Requirement"),
                 new Requirement("CSC309 Requirement"),
@@ -70,14 +70,14 @@ public class RulesController {
                 new Requirement("CSC406 Requirement"),
                 new Requirement("CSC430 Requirement"),
                 new Requirement("CSC484 Requirement"),
-                new Requirement("Technical Elective"),
-                new Requirement("IME314 or IME315 Requirement"),
+//                new Requirement("Technical Elective"),
+//                new Requirement("IME314 or IME315 Requirement"),
                 new Requirement("MATH141 Requirement"),
                 new Requirement("MATH142 Requirement"),
                 new Requirement("MATH143 Requirement"),
-                new Requirement("MATH241 Requirement"),
-                new Requirement("MATH244 Requirement"),
-                new Requirement("PHIL230 or PHIL231 Requirement")
+                new Requirement("MATH241 Requirement")
+//                new Requirement("MATH244 Requirement"),
+//                new Requirement("PHIL230 or PHIL231 Requirement")
 //                new Requirement("PSY201/202 Requirement"),
 //                new Requirement("PSY350 or COMS217 Requirement"),
 //                new Requirement("STAT312 Requirement")

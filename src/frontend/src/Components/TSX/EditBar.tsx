@@ -122,7 +122,7 @@ function EditBar({toggleSideBar, selectedUserFlowchart} : EditBarProps) : JSX.El
             </div>
         </div>
             <div className="buttons validate-button">
-                    <button aria-label="validate requirements"
+                    <button className="button" aria-label="validate requirements"
                                 onClick={handleValidateClick}>
                         Validate
                     </button>
