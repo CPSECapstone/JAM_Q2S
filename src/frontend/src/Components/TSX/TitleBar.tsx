@@ -2,24 +2,26 @@ import React, {useContext} from 'react';
 import '../CSS/TitleBar.css';
 import {Typography} from "@mui/material";
 import {AuthContext} from "../../Context/AuthContext";
-import {FlowchartContext} from "../../Context/FlowchartProvider";
+import {FlowchartMetaData} from "../../Interfaces/Interfaces";
 
+interface TitleBarProps {
+    selectedUserFlowchart: FlowchartMetaData | null
+}
+function TitleBar({selectedUserFlowchart}: TitleBarProps) : JSX.Element{
 
-function TitleBar() : JSX.Element{
-    const {flowchart} = useContext(FlowchartContext);
     const {user} = useContext(AuthContext);
 
 
     return (
         <div className="titleBar">
-            <div className='flowName'>
-                <Typography>{flowchart?.name}</Typography>
-            </div>
             <div className='degreeMajor'>
-                <Typography>{user?.major}</Typography>
+                <p>{selectedUserFlowchart ? selectedUserFlowchart.major : ""}</p>
+            </div>
+            <div className='flowName'>
+                <p>{selectedUserFlowchart ? selectedUserFlowchart.name : "Welcome To Q2S Planner"}</p>
             </div>
             <div className='catalog'>
-                <Typography>{user?.catalog_year} Catalog</Typography>
+                <p>{selectedUserFlowchart ? selectedUserFlowchart.catalogYear + " catalog" : ""} </p>
             </div>
         </div>
     )

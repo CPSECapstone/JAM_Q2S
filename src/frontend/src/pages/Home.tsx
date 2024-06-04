@@ -35,8 +35,6 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
-    console.log("ACTIVE ACCOUNT IN HOME: " + activeAccount);
-
     if (isAuthenticated && !activeAccount) {
         window.location.reload();
     }
@@ -110,7 +108,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
             loading ? <Loader/> : (
                 <div className='Home'>
                     <div className='topBar'>
-                        <TopBar toggleSideBar={toggleSideBar}/>
+                        <TopBar toggleSideBar={toggleSideBar} selectedUserFlowchart={selectedUserFlowchart}/>
                     </div>
                     <div className="bottom-screen">
 

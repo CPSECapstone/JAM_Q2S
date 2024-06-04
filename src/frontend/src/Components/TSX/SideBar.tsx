@@ -171,7 +171,7 @@ export const SideBar = ({
                         </IconButton>
                     </Tooltip>
                 </div>
-                {renderFlowchartItems(() => true)}
+                    {renderFlowchartItems(() => true)}
                 <NewFlowForm isOpen={isFormOpen} onClose={handleCloseForm} onSubmit={handleSubmitForm}/>
             </div>
         </div>

@@ -25,7 +25,9 @@
     font-size: 0.9em;
 }
 
-
+#all {
+    overflow-y: scroll;
+}
 .custom-popup {
     position: fixed;
     top: 50%;

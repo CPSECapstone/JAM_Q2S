@@ -36,13 +36,14 @@ const ContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlo
             return;
         }
         let updatedTerms: TermData[] = JSON.parse(selectedUserFlowchart.termData)
-        let term: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.tIndex.toString() === classData.termId);
+        let term: TermData | undefined = updatedTerms.find((term: TermData): boolean => term.termName === classData.termId);
         if(!term){
             return;
         }
         let classes: FlowchartClass[] = Array.from(term.courses);
         const classIndex: number = term.courses.findIndex((termClass: FlowchartClass) => termClass.uuid === classData.classUUID);
         classes.splice(classIndex, 1);
+        term.tUnits = String(Number(term.tUnits) - Number(flowchartClassCache[term.courses[classIndex].uuid].units))
         term.courses = classes;
         setSelectedUserFlowchart({...selectedUserFlowchart, termData: JSON.stringify(updatedTerms)});
 

@@ -68,7 +68,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                     </div>
                     <div className="embeddedClasses">
                         {isEmbeddedClassOpen && mockData.map((data, index) => (
-                            <EmbeddedClass key={index} data={data}/>
+                            <EmbeddedClass key={index} data={data} taken={classData.taken} color={classData.color}/>
                         ))}
                     </div>
                     <div className="collapsibleIcon">
