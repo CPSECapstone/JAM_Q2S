@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controller class for handling user-related endpoints.
- */
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -20,12 +17,6 @@ public class UserController {
 
     @Autowired
     UserController (UserService userService){
-    /**
-     * Constructor for UserController.
-     *
-     * @param userService The UserService to be injected.
-     */
-    public UserController(UserService userService){
         this.userService = userService;
     }
 
@@ -112,7 +103,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
-                                                @RequestBody UserModel updatedUser) {
+                                             @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");
         }

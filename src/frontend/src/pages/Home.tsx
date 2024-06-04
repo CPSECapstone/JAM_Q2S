@@ -70,6 +70,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
 
             if (response.status === 200) {
                 setLoadingUser(true);
+                console.log(response.data);
+                setUser(response.data);
                 if (!response.data.major) { // checking if first time registering
                     navigate(`/newUserForm?userId=${response.data.userId}`);
                 }

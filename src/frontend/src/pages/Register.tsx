@@ -14,9 +14,8 @@ const Register = ({setLoadingUser}: registerProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const currentYear = new Date().getFullYear();
-
     const navigate = useNavigate();
+    const currentYear = new Date().getFullYear();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
