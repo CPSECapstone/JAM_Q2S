@@ -5,12 +5,20 @@ import com.Q2S.Q2S_Senior_Project.Services.CourseMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller class for handling course mapping-related endpoints.
+ */
 @RestController
 @RequestMapping("/api")
 public class RulesController {
 
     private final CourseMappingService courseMappingService;
 
+    /**
+     * Constructor for RulesController.
+     *
+     * @param courseMappingService The CourseMappingService instance to use
+     */
     @Autowired
     public RulesController(CourseMappingService courseMappingService) {
         this.courseMappingService = courseMappingService;

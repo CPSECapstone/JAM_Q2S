@@ -1,0 +1,53 @@
+/* NewUserForm.css */
+
+.NewUserForm {
+    font-style: normal;
+    font-weight: 250;
+    font-size: 1em;
+    margin-top: 10%;
+    margin-left: 35%;
+
+    padding: 1.2%;
+}
+
+.NewUserForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.NewUserForm label {
+    display:flex;
+}
+
+.NewUserForm input,
+.NewUserForm select {
+    box-sizing: border-box;
+    width: 45%;
+    border: 0.1em solid #154734;
+    border-radius: 10em;
+    padding: 0.8em;
+}
+
+.NewUserForm button {
+    width: 45%;
+
+    background: #154734;
+    border-radius: 10em;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 160%;
+
+    color: #FFFFFF;
+
+    margin-bottom: 2%;
+}
+
+.NewUserForm button:hover {
+    background-color: #0056b3;
+}
+
+.NewUserForm p {
+    margin-top: 1%;
+}

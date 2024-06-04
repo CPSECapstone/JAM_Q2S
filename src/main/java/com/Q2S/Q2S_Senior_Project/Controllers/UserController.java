@@ -1,6 +1,5 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -27,10 +27,12 @@ public class UserController {
      * @return      ResponseEntity.ok if the action was successful
      *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/user/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserModel user) {
+    public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
-            return ResponseEntity.ok("User registered successfully");
+            //Optional<UserModel> userWithId = userService.findUserByEmail(user.getEmail());
+            return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.badRequest().body("User with this email already exists");
         }
@@ -43,17 +45,41 @@ public class UserController {
      * @return      Response Entity with user entity successfully signed in OR
      *              ResponseEntity.badRequest() if log in unsuccessful
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/user/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
-            ResponseEntity<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
-            if (loggedInUser != null) {
-                return ResponseEntity.ok(loggedInUser); // Return user data upon successful login
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
             } else {
                 return ResponseEntity.badRequest().body("User not found");
             }
         } else {
             return ResponseEntity.badRequest().body("Invalid email or password");
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/loginMicrosoftUser")
+    public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
+        try {
+            if (!userService.authenticateMicrosoftUser(user)) {
+                userService.addMicrosoftUser(user);
+            }
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
+        } catch (Exception e) {
+            Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
+            if (loggedInUser.isPresent()) {
+                return ResponseEntity.ok(loggedInUser.get()); // Return user data upon successful login
+            } else {
+                return ResponseEntity.badRequest().body("User not found");
+            }
         }
     }
 
@@ -74,9 +100,10 @@ public class UserController {
      * @return      ResponseEntity.ok if update was successful
      *              ResponseEntity.badRequest() if there is no associated user with the given id
      */
+    @CrossOrigin(origins = "*")
     @PatchMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
-                                                @RequestBody UserModel updatedUser) {
+                                             @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");
         }
