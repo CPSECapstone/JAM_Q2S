@@ -6,11 +6,14 @@ import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../CSS/EditBar.css';
+import {FlowchartMetaData} from "../../Interfaces/Interfaces";
 
 interface EditBarProps {
     toggleSideBar: () => void;
+    selectedUserFlowchart: FlowchartMetaData | null;
 }
-function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
+
+function EditBar({toggleSideBar, selectedUserFlowchart} : EditBarProps) : JSX.Element{
     let clickEvent = () => {
     };
     return (
@@ -82,4 +85,4 @@ function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
     )
 }
 
-export default EditBar
+export default EditBar;

@@ -3,11 +3,13 @@ import '../CSS/TopBar.css';
 import TitleBar from "./TitleBar";
 import EditBar from "./EditBar";
 import UserMenu from "./UserMenu";
+import {FlowchartMetaData} from "../../Interfaces/Interfaces";
 
 interface TopBarProps {
     toggleSideBar: () => void;
+    selectedUserFlowchart: FlowchartMetaData | null;
 }
-function TopBar({toggleSideBar} : TopBarProps): JSX.Element {
+function TopBar({toggleSideBar, selectedUserFlowchart} : TopBarProps): JSX.Element {
     return (
         <div className='topBar'>
             <div className='profile'>
@@ -18,7 +20,7 @@ function TopBar({toggleSideBar} : TopBarProps): JSX.Element {
                     <TitleBar></TitleBar>
                 </div>
                 <div className='editBar'>
-                    <EditBar toggleSideBar={toggleSideBar}></EditBar>
+                    <EditBar toggleSideBar={toggleSideBar} selectedUserFlowchart={selectedUserFlowchart}></EditBar>
                 </div>
             </div>
         </div>
