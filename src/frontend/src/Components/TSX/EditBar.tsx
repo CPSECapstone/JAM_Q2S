@@ -14,7 +14,9 @@ function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
     let clickEvent = () => {
     };
     return (
+
         <div className="editBar" onClick={() => clickEvent()}>
+            <div className="left-buttons">
             <div className="buttons">
                 <Tooltip title="Add Class to Flow"
                          placement="right"
@@ -63,6 +65,17 @@ function EditBar({toggleSideBar} : EditBarProps) : JSX.Element{
                                 onClick={() => toggleSideBar()}>
                         <VisibilityIcon className="icon"/>
                     </IconButton>
+                </Tooltip>
+            </div>
+        </div>
+            <div className="buttons validate-button">
+                <Tooltip title="Validate"
+                         placement="right-end"
+                         arrow>
+                    <button aria-label="validate requirements"
+                                onClick={() => {alert('validate requirements');}}>
+                        Validate
+                    </button>
                 </Tooltip>
             </div>
         </div>
