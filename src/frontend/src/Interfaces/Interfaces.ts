@@ -78,7 +78,7 @@ export interface FlowchartData {
 }
 
 export interface User {
-    user_id: string;
+    userId: number;
     authToken?: string;
     user_name: string;
     first_name: string;
