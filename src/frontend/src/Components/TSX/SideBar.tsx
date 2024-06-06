@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {
     ClassDisplayInformation,
     FlowchartClass,
-    FlowchartMetaData,
+    FlowchartMetaData, PatchRequestDTO,
     QuarterClassData,
     TermData
 } from "../../Interfaces/Interfaces";
@@ -14,6 +14,7 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import axios, {AxiosResponse} from "axios";
 import '../CSS/SideBar.css';
 import NewFlowForm from "./NewFlowForm";
+import usePrevious from "../../Hooks/usePrevious";
 import {AuthContext} from "../../Context/AuthContext";
 
 
@@ -24,22 +25,63 @@ interface SideBarProps {
     setFlowchartClassCache: (newCache: {
         [classUUID: string]: ClassDisplayInformation
     }) => void;
+    flowchartClassCache: {
+        [classUUID: string]: ClassDisplayInformation
+    }
 }
 
 export const SideBar = ({
                             setFlowchartClassCache,
+                            flowchartClassCache,
                             setSelectedUserFlowchart,
                             selectedUserFlowchart,
                             quarterClassCache,
                         }: SideBarProps) => {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [allUserFlowcharts, setAllUserFlowcharts] = useState<FlowchartMetaData[]>([]);
+    const [selectedUserFlowchartId, setSelectedUserFlowchartId] = useState<number>(0);
+    const selectedUserFlowchartRef = useRef<FlowchartMetaData | null>(null);
+    const allUserFlowchartRef = useRef<FlowchartMetaData[]>([]);
+    const flowchartClassCacheRef = useRef<{
+        [classUUID: string]: ClassDisplayInformation
+    }>({});
+    const prevSelectedFlowchart = usePrevious({selectedUserFlowchart, flowchartClassCache})
+    selectedUserFlowchartRef.current = selectedUserFlowchart
+    flowchartClassCacheRef.current = flowchartClassCache
+    allUserFlowchartRef.current = allUserFlowcharts
     const { user } = useContext(AuthContext);
 
     const getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/user-flowcharts");
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/AllFlowcharts");
         setAllUserFlowcharts(res.data);
     }
+    const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache:{
+        [classUUID: string]: ClassDisplayInformation
+    }): string => {
+        let newTermData: TermData[] = JSON.parse(currentSelectedFlowchart.termData)
+        newTermData.forEach((term: TermData) => {
+            term.courses.forEach((course: FlowchartClass) => {
+                course.color = classCache[course.uuid].color;
+                course.taken = classCache[course.uuid].taken;
+            })
+        })
+        return JSON.stringify(newTermData);
+    }
+
+    const saveFlowchart = () => {
+        if (selectedUserFlowchart) {
+            const flowchartIndex: number = allUserFlowcharts.findIndex(fc => fc.id === selectedUserFlowchart.id);
+            if (flowchartIndex !== -1) {
+                const newAllUserFlowcharts: FlowchartMetaData[] = [...allUserFlowcharts];
+                newAllUserFlowcharts[flowchartIndex] = {
+                    ...newAllUserFlowcharts[flowchartIndex],
+                    termData: updateFlowchartClassData(selectedUserFlowchart, flowchartClassCache),
+                };
+                setAllUserFlowcharts(newAllUserFlowcharts);
+            }
+        }
+    }
+
 
     const getNewFlowchart = async (inputValue: string) => {
         console.log(user);
@@ -62,6 +104,7 @@ export const SideBar = ({
     }
 
     const handleSelectedClick = (flowchart: FlowchartMetaData) => {
+        saveFlowchart()
         if (!selectedUserFlowchart || selectedUserFlowchart.name !== flowchart.name) {
             let newClassCache: {
                 [classUUID: string]: ClassDisplayInformation
@@ -69,7 +112,7 @@ export const SideBar = ({
             let termData: TermData[] = JSON.parse(flowchart.termData);
             termData.forEach((term: TermData) => {
                 term.courses.forEach((course: FlowchartClass) => {
-                    if (course.id) {
+                    if (course.id && course.id in quarterClassCache) {
                         newClassCache[course.uuid] = {
                             ...quarterClassCache[course.id],
                             color: course.color,
@@ -92,12 +135,48 @@ export const SideBar = ({
             })
             setFlowchartClassCache(newClassCache)
             setSelectedUserFlowchart(flowchart);
-
         }
     };
+
+
     useEffect(() => {
         getFlowcharts().catch(console.error);
     }, [])
+
+
+
+    const handleUpdatingFlowchart = async () => {
+        if (selectedUserFlowchartRef.current != null) {
+            const currentFlowchart = selectedUserFlowchartRef.current;
+            const patchRequests: PatchRequestDTO[] = [];
+            allUserFlowchartRef.current.forEach((flowchart: FlowchartMetaData) => {
+                patchRequests.push({
+                    flowchartId: flowchart.id.toString(),
+                    patchRequest: [{
+                        op: "replace",
+                        path: "/termData",
+                        value: flowchart.id === currentFlowchart.id
+                            ? updateFlowchartClassData(currentFlowchart, flowchartClassCacheRef.current)
+                            : flowchart.termData
+                    }]
+                });
+            });
+            axios.patch("http://localhost:8080/api/updateFlowcharts/" , patchRequests, {
+                    headers: {
+                        'Content-Type': 'application/json-patch+json',
+                    }
+                }
+            ).catch(console.error)
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', handleUpdatingFlowchart);
+        return () => {
+            window.removeEventListener('beforeunload', handleUpdatingFlowchart);
+        };
+    }, []);
+
 
     // const handleFavoriteClick = (current: FlowchartResponse) => {
     //     const updatedAllFlowcharts: FlowchartResponse[] = [...allFlowcharts];
@@ -123,15 +202,14 @@ export const SideBar = ({
             .filter(filterCondition)
             .map((current: FlowchartMetaData) => {
                 return (
-                    <SideBarItem
-                        key={current.id}
-                        handleSelectedClick={handleSelectedClick}
-                        // handleMainClick={handleMainClick}
-                        // responseData={current}
-                        // handleFavoriteClick={handleFavoriteClick}
-                        data={current}
-                        selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
-                    />
+                        <SideBarItem
+                            key={current.id}
+                            handleSelectedClick={handleSelectedClick}
+                            // handleMainClick={handleMainClick}
+                            // handleFavoriteClick={handleFavoriteClick}
+                            data={current}
+                            selected={selectedUserFlowchart ? selectedUserFlowchart.name === current.name : false}
+                        />
                 );
             });
     };

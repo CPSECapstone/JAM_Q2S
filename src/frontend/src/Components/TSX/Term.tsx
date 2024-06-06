@@ -12,11 +12,11 @@ type Props = {
     termName: string;
     termType: string;
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
-    totalUnits: number;
     flowchartClassCache: { [classId: string]: ClassDisplayInformation };
 };
 
-function Term({year, classList, id, termName, termType, handleRightClick, totalUnits, flowchartClassCache}: Props): JSX.Element {
+
+function Term({year, classList, id, termName, termType, handleRightClick, flowchartClassCache}: Props): JSX.Element {
     const termAsLetter = termType.match("Quarter") ? "Q" : "S";
     return (
         <div className='term'
@@ -37,19 +37,26 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
                     <div className='body'
                          ref={provided.innerRef}
                          {...provided.droppableProps}>
-                        {classList.map((currentClass: FlowchartClass, i: number) => (
-                            <Class key={i}
-                                   index={i}
-                                   classData={flowchartClassCache[currentClass.uuid]}
-                                   handleRightClick={handleRightClick}
-                                   term={termName}/>
-                        ))}
+                        {classList.map((currentClass: FlowchartClass, i: number) => {
+                            return (
+                                <Class key={i}
+                                       index={i}
+                                       classData={flowchartClassCache[currentClass.uuid]}
+                                       handleRightClick={handleRightClick}
+                                       term={id}/>
+                            )
+                        })}
                         {provided.placeholder}
                     </div>
                 )}
             </Droppable>
-            <div className="termTotalUnits">
-                <p style={{margin: 0}}>{totalUnits}</p>
+            <div className="termTotalUnits" style={{textAlign: 'center', margin: 0}}>
+                {/*<p style={{ margin: 0 }}>*/}
+                {/*    {classList.reduce((sum: number, course: FlowchartClass) => (*/}
+                {/*        sum + Number(flowchartClassCache[course.uuid].units)*/}
+                {/*    ), 0)}*/}
+                {/*</p>*/}
+
             </div>
         </div>
     );
