@@ -3,6 +3,8 @@
     height: 100%;
     display: flex;
     flex-flow: column;
+    border-right: solid #BD8B13;
+    border-bottom: solid #BD8B13;
 }
 .title{
     background-color: #DFD6C4;
@@ -21,6 +23,9 @@
     text-align: right;
     font-size: 5%;
     color: #BD8B13;
+}
+.title p{
+    align-items: center;
 }
 .body{
     border-right: solid #BD8B13;

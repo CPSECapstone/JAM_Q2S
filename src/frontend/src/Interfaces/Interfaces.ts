@@ -36,12 +36,21 @@ export interface FlowchartClass {
     uuid: string;
 }
 
+export interface PatchRequestDTO {
+    flowchartId: string,
+    patchRequest: {
+        op: string;
+        path: string;
+        value: string;
+    }[]
+}
+
 export interface TermData {
     tIndex: number;
-    courses: FlowchartClass[];
-    tUnits: string;
     termName: string;
     termType: string;
+    courses: FlowchartClass[];
+    tUnits: string;
 }
 
 export interface ContextMenuData {
@@ -60,6 +69,22 @@ export interface FlowchartMetaData {
     major: string;
     name: string;
 }
+
+export interface User {
+    admit_type: string,
+    catalog_year: string,
+    concentration: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+    major: string,
+    minor: string,
+    password: string,
+    term_admitted: string,
+    userId: number,
+    user_name: string
+}
+
 
 export interface FlowchartData {
     hash: string;

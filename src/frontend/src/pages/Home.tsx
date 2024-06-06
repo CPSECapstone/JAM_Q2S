@@ -44,8 +44,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
     }
 
     let getFlowcharts = async () => {
-        //let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
-        //setAllFlowcharts(res.data)
+        // let res: AxiosResponse<FlowchartResponse[]> = await axios.get("http://localhost:8080/api/FlowchartTemplates");
+        // setAllFlowcharts(res.data)
     }
 
     let getUser = async () => {
@@ -104,7 +104,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
 
 
     if (!loadingUser) {
-        return(<div></div>) // [TO DO] add a message here that the account is not active and you have to login
+        return (<div></div>) // [TO DO] add a message here that the account is not active and you have to login
     } else {
         const toggleSideBar = () => {
             setSidebarVisible(!sidebarVisible);
@@ -123,7 +123,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                 quarterClassCache={quarterClassCache}
                                 selectedUserFlowchart={selectedUserFlowchart}
                                 setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                setFlowchartClassCache={setFlowchartClassCache}/>
+                                setFlowchartClassCache={setFlowchartClassCache}
+                                flowchartClassCache={flowchartClassCache}/>
                         </StyledSideBar>
 
                         <div className='grid'>
@@ -132,7 +133,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                     <Grid setTotalUnits={setTotalUnits}
                                           selectedUserFlowchart={selectedUserFlowchart}
                                           setSelectedUserFlowchart={setSelectedUserFlowchart}
-                                          flowchartClassCache={flowchartClassCache}/>
+                                          flowchartClassCache={flowchartClassCache}
+                                          quarterClassCache={quarterClassCache}/>
                                 </>
                             ) : (
                                 <div className='noFlowchartMessage'>
@@ -140,8 +142,9 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                     <p>Please select or create a flowchart</p>
                                 </div>
                             )}
-                            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
-                                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+                            <footer
+                                style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
+                                <p>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</p>
                             </footer>
                         </div>
                     </div>
