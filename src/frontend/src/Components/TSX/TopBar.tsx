@@ -20,7 +20,7 @@ function TopBar({toggleSideBar, selectedUserFlowchart} : TopBarProps): JSX.Eleme
                     <TitleBar selectedUserFlowchart={selectedUserFlowchart}></TitleBar>
                 </div>
                 <div className='editBar'>
-                    <EditBar toggleSideBar={toggleSideBar}></EditBar>
+                    <EditBar toggleSideBar={toggleSideBar} selectedUserFlowchart={selectedUserFlowchart}></EditBar>
                 </div>
             </div>
         </div>

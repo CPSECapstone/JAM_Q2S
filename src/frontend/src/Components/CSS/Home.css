@@ -16,7 +16,7 @@
     width:100%;
     flex:4;
     background-color: #ffffff;
-    z-index:999999;
+    z-index:100;
 }
 .sideBar {
     /*margin-right:-25%;*/
