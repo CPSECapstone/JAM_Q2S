@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RestController
+@RequestMapping("/api")
 public class FlowchartTemplateController {
 
     private final FlowchartTemplateRepo flowchartTemplateRepo;
@@ -41,7 +41,7 @@ public class FlowchartTemplateController {
      */
     @Transactional
     @CrossOrigin(origins = "*")
-    @PostMapping("/api/FlowchartTemplates/fromScratch")
+    @PostMapping("/flowchart-templates/update-2022-26-catalog-templates")
     public List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
 
         flowchartTemplateRepo.deleteByCatalog("2022-2026");
@@ -111,7 +111,7 @@ public class FlowchartTemplateController {
         return objectMapper.writeValueAsString(termData);
     }
 
-    @PostMapping("/api/FlowchartTemplates")
+    @PostMapping("/flowchart-templates")
     public FlowchartTemplateModel saveFlowchartTemplate(@Validated @RequestBody FlowchartTemplateModel flowchartTemplate) {
         return flowchartTemplateRepo.save(flowchartTemplate);
     }
@@ -123,7 +123,7 @@ public class FlowchartTemplateController {
      * @return      corresponding template or null if none exist
      */
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/api/FlowchartTemplates/{id}")
+    @GetMapping("/flowchart-templates/{id}")
     FlowchartTemplateModel getFlowchartTemplateById(@PathVariable long id) {
         return flowchartTemplateRepo.findById(id).orElse(null);
     }
@@ -138,7 +138,7 @@ public class FlowchartTemplateController {
      * @return  Corresponding Flowchart Template object or null if none exists
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/FlowchartTemplates/Search")
+    @GetMapping("/flowchart-templates/retrieve")
     FlowchartTemplateModel getFlowchartTemplateByCatalogMajorAndCon(@RequestParam(required = true) String catalog,
                                                                     @RequestParam(required = true) String major,
                                                                     @RequestParam(required = true) String concentration) {
@@ -146,7 +146,7 @@ public class FlowchartTemplateController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/FlowchartTemplates")
+    @GetMapping("/flowchart-templates")
     List<FlowchartTemplateModel> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();
     }
@@ -154,7 +154,7 @@ public class FlowchartTemplateController {
     /**
      * Delete All Flowcharts
      */
-    @DeleteMapping("/api/FlowchartTemplates")
+    @DeleteMapping("/flowchart-templates")
     void deleteAllFlowchartTemplates(){
         flowchartTemplateRepo.deleteAll();
     }
