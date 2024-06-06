@@ -241,7 +241,6 @@ export const SideBar = ({
                 <p>FAVORITES</p>
                 {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
             </div>
-            <button onClick={() => handleUpdatingFlowchart()}>start</button>
             <div className="sidebarRow" id="all">
                 <div id="allFlowchartsHeader">
                     <p>ALL FLOWCHARTS</p>
