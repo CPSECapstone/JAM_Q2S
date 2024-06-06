@@ -1,0 +1,290 @@
+package rules.requirement
+import java.util.List;
+import java.util.Arrays;
+import com.Q2S.Q2S_Senior_Project.Models.Requirement;
+import com.Q2S.Q2S_Senior_Project.Models.Degree;
+
+rule "CSC/CPE101 Requirement"
+when
+    req: Requirement(name == "CSC/CPE101 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC101") ||
+                degree.getCourses().contains("CPE101"));
+end
+
+rule "CSC/CPE202 Requirement"
+when
+    req: Requirement(name == "CSC/CPE202 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC202") ||
+                    degree.getCourses().contains("CPE202"));
+end
+
+rule "CSC/CPE123 Requirement"
+when
+    req: Requirement(name == "CSC/CPE123 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC123") ||
+                        degree.getCourses().contains("CPE123"));
+end
+
+rule "CSC/CPE203 Requirement"
+when
+    req: Requirement(name == "CSC/CPE203 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC203") ||
+                            degree.getCourses().contains("CPE203"));
+end
+
+rule "CSC225 Requirement"
+when
+    req: Requirement(name == "CSC225 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC225"));
+end
+
+rule "CSC248 Requirement"
+when
+    req: Requirement(name == "CSC248 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC248"));
+end
+
+rule "CSC300 or PHIL323 Requirement"
+when
+    req: Requirement(name == "CSC300 or PHIL323 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC300") ||
+                degree.getCourses().contains("PHIL323"));
+end
+
+rule "CSC305 Requirement"
+when
+    req: Requirement(name == "CSC305 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC305"));
+end
+
+rule "CSC308 Requirement"
+when
+    req: Requirement(name == "CSC308 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC308"));
+end
+
+rule "CSC309 Requirement"
+when
+    req: Requirement(name == "CSC309 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC309"));
+end
+
+rule "CSC349 Requirement"
+when
+    req: Requirement(name == "CSC349 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC349"));
+end
+
+rule "CSC/CPE357 Requirement"
+when
+    req: Requirement(name == "CSC/CPE357 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC357") ||
+                degree.getCourses().contains("CPE357"));
+end
+
+rule "CSC365 Requirement"
+when
+    req: Requirement(name == "CSC365 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC365"));
+end
+
+rule "CSC402 Requirement"
+when
+    req: Requirement(name == "CSC402 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC402"));
+end
+
+rule "CSC405 Requirement"
+when
+    req: Requirement(name == "CSC405 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC405"));
+end
+
+rule "CSC406 Requirement"
+when
+    req: Requirement(name == "CSC406 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC406"));
+end
+
+rule "CSC430 Requirement"
+when
+    req: Requirement(name == "CSC430 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC430"));
+end
+
+rule "CSC484 Requirement"
+when
+    req: Requirement(name == "CSC484 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC484"));
+end
+
+rule "Technical Elective Requirement"
+when
+    req: Requirement(name == "Technical Elective Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("CSC313") ||
+                    degree.getCourses().contains("CSC321") ||
+                    degree.getCourses().contains("CPE321") ||
+                    degree.getCourses().contains("CSC323") ||
+                    degree.getCourses().contains("CSC325") ||
+                    degree.getCourses().contains("CSC344"));
+end
+
+rule "IME314 or IME315 Requirement"
+when
+    req: Requirement(name == "IME314 or IME315 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("IME314") ||
+                degree.getCourses().contains("IME315"));
+end
+
+rule "MATH141 Requirement"
+when
+    req: Requirement(name == "MATH141 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH141"));
+end
+
+rule "MATH142 Requirement"
+when
+    req: Requirement(name == "MATH142 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH142"));
+end
+
+rule "MATH143 Requirement"
+when
+    req: Requirement(name == "MATH143 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH143"));
+end
+
+rule "MATH241 Requirement"
+when
+    req: Requirement(name == "MATH241 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH241"));
+end
+
+rule "MATH244 Requirement"
+when
+    req: Requirement(name == "MATH244 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH244"));
+end
+
+rule "PHIL230 or PHIL231 Requirement"
+when
+    req: Requirement(name == "PHIL230 or PHIL231 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("PHIL230") ||
+                degree.getCourses().contains("PHIL231"));
+end
+
+rule "PSY201/202 Requirement"
+when
+    req: Requirement(name == "PSY201/202 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("PSY201") ||
+                degree.getCourses().contains("PSY202"));
+end
+
+rule "PSY350 or COMS217 Requirement"
+when
+    req: Requirement(name == "PSY350 or COMS217 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("PSY350") ||
+                degree.getCourses().contains("COMS217"));
+end
+
+rule "STAT312 Requirement"
+when
+    req: Requirement(name == "STAT312 Requirement")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("STAT312"));
+end
+
+rule "Life Science Support Elective"
+when
+    req: Requirement(name == "Life Science Support Elective")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("BIO111") ||
+                degree.getCourses().contains("BIO161") ||
+                degree.getCourses().contains("BOT121") ||
+                degree.getCourses().contains("MCRO221") ||
+                degree.getCourses().contains("MCRO224") ||
+                (degree.getCourses().contains("BIO213") && degree.getCourses().contains("BMED213")));
+end
+
+rule "Mathematics Support Elective"
+when
+    req: Requirement(name == "Mathematics Support Elective")
+    degree: Degree(courses != null)
+then
+    req.setMet(degree.getCourses().contains("MATH248") ||
+                    degree.getCourses().contains("MATH304") ||
+                    degree.getCourses().contains("MATH335") ||
+                    degree.getCourses().contains("MATH336") ||
+                    degree.getCourses().contains("MATH451"));
+end
+
+rule "Physical Science Support Elective"
+when
+    req: Requirement(name == "Physical Science Support Elective")
+    degree: Degree(courses != null)
+then
+    req.setMet((degree.getCourses().contains("CHEM124") &&
+                    degree.getCourses().contains("CHEM125") &&
+                    degree.getCourses().contains("CHEM126")) ||
+                    (degree.getCourses().contains("PHYS141") &&
+                    degree.getCourses().contains("PHYS142") &&
+                    degree.getCourses().contains("PHYS143")));
+end

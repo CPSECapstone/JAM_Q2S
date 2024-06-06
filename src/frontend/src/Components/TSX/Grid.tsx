@@ -76,8 +76,11 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
             startClasses.splice(source.index, 1);
             let finishClasses: FlowchartClass[] = Array.from(finish.courses);
             finishClasses.splice(destination.index, 0, newFlowchartClass);
+            start.tUnits = String(Number(start.tUnits) - Number(flowchartClassCache[start.courses[source.index].uuid].units))
             start.courses = startClasses;
             finish.courses = finishClasses;
+            finish.tUnits = String(Number(finish.tUnits) + Number(flowchartClassCache[finish.courses[destination.index].uuid].units))
+
         }
 
         setSelectedUserFlowchart({...selectedUserFlowchart, termData: JSON.stringify(updatedTerms)});
@@ -87,7 +90,9 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
     const calculateTotalUnits = () => {
         let total = 0;
         if (selectedUserFlowchart) {
-            JSON.parse(selectedUserFlowchart.termData).termData.forEach((term: TermData) => {
+            let parsedTermData: TermData[] = JSON.parse(selectedUserFlowchart.termData)
+            console.log(parsedTermData)
+            parsedTermData.forEach((term: TermData) => {
                 total += Number(term.tUnits) || 0;
             });
         }
@@ -95,7 +100,8 @@ function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, f
     };
 
     useEffect((): void => {
-    }, []);
+        calculateTotalUnits()
+    }, [selectedUserFlowchart]);
 
 
     return (

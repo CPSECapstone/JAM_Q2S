@@ -49,7 +49,11 @@ function Term({year, classList, id, termName, termType, handleRightClick, totalU
                 )}
             </Droppable>
             <div className="termTotalUnits">
-                <p style={{margin: 0}}>{totalUnits}</p>
+                <p style={{ margin: 0 }}>
+                    {classList.reduce((sum: number, course: FlowchartClass) => (
+                        sum + Number(flowchartClassCache[course.uuid].units)
+                    ), 0)}
+                </p>
             </div>
         </div>
     );

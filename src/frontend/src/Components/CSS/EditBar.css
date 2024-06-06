@@ -1,13 +1,20 @@
 .editBar{
-    height: 100%;
-    width: 100%;
     background: #CED8D4;
     display: flex;
-
+    align-items: center;
 }
 
 .buttons{
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.left-buttons {
+    display: flex;
+}
+
+.validate-button {
+    margin-left: auto;
+}
+
 

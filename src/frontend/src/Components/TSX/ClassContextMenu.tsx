@@ -43,6 +43,7 @@ const ClassContextMenu = ({top, left, classData, flowchartClassCache, selectedUs
         let classes: FlowchartClass[] = Array.from(term.courses);
         const classIndex: number = term.courses.findIndex((termClass: FlowchartClass) => termClass.uuid === classData.classUUID);
         classes.splice(classIndex, 1);
+        term.tUnits = String(Number(term.tUnits) - Number(flowchartClassCache[term.courses[classIndex].uuid].units))
         term.courses = classes;
         setSelectedUserFlowchart({...selectedUserFlowchart, termData: JSON.stringify(updatedTerms)});
 
