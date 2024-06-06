@@ -28,6 +28,7 @@ import java.util.function.Supplier;
 
 @Service
 @RestController
+@RequestMapping("/api")
 public class UserFlowchartController {
 
     private static final int SEMESTER_TRANSITION_YEAR = 2026;
@@ -56,22 +57,31 @@ public class UserFlowchartController {
     @Autowired
     private FlowchartTemplateController flowchartTemplateController;
 
-    /**
-     * Get all User Flowcharts
-     * @return  all user flowcharts in the database
-     */
-    @CrossOrigin(origins="http://localhost:3000")
 
-    @GetMapping("/api/UserFlowcharts")
-    List<UserFlowchartModel> getAllFlowcharts() {
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping("/AllFlowcharts")
+    List<UserFlowchartModel> getAllFlowcharts(){
         return userFlowchartRepo.findAll();
     }
 
+    /**
+     * If a userId is present, return all flowcharts associated with that userId
+     * Otherwise return all user flowcharts
+     *
+     * @param userId optional parameter for narrowing down list to a specific user
+     * @return  list of user flowcharts
+     */
     @CrossOrigin(origins="http://localhost:3000")
-    @GetMapping("/api/UserFlowcharts/{userId}")
-    List<UserFlowchartModel> getAllFlowchartsByUserId(@PathVariable long userId) {
-        return userFlowchartRepo.findByUserIdUserId(userId);
+    @GetMapping("/api/UserFlowcharts")
+
+    List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam("userId") Optional<Long> userId) {
+        if (userId.isPresent()) {
+            return userFlowchartRepo.findByUserIdUserId(userId.get());
+        }
+        return userFlowchartRepo.findAll();
     }
+
+
 
     /**
      *
@@ -83,8 +93,8 @@ public class UserFlowchartController {
      *              ResponseEntity.unprocessableEntity() if there is an error creating the flowchart JSON
      */
     @CrossOrigin(origins="http://localhost:3000")
-    @PostMapping("/api/UserFlowcharts/{userId}")
-    ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@PathVariable long userId,
+    @PostMapping("/user-flowcharts")
+    ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@RequestParam(required = true) long userId,
                                                           @Validated @RequestBody NewUserFlowchartDTO dto){
         UserFlowchartModel newFlowchart = new UserFlowchartModel();
         Optional<UserModel> user = userService.findUserModelById(userId);
@@ -126,7 +136,7 @@ public class UserFlowchartController {
         return objectMapper.treeToValue(patched, UserFlowchartModel.class);
     }
     @CrossOrigin(origins = "http://localhost:3000")
-    @PatchMapping(path = "api/updateFlowcharts/", consumes = "application/json-patch+json")
+    @PatchMapping(path = "updateFlowcharts/", consumes = "application/json-patch+json")
     ResponseEntity<List<UserFlowchartModel>> updateFlowchart(@RequestBody List<PatchRequestDTO> patches) {
         System.out.println(patches);
         List<UserFlowchartModel> patchedEntities = new ArrayList<>();

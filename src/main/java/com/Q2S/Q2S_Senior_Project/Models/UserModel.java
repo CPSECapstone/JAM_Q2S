@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 @Table(name = "user")
 public class UserModel {
-
     public enum AdmitType{
         FIRST_YEAR_FRESHMAN,
         TRANSFER

@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import '../Components/CSS/Register.css';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {AccountInfo, IPublicClientApplication} from "@azure/msal-browser";
+import {AuthContext} from "../Context/AuthContext";
 
-const Register: React.FC = () => {
+interface registerProps {
+    setLoadingUser: React.Dispatch<React.SetStateAction<Boolean>>;
+}
+const Register = ({setLoadingUser}: registerProps) => {
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
+    const {setUser} = useContext(AuthContext);
+    const currentYear = new Date().getFullYear();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -20,8 +29,13 @@ const Register: React.FC = () => {
                 email: email,
                 password: password,
             });
-            window.location.href = '/home';
-
+            if (response.status === 200) {
+                setLoadingUser(true);
+                setUser(response.data);
+                navigate(`/newUserForm?userId=${response.data.userId}`);
+            } else {
+                // Handle unsuccessful register [ TO DO ]
+            }
         } catch (error) {
             console.error('Error registering user:', error);
         }
@@ -53,6 +67,9 @@ const Register: React.FC = () => {
 
                 <button type='submit'>Register</button>
             </form>
+            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
+                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+            </footer>
         </div>
     );
 }

@@ -1,0 +1,76 @@
+/* About.css */
+
+.About {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
+}
+
+.topBar{
+    background-color: #2D5A48;
+    justify-content: space-between;
+}
+
+.divider{
+    width: 80%;
+    background: #2D5A48;
+    margin: 5%;
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FFFBF3;
+}
+
+.about-section {
+    padding: 2%;
+    width: 70%;
+    text-align: justify;
+    color: black;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 2%;
+    text-align: center;
+    alignment: center;
+    width: 50%;
+}
+
+.row{
+    display: table;
+    width: 70%;
+    padding: 2%;
+    text-align: justify;
+}
+
+.title {
+    background: white;
+    color: #BD8B13;
+    text-align: center;
+}
+
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding-right: 5%;
+    color: white;
+    background-color: #2D5A48;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+

@@ -52,7 +52,7 @@ export const SideBar = ({
     const { user } = useContext(AuthContext);
 
     const getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/UserFlowcharts");
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/AllFlowcharts");
         setAllUserFlowcharts(res.data);
     }
     const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache:{
@@ -84,7 +84,8 @@ export const SideBar = ({
 
 
     const getNewFlowchart = async (inputValue: string) => {
-        const userId = user?.user_id;
+        console.log(user);
+        const userId = user?.userId;
         const newUserFlowchartDTO = {
             flowchartName: inputValue,
             catalogYear: user?.catalog_year,
@@ -93,7 +94,7 @@ export const SideBar = ({
             term_admitted: user?.term_admitted
         };
         try {
-            let res = await axios.post(`http://localhost:8080/api/UserFlowcharts/${userId}`, newUserFlowchartDTO);
+            let res = await axios.post(`http://localhost:8080/api/user-flowcharts?userId=${userId}`, newUserFlowchartDTO);
             const newFlowchart = res.data;
             const updatedAllFlowcharts = [...allUserFlowcharts, newFlowchart];
             setAllUserFlowcharts(updatedAllFlowcharts);
@@ -240,7 +241,8 @@ export const SideBar = ({
                 <p>FAVORITES</p>
                 {/*{renderFlowchartItems((current: FlowchartResponse) => current.favorite && !current.main)}*/}
             </div>
-            start<div className="sidebarRow" id="all">
+            <button onClick={() => handleUpdatingFlowchart()}>start</button>
+            <div className="sidebarRow" id="all">
                 <div id="allFlowchartsHeader">
                     <p>ALL FLOWCHARTS</p>
                     <Tooltip title="Create a new Flow" placement="right" arrow>

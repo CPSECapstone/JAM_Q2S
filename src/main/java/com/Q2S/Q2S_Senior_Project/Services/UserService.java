@@ -5,6 +5,7 @@ import com.Q2S.Q2S_Senior_Project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -13,11 +14,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing user-related operations.
+ */
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for UserService.
+     *
+     * @param userRepository The UserRepository instance to use
+     */
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -55,7 +64,7 @@ public class UserService {
     @Transactional
     public boolean addUser(UserModel user) {
         // Check if the email already exists
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return false; // User with this email already exists
         }
 
@@ -65,6 +74,18 @@ public class UserService {
 
         userRepository.save(user);
         return true;
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void addMicrosoftUser(UserModel user) {
+        // Check if the email already exists
+        if (userRepository.findByEmail(user.getEmail()).isEmpty()) {
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+                System.out.println("Expected");
+            }
+        }
     }
 
     /**
@@ -81,6 +102,13 @@ public class UserService {
 
         // Check if the user exists and the password matches
         return user.isPresent() && hashPassword(password).equals(user.get().getPassword());
+    }
+
+    @Transactional
+    public boolean authenticateMicrosoftUser(UserModel userModel) {
+        Optional<UserModel> user = userRepository.findByEmail(userModel.getEmail());
+
+        return user.isPresent();
     }
 
     /**
@@ -121,12 +149,8 @@ public class UserService {
      *             ResponseEntity.notFound() otherwise
      */
     @Transactional
-    public ResponseEntity<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<UserModel> user = userRepository.findByEmail(email);
-
-        return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(
-                () -> ResponseEntity.notFound().build()
-        );
+    public Optional<UserModel> findUserByEmail(@PathVariable(value = "email") String email) {
+        return userRepository.findByEmail(email);
     }
 
     /**
@@ -155,6 +179,7 @@ public class UserService {
      * @param updatedUser  user entity with modified fields
      * @return  true if operation successful, false otherwise
      */
+    @Transactional
     public boolean updateUserInfo(long id, UserModel updatedUser) {
         // Retrieve the user entity by its ID
         UserModel user = userRepository.findById(id).orElse(null);
@@ -176,7 +201,7 @@ public class UserService {
      *              the updated user
      */
     public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
-        //can update any field expect email and password which must be done with a distinct call
+        //can update any field except email and password which must be done with a distinct call
         if (updatedUser.getUser_name() != null){
             user.setUser_name(updatedUser.getUser_name());
         }
@@ -207,4 +232,3 @@ public class UserService {
         return user;
     }
 }
-

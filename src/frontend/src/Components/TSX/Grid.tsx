@@ -9,7 +9,8 @@ import {
     TermData
 } from '../../Interfaces/Interfaces';
 import {useContextMenu} from '../../Hooks/useContextMenu';
-import ContextMenu from './ContextMenu';
+import ClassContextMenu from './ClassContextMenu';
+import TermContextMenu from './TermContextMenu';
 
 interface GridProps {
     setTotalUnits: (units: number) => void;
@@ -24,14 +25,10 @@ interface GridProps {
 
 }
 
-function Grid({
-                  quarterClassCache,
-                  setTotalUnits,
-                  setSelectedUserFlowchart,
-                  selectedUserFlowchart,
-                  flowchartClassCache
-              }: GridProps) {
-    const {clicked, setClicked, coords, setCoords} = useContextMenu();
+
+function Grid({setTotalUnits, setSelectedUserFlowchart, selectedUserFlowchart, flowchartClassCache, quarterClassCache}: GridProps) {
+    const {classClicked, setClassClicked, termClicked, setTermClicked, coords, setCoords} = useContextMenu();
+
     const [contextMenuClass, setContextMenuClass] = useState<ContextMenuData>({classUUID: "", termId: ""});
 
     const handleRightClick = (term: string, classId: string, x: number, y: number) => {
@@ -39,8 +36,15 @@ function Grid({
             classUUID: classId,
             termId: term
         });
-        setClicked(true);
         setCoords({x, y});
+        if(classId != ""){
+            setClassClicked(true);
+            setTermClicked(false);
+        }
+        else {
+            setTermClicked(true);
+            setClassClicked(false);
+        }
     }
 
     let onDragEnd = (result: DropResult): void => {
@@ -115,13 +119,21 @@ function Grid({
 
     return (
         <div className='grid'>
-            {clicked && (
-                <ContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}
-                             flowchartClassCache={flowchartClassCache} selectedUserFlowchart={selectedUserFlowchart}
-                             setSelectedUserFlowchart={setSelectedUserFlowchart}></ContextMenu>
+            {classClicked && (
+                <ClassContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}
+                                  flowchartClassCache={flowchartClassCache} selectedUserFlowchart={selectedUserFlowchart}
+                                  setSelectedUserFlowchart={setSelectedUserFlowchart}></ClassContextMenu>
+            )}
+            {termClicked && (
+                <TermContextMenu top={coords.y} left={coords.x} classData={contextMenuClass}
+                                  flowchartClassCache={flowchartClassCache} selectedUserFlowchart={selectedUserFlowchart}
+                                  setSelectedUserFlowchart={setSelectedUserFlowchart}></TermContextMenu>
             )}
             <DragDropContext onDragEnd={onDragEnd}
-                             onDragStart={() => setClicked(false)}>
+                             onDragStart={() => {
+                                 setClassClicked(false);
+                                 setTermClicked(false);
+                             }}>
                 {selectedUserFlowchart && JSON.parse(selectedUserFlowchart.termData).map((term: TermData) => {
                     return (
                         <div className='term' key={term.termName}>

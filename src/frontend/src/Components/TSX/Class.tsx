@@ -53,6 +53,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                     $expanded={isEmbeddedClassOpen}
                     $taken={classData.taken}
                     onContextMenu={(e) => {
+                        e.stopPropagation()
                         e.preventDefault()
                         handleRightClick(term, classData.uuid, e.pageX, e.pageY)
                     }}
