@@ -9,6 +9,7 @@ import {
 import EmbeddedClass from "./EmbeddedClass";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {Tooltip} from "react-tooltip";
+import axios from "axios";
 
 interface classProps {
     classData: ClassDisplayInformation;
@@ -16,17 +17,6 @@ interface classProps {
     handleRightClick: (termId: string, classId: string, x: number, y: number) => void;
     term: string;
 }
-
-const mockData: EmbeddedSemesterClassData[] = [
-    {
-        id: "CSC 2002",
-        displayName: "Some Other Semester Class",
-        units: "4"
-    }, {
-        id: "CSC 1001",
-        displayName: "Introduction to Computer Science",
-        units: "4"
-    }];
 
 const tooltipStyles = {
     'background': '#2c372d',
@@ -36,7 +26,27 @@ const tooltipStyles = {
 
 function Class({index, classData, handleRightClick, term}: classProps) {
     const [isEmbeddedClassOpen, setEmbeddedClassOpen] = useState<boolean>(false);
-    const toggleEmbeddedClass = () => {
+    const [embeddedClassData, setEmbeddedClassData] = useState<EmbeddedSemesterClassData[]>([]);
+
+    const toggleEmbeddedClass = async () => {
+        if (!isEmbeddedClassOpen) {
+            try {
+                const response = await axios.get(`/getCourseMapping?courseID=${classData.id}`);
+                const mappedCourseIds = response.data.mapping;
+
+                const fetchCourseDetails = async (courseId: string) => {
+                    const courseResponse = await axios.get(`/get/SemesterClass/${courseId}`);
+                    return courseResponse.data;
+                };
+
+                const mappedCoursesPromises = mappedCourseIds.map((courseId: string) => fetchCourseDetails(courseId));
+                const mappedCourses = await Promise.all(mappedCoursesPromises);
+
+                setEmbeddedClassData(mappedCourses);
+            } catch (error) {
+                console.error("Error fetching embedded class data", error);
+            }
+        }
         setEmbeddedClassOpen(!isEmbeddedClassOpen);
     };
 
@@ -53,6 +63,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                     $expanded={isEmbeddedClassOpen}
                     $taken={classData.taken}
                     onContextMenu={(e) => {
+                        e.stopPropagation()
                         e.preventDefault()
                         handleRightClick(term, classData.uuid, e.pageX, e.pageY)
                     }}
@@ -67,7 +78,7 @@ function Class({index, classData, handleRightClick, term}: classProps) {
                         <p>{classData.displayName}</p>
                     </div>
                     <div className="embeddedClasses">
-                        {isEmbeddedClassOpen && mockData.map((data, index) => (
+                        {isEmbeddedClassOpen && embeddedClassData.map((data, index) => (
                             <EmbeddedClass key={index} data={data} taken={classData.taken} color={classData.color}/>
                         ))}
                     </div>

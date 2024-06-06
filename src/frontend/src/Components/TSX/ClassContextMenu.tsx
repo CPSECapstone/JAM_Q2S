@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyledContextMenu} from '../StyledComponents/RightClickMenuStyle';
+import {StyledClassContextMenu} from '../StyledComponents/RightClickMenuStyle';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
@@ -28,7 +28,7 @@ interface ClassProps {
     setSelectedUserFlowchart: (updated: FlowchartMetaData) => void;
 }
 
-const ContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlowchart, setSelectedUserFlowchart}: ClassProps) => {
+const ClassContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlowchart, setSelectedUserFlowchart}: ClassProps) => {
     const [classTaken, setClassTaken] = useState<boolean>(false);
 
     const handleDelete = () => {
@@ -51,10 +51,11 @@ const ContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlo
 
     const handleMarkTaken = () => {
         flowchartClassCache[classData.classUUID].taken = !flowchartClassCache[classData.classUUID].taken;
+        setClassTaken(flowchartClassCache[classData.classUUID].taken);
     };
 
     return (
-        <StyledContextMenu $top={top} $left={left}>
+        <StyledClassContextMenu $top={top} $left={left}>
             <Paper sx={{width: 320, maxWidth: '100%'}}>
                 <MenuList>
                     <MenuItem onClick={() => handleMarkTaken()}>
@@ -78,8 +79,8 @@ const ContextMenu = ({top, left, classData, flowchartClassCache, selectedUserFlo
                     </MenuItem>
                 </MenuList>
             </Paper>
-        </StyledContextMenu>
+        </StyledClassContextMenu>
     );
 };
 
-export default ContextMenu;
+export default ClassContextMenu;

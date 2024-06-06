@@ -34,6 +34,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
         [classUUID: string]: ClassDisplayInformation
     }>({})
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
+    const currentYear = new Date().getFullYear();
+
 
     if (isAuthenticated && !activeAccount) {
         window.location.reload();
@@ -66,6 +68,8 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
 
             if (response.status === 200) {
                 setLoadingUser(true);
+                console.log(response.data);
+                setUser(response.data);
                 if (!response.data.major) { // checking if first time registering
                     navigate(`/newUserForm?userId=${response.data.userId}`);
                 }
@@ -134,6 +138,9 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
                                     <p>Please select or create a flowchart</p>
                                 </div>
                             )}
+                            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
+                                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+                            </footer>
                         </div>
                     </div>
                     {selectedUserFlowchart ? (

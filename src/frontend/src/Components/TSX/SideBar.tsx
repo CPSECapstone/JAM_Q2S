@@ -42,7 +42,8 @@ export const SideBar = ({
     }
 
     const getNewFlowchart = async (inputValue: string) => {
-        const userId = user?.user_id;
+        console.log(user);
+        const userId = user?.userId;
         const newUserFlowchartDTO = {
             flowchartName: inputValue,
             catalogYear: user?.catalog_year,
