@@ -60,7 +60,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
             const email = activeAccount.username;
             const name = activeAccount.name || '';
 
-            const response = await axios.post('/api/user/loginMicrosoftUser', {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/user/loginMicrosoftUser', {
                 user_name: email.substring(0, email.indexOf('@')),
                 first_name: name.split(' ')[0],
                 last_name: name.split(' ')[2],
@@ -87,7 +87,7 @@ const Home = ({loadingUser, activeAccount, setLoadingUser}: homeProps) => {
         getUser().catch(console.error);
         const loadClassCache = async () => {
             try {
-                const quarterClassesResponse = await axios.get("http://localhost:8080/api/quarter-classes");
+                const quarterClassesResponse = await axios.get(process.env.REACT_APP_BACKEND_URL + "/api/quarter-classes");
                 const tempCache: { [classId: string]: QuarterClassData } = {};
                 quarterClassesResponse.data.forEach((quarterClass: QuarterClassData) => {
                     tempCache[quarterClass.id] = quarterClass;

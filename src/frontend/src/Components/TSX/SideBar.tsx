@@ -52,7 +52,7 @@ export const SideBar = ({
     const { user } = useContext(AuthContext);
 
     const getFlowcharts = async () => {
-        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get("http://localhost:8080/api/AllFlowcharts");
+        let res: AxiosResponse<FlowchartMetaData[]> = await axios.get(process.env.REACT_APP_BACKEND_URL +"/api/user-flowcharts");
         setAllUserFlowcharts(res.data);
     }
     const updateFlowchartClassData = (currentSelectedFlowchart: FlowchartMetaData, classCache:{
@@ -94,7 +94,7 @@ export const SideBar = ({
             term_admitted: user?.term_admitted
         };
         try {
-            let res = await axios.post(`http://localhost:8080/api/user-flowcharts?userId=${userId}`, newUserFlowchartDTO);
+            let res = await axios.post(process.env.REACT_APP_BACKEND_URL + `/api/user-flowcharts?userId=${userId}`, newUserFlowchartDTO);
             const newFlowchart = res.data;
             const updatedAllFlowcharts = [...allUserFlowcharts, newFlowchart];
             setAllUserFlowcharts(updatedAllFlowcharts);
@@ -161,7 +161,7 @@ export const SideBar = ({
                     }]
                 });
             });
-            axios.patch("http://localhost:8080/api/updateFlowcharts/" , patchRequests, {
+            axios.patch(process.env.BACKEND_URL + "/api/updateFlowcharts/" , patchRequests, {
                     headers: {
                         'Content-Type': 'application/json-patch+json',
                     }

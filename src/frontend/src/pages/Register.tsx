@@ -22,7 +22,7 @@ const Register = ({setLoadingUser}: registerProps) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api/user/register', {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/user/register', {
                 user_name: username,
                 first_name: firstname,
                 last_name: lastname,

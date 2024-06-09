@@ -18,13 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Supplier;
 
 @Service
 @RestController
@@ -58,12 +55,6 @@ public class UserFlowchartController {
     private FlowchartTemplateController flowchartTemplateController;
 
 
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
-    @GetMapping("/AllFlowcharts")
-    List<UserFlowchartModel> getAllFlowcharts(){
-        return userFlowchartRepo.findAll();
-    }
-
     /**
      * If a userId is present, return all flowcharts associated with that userId
      * Otherwise return all user flowcharts
@@ -72,7 +63,7 @@ public class UserFlowchartController {
      * @return  list of user flowcharts
      */
     @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
-    @GetMapping("/api/UserFlowcharts")
+    @GetMapping("/user-flowcharts")
 
     List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam("userId") Optional<Long> userId) {
         if (userId.isPresent()) {

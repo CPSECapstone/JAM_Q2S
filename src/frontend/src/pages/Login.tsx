@@ -38,7 +38,7 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('/api/user/login', {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL + '/api/user/login', {
                 email: email,
                 password: password,
             });
