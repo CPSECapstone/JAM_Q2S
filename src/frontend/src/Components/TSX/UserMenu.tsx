@@ -34,7 +34,7 @@ function UserMenu(): JSX.Element {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setIsMenuOpen(false);
+                handleCloseMenu();
             }
         };
 

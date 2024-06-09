@@ -5,7 +5,7 @@
     background: #fff6e7;
     border-right: solid #BD8B13;
 
-
+    overflow-y: scroll;
 }
 .sidebarRow{
     min-height: 20%;

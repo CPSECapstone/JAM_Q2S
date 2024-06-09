@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import '../Components/CSS/Register.css';
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AccountInfo, IPublicClientApplication} from "@azure/msal-browser";
 import {AuthContext} from "../Context/AuthContext";
 
@@ -43,7 +43,10 @@ const Register = ({setLoadingUser}: registerProps) => {
 
     return (
         <div className='Register'>
-            <h2>Welcome!</h2>
+            <div className='topBar'>
+                <h1 className="userName">PolyPlannerPro</h1>
+            </div>
+            <h2 style={{padding: '3%'}}>Welcome!</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>User Name:</label><br/>
                 <input type='username' id='username' name='username' value={username}
@@ -67,7 +70,7 @@ const Register = ({setLoadingUser}: registerProps) => {
 
                 <button type='submit'>Register</button>
             </form>
-            <footer style={{position: "fixed", bottom: '0', color: 'grey', fontSize: '3', padding: "1%"}}>
+            <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
                 <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
             </footer>
         </div>
