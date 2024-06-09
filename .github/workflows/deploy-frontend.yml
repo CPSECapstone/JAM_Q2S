@@ -37,6 +37,8 @@ jobs:
       - name: Build app
         # don't treat warnings as errors
         run: CI='' npm run build
+        env:
+          REACT_APP_BACKEND_URL: ${{ secrets.BACKEND_URL }}
 
       - name: Upload to S3
         uses: jakejarvis/s3-sync-action@master
