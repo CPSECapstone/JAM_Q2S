@@ -51,7 +51,7 @@ public class QuarterClassesController {
      * @param id    Course ID (ex: CSC101)
      * @return      Corresponding course information or null if none exist
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @GetMapping("/quarter-classes/{id}")
     QuarterClassModel getQuarterClassById(@PathVariable String id) {
         return quarterClassRepo.findById(id).orElse(null);
@@ -61,7 +61,7 @@ public class QuarterClassesController {
      *
      * @return all quarter course entries
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @GetMapping("/quarter-classes")
     List<QuarterClassModel> getAllQuarterClasses() {
         return quarterClassRepo.findAll();

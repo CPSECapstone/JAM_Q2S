@@ -58,7 +58,7 @@ public class UserFlowchartController {
     private FlowchartTemplateController flowchartTemplateController;
 
 
-    @CrossOrigin(origins="http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @GetMapping("/AllFlowcharts")
     List<UserFlowchartModel> getAllFlowcharts(){
         return userFlowchartRepo.findAll();
@@ -71,7 +71,7 @@ public class UserFlowchartController {
      * @param userId optional parameter for narrowing down list to a specific user
      * @return  list of user flowcharts
      */
-    @CrossOrigin(origins="http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @GetMapping("/api/UserFlowcharts")
 
     List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam("userId") Optional<Long> userId) {
@@ -92,7 +92,7 @@ public class UserFlowchartController {
      *              ResponseEntity.notFound() if no template exists meeting the info of the dto, or
      *              ResponseEntity.unprocessableEntity() if there is an error creating the flowchart JSON
      */
-    @CrossOrigin(origins="http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PostMapping("/user-flowcharts")
     ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@RequestParam(required = true) long userId,
                                                           @Validated @RequestBody NewUserFlowchartDTO dto){
@@ -135,7 +135,7 @@ public class UserFlowchartController {
         JsonNode patched = patch.apply(objectMapper.convertValue(targetFlowchart, JsonNode.class));
         return objectMapper.treeToValue(patched, UserFlowchartModel.class);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PatchMapping(path = "updateFlowcharts/", consumes = "application/json-patch+json")
     ResponseEntity<List<UserFlowchartModel>> updateFlowchart(@RequestBody List<PatchRequestDTO> patches) {
         System.out.println(patches);

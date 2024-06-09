@@ -27,7 +27,7 @@ public class UserController {
      * @return      ResponseEntity.ok if the action was successful
      *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PostMapping("/user/register")
     public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
@@ -45,7 +45,7 @@ public class UserController {
      * @return      Response Entity with user entity successfully signed in OR
      *              ResponseEntity.badRequest() if log in unsuccessful
      */
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PostMapping("/user/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
@@ -60,7 +60,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PostMapping("/user/loginMicrosoftUser")
     public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
         try {
@@ -100,7 +100,7 @@ public class UserController {
      * @return      ResponseEntity.ok if update was successful
      *              ResponseEntity.badRequest() if there is no associated user with the given id
      */
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @PatchMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
                                              @RequestBody UserModel updatedUser) {
@@ -117,7 +117,7 @@ public class UserController {
      * @return     Response Entity with the user affiliated with the id or
      *             ResponseEntity.notFound() if not found
      */
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
     @GetMapping("/users/{id}")
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         return userService.findUserById(id);
