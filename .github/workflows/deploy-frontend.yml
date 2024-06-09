@@ -1,0 +1,48 @@
+name: React Frontend AWS S3 Web App CI/CD
+
+on:
+  push:
+    branches:
+      - ci-cd-aws
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - ci-cd-aws
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest] # macos-latest, windows-latest
+        node-version: [21.x]
+
+    runs-on: ${{ matrix.os }} # ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies with clean install
+        run: npm ci
+
+      - name: Build app
+        run: npm run build
+
+      - name: Upload to S3
+        uses: jakejarvis/s3-sync-action@master
+        # with:
+        #   args: --acl public-read
+        env:
+          SOURCE_DIR: frontend/build/
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
