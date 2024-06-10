@@ -16,6 +16,7 @@ export const msalConfig = {
         clientId: 'e55e28cf-2866-436a-b380-5384a9db98ba', // This is the ONLY mandatory field that you need to supply.
         authority: 'https://login.microsoftonline.com/common',
         //unsure if environment variable is needed
+        //should now be the new cloudfront.net link with updated secrets in GitHub
         redirectUri: process.env.REACT_APP_FRONTEND_URL + '/home', // Points to window.location.origin. You must register this URI on Azure Portal/App Registration.
         postLogoutRedirectUri: process.env.REACT_APP_FRONTEND_URL + '/', // Indicates the page to navigate after logout.
         navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
