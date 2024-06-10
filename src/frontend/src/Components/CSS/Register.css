@@ -53,3 +53,10 @@
 .Register p {
     margin-top: 1%;
 }
+
+.error-message {
+    color: red;
+    font-size: 1em;
+    margin-top: 1%;
+    width: 45%;
+}

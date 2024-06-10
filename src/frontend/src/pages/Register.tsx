@@ -30,11 +30,11 @@ const Register = ({setLoadingUser}: registerProps) => {
                 setLoadingUser(true);
                 navigate(`/newUserForm?userId=${response.data.userId}`);
             } else {
-                // Handle unsuccessful register [ TO DO ]
+                setError(true);
             }
         } catch (error) {
             console.error('Error registering user:', error);
-        }
+            setError(true);        }
     };
 
     return (
@@ -60,6 +60,8 @@ const Register = ({setLoadingUser}: registerProps) => {
                 <label htmlFor='password'>Password:</label><br/>
                 <input type='password' id='password' name='password' value={password}
                        onChange={(event) => setPassword(event.target.value)} required/><br/>
+
+                {error && <p className="error-message">Login failed. Please check your email and password.</p>}
 
                 <button type='submit'>Register</button>
             </form>
