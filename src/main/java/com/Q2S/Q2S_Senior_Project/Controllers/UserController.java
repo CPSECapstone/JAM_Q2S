@@ -1,10 +1,8 @@
 package com.Q2S.Q2S_Senior_Project.Controllers;
 
-
 import com.Q2S.Q2S_Senior_Project.Models.UserModel;
 import com.Q2S.Q2S_Senior_Project.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
+
     private final UserService userService;
 
     @Autowired
@@ -29,7 +28,7 @@ public class UserController {
      *              ResponseEntity.badRequest() if the email conflicts with an existing user
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<?> registerUser(@RequestBody UserModel user) {
         if (userService.addUser(user)) {
             //Optional<UserModel> userWithId = userService.findUserByEmail(user.getEmail());
@@ -47,7 +46,7 @@ public class UserController {
      *              ResponseEntity.badRequest() if log in unsuccessful
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModel user) {
         if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
             Optional<UserModel> loggedInUser = userService.findUserByEmail(user.getEmail());
@@ -62,7 +61,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/loginMicrosoftUser")
+    @PostMapping("/user/loginMicrosoftUser")
     public ResponseEntity<?> loginMicrosoftUser(@RequestBody UserModel user) {
         try {
             if (!userService.authenticateMicrosoftUser(user)) {
@@ -88,7 +87,7 @@ public class UserController {
      *
      * @return  list of all users
      */
-    @GetMapping("/allUsers")
+    @GetMapping("/users")
     public List<UserModel> findAllUsers() {
         return userService.findAllUsers();
     }
@@ -102,9 +101,9 @@ public class UserController {
      *              ResponseEntity.badRequest() if there is no associated user with the given id
      */
     @CrossOrigin(origins = "*")
-    @PatchMapping("/{id}")
+    @PatchMapping("/users/{id}")
     public ResponseEntity<String> updateUser(@PathVariable(value = "id") long id,
-                                                @RequestBody UserModel updatedUser) {
+                                             @RequestBody UserModel updatedUser) {
         if (userService.updateUserInfo(id, updatedUser)){
             return ResponseEntity.ok("User Update Successful");
         }
@@ -119,7 +118,7 @@ public class UserController {
      *             ResponseEntity.notFound() if not found
      */
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<UserModel> findUserById(@PathVariable(value = "id") long id) {
         return userService.findUserById(id);
     }

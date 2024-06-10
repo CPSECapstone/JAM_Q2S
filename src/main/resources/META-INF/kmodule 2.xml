@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!--Sourced from: https://www.javainuse.com/spring/spring-boot-drools-hello-world#google_vignette-->
+    <!--A named session ksession-rule is created. The ksession rule is applicable for all drl file contained in the
+    pacakge rules. Currently we have only one drl file of package rules.-->
+    <kbase name="rules" packages="rules" default="true">
+        <ksession name="rulesSession" />
+    </kbase>
+
+</kmodule>

@@ -14,11 +14,19 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing user-related operations.
+ */
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for UserService.
+     *
+     * @param userRepository The UserRepository instance to use
+     */
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -193,7 +201,7 @@ public class UserService {
      *              the updated user
      */
     public static UserModel getUpdatedUser(UserModel user, UserModel updatedUser){
-        //can update any field expect email and password which must be done with a distinct call
+        //can update any field except email and password which must be done with a distinct call
         if (updatedUser.getUser_name() != null){
             user.setUser_name(updatedUser.getUser_name());
         }
@@ -224,4 +232,3 @@ public class UserService {
         return user;
     }
 }
-

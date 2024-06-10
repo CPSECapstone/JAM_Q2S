@@ -35,6 +35,13 @@ The project also requires Java v.20, available here:
 The project is using ESLint setup with GitHub Actions to lint the code on every pull request to ensure clean and consistent code.
 GitHub Actions is also setup to build and test the code on every pull request to ensure continuous testing and integration.
 
+Developer Set Up - Install Instructions:
+
+Beginning to develop once IntelliJ Ultimate is installed with Java v.20 is quite easy.
+Simply clone the repo and create a new branch.
+It is important to create a new branch since the repository is configured such that no one can push directly to main. 
+Once changes are completed, create a PR for review. A minimum of one review is require to merge code into main.
+
 How to Run the Application Locally:
 
     Back-end: Through IntelliJ run the "Q2SSeniorProjectApplication" file. The APIs can be accessed through "http://localhost:8080/api".

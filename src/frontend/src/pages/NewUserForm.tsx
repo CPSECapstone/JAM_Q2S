@@ -24,7 +24,7 @@ const NewUserForm = () => {
             if (admitType != "FIRST_YEAR_FRESHMAN" && admitType != "TRANSFER") {
                 console.log("You need to choose a valid admitType!"); // we will change this to a dropdown
             }
-            const response = await axios.patch(`/api/user/${userId}`, {
+            const response = await axios.patch(`/api/users/${userId}`, {
                 term_admitted: termAdmitted,
                 admit_type: admitType,
                 catalog_year: catalogYear,
