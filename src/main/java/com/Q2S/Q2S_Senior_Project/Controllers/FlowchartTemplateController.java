@@ -40,7 +40,7 @@ public class FlowchartTemplateController {
      * @throws IOException  thrown on invalid file paths or by object mapper
      */
     @Transactional
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @PostMapping("/flowchart-templates/update-2022-26-catalog-templates")
     public List<FlowchartTemplateModel> updateFlowchartTemplates() throws IOException {
 
@@ -122,7 +122,7 @@ public class FlowchartTemplateController {
      * @param id    template id
      * @return      corresponding template or null if none exist
      */
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @GetMapping("/flowchart-templates/{id}")
     FlowchartTemplateModel getFlowchartTemplateById(@PathVariable long id) {
         return flowchartTemplateRepo.findById(id).orElse(null);
@@ -137,7 +137,7 @@ public class FlowchartTemplateController {
      * @param concentration Concentration
      * @return  Corresponding Flowchart Template object or null if none exists
      */
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @GetMapping("/flowchart-templates/retrieve")
     FlowchartTemplateModel getFlowchartTemplateByCatalogMajorAndCon(@RequestParam(required = true) String catalog,
                                                                     @RequestParam(required = true) String major,
@@ -145,7 +145,7 @@ public class FlowchartTemplateController {
         return flowchartTemplateRepo.findByCatalogAndAndMajorAndConcentration(catalog, major, concentration).orElse(null);
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @GetMapping("/flowchart-templates")
     List<FlowchartTemplateModel> getAllFlowchartTemplates() {
         return flowchartTemplateRepo.findAll();

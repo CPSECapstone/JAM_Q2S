@@ -62,7 +62,7 @@ public class UserFlowchartController {
      * @param userId optional parameter for narrowing down list to a specific user
      * @return  list of user flowcharts
      */
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @GetMapping("/user-flowcharts")
 
     List<UserFlowchartModel> getAllFlowchartsByUserId(@RequestParam("userId") Optional<Long> userId) {
@@ -83,7 +83,7 @@ public class UserFlowchartController {
      *              ResponseEntity.notFound() if no template exists meeting the info of the dto, or
      *              ResponseEntity.unprocessableEntity() if there is an error creating the flowchart JSON
      */
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @PostMapping("/user-flowcharts")
     ResponseEntity<UserFlowchartModel> addNewUserFlowchart(@RequestParam(required = true) long userId,
                                                           @Validated @RequestBody NewUserFlowchartDTO dto){
@@ -126,7 +126,7 @@ public class UserFlowchartController {
         JsonNode patched = patch.apply(objectMapper.convertValue(targetFlowchart, JsonNode.class));
         return objectMapper.treeToValue(patched, UserFlowchartModel.class);
     }
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @PatchMapping(path = "updateFlowcharts/", consumes = "application/json-patch+json")
     ResponseEntity<List<UserFlowchartModel>> updateFlowchart(@RequestBody List<PatchRequestDTO> patches) {
         System.out.println(patches);

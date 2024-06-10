@@ -32,7 +32,7 @@ public class RulesController {
      * @return      The corresponding course(s) of the opposite term type set in the "mapping" field
      *              "mapping" field left as null if there is no corresponding rule
      */
-    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com"})
+    @CrossOrigin(origins = {"http://localhost:3000", "http://q2s-poly-planner-pro-s3.s3-website-us-west-2.amazonaws.com", "https://dq9fcidy0o710.cloudfront.net"})
     @RequestMapping(value = "/course-mapping", method = RequestMethod.GET, produces = "application/json")
     public CourseMapping getCourseMapping(@RequestParam(required = true) String courseID) {
         //if invalid courseID, mapping will return as null
