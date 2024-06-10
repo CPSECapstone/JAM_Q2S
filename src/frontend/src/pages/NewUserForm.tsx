@@ -63,12 +63,20 @@ const NewUserForm = () => {
                        onChange={(event) => setCatalogYear(event.target.value)} required/><br/>
 
                 <label htmlFor='major'>Major:</label><br/>
-                <input type='major' id='major' name='major' value={major}
-                       onChange={(event) => setMajor(event.target.value)} required/><br/>
+                <select id='major' name='major' value={major}
+                        onChange={(event) => setMajor(event.target.value)} required>
+                    <option value=''>Select Major</option>
+                    <option value='Computer Science'>Computer Science</option>
+                    <option value='Software Engineering'>Software Engineering</option>
+                </select>
 
                 <label htmlFor='concentration'>Concentration:</label><br/>
-                <input type='concentration' id='concentration' name='concentration' value={concentration}
-                       onChange={(event) => setConcentration(event.target.value)} required/><br/>
+                <select id='concentration' name='concentration' value={concentration}
+                        onChange={(event) => setConcentration(event.target.value)} required>
+                    <option value=''>Select Concentration</option>
+                    <option value='Non-Concentration Option'>Non-Concentration Option</option>
+                    <option value='Not Applicable For This Major'>Not Applicable For This Major</option>
+                </select>
 
                 <label htmlFor='minor'>Minor:</label><br/>
                 <input type='minor' id='minor' name='minor' value={minor}

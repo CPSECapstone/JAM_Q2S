@@ -47,10 +47,11 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                 setUser(response.data);
                 navigate("/home");
             } else {
-                // Handle unsuccessful login [ TO DO ]
+                setError(true);
             }
         } catch (error) {
             console.error('Error logging in user:', error);
+            setError(true);
         }
     };
 
@@ -65,6 +66,8 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                 <label htmlFor='password'>Password:</label><br/>
                 <input type='password' id='password' name='password' value={password}
                        onChange={(event) => setPassword(event.target.value)} required/><br/>
+
+                {error && <p className="error-message">Login failed. Please check your email and password. Sign in with Microsoft if previously done.</p>}
 
                 <button type='submit'>Login</button>
             </form>

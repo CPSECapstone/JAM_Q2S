@@ -63,13 +63,18 @@
 }
 
 .microsoft-sign-in {
-    margin-left: 0.5rem; /* Adjust the space between the icon and text */
-    text-transform: none; /* Override the default uppercase text transform */
-
-    /* Add any other styles you want to match the font with the rest of the page */
+    margin-left: 0.5rem;
+    text-transform: none;
 }
 
 .divider {
+    width: 45%;
+}
+
+.error-message {
+    color: red;
+    font-size: 1em;
+    margin-top: 1%;
     width: 45%;
 }
 
