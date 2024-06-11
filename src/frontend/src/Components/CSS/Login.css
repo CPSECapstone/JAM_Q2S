@@ -75,3 +75,9 @@
     justify-content: space-between;
 }
 
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
+}
+

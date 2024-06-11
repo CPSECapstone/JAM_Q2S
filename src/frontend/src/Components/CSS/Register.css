@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 35%;
-    margin-bottom: 5%;
 }
 
 .Register label {
@@ -26,7 +25,7 @@
     border: 0.1em solid #154734;
     border-radius: 10em;
 
-    padding: 0.8em;
+    padding: 0.5em;
 }
 
 .Register button {
@@ -56,4 +55,10 @@
 .topBar{
     background-color: #2D5A48;
     justify-content: space-between;
+}
+
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
 }

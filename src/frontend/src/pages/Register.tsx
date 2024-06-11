@@ -46,7 +46,7 @@ const Register = ({setLoadingUser}: registerProps) => {
             <div className='topBar'>
                 <h1 className="userName">PolyPlannerPro</h1>
             </div>
-            <h2 style={{padding: '3%'}}>Welcome!</h2>
+            <h1 style={{padding: '3%'}}>Welcome!</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'>User Name:</label><br/>
                 <input type='username' id='username' name='username' value={username}
@@ -70,6 +70,9 @@ const Register = ({setLoadingUser}: registerProps) => {
 
                 <button type='submit'>Register</button>
             </form>
+            <div style={{padding: '3%'}}>
+                <Link to="/">Already have an account? Login</Link>
+            </div>
             <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
                 <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
             </footer>

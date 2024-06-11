@@ -55,10 +55,10 @@
     text-align: justify;
 }
 
-.title {
+.titleSE{
     background: white;
     color: #BD8B13;
-    text-align: center;
+    padding: 1%;
 }
 
 .button {

@@ -72,7 +72,7 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                 <button type='submit'>Login</button>
             </form>
             <hr className="divider"/> {/* Divider with custom class */}
-            <button onClick={handleLoginRedirect}> {/* Adjust variant as needed */}
+            <button onClick={handleLoginRedirect} style={{width: '29%'}}> {/* Adjust variant as needed */}
                 <FontAwesomeIcon icon={faMicrosoft}/>
                 <span className="microsoft-sign-in">Sign in with Microsoft</span>
             </button>
