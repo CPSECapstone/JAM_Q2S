@@ -56,8 +56,11 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
 
     return (
         <div className='Login'>
-            <h2>Welcome Back!</h2>
-            <form onSubmit={handleLogin}>
+            <div className='topBar'>
+                <h1 className="userName">PolyPlannerPro</h1>
+            </div>
+            <h2 style={{padding: '3%'}}>Welcome Back!</h2>
+            <form onSubmit={handleLogin} style={{paddingLeft: '35%'}}>
                 <label htmlFor='email'>Email:</label><br/>
                 <input type='email' id='email' name='email' value={email}
                        onChange={(event) => setEmail(event.target.value)} required/><br/>
@@ -69,18 +72,16 @@ const Login = ({setLoadingUser, setActiveAccount, instance}: loginProps) => {
                 <button type='submit'>Login</button>
             </form>
             <hr className="divider"/> {/* Divider with custom class */}
-            <button onClick={handleLoginRedirect}> {/* Adjust variant as needed */}
+            <button onClick={handleLoginRedirect} style={{width: '29%'}}> {/* Adjust variant as needed */}
                 <FontAwesomeIcon icon={faMicrosoft}/>
                 <span className="microsoft-sign-in">Sign in with Microsoft</span>
             </button>
-            <Grid container>
-                <Grid item>
-                    <Link to="/register">Don't have an account? Register</Link>
-                </Grid>
-            </Grid>
-            {/*<footer style={{position: 'fixed', bottom: 9, color: 'grey', fontSize: '3', padding: "1%"}}>*/}
-            {/*    <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>*/}
-            {/*</footer>*/}
+            <div style={{padding: '3%'}}>
+                <Link to="/register">Don't have an account? Register</Link>
+            </div>
+            <footer style={{color: 'grey', fontSize: '3', padding: "1%"}}>
+                <text>&copy; 2023-{currentYear} PolyPlannerPro | All rights reserved.</text>
+            </footer>
         </div>
     );
 };

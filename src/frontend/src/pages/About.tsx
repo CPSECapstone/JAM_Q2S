@@ -43,10 +43,23 @@ const About = () => {
                         who were all 4th year Software Engineering majors at the time. JAM began working on Poly Planner
                         Pro in Fall 2023 as a commission from the Engineering Student Services at Cal Poly.</p>
                     <div className="card">
-                        <div className="container">
-                            <h3 style={{padding: '1%'}}>Software Engineers</h3>
-                            <p className="title">ANDREW ESTRADA,  ARCHIE JONES,  JAMIE LUNA,  JENNY FERRIOL,  MITASHI PARIKH</p>
-                        </div>
+                        <h3 style={{padding: '1%'}}>Software Engineers</h3>
+                        <text className="titleSE">ANDREW ESTRADA</text>
+                        <text className="titleSE">ARCHIE JONES</text>
+                        <text className="titleSE">JAMIE LUNA</text>
+                        <text className="titleSE">JENNY FERRIOL</text>
+                        <text className="titleSE">MITASHI PARIKH</text>
+                    </div>
+                    <div className="card">
+                        <h3 style={{padding: '1%'}}>Advisors</h3>
+                        <text className="titleSE">BJ KLINGENBERG</text>
+                        <text className="titleSE">DR. ZOE WOOD</text>
+                        <text className="titleSE">DR. AARON KEEN</text>
+                    </div>
+                    <div className="card">
+                        <h3 style={{padding: '1%'}}>Engineering Student Services Sponsors</h3>
+                        <text className="titleSE">KATIE JENNINGS</text>
+                        <text className="titleSE">KIM MARSALEK</text>
                     </div>
                 </div>
             </div>

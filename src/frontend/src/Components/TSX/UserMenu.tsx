@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef, useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import '../CSS/UserMenu.css';
-import { StyledClassContextMenu } from '../StyledComponents/RightClickMenuStyle';
+import { StyledUserContextMenu } from '../StyledComponents/RightClickMenuStyle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import MenuList from "@mui/material/MenuList";
@@ -34,7 +34,7 @@ function UserMenu(): JSX.Element {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setIsMenuOpen(false);
+                handleCloseMenu();
             }
         };
 
@@ -71,6 +71,16 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
         const { removeItem } = useLocalStorage();
         const { instance } = useMsal();
         const navigate = useNavigate();
+        const width = () => {
+            const userNameLength = user?.user_name?.length ?? 0;
+            const majorLength = user?.major?.length ?? 0;
+
+            const calculatedWidth = (userNameLength > majorLength)
+                ? (userNameLength * 20)
+                : (majorLength * 20);
+
+            return Math.max(calculatedWidth, 200);
+        };
 
         const handleLogoutRedirect = () => {
             removeItem("user");
@@ -82,8 +92,8 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
         };
 
         return (
-            <StyledClassContextMenu $top={65} $left={20}>
-                <Paper sx={{width: 320, maxWidth: '100%'}}>
+            <StyledUserContextMenu $top={80} $left={30} $width={width()}>
+                <Paper sx={{width: 350, maxWidth: '100%'}}>
                     <MenuList>
                         <MenuItem>
                             <ListItemText>{user?.user_name}</ListItemText>
@@ -114,7 +124,7 @@ const ContextMenu = React.forwardRef<HTMLDivElement, MenuProps>(
                         </MenuItem>
                     </MenuList>
                 </Paper>
-            </StyledClassContextMenu>
+            </StyledUserContextMenu>
         );
     }
 );

@@ -3,10 +3,7 @@
 .Login {
     font-style: normal;
     font-weight: 250;
-    font-size: .75em;
-    margin-top: 10%;
-    margin-left: 35%;
-    padding: 3%;
+    text-align: center;
 }
 
 .Login form {
@@ -65,11 +62,22 @@
 .microsoft-sign-in {
     margin-left: 0.5rem; /* Adjust the space between the icon and text */
     text-transform: none; /* Override the default uppercase text transform */
-
+    width: 20%
     /* Add any other styles you want to match the font with the rest of the page */
 }
 
 .divider {
-    width: 45%;
+    width: 10%;
+}
+
+.topBar{
+    background-color: #2D5A48;
+    justify-content: space-between;
+}
+
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
 }
 

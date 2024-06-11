@@ -4,15 +4,13 @@
     font-style: normal;
     font-weight: 250;
     font-size: 1em;
-    margin-top: 10%;
-    margin-left: 35%;
-
-    padding: 1.2%;
+    text-align: center;
 }
 
 .Register form {
     display: flex;
     flex-direction: column;
+    margin-left: 35%;
 }
 
 .Register label {
@@ -27,7 +25,7 @@
     border: 0.1em solid #154734;
     border-radius: 10em;
 
-    padding: 0.8em;
+    padding: 0.5em;
 }
 
 .Register button {
@@ -52,4 +50,15 @@
 
 .Register p {
     margin-top: 1%;
+}
+
+.topBar{
+    background-color: #2D5A48;
+    justify-content: space-between;
+}
+
+.userName {
+    padding: 2%;
+    color: white;
+    text-align: left;
 }
